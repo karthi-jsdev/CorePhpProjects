@@ -1,0 +1,60 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1363" measuredH="814" mockupW="1355" mockupH="811">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="8" y="3" w="1355" h="811" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Semtronics%20ERP%20System%0Ahttp%3A//www.semtronics.in/erp</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Image" x="901" y="79" w="456" h="57" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Semtronics%20Logo</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::DataGrid" x="66" y="217" w="1186" h="288" measuredW="1205" measuredH="533" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>right</align>
+        <hLines>true</hLines>
+        <text>VENDOR%20ID%20%5E%2C%20VENDOR%20NAME%2C%20CATEGORY%2C%20ADDRESS%2C%20PH%20NO%2C%20MAIL%2C%20CONT%20PERSON%2C%20CREDIT%20LIMIT%2C%20CREDIT%20PERIOD%2C%20LEAD%20TIME%0AVN0001%2C%20A%20R%20ENTERPRISES%2C%20SMD%2C%20123%20MAIN%20ST%20BANGL%2C%20080-1254125%2C%20sales@arent.com%2C%20VENDOR1%2C%2070000%2C%2060%20Days%2C%2015%20%0AVN0002%2C%20ASIATIC%20STATIONERS%2C%20SMD%26WIRES%2C%20145%20MAIN%20ST%20BANGL%2C%20080-14564125%2C%20sales@asiatic.com%2C%20VENDOR2%2C45000%2C45%20Days%2C%2012%0AVN0003%2C%20ARTHI%20ELECTRONICS%2C%20SMD%2C%20233%20MAIN%20ST%20BANGL%2C%20080-145987125%2C%20sales@arthi.com%2C%20VENDOR3%2C%2020000%2C15%20Days%2C%2025%0AVN0004%2C%20ALTIS%20SOLUTIONS%2C%20SMD%2C%203245%20MAIN%20ST%20BANGL%2C%20080-1584585%2C%20sales@altis.com%2C%20VENDOR4%2C%2035000%2C%2015%20Days%2C%2010%0A%20VN0005%2C%20ADBVANCE%20MC%2C%20SMD%26CONNECTORS%2C%20174%20MAIN%20ST%20BNGLR%2C080-2546584%2C%20sales@advance.com%2CVENDOR5%2C1000000%2C90%20Days%2C%2015%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%7B10L%2C%2020L%2C%2010L%2C%2015L%2C10L%2C%2010L%2C%2010L%2C%2010C%2C%2010C%2C%2010C%7D%0A%20%0A%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::Button" x="974" y="184" w="-1" h="-1" measuredW="92" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Add%20Vendor</text>
+      </controlProperties>
+    </control>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::Button" x="1084" y="184" w="-1" h="-1" measuredW="91" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Edit%20Vendor</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::Alert" x="390" y="331" w="277" h="99" measuredW="200" measuredH="76" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Vendor%20Updated%0AVendor%20VN0003%20Updated%20Sucessfully%21%21</text>
+      </controlProperties>
+    </control>
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::Button" x="494" y="388" w="-1" h="-1" measuredW="56" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>erp_editedvendor%26bm%3Berp_editedvendor.bmml%26bm%3Berp_editedvendor.bmml%26bm%3Berp_editedvendor.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22486%2C385%2C542%2C412%22%20href%3D%22erp_editedvendor.bmml%22%20alt%3D%22erp_editedvendor%22%20id%3D%2242%22/%3E</map>
+        <state>selected</state>
+        <text>Close</text>
+      </controlProperties>
+    </control>
+    <control controlID="43" controlTypeID="com.balsamiq.mockups::ButtonBar" x="65" y="93" w="-1" h="-1" measuredW="814" measuredH="29" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>erp_dashboard%26bm%3Berp_dashboard.bmml%26bm%3Berp_dashboard.bmml%26bm%3Berp_dashboard.bmml%2Cerp_vendor%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%2Cerp_stockmanagement%26bm%3Berp_stockmanagement.bmml%26bm%3Berp_stockmanagement.bmml%26bm%3Berp_stockmanagement.bmml%2Cerp_issuance%26bm%3Berp_issuance.bmml%26bm%3Berp_issuance.bmml%26bm%3Berp_issuance.bmml%2Cerp_productmanagment%26bm%3Berp_productmanagment.bmml%26bm%3Berp_productmanagment.bmml%26bm%3Berp_productmanagment.bmml%2Cerp_kitting%26bm%3Berp_kitting.bmml%26bm%3Berp_kitting.bmml%26bm%3Berp_kitting.bmml%2Cerp_items%26bm%3Berp_items.bmml%26bm%3Berp_items.bmml%26bm%3Berp_items.bmml%2Cerp_finance%26bm%3Berp_finance.bmml%26bm%3Berp_finance.bmml%26bm%3Berp_finance.bmml%2Cerp_login%26bm%3Berp_login.bmml%26bm%3Berp_login.bmml%26bm%3Berp_login.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2257%2C90%2C147%2C119%22%20href%3D%22erp_dashboard.bmml%22%20alt%3D%22erp_dashboard%22%20id%3D%2243_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22147%2C90%2C223%2C119%22%20href%3D%22erp_vendor.bmml%22%20alt%3D%22erp_vendor%22%20id%3D%2243_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22223%2C90%2C367%2C119%22%20href%3D%22erp_stockmanagement.bmml%22%20alt%3D%22erp_stockmanagement%22%20id%3D%2243_2%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22367%2C90%2C447%2C119%22%20href%3D%22erp_issuance.bmml%22%20alt%3D%22erp_issuance%22%20id%3D%2243_3%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22447%2C90%2C603%2C119%22%20href%3D%22erp_productmanagment.bmml%22%20alt%3D%22erp_productmanagment%22%20id%3D%2243_4%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22603%2C90%2C667%2C119%22%20href%3D%22erp_kitting.bmml%22%20alt%3D%22erp_kitting%22%20id%3D%2243_5%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22667%2C90%2C729%2C119%22%20href%3D%22erp_items.bmml%22%20alt%3D%22erp_items%22%20id%3D%2243_6%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22729%2C90%2C803%2C119%22%20href%3D%22erp_finance.bmml%22%20alt%3D%22erp_finance%22%20id%3D%2243_7%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22803%2C90%2C871%2C119%22%20href%3D%22erp_login.bmml%22%20alt%3D%22erp_login%22%20id%3D%2243_8%22/%3E%0A</map>
+        <selectedIndex>1</selectedIndex>
+        <text>Dashboard%2CMasters%2CStock%20Management%2CIssuance%2CProduct%20Management%2CKitting%2CItems%2CFinance%2C%20Logout</text>
+      </controlProperties>
+    </control>
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::ButtonBar" x="67" y="153" w="-1" h="-1" measuredW="443" measuredH="29" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>erp_vendor%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%2Cerp_Itemscategory%26bm%3Berp_Itemscategory.bmml%26bm%3Berp_Itemscategory.bmml%26bm%3Berp_Itemscategory.bmml%2Cerp_rawmaterial%26bm%3Berp_rawmaterial.bmml%26bm%3Berp_rawmaterial.bmml%26bm%3Berp_rawmaterial.bmml%2Cerp_assignaddedRawMaterial%26bm%3Berp_assignaddedRawMaterial.bmml%26bm%3Berp_assignaddedRawMaterial.bmml%26bm%3Berp_assignaddedRawMaterial.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2259%2C150%2C130%2C179%22%20href%3D%22erp_vendor.bmml%22%20alt%3D%22erp_vendor%22%20id%3D%2245_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22130%2C150%2C240%2C179%22%20href%3D%22erp_Itemscategory.bmml%22%20alt%3D%22erp_Itemscategory%22%20id%3D%2245_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22240%2C150%2C348%2C179%22%20href%3D%22erp_rawmaterial.bmml%22%20alt%3D%22erp_rawmaterial%22%20id%3D%2245_2%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22348%2C150%2C502%2C179%22%20href%3D%22erp_assignaddedRawMaterial.bmml%22%20alt%3D%22erp_assignaddedRawMaterial%22%20id%3D%2245_3%22/%3E%0A</map>
+        <selectedIndex>0</selectedIndex>
+        <text>Vendor%2CRM%20Category%2C%20Raw%20Material%2C%20Assign%20Raw%20Material</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

@@ -1,0 +1,82 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1355" measuredH="812" mockupW="1355" mockupH="811">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="0" y="1" w="1355" h="811" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Semtronics%20ERP%20System%0Ahttp%3A//www.semtronics.in/erp</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::ButtonBar" x="65" y="93" w="-1" h="-1" measuredW="814" measuredH="29" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>erp_dashboard%26bm%3Berp_dashboard.bmml%26bm%3Berp_dashboard.bmml%26bm%3Berp_dashboard.bmml%2Cerp_vendor%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%2Cerp_stockmanagement%26bm%3Berp_stockmanagement.bmml%26bm%3Berp_stockmanagement.bmml%26bm%3Berp_stockmanagement.bmml%2Cerp_issuance%26bm%3Berp_issuance.bmml%26bm%3Berp_issuance.bmml%26bm%3Berp_issuance.bmml%2Cerp_productmanagment%26bm%3Berp_productmanagment.bmml%26bm%3Berp_productmanagment.bmml%26bm%3Berp_productmanagment.bmml%2Cerp_kitting%26bm%3Berp_kitting.bmml%26bm%3Berp_kitting.bmml%26bm%3Berp_kitting.bmml%2Cerp_items%26bm%3Berp_items.bmml%26bm%3Berp_items.bmml%26bm%3Berp_items.bmml%2Cerp_finance%26bm%3Berp_finance.bmml%26bm%3Berp_finance.bmml%26bm%3Berp_finance.bmml%2Cerp_login%26bm%3Berp_login.bmml%26bm%3Berp_login.bmml%26bm%3Berp_login.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2265%2C92%2C155%2C121%22%20href%3D%22erp_dashboard.bmml%22%20alt%3D%22erp_dashboard%22%20id%3D%222_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22155%2C92%2C231%2C121%22%20href%3D%22erp_vendor.bmml%22%20alt%3D%22erp_vendor%22%20id%3D%222_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22231%2C92%2C375%2C121%22%20href%3D%22erp_stockmanagement.bmml%22%20alt%3D%22erp_stockmanagement%22%20id%3D%222_2%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22375%2C92%2C455%2C121%22%20href%3D%22erp_issuance.bmml%22%20alt%3D%22erp_issuance%22%20id%3D%222_3%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22455%2C92%2C611%2C121%22%20href%3D%22erp_productmanagment.bmml%22%20alt%3D%22erp_productmanagment%22%20id%3D%222_4%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22611%2C92%2C675%2C121%22%20href%3D%22erp_kitting.bmml%22%20alt%3D%22erp_kitting%22%20id%3D%222_5%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22675%2C92%2C737%2C121%22%20href%3D%22erp_items.bmml%22%20alt%3D%22erp_items%22%20id%3D%222_6%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22737%2C92%2C811%2C121%22%20href%3D%22erp_finance.bmml%22%20alt%3D%22erp_finance%22%20id%3D%222_7%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22811%2C92%2C879%2C121%22%20href%3D%22erp_login.bmml%22%20alt%3D%22erp_login%22%20id%3D%222_8%22/%3E%0A</map>
+        <selectedIndex>2</selectedIndex>
+        <text>Dashboard%2CMasters%2CStock%20Management%2CIssuance%2CProduct%20Management%2CKitting%2CItems%2CFinance%2C%20Logout</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::DataGrid" x="67" y="193" w="1264" h="320" measuredW="279" measuredH="143" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Vendor%20Name%2CInvoice%20No%2CInvoice%20Amount%0A%20%0AAR%20Enterpriss%2C%201000212%2C%201024.25%0A%20%0A%20%0A%7B10L%2C%2010L%2C%2010L%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::ButtonBar" x="65" y="134" w="-1" h="-1" measuredW="348" measuredH="29" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>%2Cerp_stockmanagement%26bm%3Berp_stockmanagement.bmml%26bm%3Berp_stockmanagement.bmml%26bm%3Berp_stockmanagement.bmml%2Cerp_stockstatus%26bm%3Berp_stockstatus.bmml%26bm%3Berp_stockstatus.bmml%26bm%3Berp_stockstatus.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22182%2C133%2C306%2C162%22%20href%3D%22erp_stockmanagement.bmml%22%20alt%3D%22erp_stockmanagement%22%20id%3D%2212_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22306%2C133%2C413%2C162%22%20href%3D%22erp_stockstatus.bmml%22%20alt%3D%22erp_stockstatus%22%20id%3D%2212_1%22/%3E%0A</map>
+        <text>Invoice%20Details%2CStock%20Inventory%2C%20Stock%20Status</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::FieldSet" x="247" y="124" w="751" h="259" measuredW="200" measuredH="170" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Add%20Invoice%20Details</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Label" x="265" y="190" w="-1" h="-1" measuredW="86" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Vendor%20Name</text>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::ComboBox" x="363" y="193" w="166" h="-1" measuredW="144" measuredH="78" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20R%20ENTERPRISES%0AAISIATIC%20STATIONERS%0AARTHI%20ELECTRONICS%0AALTIS%20SOLUTIONS</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::DateChooser" x="265" y="150" w="-1" h="-1" measuredW="136" measuredH="25" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>07/03/2014%20%20%20%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::Label" x="265" y="295" w="-1" h="-1" measuredW="96" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Invoice%20Number</text>
+      </controlProperties>
+    </control>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::TextInput" x="372" y="292" w="157" h="-1" measuredW="60" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>102546</text>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::Label" x="567" y="295" w="-1" h="-1" measuredW="94" measuredH="21" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Invoice%20Amount</text>
+      </controlProperties>
+    </control>
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::TextInput" x="674" y="292" w="157" h="-1" measuredW="54" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>25000</text>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::Button" x="536" y="340" w="-1" h="-1" measuredW="47" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>erp_stockmanagement%26bm%3Berp_stockmanagement.bmml%26bm%3Berp_stockmanagement.bmml%26bm%3Berp_stockmanagement.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22536%2C339%2C583%2C366%22%20href%3D%22erp_stockmanagement.bmml%22%20alt%3D%22erp_stockmanagement%22%20id%3D%2225%22/%3E</map>
+        <state>selected</state>
+        <text>Add</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Button" x="629" y="339" w="-1" h="-1" measuredW="64" measuredH="27" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cancel</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

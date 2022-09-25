@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<presentation title="CloseComplaint" width="600.0000000" height="450.0000000" thmbWidth="0.0000000" thmbHeight="0.0000000" frameRate="24.0000000" looping="0" startingSlideShow="" pptVersion="2007" type="compound" hasExternalAudio="0" uid="{BD3D5D09-08ED-432E-B855-3B1B7BF9CC9E}">
+	<presenters/>
+	<references/>
+	<soundAssets/>
+	<backgroundSound soundAssetId="" looping="0"/>
+	<settings>
+		<navigation>
+			<keyboard enabled="1"/>
+			<mouse enabled="1" target="step"/>
+		</navigation>
+		<skin>
+			<layout>
+				<alignment horizontal="right" vertical="bottom"/>
+				<margins horizontal="5" vertical="5"/>
+				<buttons width="32" height="33" stride="6"/>
+			</layout>
+			<navigation advanceType="slide"/>
+			<messages>
+				<resumeText>Would you like to resume the presentation from the last slide viewed?</resumeText>
+				<resumeTitle>Resume Presentation</resumeTitle>
+				<ok>OK</ok>
+				<no>No</no>
+				<yes>Yes</yes>
+			</messages>
+		</skin>
+		<colorScheme>
+			<primaryColor>0.5686482;0.5208360;-0.0894842;0.0000000;0.0000000;0.1655884;0.6967325;0.1376791;0.0000000;0.0000000;0.3927516;0.2936727;0.3135757;0.0000000;0.0000000;0.0000000;0.0000000;0.0000000;1.0000000;0.0000000;</primaryColor>
+		</colorScheme>
+		<appearance fullScreen="0"/>
+		<playback autoStart="0" resumePresentationPlayback="1" syncWithVideoNarration="1" enableVideoControl="1"/>
+	</settings>
+	<slides embedded="0">
+		<slide index="0" title="" titleNormalized="" src="data/slide1.swf" size="67827" advanceOnTime="1" framesCount="37" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="36" playTime="1.5000000" pauseTime="3.5000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>click on complaint status</text>
+		</slide>
+		<slide index="1" title="" titleNormalized="" src="data/slide2.swf" size="68938" advanceOnTime="1" framesCount="40" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="0" playTime="0.0010000" pauseTime="2.0000000"/>
+				<step start="1" end="13" playTime="0.5000000" pauseTime="1.5000000"/>
+				<step start="14" end="26" playTime="0.5000000" pauseTime="1.5000000"/>
+				<step start="27" end="39" playTime="0.5000000" pauseTime="1.5000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>status resolved</text>
+		</slide>
+		<slide index="2" title="" titleNormalized="" src="data/slide3.swf" size="62982" advanceOnTime="1" framesCount="85" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="84" playTime="3.5000000" pauseTime="1.5000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>resolved tickets in
+ closed stage
+click on ticket</text>
+		</slide>
+		<slide index="3" title="" titleNormalized="" src="data/slide4.swf" size="79964" advanceOnTime="1" framesCount="157" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="156" playTime="6.5000000" pauseTime="0.0000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>staus closed
+enter the comments
+enter the skill rates
+click on update</text>
+		</slide>
+		<slide index="4" title="" titleNormalized="" src="data/slide5.swf" size="72551" advanceOnTime="1" framesCount="110" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="0" playTime="0.0010000" pauseTime="2.0000000"/>
+				<step start="1" end="109" playTime="4.5000000" pauseTime="0.0000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>ticket is reopened
+enter comments
+click on update</text>
+		</slide>
+	</slides>
+	<actions>
+		<action name="playPause">
+			<shortcut code="32" control="0" shift="0"/>
+		</action>
+		<action name="nextSlide">
+			<shortcut code="34" control="0" shift="0"/>
+		</action>
+		<action name="previousSlide">
+			<shortcut code="33" control="0" shift="0"/>
+		</action>
+		<action name="nextStep">
+			<shortcut code="13" control="0" shift="0"/>
+		</action>
+		<action name="previousStep">
+			<shortcut code="13" control="0" shift="1"/>
+		</action>
+		<action name="seekForward">
+			<shortcut code="39" control="0" shift="0"/>
+		</action>
+		<action name="seekBackward">
+			<shortcut code="37" control="0" shift="0"/>
+		</action>
+		<action name="firstSlide">
+			<shortcut code="36" control="1" shift="0"/>
+		</action>
+		<action name="lastSlide">
+			<shortcut code="35" control="1" shift="0"/>
+		</action>
+		<action name="lastViewedSlide">
+			<shortcut code="8" control="0" shift="0"/>
+		</action>
+		<action name="slideStart">
+			<shortcut code="36" control="0" shift="0"/>
+		</action>
+		<action name="slideEnd">
+			<shortcut code="35" control="0" shift="0"/>
+		</action>
+		<action name="volumeUp">
+			<shortcut code="38" control="0" shift="0"/>
+		</action>
+		<action name="volumeDown">
+			<shortcut code="40" control="0" shift="0"/>
+		</action>
+		<action name="toggleFullscreen">
+			<shortcut code="70" control="1" shift="0"/>
+		</action>
+	</actions>
+</presentation>

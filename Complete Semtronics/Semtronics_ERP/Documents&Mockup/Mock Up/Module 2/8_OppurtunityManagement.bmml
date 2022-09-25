@@ -1,0 +1,135 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1366" measuredH="477" mockupW="1366" mockupH="477">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::TabBar" x="0" y="0" w="1366" h="477" measuredW="485" measuredH="100" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>1_Masters%26bm%3B1_Masters.bmml%26bm%3B1_Masters.bmml%26bm%3B1_Masters.bmml%2C2_LeadManagement%26bm%3B2_LeadManagement.bmml%26bm%3B2_LeadManagement.bmml%26bm%3B2_LeadManagement.bmml%2C5_Oppurtunities%26bm%3B5_Oppurtunities.bmml%26bm%3B5_Oppurtunities.bmml%26bm%3B5_Oppurtunities.bmml%2C15_Salesorder%26bm%3B15_Salesorder.bmml%26bm%3B15_Salesorder.bmml%26bm%3B15_Salesorder.bmml%2C17_SalesInvoice%26bm%3B17_SalesInvoice.bmml%26bm%3B17_SalesInvoice.bmml%26bm%3B17_SalesInvoice.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2220%2C0%2C82%2C25%22%20href%3D%221_Masters.bmml%22%20alt%3D%221_Masters%22%20id%3D%221_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%2282%2C0%2C204%2C25%22%20href%3D%222_LeadManagement.bmml%22%20alt%3D%222_LeadManagement%22%20id%3D%221_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22204%2C0%2C293%2C25%22%20href%3D%225_Oppurtunities.bmml%22%20alt%3D%225_Oppurtunities%22%20id%3D%221_2%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22293%2C0%2C370%2C25%22%20href%3D%2215_Salesorder.bmml%22%20alt%3D%2215_Salesorder%22%20id%3D%221_3%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22370%2C0%2C461%2C25%22%20href%3D%2217_SalesInvoice.bmml%22%20alt%3D%2217_SalesInvoice%22%20id%3D%221_4%22/%3E%0A</map>
+        <selectedIndex>2</selectedIndex>
+        <text>Masters%2C%20Lead%20Management%2C%20Oppurtunities%2C%20Sale%20Order%2C%20Sales%20Invoice</text>
+      </controlProperties>
+    </control>
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::DataGrid" x="22" y="93" w="1212" h="195" measuredW="1041" measuredH="113" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <rowHeight>17</rowHeight>
+        <text>Work%20No%2CLead%20Name%2C%20Description%2C%20product%2C%20Quantity%2C%20Date%2C%20Contact%20Person%2C%20Designation%2C%20Mail%20ID%2CPh/Mob%20No%2C%20Company%2C%20Status%0AWK000001%2CClient1%2C%20Description1%2C%20Driver%201%2C%205000%2C08/04/2014%2C%20Person1%2C%20CEO%2C%20contact@client.com%2C2547747%2CCompany%201%2C%20Proposal%0AWK000002%2CClient2%2C%20Description2%2C%20Driver%202%2C%205800%2C09/04/2014%2C%20Person2%2C%20CEO%2C%20contact@client.com%2C2478747%2CCompany%202%2C%20Negotiation%0AWK000003%2CClient3%2C%20Description3%2C%20Driver%203%2C%207000%2C18/04/2014%2C%20Person3%2C%20CEO%2C%20contact@client.com%2C2544597%2CCompany%203%2C%20Final%20Review%0AWK000004%2CClient4%2C%20Description4%2C%20Driver%204%2C%206000%2C28/04/2014%2C%20Person4%2C%20CEO%2C%20contact@client.com%2C2544577%2CCompany%204%2C%20Analysis%0A%20%0A%7B12L%2C10C%2C%208C%2C%208C%2C%2010C%2C%2010C%2C%208C%2C%208C%2C%2010C%2C%2010C%2C%208C%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="37" controlTypeID="com.balsamiq.mockups::Button" x="1238" y="109" w="46" h="19" measuredW="46" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Edit</text>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::Button" x="1240" y="129" w="46" h="19" measuredW="46" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Edit</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::Button" x="1240" y="149" w="46" h="19" measuredW="46" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>12_OppurtunityManagementClose%26bm%3B12_OppurtunityManagementClose.bmml%26bm%3B12_OppurtunityManagementClose.bmml%26bm%3B12_OppurtunityManagementClose.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%221240%2C149%2C1286%2C168%22%20href%3D%2212_OppurtunityManagementClose.bmml%22%20alt%3D%2212_OppurtunityManagementClose%22%20id%3D%2241%22/%3E</map>
+        <state>selected</state>
+        <text>Edit</text>
+      </controlProperties>
+    </control>
+    <control controlID="43" controlTypeID="com.balsamiq.mockups::Button" x="1240" y="169" w="46" h="19" measuredW="46" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>10_OppurtunityEdit%26bm%3B10_OppurtunityEdit.bmml%26bm%3B10_OppurtunityEdit.bmml%26bm%3B10_OppurtunityEdit.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%221240%2C169%2C1286%2C188%22%20href%3D%2210_OppurtunityEdit.bmml%22%20alt%3D%2210_OppurtunityEdit%22%20id%3D%2243%22/%3E</map>
+        <state>selected</state>
+        <text>Edit</text>
+      </controlProperties>
+    </control>
+    <control controlID="58" controlTypeID="com.balsamiq.mockups::Link" x="29" y="64" w="-1" h="-1" measuredW="40" measuredH="21" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>8_OppurtunityManagement%26bm%3B8_OppurtunityManagement.bmml%26bm%3B8_OppurtunityManagement.bmml%26bm%3B8_OppurtunityManagement.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2229%2C64%2C69%2C85%22%20href%3D%228_OppurtunityManagement.bmml%22%20alt%3D%228_OppurtunityManagement%22%20id%3D%2258%22/%3E</map>
+        <text>All%20%284%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::Link" x="75" y="64" w="-1" h="-1" measuredW="94" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Prospecting%20%280%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::Link" x="171" y="64" w="-1" h="-1" measuredW="69" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>9_OppurtunityManagementAnalysis%26bm%3B9_OppurtunityManagementAnalysis.bmml%26bm%3B9_OppurtunityManagementAnalysis.bmml%26bm%3B9_OppurtunityManagementAnalysis.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22171%2C64%2C240%2C85%22%20href%3D%229_OppurtunityManagementAnalysis.bmml%22%20alt%3D%229_OppurtunityManagementAnalysis%22%20id%3D%2260%22/%3E</map>
+        <text>Analysis%20%281%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="61" controlTypeID="com.balsamiq.mockups::Link" x="243" y="64" w="-1" h="-1" measuredW="99" measuredH="21" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Presentation%20%280%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::Link" x="786" y="64" w="-1" h="-1" measuredW="69" measuredH="21" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Quoted%20%281%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="64" controlTypeID="com.balsamiq.mockups::Link" x="860" y="64" w="-1" h="-1" measuredW="97" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Final%20Review%20%281%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="65" controlTypeID="com.balsamiq.mockups::Link" x="1171" y="64" w="-1" h="-1" measuredW="102" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Closed/Lost%20%2812%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::Link" x="1066" y="64" w="-1" h="-1" measuredW="102" measuredH="21" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Closed/Won%20%2810%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::Link" x="1273" y="64" w="-1" h="-1" measuredW="67" measuredH="21" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Others%20%280%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::Link" x="957" y="64" w="-1" h="-1" measuredW="107" measuredH="21" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Hold/Postpone%280%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="69" controlTypeID="com.balsamiq.mockups::Button" x="1073" y="36" w="-1" h="-1" measuredW="56" measuredH="27" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>8_OppurtunityManagement%26bm%3B8_OppurtunityManagement.bmml%26bm%3B8_OppurtunityManagement.bmml%26bm%3B8_OppurtunityManagement.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%221073%2C36%2C1129%2C63%22%20href%3D%228_OppurtunityManagement.bmml%22%20alt%3D%228_OppurtunityManagement%22%20id%3D%2269%22/%3E</map>
+        <text>Close</text>
+      </controlProperties>
+    </control>
+    <control controlID="70" controlTypeID="com.balsamiq.mockups::Link" x="22" y="303" w="-1" h="-1" measuredW="160" measuredH="21" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>SaleOrder%20to%20be%20Issued%20%280%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="71" controlTypeID="com.balsamiq.mockups::SearchBox" x="1223" y="30" w="-1" h="-1" measuredW="120" measuredH="25" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>search</text>
+      </controlProperties>
+    </control>
+    <control controlID="72" controlTypeID="com.balsamiq.mockups::Link" x="342" y="64" w="-1" h="-1" measuredW="132" measuredH="21" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Samples%20Provided%20%280%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="73" controlTypeID="com.balsamiq.mockups::Link" x="471" y="64" w="-1" h="-1" measuredW="108" measuredH="21" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Samples%20Appr%20%280%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="74" controlTypeID="com.balsamiq.mockups::Link" x="578" y="64" w="-1" h="-1" measuredW="97" measuredH="21" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Nego%20to%20Pilot%280%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="75" controlTypeID="com.balsamiq.mockups::Link" x="675" y="64" w="-1" h="-1" measuredW="111" measuredH="21" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Pilot%20Lot%20Order%20%280%29</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

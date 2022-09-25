@@ -1,0 +1,57 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1366" measuredH="477" mockupW="1366" mockupH="477">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::TabBar" x="0" y="0" w="1366" h="477" measuredW="485" measuredH="100" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>1_Masters%26bm%3B1_Masters.bmml%26bm%3B1_Masters.bmml%26bm%3B1_Masters.bmml%2C2_LeadManagement%26bm%3B2_LeadManagement.bmml%26bm%3B2_LeadManagement.bmml%26bm%3B2_LeadManagement.bmml%2C5_Oppurtunities%26bm%3B5_Oppurtunities.bmml%26bm%3B5_Oppurtunities.bmml%26bm%3B5_Oppurtunities.bmml%2C15_Salesorder%26bm%3B15_Salesorder.bmml%26bm%3B15_Salesorder.bmml%26bm%3B15_Salesorder.bmml%2C17_SalesInvoice%26bm%3B17_SalesInvoice.bmml%26bm%3B17_SalesInvoice.bmml%26bm%3B17_SalesInvoice.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2220%2C0%2C82%2C25%22%20href%3D%221_Masters.bmml%22%20alt%3D%221_Masters%22%20id%3D%221_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%2282%2C0%2C204%2C25%22%20href%3D%222_LeadManagement.bmml%22%20alt%3D%222_LeadManagement%22%20id%3D%221_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22204%2C0%2C293%2C25%22%20href%3D%225_Oppurtunities.bmml%22%20alt%3D%225_Oppurtunities%22%20id%3D%221_2%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22293%2C0%2C370%2C25%22%20href%3D%2215_Salesorder.bmml%22%20alt%3D%2215_Salesorder%22%20id%3D%221_3%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22370%2C0%2C461%2C25%22%20href%3D%2217_SalesInvoice.bmml%22%20alt%3D%2217_SalesInvoice%22%20id%3D%221_4%22/%3E%0A</map>
+        <selectedIndex>3</selectedIndex>
+        <tabHPosition>left</tabHPosition>
+        <tabVPosition>top</tabVPosition>
+        <text>Masters%2C%20Lead%20Management%2C%20Oppurtunities%2C%20Sale%20Order%2C%20Sales%20Invoice</text>
+      </controlProperties>
+    </control>
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::DataGrid" x="15" y="111" w="1212" h="120" measuredW="1340" measuredH="95" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <rowHeight>17</rowHeight>
+        <text>SO%20No%2CLead%20Name%2C%20Description%2C%20product%2C%20Quantity%2C%20Date%2C%20Contact%20Person%2C%20%20Company%2C%20Approved%20By%2C%20Status%2C%20Comment%2C%20Shipping%20Address%2C%20Billing%20Address%2C%20Courier%20By%2C%20Payment%0A%2CClient3%2C%20Description3%2C%20Driver%203%2C%207000%2C18/04/2014%2C%20Person3%2C%20Company%203%2C%20%2C%20Done%2C%20Items%20Packed%20Ready%20For%20Delivery%2C%20123%20main%20st%2C%2012343%20main%20st%2C%20DTDC%2C%20Self%0A%20%0A%20%0A%20%0A%7B12L%2C10C%2C%208C%2C%208C%2C%2010C%2C%2010C%2C%208C%2C%208C%2C%2010C%2C%2010C%2C%2010C%2C%2010C%2C%2010C%2C%2010C%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="74" controlTypeID="com.balsamiq.mockups::SearchBox" x="1107" y="82" w="-1" h="-1" measuredW="120" measuredH="25" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>search</text>
+      </controlProperties>
+    </control>
+    <control controlID="83" controlTypeID="com.balsamiq.mockups::Button" x="1171" y="29" w="-1" h="-1" measuredW="56" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>15_Salesorder%26bm%3B15_Salesorder.bmml%26bm%3B15_Salesorder.bmml%26bm%3B15_Salesorder.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%221171%2C29%2C1227%2C56%22%20href%3D%2215_Salesorder.bmml%22%20alt%3D%2215_Salesorder%22%20id%3D%2283%22/%3E</map>
+        <text>Close</text>
+      </controlProperties>
+    </control>
+    <control controlID="84" controlTypeID="com.balsamiq.mockups::Link" x="22" y="130" w="-1" h="-1" measuredW="69" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>19.1_Saleordersummary%26bm%3B19.1_Saleordersummary.bmml%26bm%3B19.1_Saleordersummary.bmml%26bm%3B19.1_Saleordersummary.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2222%2C130%2C91%2C151%22%20href%3D%2219.1_Saleordersummary.bmml%22%20alt%3D%2219.1_Saleordersummary%22%20id%3D%2284%22/%3E</map>
+        <text>SO000001</text>
+      </controlProperties>
+    </control>
+    <control controlID="85" controlTypeID="com.balsamiq.mockups::DataGrid" x="15" y="285" w="1212" h="120" measuredW="1340" measuredH="95" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <rowHeight>17</rowHeight>
+        <text>SO%20No%2CLead%20Name%2C%20Description%2C%20product%2C%20Quantity%2C%20Date%2C%20Contact%20Person%2C%20%20Company%2C%20Approved%20By%2C%20Status%2C%20Comment%2C%20Shipping%20Address%2C%20Billing%20Address%2C%20Courier%20By%2C%20Payment%0A%2CClient3%2C%20Description3%2C%20Driver%203%2C%207000%2C18/04/2014%2C%20Person3%2C%20Company%203%2C%20%2C%20Done%2C%20Items%20Packed%20Ready%20For%20Delivery%2C%20123%20main%20st%2C%2012343%20main%20st%2C%20DTDC%2C%20Self%0A%20%0A%20%0A%20%0A%7B12L%2C10C%2C%208C%2C%208C%2C%2010C%2C%2010C%2C%208C%2C%208C%2C%2010C%2C%2010C%2C%2010C%2C%2010C%2C%2010C%2C%2010C%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="86" controlTypeID="com.balsamiq.mockups::Link" x="22" y="304" w="-1" h="-1" measuredW="69" measuredH="21" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>19.1_Saleordersummary%26bm%3B19.1_Saleordersummary.bmml%26bm%3B19.1_Saleordersummary.bmml%26bm%3B19.1_Saleordersummary.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2222%2C304%2C91%2C325%22%20href%3D%2219.1_Saleordersummary.bmml%22%20alt%3D%2219.1_Saleordersummary%22%20id%3D%2286%22/%3E</map>
+        <text>SO000001</text>
+      </controlProperties>
+    </control>
+    <control controlID="87" controlTypeID="com.balsamiq.mockups::Label" x="15" y="258" w="183" h="19" measuredW="183" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Sale%20Order%20to%20be%20Approved%20%281%29</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

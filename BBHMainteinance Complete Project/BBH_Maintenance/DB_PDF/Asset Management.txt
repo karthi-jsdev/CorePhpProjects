@@ -1,0 +1,35 @@
+Asset Management Requirement:
+1)   
+			Division
+			Department
+			Location/Place
+
+
+
+
+2)        System               - Master 
+          ---Desktop
+          ---Laptop
+             Switch
+             Printer
+			 Scanner
+
+3)		System name
+
+4)		System Description
+
+5)     Connection Type - Network/Standby
+
+6)      Purchase Date
+
+7)      Warrenty Date 
+
+8) 		AMC Period
+
+
+9)		Condemn -> Not Inactive List
+
+
+Report :
+---Turnaround Time
+   ---Call management

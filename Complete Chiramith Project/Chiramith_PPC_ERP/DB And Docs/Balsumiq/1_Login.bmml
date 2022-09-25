@@ -1,0 +1,66 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1426" measuredH="598" mockupW="1422" mockupH="597">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="4" y="1" w="1422" h="597" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>CHARAMITH%20PRECISION%20%28INDIA%29%20-%20ENTERPRISE%20RESOURCE%20PLANNING%20APPLICATION%0Ahttp%3A//www.charamith.com/ERP/Login</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="364" y="152" w="630" h="250" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="-1"/>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::TextArea" x="389" y="167" w="547" h="24" measuredW="200" measuredH="140" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <borderColor>16777215</borderColor>
+        <color>16777215</color>
+        <text>CHARAMITH%20PRECISION%20%28INDIA%29%20-%20ENTERPRISE%20RESOURCE%20PLANNING%20APPLICATION</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::TextInput" x="592" y="241" w="176" h="-1" measuredW="109" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Enter%20Username</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::TextInput" x="592" y="287" w="176" h="-1" measuredW="104" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Enter%20Password</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::TextArea" x="481" y="240" w="96" h="24" measuredW="200" measuredH="140" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <borderColor>16777215</borderColor>
+        <color>16777215</color>
+        <text>User%20Name</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::TextArea" x="481" y="281" w="97" h="25" measuredW="200" measuredH="140" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <borderColor>16777215</borderColor>
+        <color>16777215</color>
+        <text>Password</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::TextArea" x="481" y="206" w="96" h="24" measuredW="200" measuredH="140" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <borderColor>16777215</borderColor>
+        <color>16777215</color>
+        <text>LOGIN%20%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Button" x="592" y="343" w="-1" h="-1" measuredW="62" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>2_Dashboard%26bm%3B2_Dashboard.bmml%26bm%3B2_Dashboard.bmml%26bm%3B2_Dashboard.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22588%2C342%2C650%2C369%22%20href%3D%222_Dashboard.bmml%22%20alt%3D%222_Dashboard%22%20id%3D%228%22/%3E</map>
+        <text>Submit</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Button" x="684" y="343" w="62" h="27" measuredW="64" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>1_Login%26bm%3B1_Login.bmml%26bm%3B1_Login.bmml%26bm%3B1_Login.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22680%2C342%2C742%2C369%22%20href%3D%221_Login.bmml%22%20alt%3D%221_Login%22%20id%3D%229%22/%3E</map>
+        <text>Cancel</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

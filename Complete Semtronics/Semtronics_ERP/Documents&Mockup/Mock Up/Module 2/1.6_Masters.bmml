@@ -1,0 +1,81 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1366" measuredH="477" mockupW="1366" mockupH="477">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::TabBar" x="0" y="0" w="1366" h="477" measuredW="485" measuredH="100" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>1_Masters%26bm%3B1_Masters.bmml%26bm%3B1_Masters.bmml%26bm%3B1_Masters.bmml%2C2_LeadManagement%26bm%3B2_LeadManagement.bmml%26bm%3B2_LeadManagement.bmml%26bm%3B2_LeadManagement.bmml%2C5_Oppurtunities%26bm%3B5_Oppurtunities.bmml%26bm%3B5_Oppurtunities.bmml%26bm%3B5_Oppurtunities.bmml%2C15_Salesorder%26bm%3B15_Salesorder.bmml%26bm%3B15_Salesorder.bmml%26bm%3B15_Salesorder.bmml%2C17_SalesInvoice%26bm%3B17_SalesInvoice.bmml%26bm%3B17_SalesInvoice.bmml%26bm%3B17_SalesInvoice.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2220%2C0%2C82%2C25%22%20href%3D%221_Masters.bmml%22%20alt%3D%221_Masters%22%20id%3D%221_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%2282%2C0%2C204%2C25%22%20href%3D%222_LeadManagement.bmml%22%20alt%3D%222_LeadManagement%22%20id%3D%221_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22204%2C0%2C293%2C25%22%20href%3D%225_Oppurtunities.bmml%22%20alt%3D%225_Oppurtunities%22%20id%3D%221_2%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22293%2C0%2C370%2C25%22%20href%3D%2215_Salesorder.bmml%22%20alt%3D%2215_Salesorder%22%20id%3D%221_3%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22370%2C0%2C461%2C25%22%20href%3D%2217_SalesInvoice.bmml%22%20alt%3D%2217_SalesInvoice%22%20id%3D%221_4%22/%3E%0A</map>
+        <selectedIndex>0</selectedIndex>
+        <text>Masters%2C%20Lead%20Management%2C%20Oppurtunities%2C%20Sale%20Order%2C%20Sales%20Invoice</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::TabBar" x="0" y="32" w="1366" h="445" measuredW="822" measuredH="100" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>1_Masters%26bm%3B1_Masters.bmml%26bm%3B1_Masters.bmml%26bm%3B1_Masters.bmml%2C1.1_Masters%26bm%3B1.1_Masters.bmml%26bm%3B1.1_Masters.bmml%26bm%3B1.1_Masters.bmml%2C1.2_Masters%26bm%3B1.2_Masters.bmml%26bm%3B1.2_Masters.bmml%26bm%3B1.2_Masters.bmml%2C1.3_Masters%26bm%3B1.3_Masters.bmml%26bm%3B1.3_Masters.bmml%26bm%3B1.3_Masters.bmml%2C1.4_Masters%26bm%3B1.4_Masters.bmml%26bm%3B1.4_Masters.bmml%26bm%3B1.4_Masters.bmml%2C1.5_Masters%26bm%3B1.5_Masters.bmml%26bm%3B1.5_Masters.bmml%26bm%3B1.5_Masters.bmml%2C1.6_Masters%26bm%3B1.6_Masters.bmml%26bm%3B1.6_Masters.bmml%26bm%3B1.6_Masters.bmml%2C1.7_Masters%26bm%3B1.7_Masters.bmml%26bm%3B1.7_Masters.bmml%26bm%3B1.7_Masters.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2220%2C32%2C138%2C57%22%20href%3D%221_Masters.bmml%22%20alt%3D%221_Masters%22%20id%3D%222_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22138%2C32%2C256%2C57%22%20href%3D%221.1_Masters.bmml%22%20alt%3D%221.1_Masters%22%20id%3D%222_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22256%2C32%2C374%2C57%22%20href%3D%221.2_Masters.bmml%22%20alt%3D%221.2_Masters%22%20id%3D%222_2%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22374%2C32%2C498%2C57%22%20href%3D%221.3_Masters.bmml%22%20alt%3D%221.3_Masters%22%20id%3D%222_3%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22498%2C32%2C575%2C57%22%20href%3D%221.4_Masters.bmml%22%20alt%3D%221.4_Masters%22%20id%3D%222_4%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22575%2C32%2C639%2C57%22%20href%3D%221.5_Masters.bmml%22%20alt%3D%221.5_Masters%22%20id%3D%222_5%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22639%2C32%2C754%2C57%22%20href%3D%221.6_Masters.bmml%22%20alt%3D%221.6_Masters%22%20id%3D%222_6%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22754%2C32%2C828%2C57%22%20href%3D%221.7_Masters.bmml%22%20alt%3D%221.7_Masters%22%20id%3D%222_7%22/%3E%0A</map>
+        <selectedIndex>6</selectedIndex>
+        <text>Oppurtunity%20Status%2C%20Industry%20Category%2C%20Product%20Category%2C%20Sales%20Order%20Status%2CReference%2C%20Couriers%2C%20Vendor%20Category%2C%20Ref%20Group</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="52" y="138" w="-1" h="-1" measuredW="61" measuredH="21" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Category</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::TextInput" x="134" y="135" w="122" h="-1" measuredW="79" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Button" x="279" y="138" w="-1" h="-1" measuredW="47" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Add</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::DataGrid" x="50" y="194" w="474" h="258" measuredW="164" measuredH="131" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <rowHeight>16</rowHeight>
+        <text>SI%20No%2C%20Vendor%20Category%0A1%2C%20OEM%0A2%2C%20Class%20A%0A3%2C%20Class%20B%0A4%2C%20Class%20D%0A%20%0A%20%0A%7B4L%2C%2015C%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Button" x="436" y="215" w="41" h="16" measuredW="46" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Edit</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Button" x="477" y="215" w="41" h="16" measuredW="63" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Delete</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Button" x="436" y="233" w="41" h="16" measuredW="46" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Edit</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Button" x="477" y="233" w="41" h="16" measuredW="63" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Delete</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="438" y="251" w="41" h="16" measuredW="46" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Edit</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Button" x="479" y="251" w="41" h="16" measuredW="63" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Delete</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Button" x="438" y="267" w="41" h="16" measuredW="46" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Edit</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Button" x="479" y="267" w="41" h="16" measuredW="63" measuredH="27" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Delete</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

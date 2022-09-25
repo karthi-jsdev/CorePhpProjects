@@ -1,0 +1,77 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1377" measuredH="821" mockupW="1355" mockupH="811">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="22" y="10" w="1355" h="811" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Semtronics%20ERP%20System%0Ahttp%3A//www.semtronics.in/erp</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Image" x="901" y="79" w="456" h="57" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Semtronics%20Logo</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="65" y="231" w="-1" h="-1" measuredW="86" measuredH="21" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Vendor%20Name</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::ComboBox" x="167" y="234" w="166" h="-1" measuredW="144" measuredH="78" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20R%20ENTERPRISES%0AAISIATIC%20STATIONERS%0AARTHI%20ELECTRONICS%0AALTIS%20SOLUTIONS</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::List" x="398" y="234" w="174" h="477" measuredW="100" measuredH="1052" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>14</selectedIndex>
+        <text>RS01001%20-%20Descrip%0ARS01002%20-%20Descrip%0ARS01003%20-%20Descrip%0ARS01004%20-%20Descrip%0ARS01005%20-%20Descrip%0ARS01006%20-%20Descrip%0ARS01007%20-%20Descrip%0ARS01008%20-%20Descrip%0ARS01009%20-%20Descrip%0ARS01010%20-%20Descrip%0ARS01011%20-%20Descrip%0ARS01012%20-%20Descrip%0ARS01013%20-%20Descrip%0ARS01014%20-%20Descrip%0ARS01015%20-%20Descrip%0ARS01016%20-%20Descrip%0ARS01017%20-%20Descrip%0ARS01018%20-%20Descrip%0ARS01019%20-%20Descrip%0ARS01020%20-%20Descrip%0ARS01021%20-%20Descrip%0ARS01022%20-%20Descrip%0ARS01023%20-%20Descrip%0ARS01024%20-%20Descrip%0ARS01025%20-%20Descrip%0ARS01026%20-%20Descrip%0ARS01027%20-%20Descrip%0ARS01028%20-%20Descrip%0ARS01029%20-%20Descrip%0ARS01030%20-%20Descrip%0ARS01031%20-%20Descrip%0ARS01032%20-%20Descrip%0ARS01033%20-%20Descrip%0ARS01034%20-%20Descrip%0ARS01035%20-%20Descrip%0ARS01036%20-%20Descrip%0ARS01037%20-%20Descrip%0ARS01038%20-%20Descrip%0ARS01039%20-%20Descrip%0ARS01040%20-%20Descrip%0ARS01041%20-%20Descrip%0ARS01042%20-%20Descrip%0ARS01043%20-%20Descrip%0ARS01044%20-%20Descrip%0ARS01045%20-%20Descrip%0ARS01046%20-%20Descrip%0ARS01047%20-%20Descrip%0ARS01048%20-%20Descrip%0ARS01049%20-%20Descrip%0ARS01050%20-%20Descrip</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::List" x="690" y="234" w="174" h="477" measuredW="100" measuredH="170" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>RS01001%20-%20Descrip%0ARS01002%20-%20Descrip%0ARS01003%20-%20Descrip%0ARS01007%20-%20Descrip%0ARS01008%20-%20Descrip%0ARS01009%20-%20Descrip%0ARS01043%20-%20Descrip%0ARS01015%20-%20Descrip</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::PointyButton" x="580" y="396" w="95" h="-1" measuredW="44" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Add</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::PointyButton" x="580" y="438" w="96" h="-1" measuredW="69" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>left</direction>
+        <text>Remove</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::RadioButtonGroup" x="65" y="345" w="139" h="64" measuredW="122" measuredH="42" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%28o%29%20Code%20%28selected%29%0A%28%20%29%20Part%20Number</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Button" x="580" y="488" w="89" h="27" measuredW="54" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>erp_assignaddedRawMaterial%26bm%3Berp_assignaddedRawMaterial.bmml%26bm%3Berp_assignaddedRawMaterial.bmml%26bm%3Berp_assignaddedRawMaterial.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22558%2C478%2C647%2C505%22%20href%3D%22erp_assignaddedRawMaterial.bmml%22%20alt%3D%22erp_assignaddedRawMaterial%22%20id%3D%2213%22/%3E</map>
+        <state>selected</state>
+        <text>Save</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::ButtonBar" x="65" y="93" w="-1" h="-1" measuredW="814" measuredH="29" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>erp_dashboard%26bm%3Berp_dashboard.bmml%26bm%3Berp_dashboard.bmml%26bm%3Berp_dashboard.bmml%2Cerp_vendor%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%2Cerp_stockmanagement%26bm%3Berp_stockmanagement.bmml%26bm%3Berp_stockmanagement.bmml%26bm%3Berp_stockmanagement.bmml%2Cerp_issuance%26bm%3Berp_issuance.bmml%26bm%3Berp_issuance.bmml%26bm%3Berp_issuance.bmml%2Cerp_productmanagment%26bm%3Berp_productmanagment.bmml%26bm%3Berp_productmanagment.bmml%26bm%3Berp_productmanagment.bmml%2Cerp_kitting%26bm%3Berp_kitting.bmml%26bm%3Berp_kitting.bmml%26bm%3Berp_kitting.bmml%2Cerp_items%26bm%3Berp_items.bmml%26bm%3Berp_items.bmml%26bm%3Berp_items.bmml%2Cerp_finance%26bm%3Berp_finance.bmml%26bm%3Berp_finance.bmml%26bm%3Berp_finance.bmml%2Cerp_login%26bm%3Berp_login.bmml%26bm%3Berp_login.bmml%26bm%3Berp_login.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2243%2C83%2C133%2C112%22%20href%3D%22erp_dashboard.bmml%22%20alt%3D%22erp_dashboard%22%20id%3D%2214_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22133%2C83%2C209%2C112%22%20href%3D%22erp_vendor.bmml%22%20alt%3D%22erp_vendor%22%20id%3D%2214_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22209%2C83%2C353%2C112%22%20href%3D%22erp_stockmanagement.bmml%22%20alt%3D%22erp_stockmanagement%22%20id%3D%2214_2%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22353%2C83%2C433%2C112%22%20href%3D%22erp_issuance.bmml%22%20alt%3D%22erp_issuance%22%20id%3D%2214_3%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22433%2C83%2C589%2C112%22%20href%3D%22erp_productmanagment.bmml%22%20alt%3D%22erp_productmanagment%22%20id%3D%2214_4%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22589%2C83%2C653%2C112%22%20href%3D%22erp_kitting.bmml%22%20alt%3D%22erp_kitting%22%20id%3D%2214_5%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22653%2C83%2C715%2C112%22%20href%3D%22erp_items.bmml%22%20alt%3D%22erp_items%22%20id%3D%2214_6%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22715%2C83%2C789%2C112%22%20href%3D%22erp_finance.bmml%22%20alt%3D%22erp_finance%22%20id%3D%2214_7%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22789%2C83%2C857%2C112%22%20href%3D%22erp_login.bmml%22%20alt%3D%22erp_login%22%20id%3D%2214_8%22/%3E%0A</map>
+        <selectedIndex>1</selectedIndex>
+        <text>Dashboard%2CMasters%2CStock%20Management%2CIssuance%2CProduct%20Management%2CKitting%2CItems%2CFinance%2C%20Logout</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::ButtonBar" x="67" y="153" w="-1" h="-1" measuredW="443" measuredH="29" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>erp_vendor%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%2Cerp_Itemscategory%26bm%3Berp_Itemscategory.bmml%26bm%3Berp_Itemscategory.bmml%26bm%3Berp_Itemscategory.bmml%2Cerp_rawmaterial%26bm%3Berp_rawmaterial.bmml%26bm%3Berp_rawmaterial.bmml%26bm%3Berp_rawmaterial.bmml%2Cerp_assignaddedRawMaterial%26bm%3Berp_assignaddedRawMaterial.bmml%26bm%3Berp_assignaddedRawMaterial.bmml%26bm%3Berp_assignaddedRawMaterial.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2245%2C143%2C116%2C172%22%20href%3D%22erp_vendor.bmml%22%20alt%3D%22erp_vendor%22%20id%3D%2216_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22116%2C143%2C226%2C172%22%20href%3D%22erp_Itemscategory.bmml%22%20alt%3D%22erp_Itemscategory%22%20id%3D%2216_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22226%2C143%2C334%2C172%22%20href%3D%22erp_rawmaterial.bmml%22%20alt%3D%22erp_rawmaterial%22%20id%3D%2216_2%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22334%2C143%2C488%2C172%22%20href%3D%22erp_assignaddedRawMaterial.bmml%22%20alt%3D%22erp_assignaddedRawMaterial%22%20id%3D%2216_3%22/%3E%0A</map>
+        <selectedIndex>3</selectedIndex>
+        <text>Vendor%2CRM%20Category%2C%20Raw%20Material%2C%20Assign%20Raw%20Material</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

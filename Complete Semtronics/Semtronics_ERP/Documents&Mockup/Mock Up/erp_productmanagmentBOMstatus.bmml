@@ -1,0 +1,42 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1355" measuredH="812" mockupW="1355" mockupH="811">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="0" y="1" w="1355" h="811" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Semtronics%20ERP%20System%0Ahttp%3A//www.semtronics.in/erp</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::ButtonBar" x="65" y="93" w="-1" h="-1" measuredW="814" measuredH="29" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>erp_dashboard%26bm%3Berp_dashboard.bmml%26bm%3Berp_dashboard.bmml%26bm%3Berp_dashboard.bmml%2Cerp_vendor%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%2Cerp_stockmanagement%26bm%3Berp_stockmanagement.bmml%26bm%3Berp_stockmanagement.bmml%26bm%3Berp_stockmanagement.bmml%2Cerp_issuance%26bm%3Berp_issuance.bmml%26bm%3Berp_issuance.bmml%26bm%3Berp_issuance.bmml%2Cerp_productmanagment%26bm%3Berp_productmanagment.bmml%26bm%3Berp_productmanagment.bmml%26bm%3Berp_productmanagment.bmml%2Cerp_kitting%26bm%3Berp_kitting.bmml%26bm%3Berp_kitting.bmml%26bm%3Berp_kitting.bmml%2Cerp_items%26bm%3Berp_items.bmml%26bm%3Berp_items.bmml%26bm%3Berp_items.bmml%2Cerp_finance%26bm%3Berp_finance.bmml%26bm%3Berp_finance.bmml%26bm%3Berp_finance.bmml%2Cerp_login%26bm%3Berp_login.bmml%26bm%3Berp_login.bmml%26bm%3Berp_login.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2265%2C92%2C155%2C121%22%20href%3D%22erp_dashboard.bmml%22%20alt%3D%22erp_dashboard%22%20id%3D%222_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22155%2C92%2C231%2C121%22%20href%3D%22erp_vendor.bmml%22%20alt%3D%22erp_vendor%22%20id%3D%222_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22231%2C92%2C375%2C121%22%20href%3D%22erp_stockmanagement.bmml%22%20alt%3D%22erp_stockmanagement%22%20id%3D%222_2%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22375%2C92%2C455%2C121%22%20href%3D%22erp_issuance.bmml%22%20alt%3D%22erp_issuance%22%20id%3D%222_3%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22455%2C92%2C611%2C121%22%20href%3D%22erp_productmanagment.bmml%22%20alt%3D%22erp_productmanagment%22%20id%3D%222_4%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22611%2C92%2C675%2C121%22%20href%3D%22erp_kitting.bmml%22%20alt%3D%22erp_kitting%22%20id%3D%222_5%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22675%2C92%2C737%2C121%22%20href%3D%22erp_items.bmml%22%20alt%3D%22erp_items%22%20id%3D%222_6%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22737%2C92%2C811%2C121%22%20href%3D%22erp_finance.bmml%22%20alt%3D%22erp_finance%22%20id%3D%222_7%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22811%2C92%2C879%2C121%22%20href%3D%22erp_login.bmml%22%20alt%3D%22erp_login%22%20id%3D%222_8%22/%3E%0A</map>
+        <selectedIndex>4</selectedIndex>
+        <text>Dashboard%2CMasters%2CStock%20Management%2CIssuance%2CProduct%20Management%2CKitting%2CItems%2CFinance%2C%20Logout</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::ButtonBar" x="65" y="160" w="-1" h="-1" measuredW="282" measuredH="29" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>erp_productmanagment%26bm%3Berp_productmanagment.bmml%26bm%3Berp_productmanagment.bmml%26bm%3Berp_productmanagment.bmml%2Cerp_productmanagmentBOM%26bm%3Berp_productmanagmentBOM.bmml%26bm%3Berp_productmanagmentBOM.bmml%26bm%3Berp_productmanagmentBOM.bmml%2Cerp_productmanagmentBOMstatus%26bm%3Berp_productmanagmentBOMstatus.bmml%26bm%3Berp_productmanagmentBOMstatus.bmml%26bm%3Berp_productmanagmentBOMstatus.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2265%2C159%2C138%2C188%22%20href%3D%22erp_productmanagment.bmml%22%20alt%3D%22erp_productmanagment%22%20id%3D%224_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22138%2C159%2C244%2C188%22%20href%3D%22erp_productmanagmentBOM.bmml%22%20alt%3D%22erp_productmanagmentBOM%22%20id%3D%224_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22244%2C159%2C347%2C188%22%20href%3D%22erp_productmanagmentBOMstatus.bmml%22%20alt%3D%22erp_productmanagmentBOMstatus%22%20id%3D%224_2%22/%3E%0A</map>
+        <selectedIndex>1</selectedIndex>
+        <text>Product%2C%20Product-BOM%2CBOM%20Status</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::DataGrid" x="66" y="217" w="1186" h="288" measuredW="610" measuredH="623" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>right</align>
+        <hLines>true</hLines>
+        <text>Item%2CRaw%20Material%20Code%2CQuantity%2CReference%2CPart%20%2C%20Unit%20Cost%2C%20%20Total%20%2C%20Stock%0A1%2CDE05008%2C4%2CD1%5C%2CD2%5C%2CD3%5C%2CD4%2C1N4007%2C%201.2%2C12%2C%2010%0A2%2CCP04064%2C2%2CC2%5C%2CC10%2C100nF%20305V%20AC%2C%201%2C%2015%2C15%0A3%2CCP04007%2C1%2CC3%2C103/1KVA%2C0.5%2C10%2C20%0A4%2CCP04014%2C1%2CC8%2C%2022uF/50V%20%20%28105%29%2C.35%2C%2035%2C100%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%7B8L%2C%2015L%2C%2010L%2C%2010L%2C10L%2C%2010C%2C%2010C%2C%2010C%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="462" y="165" w="-1" h="-1" measuredW="85" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Product%20Code</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::ComboBox" x="573" y="164" w="-1" h="-1" measuredW="78" measuredH="78" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>300001%0A300002%0A300004%0A300003</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

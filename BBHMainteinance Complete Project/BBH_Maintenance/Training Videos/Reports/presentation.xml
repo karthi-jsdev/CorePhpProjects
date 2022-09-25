@@ -1,0 +1,320 @@
+<?xml version="1.0"?>
+<presentation title="Presentation1" width="600.0000000" height="450.0000000" thmbWidth="0.0000000" thmbHeight="0.0000000" frameRate="24.0000000" looping="0" startingSlideShow="" pptVersion="2007" type="compound" hasExternalAudio="0" uid="{58DF3224-9F0C-41BF-B373-9290D8570377}">
+	<presenters/>
+	<references/>
+	<soundAssets/>
+	<backgroundSound soundAssetId="" looping="0"/>
+	<settings>
+		<navigation>
+			<keyboard enabled="1"/>
+			<mouse enabled="1" target="step"/>
+		</navigation>
+		<skin>
+			<layout>
+				<alignment horizontal="right" vertical="bottom"/>
+				<margins horizontal="5" vertical="5"/>
+				<buttons width="32" height="33" stride="6"/>
+			</layout>
+			<navigation advanceType="slide"/>
+			<messages>
+				<resumeText>Would you like to resume the presentation from the last slide viewed?</resumeText>
+				<resumeTitle>Resume Presentation</resumeTitle>
+				<ok>OK</ok>
+				<no>No</no>
+				<yes>Yes</yes>
+			</messages>
+		</skin>
+		<colorScheme>
+			<primaryColor>0.5686482;0.5208360;-0.0894842;0.0000000;0.0000000;0.1655884;0.6967325;0.1376791;0.0000000;0.0000000;0.3927516;0.2936727;0.3135757;0.0000000;0.0000000;0.0000000;0.0000000;0.0000000;1.0000000;0.0000000;</primaryColor>
+		</colorScheme>
+		<appearance fullScreen="0"/>
+		<playback autoStart="0" resumePresentationPlayback="1" syncWithVideoNarration="1" enableVideoControl="1"/>
+	</settings>
+	<slides embedded="0">
+		<slide index="0" title="" titleNormalized="" src="data/slide1.swf" size="65434" advanceOnTime="1" framesCount="157" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="156" playTime="6.5000000" pauseTime="3.5000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>click on reports
+enter start and end date
+click on search
+click on download, to get the data in a 	excel format</text>
+		</slide>
+		<slide index="1" title="" titleNormalized="" src="data/slide2.swf" size="54389" advanceOnTime="1" framesCount="37" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="36" playTime="1.5000000" pauseTime="2.5000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>downloadable excel format 
+ will look like this</text>
+		</slide>
+		<slide index="2" title="" titleNormalized="" src="data/slide3.swf" size="40654" advanceOnTime="1" framesCount="37" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="36" playTime="1.5000000" pauseTime="2.5000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>to view status in chart click on show charts</text>
+		</slide>
+		<slide index="3" title="" titleNormalized="" src="data/slide4.swf" size="42408" advanceOnTime="1" framesCount="49" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="48" playTime="2.0000000" pauseTime="2.0000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>to hide charts click on hide chart</text>
+		</slide>
+		<slide index="4" title="" titleNormalized="" src="data/slide5.swf" size="98147" advanceOnTime="1" framesCount="241" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="240" playTime="10.0000000" pauseTime="2.0000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>click on department
+select department you want to search
+select status you want to search
+select start and end date
+click on search
+click on download, to get the data
+ in a excel format</text>
+		</slide>
+		<slide index="5" title="" titleNormalized="" src="data/slide6.swf" size="90083" advanceOnTime="1" framesCount="241" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="240" playTime="10.0000000" pauseTime="2.0000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>click on technician
+select technician name want to search
+select status you want to search
+select start and end date
+click on search
+click on download, to get the data
+ in a excel format</text>
+		</slide>
+		<slide index="6" title="" titleNormalized="" src="data/slide7.swf" size="75970" advanceOnTime="1" framesCount="241" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="240" playTime="10.0000000" pauseTime="2.0000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>click on zone
+click on search
+click on download, to get the data
+ in a excel format
+select zone name want to search
+select status you want to search
+select start and end date</text>
+		</slide>
+		<slide index="7" title="" titleNormalized="" src="data/slide8.swf" size="75124" advanceOnTime="1" framesCount="313" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="312" playTime="13.0000000" pauseTime="1.0000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>click all
+select department name want to search
+select technician you want to search
+select zone you want to search
+select status you want to search
+select start and end date
+click on search
+click on download, to get the data
+ in a excel format</text>
+		</slide>
+		<slide index="8" title="" titleNormalized="" src="data/slide9.swf" size="62452" advanceOnTime="1" framesCount="157" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="156" playTime="6.5000000" pauseTime="2.5000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>click on call slip
+select year
+select month
+click on search</text>
+		</slide>
+		<slide index="9" title="" titleNormalized="" src="data/slide10.swf" size="85424" advanceOnTime="1" framesCount="193" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="192" playTime="8.0000000" pauseTime="4.0000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>click delayed call slip
+click on search
+click on download, to get the data
+ in a excel format
+select year
+select month</text>
+		</slide>
+		<slide index="10" title="" titleNormalized="" src="data/slide11.swf" size="51269" advanceOnTime="1" framesCount="181" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="180" playTime="7.5000000" pauseTime="4.5000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>click on kpi
+select year
+select month
+click on search
+click on download, to get the data
+ in a excel format</text>
+		</slide>
+		<slide index="11" title="" titleNormalized="" src="data/slide12.swf" size="83214" advanceOnTime="1" framesCount="301" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="300" playTime="12.5000000" pauseTime="3.5000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>click on assets
+select department name want to search
+select location you want to search
+select item you want to search
+select connection type you want to search
+select divisiont name want to search
+click on search
+click on download, to get the data
+ in a excel format</text>
+		</slide>
+		<slide index="12" title="" titleNormalized="" src="data/slide13.swf" size="65507" advanceOnTime="1" framesCount="193" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="192" playTime="8.0000000" pauseTime="4.0000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>click on amc period
+select year
+select month
+click on search
+click on download, to get the data
+ in a excel format</text>
+		</slide>
+	</slides>
+	<actions>
+		<action name="playPause">
+			<shortcut code="32" control="0" shift="0"/>
+		</action>
+		<action name="nextSlide">
+			<shortcut code="34" control="0" shift="0"/>
+		</action>
+		<action name="previousSlide">
+			<shortcut code="33" control="0" shift="0"/>
+		</action>
+		<action name="nextStep">
+			<shortcut code="13" control="0" shift="0"/>
+		</action>
+		<action name="previousStep">
+			<shortcut code="13" control="0" shift="1"/>
+		</action>
+		<action name="seekForward">
+			<shortcut code="39" control="0" shift="0"/>
+		</action>
+		<action name="seekBackward">
+			<shortcut code="37" control="0" shift="0"/>
+		</action>
+		<action name="firstSlide">
+			<shortcut code="36" control="1" shift="0"/>
+		</action>
+		<action name="lastSlide">
+			<shortcut code="35" control="1" shift="0"/>
+		</action>
+		<action name="lastViewedSlide">
+			<shortcut code="8" control="0" shift="0"/>
+		</action>
+		<action name="slideStart">
+			<shortcut code="36" control="0" shift="0"/>
+		</action>
+		<action name="slideEnd">
+			<shortcut code="35" control="0" shift="0"/>
+		</action>
+		<action name="volumeUp">
+			<shortcut code="38" control="0" shift="0"/>
+		</action>
+		<action name="volumeDown">
+			<shortcut code="40" control="0" shift="0"/>
+		</action>
+		<action name="toggleFullscreen">
+			<shortcut code="70" control="1" shift="0"/>
+		</action>
+	</actions>
+</presentation>

@@ -1,0 +1,73 @@
+/**
+* @package		JJ Social Slider
+* @author		JoomJunk
+* @copyright	Copyright (C) 2011 - 2013 JoomJunk. All Rights Reserved
+* @license		http://www.gnu.org/licenses/gpl-3.0.html
+*/
+ul#jj_sl_navigation {
+    position: fixed;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    z-index:9999;
+	font-family: Arial,Helvetica,sans-serif;
+}
+ul#jj_sl_navigation li {
+	padding: 1px 0px 1px 0px;
+    overflow:hidden;
+	direction: ltr;
+}
+ul#jj_sl_navigation li a {
+    display: block;
+    width: 170px;  
+    background-repeat:no-repeat;
+	text-decoration: none;
+	font-size: 12px;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+ul#jj_sl_navigation .facebook a:hover{
+    background-color: #3B5998;
+}
+ul#jj_sl_navigation .twitter a:hover{
+    background-color: #62BDB2;
+}
+ul#jj_sl_navigation .google a:hover{
+    background-color: #DB4A39;
+}
+ul#jj_sl_navigation .myspace a:hover{
+    background-color: #3B64B3;
+}
+ul#jj_sl_navigation .youtube a:hover{
+    background-color: #CC252C;
+}
+ul#jj_sl_navigation .linkedin a:hover{
+    background-color: #4F93B3;
+}
+ul#jj_sl_navigation .steam a:hover{
+    background-color: #111111;
+}
+ul#jj_sl_navigation .lastfm a:hover{
+    background-color: #bf0d1c;
+}
+ul#jj_sl_navigation .pinterest a:hover{
+    background-color: #b61d23;
+}
+ul#jj_sl_navigation .soundcloud a:hover{
+    background-color: #ff5419;
+}
+ul#jj_sl_navigation .tumblr a:hover{
+    background-color: #304e6c;
+}
+ul#jj_sl_navigation .github a:hover{
+    background-color: #222222;
+}
+ul#jj_sl_navigation .flickr a:hover{
+    background-color: #ff0084;
+}
+ul#jj_sl_navigation .rss a:hover{
+    background-color: #FF6600;
+}
+ul#jj_sl_navigation .vimeo a:hover{
+    background-color: #1BB7EA;
+}

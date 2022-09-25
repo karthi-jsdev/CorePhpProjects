@@ -1,0 +1,60 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1377" measuredH="820" mockupW="1355" mockupH="811">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="22" y="9" w="1355" h="811" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Semtronics%20ERP%20System%0Ahttp%3A//www.semtronics.in/erp</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Image" x="901" y="79" w="456" h="57" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Semtronics%20Logo</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::DataGrid" x="66" y="217" w="1186" h="288" measuredW="576" measuredH="473" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>right</align>
+        <hLines>true</hLines>
+        <text>Raw%20Material%20Code%20%5E%2C%20Category%20No%2C%20Category%20Name%2C%20Part%20No%2C%20Description%0AVN0089DE05001%2CDE05001%2C%20Diode%2CMB10S%20%28%20MD7S%29%2CBRIDGE%20DIODE%0ASM0105DE05002%2CDE05002%2CDiode%2CSMUA2121%20207%201P%2CBRIDGE%20DIODE%0ASM0105DE05003%2CDE05003%2CDiode%2CMSU2N60%2CBRIDGE%20DIODE%0AVN0064DE05004%2CDE05004%2CDiode%2CSIM%20BRIDGE%20DIODE%2CBRIDGE%20DIODE%0AVN0064DE5005%2CDE5005%2CDiodes%2CMSU2N70%2CBRIDGE%20DIODE%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%20%0A%7B10L%2C%2015L%2C%2015L%2C%2060L%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::Button" x="950" y="184" w="-1" h="-1" measuredW="125" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Add%20Raw%20Material</text>
+      </controlProperties>
+    </control>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::Button" x="1084" y="184" w="-1" h="-1" measuredW="124" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Edit%20Raw%20Material</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::Alert" x="406" y="251" w="431" h="113" measuredW="200" measuredH="76" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Raw%20Materail%20Added%21%21%0ARaw%20Material%20VN0064DE5005%20Added%20Successfully%21</text>
+      </controlProperties>
+    </control>
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::Button" x="574" y="323" w="-1" h="-1" measuredW="56" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>erp_rawmaterialadded%26bm%3Berp_rawmaterialadded.bmml%26bm%3Berp_rawmaterialadded.bmml%26bm%3Berp_rawmaterialadded.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22552%2C314%2C608%2C341%22%20href%3D%22erp_rawmaterialadded.bmml%22%20alt%3D%22erp_rawmaterialadded%22%20id%3D%2242%22/%3E</map>
+        <state>selected</state>
+        <text>Close</text>
+      </controlProperties>
+    </control>
+    <control controlID="43" controlTypeID="com.balsamiq.mockups::ButtonBar" x="65" y="93" w="-1" h="-1" measuredW="814" measuredH="29" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>erp_dashboard%26bm%3Berp_dashboard.bmml%26bm%3Berp_dashboard.bmml%26bm%3Berp_dashboard.bmml%2Cerp_vendor%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%2Cerp_stockmanagement%26bm%3Berp_stockmanagement.bmml%26bm%3Berp_stockmanagement.bmml%26bm%3Berp_stockmanagement.bmml%2Cerp_issuance%26bm%3Berp_issuance.bmml%26bm%3Berp_issuance.bmml%26bm%3Berp_issuance.bmml%2Cerp_productmanagment%26bm%3Berp_productmanagment.bmml%26bm%3Berp_productmanagment.bmml%26bm%3Berp_productmanagment.bmml%2Cerp_kitting%26bm%3Berp_kitting.bmml%26bm%3Berp_kitting.bmml%26bm%3Berp_kitting.bmml%2Cerp_items%26bm%3Berp_items.bmml%26bm%3Berp_items.bmml%26bm%3Berp_items.bmml%2Cerp_finance%26bm%3Berp_finance.bmml%26bm%3Berp_finance.bmml%26bm%3Berp_finance.bmml%2Cerp_login%26bm%3Berp_login.bmml%26bm%3Berp_login.bmml%26bm%3Berp_login.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2243%2C84%2C133%2C113%22%20href%3D%22erp_dashboard.bmml%22%20alt%3D%22erp_dashboard%22%20id%3D%2243_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22133%2C84%2C209%2C113%22%20href%3D%22erp_vendor.bmml%22%20alt%3D%22erp_vendor%22%20id%3D%2243_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22209%2C84%2C353%2C113%22%20href%3D%22erp_stockmanagement.bmml%22%20alt%3D%22erp_stockmanagement%22%20id%3D%2243_2%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22353%2C84%2C433%2C113%22%20href%3D%22erp_issuance.bmml%22%20alt%3D%22erp_issuance%22%20id%3D%2243_3%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22433%2C84%2C589%2C113%22%20href%3D%22erp_productmanagment.bmml%22%20alt%3D%22erp_productmanagment%22%20id%3D%2243_4%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22589%2C84%2C653%2C113%22%20href%3D%22erp_kitting.bmml%22%20alt%3D%22erp_kitting%22%20id%3D%2243_5%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22653%2C84%2C715%2C113%22%20href%3D%22erp_items.bmml%22%20alt%3D%22erp_items%22%20id%3D%2243_6%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22715%2C84%2C789%2C113%22%20href%3D%22erp_finance.bmml%22%20alt%3D%22erp_finance%22%20id%3D%2243_7%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22789%2C84%2C857%2C113%22%20href%3D%22erp_login.bmml%22%20alt%3D%22erp_login%22%20id%3D%2243_8%22/%3E%0A</map>
+        <selectedIndex>1</selectedIndex>
+        <text>Dashboard%2CMasters%2CStock%20Management%2CIssuance%2CProduct%20Management%2CKitting%2CItems%2CFinance%2C%20Logout</text>
+      </controlProperties>
+    </control>
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::ButtonBar" x="67" y="153" w="-1" h="-1" measuredW="443" measuredH="29" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>erp_vendor%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%26bm%3Berp_vendor.bmml%2Cerp_Itemscategory%26bm%3Berp_Itemscategory.bmml%26bm%3Berp_Itemscategory.bmml%26bm%3Berp_Itemscategory.bmml%2Cerp_rawmaterial%26bm%3Berp_rawmaterial.bmml%26bm%3Berp_rawmaterial.bmml%26bm%3Berp_rawmaterial.bmml%2Cerp_assignaddedRawMaterial%26bm%3Berp_assignaddedRawMaterial.bmml%26bm%3Berp_assignaddedRawMaterial.bmml%26bm%3Berp_assignaddedRawMaterial.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2245%2C144%2C116%2C173%22%20href%3D%22erp_vendor.bmml%22%20alt%3D%22erp_vendor%22%20id%3D%2245_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22116%2C144%2C226%2C173%22%20href%3D%22erp_Itemscategory.bmml%22%20alt%3D%22erp_Itemscategory%22%20id%3D%2245_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22226%2C144%2C334%2C173%22%20href%3D%22erp_rawmaterial.bmml%22%20alt%3D%22erp_rawmaterial%22%20id%3D%2245_2%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22334%2C144%2C488%2C173%22%20href%3D%22erp_assignaddedRawMaterial.bmml%22%20alt%3D%22erp_assignaddedRawMaterial%22%20id%3D%2245_3%22/%3E%0A</map>
+        <selectedIndex>2</selectedIndex>
+        <text>Vendor%2CRM%20Category%2C%20Raw%20Material%2C%20Assign%20Raw%20Material</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

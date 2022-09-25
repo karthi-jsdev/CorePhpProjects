@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<presentation title="Assets" width="600.0000000" height="450.0000000" thmbWidth="0.0000000" thmbHeight="0.0000000" frameRate="24.0000000" looping="0" startingSlideShow="" pptVersion="2007" type="compound" hasExternalAudio="0" uid="{DE2A2DAB-447D-4793-8549-0D66E170EBA5}">
+	<presenters/>
+	<references/>
+	<soundAssets/>
+	<backgroundSound soundAssetId="" looping="0"/>
+	<settings>
+		<navigation>
+			<keyboard enabled="1"/>
+			<mouse enabled="1" target="step"/>
+		</navigation>
+		<skin>
+			<layout>
+				<alignment horizontal="right" vertical="bottom"/>
+				<margins horizontal="5" vertical="5"/>
+				<buttons width="32" height="33" stride="6"/>
+			</layout>
+			<navigation advanceType="slide"/>
+			<messages>
+				<resumeText>Would you like to resume the presentation from the last slide viewed?</resumeText>
+				<resumeTitle>Resume Presentation</resumeTitle>
+				<ok>OK</ok>
+				<no>No</no>
+				<yes>Yes</yes>
+			</messages>
+		</skin>
+		<colorScheme>
+			<primaryColor>0.5686482;0.5208360;-0.0894842;0.0000000;0.0000000;0.1655884;0.6967325;0.1376791;0.0000000;0.0000000;0.3927516;0.2936727;0.3135757;0.0000000;0.0000000;0.0000000;0.0000000;0.0000000;1.0000000;0.0000000;</primaryColor>
+		</colorScheme>
+		<appearance fullScreen="0"/>
+		<playback autoStart="0" resumePresentationPlayback="1" syncWithVideoNarration="1" enableVideoControl="1"/>
+	</settings>
+	<slides embedded="0">
+		<slide index="0" title="" titleNormalized="" src="data/slide1.swf" size="58318" advanceOnTime="1" framesCount="37" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="36" playTime="1.5000000" pauseTime="0.5000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>click on assets to view properties of available system</text>
+		</slide>
+		<slide index="1" title="" titleNormalized="" src="data/slide2.swf" size="74149" advanceOnTime="1" framesCount="1177" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="1176" playTime="49.0000000" pauseTime="0.0000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>select division
+select department
+select location
+select item
+enter item name and its description
+ enter the purchase &amp; warranty date
+ enter ip address 
+select connection type
+select amc period
+select condemned and stand by
+select available softwares
+move selected software
+remove selected sofwares
+click on submit</text>
+		</slide>
+		<slide index="2" title="" titleNormalized="" src="data/slide3.swf" size="68062" advanceOnTime="1" framesCount="79" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="0" playTime="0.0010000" pauseTime="2.0000000"/>
+				<step start="1" end="13" playTime="0.5000000" pauseTime="1.5000000"/>
+				<step start="14" end="26" playTime="0.5000000" pauseTime="1.5000000"/>
+				<step start="27" end="39" playTime="0.5000000" pauseTime="1.5000000"/>
+				<step start="40" end="52" playTime="0.5000000" pauseTime="1.5000000"/>
+				<step start="53" end="65" playTime="0.5000000" pauseTime="1.5000000"/>
+				<step start="66" end="78" playTime="0.5000000" pauseTime="1.5000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>click on asset status
+enter item to search assets</text>
+		</slide>
+		<slide index="3" title="" titleNormalized="" src="data/slide4.swf" size="60461" advanceOnTime="1" framesCount="85" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="84" playTime="3.5000000" pauseTime="0.0000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>click on search
+searched items</text>
+		</slide>
+		<slide index="4" title="" titleNormalized="" src="data/slide5.swf" size="59555" advanceOnTime="1" framesCount="101" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="48" playTime="2.0000000" pauseTime="0.0000000"/>
+				<step start="49" end="61" playTime="0.5000000" pauseTime="1.5000000"/>
+				<step start="62" end="74" playTime="0.5000000" pauseTime="1.5000000"/>
+				<step start="75" end="87" playTime="0.5000000" pauseTime="1.5000000"/>
+				<step start="88" end="100" playTime="0.5000000" pauseTime="1.5000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>enter the 
+ mandatory fields
+click on submit</text>
+		</slide>
+	</slides>
+	<actions>
+		<action name="playPause">
+			<shortcut code="32" control="0" shift="0"/>
+		</action>
+		<action name="nextSlide">
+			<shortcut code="34" control="0" shift="0"/>
+		</action>
+		<action name="previousSlide">
+			<shortcut code="33" control="0" shift="0"/>
+		</action>
+		<action name="nextStep">
+			<shortcut code="13" control="0" shift="0"/>
+		</action>
+		<action name="previousStep">
+			<shortcut code="13" control="0" shift="1"/>
+		</action>
+		<action name="seekForward">
+			<shortcut code="39" control="0" shift="0"/>
+		</action>
+		<action name="seekBackward">
+			<shortcut code="37" control="0" shift="0"/>
+		</action>
+		<action name="firstSlide">
+			<shortcut code="36" control="1" shift="0"/>
+		</action>
+		<action name="lastSlide">
+			<shortcut code="35" control="1" shift="0"/>
+		</action>
+		<action name="lastViewedSlide">
+			<shortcut code="8" control="0" shift="0"/>
+		</action>
+		<action name="slideStart">
+			<shortcut code="36" control="0" shift="0"/>
+		</action>
+		<action name="slideEnd">
+			<shortcut code="35" control="0" shift="0"/>
+		</action>
+		<action name="volumeUp">
+			<shortcut code="38" control="0" shift="0"/>
+		</action>
+		<action name="volumeDown">
+			<shortcut code="40" control="0" shift="0"/>
+		</action>
+		<action name="toggleFullscreen">
+			<shortcut code="70" control="1" shift="0"/>
+		</action>
+	</actions>
+</presentation>

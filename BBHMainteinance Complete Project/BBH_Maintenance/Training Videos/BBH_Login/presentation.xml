@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<presentation title="BBH_Login" width="600.0000000" height="450.0000000" thmbWidth="0.0000000" thmbHeight="0.0000000" frameRate="24.0000000" looping="0" startingSlideShow="" pptVersion="2007" type="compound" hasExternalAudio="0" uid="{83AAE189-6375-4D89-8678-9CF5BA9BE427}">
+	<presenters/>
+	<references/>
+	<soundAssets/>
+	<backgroundSound soundAssetId="" looping="0"/>
+	<settings>
+		<navigation>
+			<keyboard enabled="1"/>
+			<mouse enabled="1" target="step"/>
+		</navigation>
+		<skin>
+			<layout>
+				<alignment horizontal="right" vertical="bottom"/>
+				<margins horizontal="5" vertical="5"/>
+				<buttons width="32" height="33" stride="6"/>
+			</layout>
+			<navigation advanceType="slide"/>
+			<messages>
+				<resumeText>Would you like to resume the presentation from the last slide viewed?</resumeText>
+				<resumeTitle>Resume Presentation</resumeTitle>
+				<ok>OK</ok>
+				<no>No</no>
+				<yes>Yes</yes>
+			</messages>
+		</skin>
+		<colorScheme>
+			<primaryColor>0.5686482;0.5208360;-0.0894842;0.0000000;0.0000000;0.1655884;0.6967325;0.1376791;0.0000000;0.0000000;0.3927516;0.2936727;0.3135757;0.0000000;0.0000000;0.0000000;0.0000000;0.0000000;1.0000000;0.0000000;</primaryColor>
+		</colorScheme>
+		<appearance fullScreen="0"/>
+		<playback autoStart="0" resumePresentationPlayback="1" syncWithVideoNarration="1" enableVideoControl="1"/>
+	</settings>
+	<slides embedded="0">
+		<slide index="0" title="" titleNormalized="" src="data/slide1.swf" size="35515" advanceOnTime="1" framesCount="73" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="72" playTime="3.0000000" pauseTime="2.0000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>
+click on submit
+enter username
+enter your password</text>
+		</slide>
+		<slide index="1" title="" titleNormalized="" src="data/slide2.swf" size="71681" advanceOnTime="1" framesCount="109" hasEmbeddedFlashClip="0" hidden="0" level="0" advanceOnClick="1" thumbnailSrc="" presenterIndex="">
+			<sounds/>
+			<videos/>
+			<transitionEffect name="" duration="0.0000000" soundId="" looped="0"/>
+			<soundCommands/>
+			<videoCommands/>
+			<animationSteps>
+				<step start="0" end="108" playTime="4.5000000" pauseTime="0.5000000"/>
+			</animationSteps>
+			<notes/>
+			<notesNormalized/>
+			<notesHtml/>
+			<text>dashboard will appear 
+logged in username will appear here</text>
+		</slide>
+	</slides>
+	<actions>
+		<action name="playPause">
+			<shortcut code="32" control="0" shift="0"/>
+		</action>
+		<action name="nextSlide">
+			<shortcut code="34" control="0" shift="0"/>
+		</action>
+		<action name="previousSlide">
+			<shortcut code="33" control="0" shift="0"/>
+		</action>
+		<action name="nextStep">
+			<shortcut code="13" control="0" shift="0"/>
+		</action>
+		<action name="previousStep">
+			<shortcut code="13" control="0" shift="1"/>
+		</action>
+		<action name="seekForward">
+			<shortcut code="39" control="0" shift="0"/>
+		</action>
+		<action name="seekBackward">
+			<shortcut code="37" control="0" shift="0"/>
+		</action>
+		<action name="firstSlide">
+			<shortcut code="36" control="1" shift="0"/>
+		</action>
+		<action name="lastSlide">
+			<shortcut code="35" control="1" shift="0"/>
+		</action>
+		<action name="lastViewedSlide">
+			<shortcut code="8" control="0" shift="0"/>
+		</action>
+		<action name="slideStart">
+			<shortcut code="36" control="0" shift="0"/>
+		</action>
+		<action name="slideEnd">
+			<shortcut code="35" control="0" shift="0"/>
+		</action>
+		<action name="volumeUp">
+			<shortcut code="38" control="0" shift="0"/>
+		</action>
+		<action name="volumeDown">
+			<shortcut code="40" control="0" shift="0"/>
+		</action>
+		<action name="toggleFullscreen">
+			<shortcut code="70" control="1" shift="0"/>
+		</action>
+	</actions>
+</presentation>
