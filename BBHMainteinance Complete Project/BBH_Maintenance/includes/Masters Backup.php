@@ -3,15 +3,15 @@ if($_POST['DB'])
 {
 	date_default_timezone_set('Asia/Kolkata'); 
 	$tables = '*';
-	$link = mysql_connect('mysql_hostname','mysql_user','$mysql_password');
-	mysql_select_db($mysql_database,$link);
+	$link = mysqli_connect('mysql_hostname','mysql_user','$mysql_password');
+	mysqli_select_db($mysql_database,$link);
 	
 	//get all of the tables
 	if($tables == '*')
 	{
 		$tables = array();
 		$result = mysqli_query($_SESSION['connection'],'SHOW TABLES');
-		while($row = mysql_fetch_row($result))
+		while($row = mysqli_fetch_row($result))
 		{
 			$tables[] = $row[0];
 		}
@@ -25,15 +25,15 @@ if($_POST['DB'])
 	foreach($tables as $table)
 	{
 		$result = mysqli_query($_SESSION['connection'],'SELECT * FROM '.$table);
-		$num_fields = mysql_num_fields($result);
+		$num_fields = mysqli_num_fields($result);
 		
 		$return.= 'DROP TABLE '.$table.';';
-		$row2 = mysql_fetch_row(mysqli_query($_SESSION['connection'],'SHOW CREATE TABLE '.$table));
+		$row2 = mysqli_fetch_row(mysqli_query($_SESSION['connection'],'SHOW CREATE TABLE '.$table));
 		$return.= "\n\n".$row2[1].";\n\n";
 		
 		for ($i = 0; $i < $num_fields; $i++) 
 		{
-			while($row = mysql_fetch_row($result))
+			while($row = mysqli_fetch_row($result))
 			{
 				$return.= 'INSERT INTO '.$table.' VALUES(';
 				for($j=0; $j<$num_fields; $j++) 
