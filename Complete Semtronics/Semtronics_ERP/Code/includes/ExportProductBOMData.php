@@ -19,7 +19,7 @@ if(isset($_GET['export']))
 <div class="columns">
 	<h3>
 		<?php
-		$ProductBOMTotalRows = mysql_fetch_assoc(ProductBOM_Select_Count_All());
+		$ProductBOMTotalRows = mysqli_fetch_assoc(ProductBOM_Select_Count_All());
 		?>
 	</h3>
 	<table class="paginate sortable full" border="1">
@@ -41,12 +41,12 @@ if(isset($_GET['export']))
 				echo '<tr><td colspan="7"><font color="red"><center>No data found</center></font></td></tr>';
 			$i = 1;
 			$ProductBOMRows = ProductBOM_Select_ByNOLimit();
-			while($ProductBOM = mysql_fetch_assoc($ProductBOMRows))
+			while($ProductBOM = mysqli_fetch_assoc($ProductBOMRows))
 			{
-				$FetchProductCode = mysql_fetch_array(SelectProductCode($ProductBOM['productid']));
-				$FetchRawMeterial = mysql_fetch_array(SelectRawMeterial($ProductBOM['rawmaterialid']));
-				$Fetchproductcategory = mysql_fetch_array(SelectProductcategory($ProductBOM['productcategory_id']));
-				$Fetchproductsubcategory = mysql_fetch_array(SelectProductsubcategory($ProductBOM['productsubcategory_id']));
+				$FetchProductCode = mysqli_fetch_array(SelectProductCode($ProductBOM['productid']));
+				$FetchRawMeterial = mysqli_fetch_array(SelectRawMeterial($ProductBOM['rawmaterialid']));
+				$Fetchproductcategory = mysqli_fetch_array(SelectProductcategory($ProductBOM['productcategory_id']));
+				$Fetchproductsubcategory = mysqli_fetch_array(SelectProductsubcategory($ProductBOM['productsubcategory_id']));
 				echo "<tr style='valign:middle;'>
 					<td align='center'>".$i++."</td>
 					<td align='center'>".$Fetchproductcategory['name']."</td>

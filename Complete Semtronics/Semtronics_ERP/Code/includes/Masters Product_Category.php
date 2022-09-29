@@ -3,7 +3,7 @@
 		$Columns = array("id", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Credit = mysql_fetch_assoc(ProductCategories_Select_ById());
+			$Credit = mysqli_fetch_assoc(ProductCategories_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Credit[$Col];
 		}
@@ -18,7 +18,7 @@
 				$ProductCategoriesResource = ProductCategories_Select_ByNamePWD();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($ProductCategoriesResource))
+					if(mysqli_num_rows($ProductCategoriesResource))
 						$message = "<br /><div class='message error'><b>Message</b> : Product Category already exists</div>";
 					else
 					{
@@ -28,8 +28,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$ProductCategories = mysql_fetch_assoc($ProductCategoriesResource);
-					if(mysql_num_rows(ProductCategories_Select_ByNamePWDId()))
+					$ProductCategories = mysqli_fetch_assoc($ProductCategoriesResource);
+					if(mysqli_num_rows(ProductCategories_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Product Category already exists</div>";
 					else
 					{
@@ -67,7 +67,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$ProductCategoriesTotalRows = mysql_fetch_assoc(ProductCategories_Select_Count_All());
+				$ProductCategoriesTotalRows = mysqli_fetch_assoc(ProductCategories_Select_Count_All());
 				echo "Total No. of Product Category - ".$ProductCategoriesTotalRows['total'];
 				?>
 			</h3>
@@ -93,7 +93,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$ProductCategoriesRows = ProductCategories_Select_ByLimit($Start, $Limit);
-					while($ProductCategories = mysql_fetch_assoc($ProductCategoriesRows))
+					while($ProductCategories = mysqli_fetch_assoc($ProductCategoriesRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

@@ -5,7 +5,7 @@
 					<option value="">All</option>
 					<?php
 					$SelectClientcategory = SelectClientcategorycode();
-					while($FetchClientcategory = mysql_fetch_array($SelectClientcategory))
+					while($FetchClientcategory = mysqli_fetch_array($SelectClientcategory))
 					{
 						if($FetchClientcategory['id']== $_POST['client_category_id'])
 							echo "<option value='".$FetchClientcategory['id']."'selected>".$FetchClientcategory['clientcategory']."</option>";
@@ -19,7 +19,7 @@
 					<option value="">All</option>
 					<?php
 						$Selectreferredby = Selectreferredbycode();
-						while($Fetchreferredby = mysql_fetch_array($Selectreferredby))
+						while($Fetchreferredby = mysqli_fetch_array($Selectreferredby))
 						{
 							if($Fetchreferredby['id']==$_POST['reference_id'])
 								echo "<option value='".$Fetchreferredby['id']."'selected>".$Fetchreferredby['reference']."</option>";
@@ -34,7 +34,7 @@
 					<option value="">All</option>
 					<?php
 						$Selectreferredgroupby = Selectreferencegroup();
-						while($Fetchreferredgroupby = mysql_fetch_array($Selectreferredgroupby))
+						while($Fetchreferredgroupby = mysqli_fetch_array($Selectreferredgroupby))
 						{
 							if($Fetchreferredgroupby['id']==$_POST['reference_group_id'])
 								echo "<option value='".$Fetchreferredgroupby['id']."'selected>".$Fetchreferredgroupby['name']."</option>";
@@ -49,7 +49,7 @@
 					<option value="">All</option>
 					<?php
 						$Selectindustryby = Selectindustrycode();
-						while($Fetchindustryby = mysql_fetch_array($Selectindustryby))
+						while($Fetchindustryby = mysqli_fetch_array($Selectindustryby))
 						{
 							if($Fetchindustryby['id']==$_POST['industry_category_id'])
 								echo "<option value='".$Fetchindustryby['id']."'selected>".$Fetchindustryby['name']."</option>";
@@ -70,7 +70,7 @@
 	if(!$_GET['vendor_category_id'] && !$_GET['reference_id'] && !$_GET['reference_group_id'] && !$_GET['industry_category_id'])
 	{
 
-		$LeadTotalRows = mysql_fetch_assoc(Lead_Select_Count_All());
+		$LeadTotalRows = mysqli_fetch_assoc(Lead_Select_Count_All());
 			echo "<h4>Total No. of Leads - ".$LeadTotalRows['total']."</h4>";
 			echo '<div align="right"><a href="#" title="Download" onclick=\'Export_Data("getdata=Lead_Report")\'><img src="images/icons/download.png"></a></div>';
 	?>
@@ -105,12 +105,12 @@
 							echo '<tr><td colspan="20"><font color="red"><center>No data found</center></font></td></tr>';
 						$i = 1;
 						$LeadRows = Lead_Select_ByNoLimit();
-						while($Lead = mysql_fetch_assoc($LeadRows))
+						while($Lead = mysqli_fetch_assoc($LeadRows))
 						{
-							$Clientcategory = mysql_fetch_array(Client_Category_Name($Lead['client_category_id']));
-							$Reference = mysql_fetch_array(Reference_Name($Lead['reference_id']));
-							$ReferenceGroup = mysql_fetch_array(Reference_GroupName($Lead['reference_group_id']));
-							$Industrycategory = mysql_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
+							$Clientcategory = mysqli_fetch_array(Client_Category_Name($Lead['client_category_id']));
+							$Reference = mysqli_fetch_array(Reference_Name($Lead['reference_id']));
+							$ReferenceGroup = mysqli_fetch_array(Reference_GroupName($Lead['reference_group_id']));
+							$Industrycategory = mysqli_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
 							$Digits = array("","0", "00", "000", "0000", "00000", "000000");
 							$LDNo = "LD".$Digits[6 - strlen($Lead['id'])].($Lead['id']);
 							echo "<tr style='valign:middle;'>

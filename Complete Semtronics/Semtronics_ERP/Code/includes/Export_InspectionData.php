@@ -29,10 +29,10 @@ if($_GET['getdata']=='Inspect_Report')
 	<tbody>	
 	<?php
 		$summary = Stock_Inspection();
-		if(!mysql_num_rows($summary))
+		if(!mysqli_num_rows($summary))
 			echo '<tr><td>NO Date Found</td></tr>';
 		$i=1;
-		while($stock_summary = mysql_fetch_assoc($summary))
+		while($stock_summary = mysqli_fetch_assoc($summary))
 		{
 			echo'<tbody>
 				<tr>

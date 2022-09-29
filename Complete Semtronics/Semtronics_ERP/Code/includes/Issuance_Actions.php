@@ -15,10 +15,10 @@
 	if($_GET['Action'] == "Insert" && $_POST['number'] && $_POST['issuedto'] && $_POST['rawmaterialid'] && $_POST['batchid'] && $_POST['quantity'])
 	{
 		Insert_Issuance();
-		$EditData = mysql_fetch_assoc(Select_StockIssuance_ByBatch());
+		$EditData = mysqli_fetch_assoc(Select_StockIssuance_ByBatch());
 		echo "Issuance added successfully$$".$EditData['id']."$$";
 		$StockIssuances = Select_StockIssuance();
-		while($StockIssuance = mysql_fetch_array($StockIssuances))
+		while($StockIssuance = mysqli_fetch_array($StockIssuances))
 		{
 			echo "<tr id='".$StockIssuance['id']."'><td>".$StockIssuance['materialcode']."</td>
 			<td>".$StockIssuance['number']."</td><td>".$StockIssuance['quantity']."</td>
@@ -31,7 +31,7 @@
 				<option value="">Select</option>
 				<?php
 				$RawMaterials = Select_All_RawMaterial();
-				while($RawMaterial = mysql_fetch_assoc($RawMaterials))
+				while($RawMaterial = mysqli_fetch_assoc($RawMaterials))
 					echo "<option value='".$RawMaterial['id']."$".$RawMaterial['partnumber']."$".$RawMaterial['materialcode']."'>".$RawMaterial['materialcode']."</option>";
 				?>
 			</select>
@@ -67,8 +67,8 @@
 	}
 	else if($_GET['Action'] == "Edit")
 	{
-		$CurrentIssuance = mysql_fetch_array(Select_StockIssuance_ById());
-		$issuebatch = mysql_fetch_assoc(mysql_query("SELECT batch.id, batch.number, sum(stockinventory.quantity) as quantity FROM batch
+		$CurrentIssuance = mysqli_fetch_array(Select_StockIssuance_ById());
+		$issuebatch = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT batch.id, batch.number, sum(stockinventory.quantity) as quantity FROM batch
 							JOIN stock ON stock.batchid=batch.id
 							JOIN stockinventory ON stockinventory.batchid=batch.id
 							WHERE batch.rawmaterialid=".$CurrentIssuance['rawmaterialid']." && stockinventory.quantity>0 && stockinventory.inspection='1' group by batch.id ORDER BY batch.id"));
@@ -82,7 +82,7 @@
 					<option value="">Select</option>
 					<?php
 					$RawMaterials = Select_All_RawMaterial();
-					while($RawMaterial = mysql_fetch_assoc($RawMaterials))
+					while($RawMaterial = mysqli_fetch_assoc($RawMaterials))
 					{
 						if($RawMaterial['id'] == $CurrentIssuance['rawmaterialid'])
 							echo "<option value='".$RawMaterial['id']."$".$RawMaterial['partnumber']."$".$RawMaterial['materialcode']."' selected>".$RawMaterial['materialcode']."</option>";
@@ -102,17 +102,17 @@
 						<option value="">Select</option>
 						<?php
 						$_POST['rawmaterialid'] = $CurrentIssuance['rawmaterialid'];
-						$issuebatch = mysql_fetch_assoc(mysql_query("SELECT batch.id, batch.number, sum(stockissuance.quantity) as quantity FROM batch
+						$issuebatch = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT batch.id, batch.number, sum(stockissuance.quantity) as quantity FROM batch
 							JOIN stock ON stock.batchid=batch.id
 							JOIN stockissuance ON stockissuance.batchid=batch.id
 							WHERE batch.rawmaterialid=".$CurrentIssuance['rawmaterialid']." group by batch.id "));
-						$inventorybatch = mysql_fetch_assoc(mysql_query("SELECT batch.id, batch.number, sum(stockinventory.quantity) as quantity FROM batch
+						$inventorybatch = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT batch.id, batch.number, sum(stockinventory.quantity) as quantity FROM batch
 						JOIN stock ON stock.batchid=batch.id
 						JOIN stockinventory ON stockinventory.batchid=batch.id
 						WHERE batch.rawmaterialid=".$CurrentIssuance['rawmaterialid']." && stockinventory.quantity>0 && stockinventory.inspection='1' group by batch.id ORDER BY batch.id"));
 						$CurrentIssuance['stockquantity'] =$inventorybatch['quantity'] - $issuebatch['quantity'];
 						$Batches = Select_All_Batches();
-						while($Batch = mysql_fetch_assoc($Batches))
+						while($Batch = mysqli_fetch_assoc($Batches))
 						{
 							if($Batch['id'] == $CurrentIssuance['batchid'])
 								echo "<option value='".$Batch['id']."$".$Batch['quantity']."$".$Batch['number']."' selected>".$Batch['number']."</option>";

@@ -2,11 +2,11 @@
 ini_set("display_errors","0");
 if($_GET['action']=='Edit')
 		{
-			 $Products = mysql_fetch_array(mysql_query("select * from productbom where id='".$_GET['id']."'"));
+			 $Products = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select * from productbom where id='".$_GET['id']."'"));
 		}
 		if($_POST['Update'])
 		{
-			 mysql_query("UPDATE productbom SET rawmaterialid='".$_POST['rawmaterialid']."',quantity='".$_POST['quantity']."',reference='".$_POST['reference']."'  WHERE  id='".$_POST['id']."'");
+			 mysqli_query($_SESSION['connection'],"UPDATE productbom SET rawmaterialid='".$_POST['rawmaterialid']."',quantity='".$_POST['quantity']."',reference='".$_POST['reference']."'  WHERE  id='".$_POST['id']."'");
 			 $_POST['productid'] = $_POST['productsid'];
 		}
 ?>
@@ -26,9 +26,9 @@ if($_GET['action']=='Edit')
 							<option value="">Select</option>
 							<?php
 								$SelectProductcategorycode = SelectProductcategorycode();
-								while($FetchProductcategorycode = mysql_fetch_array($SelectProductcategorycode))
+								while($FetchProductcategorycode = mysqli_fetch_array($SelectProductcategorycode))
 								{
-									$FetchProductCode = mysql_fetch_array(SelectProductCode($_POST['productid']));
+									$FetchProductCode = mysqli_fetch_array(SelectProductCode($_POST['productid']));
 									if(substr($FetchProductCode['code'],0,3) == substr($FetchProductcategorycode['prefix'],0,3))
 										echo '<option value="'.$FetchProductcategorycode['prefix'].'" selected>'.$FetchProductcategorycode['name']."-".$FetchProductcategorycode['prefix'].'</option>';
 									else
@@ -56,7 +56,7 @@ if($_GET['action']=='Edit')
 						<option value="">Select</option>
 						<?php
 							$SelectRawMeterialcode = SelectRawMeterialcode();
-							while($FetchRawMeterialcode = mysql_fetch_array($SelectRawMeterialcode))
+							while($FetchRawMeterialcode = mysqli_fetch_array($SelectRawMeterialcode))
 							{
 								if($Products['rawmaterialid'] == $FetchRawMeterialcode['id'])
 									echo '<option value="'.$FetchRawMeterialcode['id'].'" selected>'.$FetchRawMeterialcode['materialcode'].'</option>';
@@ -92,7 +92,7 @@ if($_GET['action']=='Edit')
 		?>
 			<h3>Product-BOM Status
 				<?php
-				$ProductBOMStatusTotalRows = mysql_num_rows(ProductBOMStatus_Select_Count_All($_POST['productid']));
+				$ProductBOMStatusTotalRows = mysqli_num_rows(ProductBOMStatus_Select_Count_All($_POST['productid']));
 				echo " : No. of total ProductBOM - ".$ProductBOMStatusTotalRows;
 				?>
 			</h3>
@@ -125,7 +125,7 @@ if($_GET['action']=='Edit')
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$ProductBOMStatusRows = ProductBOMStatus($Start, $Limit,$_POST['productid']);
-					while($ProductBOMStatus = mysql_fetch_array($ProductBOMStatusRows))
+					while($ProductBOMStatus = mysqli_fetch_array($ProductBOMStatusRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
@@ -160,7 +160,7 @@ if($_GET['action']=='Edit')
 	<?php
 	if($_POST['productid'])
 	{
-		$FetchProductCode = mysql_fetch_array(SelectProductCode($_POST['productid']));
+		$FetchProductCode = mysqli_fetch_array(SelectProductCode($_POST['productid']));
 	?>
 	GetProductCode(<?php echo $FetchProductCode['code'].",".$_POST['productid']; ?>);
 	<?php

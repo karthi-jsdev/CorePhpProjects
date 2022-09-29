@@ -11,7 +11,7 @@ if(isset($_GET['export']))
 		/*echo '<div style="float:left">
 		<img src="http://localhost/Semtronics_ERP/Code/images/semtronics1.png" alt="semtronics" width="30%" height="10%"/>
 		</div><br />';*/
-		$productname = mysql_fetch_assoc(mysql_query("SELECT products.productcode FROM product JOIN products ON product.productcode = products.id WHERE product.productcode = '".$_GET['productcode']."' "));
+		$productname = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT products.productcode FROM product JOIN products ON product.productcode = products.id WHERE product.productcode = '".$_GET['productcode']."' "));
 		echo '<div align="center">
 		<h4>Product Name:'.$productname['productcode'].'</div><div align="right">Report Date:'.date("d-m-Y").'
 		</h4></div>';
@@ -20,7 +20,7 @@ if(isset($_GET['export']))
 	{ ?>
 	<h3>
 		<?php
-		$ProductTotalRows = mysql_fetch_assoc(Product_Select_Count_Productcode());
+		$ProductTotalRows = mysqli_fetch_assoc(Product_Select_Count_Productcode());
 		?>
 	</h3>			
 	<table class="paginate sortable full" style="width:1000px;" border="1">
@@ -51,7 +51,7 @@ if(isset($_GET['export']))
 				echo '<tr><td colspan="7"><font color="red"><center>No data found</center></font></td></tr>';
 			$i = 1;
 			$ProductRows = Product_Select_Subcategory_ByNoLimit_particulardata();
-			while($Product = mysql_fetch_assoc($ProductRows))
+			while($Product = mysqli_fetch_assoc($ProductRows))
 			{
 				echo "<tr style='valign:middle;'>
 					<td align='center'>".$i++."</td>

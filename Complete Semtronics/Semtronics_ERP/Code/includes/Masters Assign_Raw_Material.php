@@ -2,7 +2,7 @@
 	$Columns = array("id", "vendorid","rawmaterialid");
 	if($_GET['action'] == 'Edit')
 	{
-		$Rawmaterials = mysql_fetch_assoc(Rawmaterials_Select_ById($_GET['id']));
+		$Rawmaterials = mysqli_fetch_assoc(Rawmaterials_Select_ById($_GET['id']));
 		foreach($Columns as $Col)
 			$_POST[$Col] = $Rawmaterials[$Col];
 	}
@@ -17,7 +17,7 @@
 			$_POST['rawmaterialid'] = implode($_POST['rawmaterialid'], ".");
 		$RawmaterialResourse = Rawmaterial_Select_Byvendor();
 		if(isset($_POST['Submit']))
-		{	if(mysql_num_rows($RawmaterialResourse))
+		{	if(mysqli_num_rows($RawmaterialResourse))
 				$message = "<br /><div class='message error'><b>Message</b> : Vendor already exists</div>";
 			else
 			{
@@ -27,8 +27,8 @@
 		}
 		else if(isset($_POST['Update']))
 		{
-			$Vendor = mysql_fetch_assoc($RawmaterialResourse);
-			if(mysql_num_rows(Rawmaterial_Select_Byvendor_ById()))
+			$Vendor = mysqli_fetch_assoc($RawmaterialResourse);
+			if(mysqli_num_rows(Rawmaterial_Select_Byvendor_ById()))
 				$message = "<br /><div class='message error'><b>Message</b> : This Vendor already exists</div>";
 			else
 			{
@@ -54,7 +54,7 @@
 						<option value=''>Select</option>
 						<?php
 							$VendorSection = Vendormaterial_Section();
-							while($VendorMaterial = mysql_fetch_array($VendorSection))
+							while($VendorMaterial = mysqli_fetch_array($VendorSection))
 							{
 								if($VendorMaterial['id'] == $_POST['vendorid'])
 									echo '<option value="'.$VendorMaterial['id'].'" selected>'.$VendorMaterial['name'].'</option>';
@@ -105,7 +105,7 @@
 											$_POST['rawmaterialid'] = explode(".", $_POST['rawmaterialid']);
 										$AvailableMaterials = "";
 										$Material = Materials_Select_All();
-										while($Materials = mysql_fetch_assoc($Material))
+										while($Materials = mysqli_fetch_assoc($Material))
 										{
 											if(in_array($Materials['id'], $_POST['rawmaterialid']))
 												echo "<option value='".$Materials['id']."'>".$Materials['materialcode']."-".$Materials['description']."</option>";
@@ -142,9 +142,9 @@
 			<h3>
 			<?php
 			if($_GET['Search'])
-				$RawmaterialsTotalRows = mysql_num_rows(Rawmaterials_Select_AllBySearch($_GET['Search']));
+				$RawmaterialsTotalRows = mysqli_num_rows(Rawmaterials_Select_AllBySearch($_GET['Search']));
 			else
-				$RawmaterialsTotalRows = mysql_num_rows(Rawmaterials_Select_All());
+				$RawmaterialsTotalRows = mysqli_num_rows(Rawmaterials_Select_All());
 			echo "Total No. of Raw Materials Assigned List -".$RawmaterialsTotalRows;
 			?>
 			</h3>
@@ -186,12 +186,12 @@
 						$j = 1;
 					else
 						$j = ($Limit*($_GET['pageno']-1))+1;
-					while($Rawmaterials = mysql_fetch_assoc($RawmaterialsRow))
+					while($Rawmaterials = mysqli_fetch_assoc($RawmaterialsRow))
 					{
 						echo "<tr>
 						<td width='10%' align='center'>".$j++."</td>";
-						$Vendors_Name = mysql_fetch_array(Rawmaterialvendor_BYId($Rawmaterials['vendorid']));
-						$Rawmaterial_Name = mysql_fetch_array(Rawmaterial_BYId($Rawmaterials['rawmaterialid']));						
+						$Vendors_Name = mysqli_fetch_array(Rawmaterialvendor_BYId($Rawmaterials['vendorid']));
+						$Rawmaterial_Name = mysqli_fetch_array(Rawmaterial_BYId($Rawmaterials['rawmaterialid']));						
 						echo "<td width='20%'>".$Vendors_Name['name']."</td><td width='50%'>";
 						$rawmaterialid = explode(".", $Rawmaterials['rawmaterialid']);
 						$Allrawmaterials = array();
@@ -199,7 +199,7 @@
 						{
 							foreach($rawmaterialid as $Id)
 							{
-								$Rawmaterial = mysql_fetch_assoc(Rawmaterialsassignment_Select_ById($Id));
+								$Rawmaterial = mysqli_fetch_assoc(Rawmaterialsassignment_Select_ById($Id));
 								$Allrawmaterials[] = $Rawmaterial['materialcode'];
 							}
 						}	
@@ -235,14 +235,14 @@
 						$j = 1;
 					else
 						$j = ($Limit*($_GET['pageno']-1))+1;
-					if(mysql_num_rows(Rawmaterials_Select_ByLimitSearch($Start, $Limit,$_GET['Search'])))
+					if(mysqli_num_rows(Rawmaterials_Select_ByLimitSearch($Start, $Limit,$_GET['Search'])))
 					{
-						while($Rawmaterials = mysql_fetch_assoc($RawmaterialsRow))
+						while($Rawmaterials = mysqli_fetch_assoc($RawmaterialsRow))
 						{
 							echo "<tr>
 							<td width='10%' align='center'>".$j++."</td>";
-							$Vendors_Name = mysql_fetch_array(Rawmaterialvendor_BYId($Rawmaterials['vendorid']));
-							$Rawmaterial_Name = mysql_fetch_array(Rawmaterial_BYId($Rawmaterials['rawmaterialid']));						
+							$Vendors_Name = mysqli_fetch_array(Rawmaterialvendor_BYId($Rawmaterials['vendorid']));
+							$Rawmaterial_Name = mysqli_fetch_array(Rawmaterial_BYId($Rawmaterials['rawmaterialid']));						
 							echo "<td width='20%'>".$Vendors_Name['name']."</td><td width='50%'>";
 							$rawmaterialid = explode(".", $Rawmaterials['rawmaterialid']);
 							$Allrawmaterials = array();
@@ -250,7 +250,7 @@
 							{
 								foreach($rawmaterialid as $Id)
 								{
-									$Rawmaterial = mysql_fetch_assoc(Rawmaterialsassignment_Select_ById($Id));
+									$Rawmaterial = mysqli_fetch_assoc(Rawmaterialsassignment_Select_ById($Id));
 									$Allrawmaterials[] = $Rawmaterial['materialcode'];
 								}
 							}	
@@ -353,7 +353,7 @@
 		for(var count = 0; count < listbox.options.length; count++)
 			listbox.options[count].selected = isSelect;
 	}
-	for(var i=0; i<<?php echo mysql_num_rows($RawmaterialsRow);?> ; i++)
+	for(var i=0; i<<?php echo mysqli_num_rows($RawmaterialsRow);?> ; i++)
 	{
 		document.getElementById("Rawmaterial"+i).style.display="none";
 		document.getElementById("hide"+i).style.display="none";

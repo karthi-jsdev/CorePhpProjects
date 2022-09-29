@@ -32,7 +32,7 @@
 		$Search = $_GET['Search'];
 	if($_GET['ApproverId'] && $_GET['SaleOrderId'])
 	{
-		if(!mysql_num_rows(SelectApproversById($_GET['ApproverId'],$_GET['SaleOrderId'])))
+		if(!mysqli_num_rows(SelectApproversById($_GET['ApproverId'],$_GET['SaleOrderId'])))
 			AddApprover($_GET['ApproverId'],$_GET['SaleOrderId']);
 	}
 	echo "<div style='width:1200px;height:450px;overflow-x:auto;overflow-y:auto;'>";
@@ -54,7 +54,7 @@
 				<th>Courier By</th>
 				<th>Payment</th>';
 				$SelectApproversForHeader = Select_Approver();
-				while($FetchApprovers = mysql_fetch_array($SelectApproversForHeader))
+				while($FetchApprovers = mysqli_fetch_array($SelectApproversForHeader))
 					echo '<th>Approver</th>';
 			echo '</tr>
 		</thead>';
@@ -64,15 +64,15 @@
 	else
 		$Select_Sales_Orders = Select_Sales_orderSummaryByLimit();
 	$i = 1;
-	if(mysql_num_rows($Select_Sales_Orders))
+	if(mysqli_num_rows($Select_Sales_Orders))
 	{
-		while($Fetch_Sales_Order = mysql_fetch_array($Select_Sales_Orders))
+		while($Fetch_Sales_Order = mysqli_fetch_array($Select_Sales_Orders))
 		{
-			$TotalApprover = mysql_num_rows(Select_Approver());
-			$FetchLeadName = mysql_fetch_array(FetchLeadById($Fetch_Sales_Order['lead_id']));
-			$FetchOppurtunity = mysql_fetch_array(Select_Opportunity($Fetch_Sales_Order['oppurtunity_id']));
-			$FetchProduct = mysql_fetch_array(SelectProductById($FetchOppurtunity['product_id']));
-			$FetchCourierBy =  mysql_fetch_array(SelectCourierById($Fetch_Sales_Order['courier_by_id']));
+			$TotalApprover = mysqli_num_rows(Select_Approver());
+			$FetchLeadName = mysqli_fetch_array(FetchLeadById($Fetch_Sales_Order['lead_id']));
+			$FetchOppurtunity = mysqli_fetch_array(Select_Opportunity($Fetch_Sales_Order['oppurtunity_id']));
+			$FetchProduct = mysqli_fetch_array(SelectProductById($FetchOppurtunity['product_id']));
+			$FetchCourierBy =  mysqli_fetch_array(SelectCourierById($Fetch_Sales_Order['courier_by_id']));
 			$SelectUser = Select_Approver();
 			$Digits = array("", "0", "00", "000", "0000", "00000", "000000", "0000000");
 			$SONo = "SO".$Digits[7 - strlen($Fetch_Sales_Order['id'])].($Fetch_Sales_Order['id']);
@@ -86,7 +86,7 @@
 				$Fetch_Sales_Order['is_self_or_customer_pay'] = "Self";
 			else
 				$Fetch_Sales_Order['is_self_or_customer_pay'] = "Customer";
-			if(!(mysql_num_rows(Select_Approver()) == mysql_num_rows(SelectApprovers($Fetch_Sales_Order['id']))))
+			if(!(mysqli_num_rows(Select_Approver()) == mysqli_num_rows(SelectApprovers($Fetch_Sales_Order['id']))))
 			{
 				echo '<tr>
 					<td>'.$SONo.'</td>
@@ -103,11 +103,11 @@
 					<td>'.$Fetch_Sales_Order['billing_address'].'</td>
 					<td>'.$FetchCourierBy['couriers'].'</td>
 					<td>'.$Fetch_Sales_Order['is_self_or_customer_pay'].'</td>';
-					while($FetchApprover = mysql_fetch_array($SelectUser))
+					while($FetchApprover = mysqli_fetch_array($SelectUser))
 					{
 						$TotalApprover--;
-						$SelectApprovers = mysql_num_rows(SelectApproversById($FetchApprover['user'],$Fetch_Sales_Order['id']));
-						$FetchApproverName = mysql_fetch_array(mysql_query("select * from user where id='".$FetchApprover['user']."'"));
+						$SelectApprovers = mysqli_num_rows(SelectApproversById($FetchApprover['user'],$Fetch_Sales_Order['id']));
+						$FetchApproverName = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select * from user where id='".$FetchApprover['user']."'"));
 						if(!$SelectApprovers)
 						{
 							echo '<td><a style="width:120px" onclick="AddApprover('.$FetchApprover['user'].','.$Fetch_Sales_Order['id'].')" class="button button-blue" >Approver '.$i.'</a>';
@@ -132,7 +132,7 @@
 	if($_GET['ApproverId'] && $_GET['SaleOrderId'])
 	{
 		$SeleCtApprovers = SelectApprovers($_GET['SaleOrderId']);
-		if(mysql_num_rows($SeleCtApprovers))
+		if(mysqli_num_rows($SeleCtApprovers))
 		{
 			echo '<br/><br/><table  class="paginate sortable">
 						<thead>
@@ -142,11 +142,11 @@
 								<th>Date</th>
 							</tr>
 						</thead>';
-			while($FetchApprovers = mysql_fetch_array($SeleCtApprovers))
+			while($FetchApprovers = mysqli_fetch_array($SeleCtApprovers))
 			{
 				$Digits = array("", "0", "00", "000", "0000", "00000", "000000", "0000000");
 				$SONo = "SO".$Digits[7 - strlen($FetchApprovers['sales_order_id'])].($FetchApprovers['sales_order_id']);
-				$FetchUser = mysql_fetch_array(FetchUser($FetchApprovers['approved_by']));
+				$FetchUser = mysqli_fetch_array(FetchUser($FetchApprovers['approved_by']));
 				echo '<tr>
 					<td>'.$SONo.'</td>
 					<td>'.$FetchUser['firstname'].'</td>

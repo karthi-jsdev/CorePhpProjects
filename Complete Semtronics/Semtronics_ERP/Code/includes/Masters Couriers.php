@@ -3,7 +3,7 @@
 		$Columns = array("id", "couriers");
 		if($_GET['action'] == 'Edit')
 		{
-			$Credit = mysql_fetch_assoc(Couriers_Select_ById());
+			$Credit = mysqli_fetch_assoc(Couriers_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Credit[$Col];
 		}
@@ -18,7 +18,7 @@
 				$CouriersResource = Couriers_Select_ByNamePWD();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($CouriersResource))
+					if(mysqli_num_rows($CouriersResource))
 						$message = "<br /><div class='message error'><b>Message</b> : Couriers already exists</div>";
 					else
 					{
@@ -28,8 +28,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$Couriers = mysql_fetch_assoc($CouriersResource);
-					if(mysql_num_rows(Couriers_Select_ByNamePWDId()))
+					$Couriers = mysqli_fetch_assoc($CouriersResource);
+					if(mysqli_num_rows(Couriers_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Couriers already exists</div>";
 					else
 					{
@@ -67,7 +67,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$CouriersTotalRows = mysql_fetch_assoc(Couriers_Count_All());
+				$CouriersTotalRows = mysqli_fetch_assoc(Couriers_Count_All());
 				echo "Total No. of Couriers - ".$CouriersTotalRows['total'];
 				?>
 			</h3>
@@ -93,7 +93,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$CouriersRows = Couriers_Select_ByLimit($Start, $Limit);
-					while($Couriers = mysql_fetch_assoc($CouriersRows))
+					while($Couriers = mysqli_fetch_assoc($CouriersRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

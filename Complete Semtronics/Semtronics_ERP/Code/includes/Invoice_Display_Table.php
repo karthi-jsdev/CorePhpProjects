@@ -2,7 +2,7 @@
 	ini_set("display_errors","0");
 	require("Config.php");
 	require("Reports_Queries.php");
-	$TotalRows = mysql_fetch_array(Stock_Status_Summary_Count_display());
+	$TotalRows = mysqli_fetch_array(Stock_Status_Summary_Count_display());
 	echo "<h4>INVOICE SUMMARY:Total Number of Invoices - ".$TotalRows['total'].'</h4>';
 	echo '<div align="right"><a href="#" title="Download" onclick=\'Export_Invoice_Data()\'><img src="images/icons/download.png"></a></div>';
 ?>
@@ -32,7 +32,7 @@
 		$summary = Stock_Status_Summary_display($Start,$Limit);*/
 		$i = 1;
 		$summary = Stock_Status_Summary_display();
-		while($stock_summary = mysql_fetch_assoc($summary))
+		while($stock_summary = mysqli_fetch_assoc($summary))
 		{
 			$totalamount = round($stock_summary['sum(amount)']+$stock_summary['sum(taxamount)'],2);
 			echo'<tbody>

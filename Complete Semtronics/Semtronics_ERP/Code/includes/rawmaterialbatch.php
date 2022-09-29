@@ -1,6 +1,6 @@
 <?php
 	include("Config.php");
-	$Stock_status = mysql_query("SELECT batch.number,rawmaterial.id,rawmaterial.minquantity,stock.unitprice,category.name,sum(stock.amount) as amount,sum(stock.quantity) as quantity, rawmaterial.materialcode, rawmaterial.description, rawmaterial.partnumber FROM category 
+	$Stock_status = mysqli_query($_SESSION['connection'],"SELECT batch.number,rawmaterial.id,rawmaterial.minquantity,stock.unitprice,category.name,sum(stock.amount) as amount,sum(stock.quantity) as quantity, rawmaterial.materialcode, rawmaterial.description, rawmaterial.partnumber FROM category 
 								INNER JOIN rawmaterial ON categoryid = category.id 
 								INNER JOIN batch ON rawmaterial.id = batch.rawmaterialid
 								INNER JOIN stock ON stock.batchid = batch.id 
@@ -23,23 +23,23 @@
 		</thead>
 <?php
 	$i=1;
-	while($Stock_quantity = mysql_fetch_assoc($Stock_status))
+	while($Stock_quantity = mysqli_fetch_assoc($Stock_status))
 	{
 		if($Stock_quantity['quantity']==null)
 			$Stock_quantity['quantity']='0';
 		if($Stock_quantity['amount']==null)
 			$Stock_quantity['amount']='0';
-		$Stock_location = mysql_fetch_assoc(mysql_query("SELECT location.name as locationname FROM category
+		$Stock_location = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT location.name as locationname FROM category
 										INNER JOIN rawmaterial ON categoryid = category.id
 										INNER JOIN batch ON rawmaterial.id = batch.rawmaterialid
 										INNER JOIN stockinventory ON stockinventory.batchid = batch.id
 										INNER JOIN location ON location.id = stockinventory.locationid
 										INNER JOIN stock ON stock.batchid = batch.id
 										WHERE rawmaterial.id='".$Stock_quantity['id']."'")); 
-		$inspection = mysql_fetch_assoc(mysql_query("select sum(quantity) as quantity,sum(amount) as amount from rawmaterial inner join batch on rawmaterial.id=rawmaterialid inner join stockinventory on batchid=batch.id where rawmaterial.id='".$Stock_quantity['id']."' && (stockinventory.inspection='2' || stockinventory.inspection='3') group by rawmaterialid"));	
-		$inspect_color = mysql_fetch_assoc(mysql_query("select * from stockinventory join batch on batch.id=stockinventory.batchid join rawmaterial on batch.rawmaterialid='".$Stock_quantity['id']."' where (stockinventory.inspection='0' || stockinventory.inspection='1' || stockinventory.inspection='2' || stockinventory.inspection='3') group by rawmaterial.id"));
-		$inspection_green = mysql_fetch_assoc(mysql_query("select count(green) as total,sum(quantity) as quantity from (select Min(inspection) as green,min(quantity) as quantity from stockinventory join batch on batch.id=stockinventory.batchid join rawmaterial on batch.rawmaterialid='".$Stock_quantity['id']."' where (stockinventory.inspection='0' || stockinventory.inspection='4') group by rawmaterial.id)a"));
-		$inspection_blue = mysql_fetch_assoc(mysql_query("select count(green) as total,sum(quantity) as quantity from (select Min(inspection) as green,min(quantity) as quantity from stockinventory join batch on batch.id=stockinventory.batchid join rawmaterial on batch.rawmaterialid='".$Stock_quantity['id']."' where (stockinventory.inspection='0' || stockinventory.inspection='4') group by rawmaterial.id)a"));
+		$inspection = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select sum(quantity) as quantity,sum(amount) as amount from rawmaterial inner join batch on rawmaterial.id=rawmaterialid inner join stockinventory on batchid=batch.id where rawmaterial.id='".$Stock_quantity['id']."' && (stockinventory.inspection='2' || stockinventory.inspection='3') group by rawmaterialid"));	
+		$inspect_color = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select * from stockinventory join batch on batch.id=stockinventory.batchid join rawmaterial on batch.rawmaterialid='".$Stock_quantity['id']."' where (stockinventory.inspection='0' || stockinventory.inspection='1' || stockinventory.inspection='2' || stockinventory.inspection='3') group by rawmaterial.id"));
+		$inspection_green = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select count(green) as total,sum(quantity) as quantity from (select Min(inspection) as green,min(quantity) as quantity from stockinventory join batch on batch.id=stockinventory.batchid join rawmaterial on batch.rawmaterialid='".$Stock_quantity['id']."' where (stockinventory.inspection='0' || stockinventory.inspection='4') group by rawmaterial.id)a"));
+		$inspection_blue = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select count(green) as total,sum(quantity) as quantity from (select Min(inspection) as green,min(quantity) as quantity from stockinventory join batch on batch.id=stockinventory.batchid join rawmaterial on batch.rawmaterialid='".$Stock_quantity['id']."' where (stockinventory.inspection='0' || stockinventory.inspection='4') group by rawmaterial.id)a"));
 
 		echo'<tbody>';
 			echo '<tr ';
@@ -62,7 +62,7 @@
 				<td>'.$Stock_location['locationname'].'</td>
 			</tr>';
 	}
-	$Stock_status = mysql_fetch_Assoc(mysql_query("SELECT sum(stock.amount) as amount FROM rawmaterial 
+	$Stock_status = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT sum(stock.amount) as amount FROM rawmaterial 
 								INNER JOIN batch ON rawmaterial.id = batch.rawmaterialid
 								INNER JOIN stock ON stock.batchid = batch.id 
 								WHERE rawmaterial.id='".$_GET['batch']."' GROUP BY rawmaterial.id"));

@@ -22,7 +22,7 @@
 			<div class="columns">
 			<h3>
 				<?php
-				$ProductBOMTotalRows = mysql_fetch_assoc(ProductBOM_displaySelect_Count_All());
+				$ProductBOMTotalRows = mysqli_fetch_assoc(ProductBOM_displaySelect_Count_All());
 				echo "<h4>Total No. of Product-BOM - ".$ProductBOMTotalRows['total']."</h4>";
 				?>
 			</h3>
@@ -45,12 +45,12 @@
 						echo '<tr><td colspan="7"><font color="red"><center>No data found</center></font></td></tr>';
 					$i = 1;
 					$ProductBOMRows = ProductBOM_displaySelect_ByNOLimit();
-					while($ProductBOM = mysql_fetch_assoc($ProductBOMRows))
+					while($ProductBOM = mysqli_fetch_assoc($ProductBOMRows))
 					{
-						$FetchProductCode = mysql_fetch_array(SelectProductCode($ProductBOM['productid']));
-						$FetchRawMeterial = mysql_fetch_array(SelectRawMeterial($ProductBOM['rawmaterialid']));
-						$Fetchproductcategory = mysql_fetch_array(SelectProductcategory($ProductBOM['productcategory_id']));
-						$Fetchproductsubcategory = mysql_fetch_array(SelectProductsubcategory($ProductBOM['productsubcategory_id']));
+						$FetchProductCode = mysqli_fetch_array(SelectProductCode($ProductBOM['productid']));
+						$FetchRawMeterial = mysqli_fetch_array(SelectRawMeterial($ProductBOM['rawmaterialid']));
+						$Fetchproductcategory = mysqli_fetch_array(SelectProductcategory($ProductBOM['productcategory_id']));
+						$Fetchproductsubcategory = mysqli_fetch_array(SelectProductsubcategory($ProductBOM['productsubcategory_id']));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
 							<td align='center'>".$Fetchproductcategory['name']."</td>
@@ -71,7 +71,7 @@
 		{ ?>
 		<h3>Product-BOM Status
 					<?php
-					$ProductBOMTotalRows = mysql_fetch_assoc(ProductBOM_displaySelect_Count_All());
+					$ProductBOMTotalRows = mysqli_fetch_assoc(ProductBOM_displaySelect_Count_All());
 					echo "<h4>Total No. of Product-BOM - ".$ProductBOMTotalRows['total']."</h4>";
 					?>
 				</h3>
@@ -96,7 +96,7 @@
 						$i = 1;
 						$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 						$ProductBOMStatusRows = ProductBOM_displaySelect_ByNOLimit();
-						while($ProductBOMStatus = mysql_fetch_array($ProductBOMStatusRows))
+						while($ProductBOMStatus = mysqli_fetch_array($ProductBOMStatusRows))
 						{
 							echo "<tr style='valign:middle;'>
 								<td align='center'>".$i++."</td>

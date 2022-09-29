@@ -3,7 +3,7 @@
 		$Columns = array("id", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Credit = mysql_fetch_assoc(Inhousecategory_Select_ById());
+			$Credit = mysqli_fetch_assoc(Inhousecategory_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Credit[$Col];
 		}
@@ -18,7 +18,7 @@
 				$InhousecategoryResource = Inhousecategory_Select_ByNamePWD();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($InhousecategoryResource))
+					if(mysqli_num_rows($InhousecategoryResource))
 						$message = "<br /><div class='message error'><b>Message</b> : Inhouse Category already exists</div>";
 					else
 					{
@@ -28,8 +28,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$Inhousecategory = mysql_fetch_assoc($InhousecategoryResource);
-					if(mysql_num_rows(Inhousecategory_Select_ByNamePWDId()))
+					$Inhousecategory = mysqli_fetch_assoc($InhousecategoryResource);
+					if(mysqli_num_rows(Inhousecategory_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Inhouse Category already exists</div>";
 					else
 					{
@@ -67,7 +67,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$InhousecategoryTotalRows = mysql_fetch_assoc(Inhousecategory_Select_Count_All());
+				$InhousecategoryTotalRows = mysqli_fetch_assoc(Inhousecategory_Select_Count_All());
 				echo "Total No. of Inhouse Categories - ".$InhousecategoryTotalRows['total'];
 				?>
 			</h3>
@@ -93,7 +93,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$InhousecategoryRows = Inhousecategory_Select_ByLimit($Start, $Limit);
-					while($Inhousecategory = mysql_fetch_assoc($InhousecategoryRows))
+					while($Inhousecategory = mysqli_fetch_assoc($InhousecategoryRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

@@ -6,7 +6,7 @@
 	{
 		$results = "";
 		$Material = Materials_Select_All();
-		while($Materials = mysql_fetch_assoc($Material))
+		while($Materials = mysqli_fetch_assoc($Material))
 		{
 			echo "<option value='".$Materials['id']."'>".$Materials['materialcode']."-".$Materials['description']."</option>";
 		}
@@ -15,7 +15,7 @@
 	{
 		$results = "";
 		$Material = Materials_Select_All();
-		while($Materials = mysql_fetch_assoc($Material))
+		while($Materials = mysqli_fetch_assoc($Material))
 		{
 			echo "<option value='".$Materials['id']."'>".$Materials['partnumber']."-".$Materials['description']."</option>";
 		}

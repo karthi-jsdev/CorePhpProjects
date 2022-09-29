@@ -6,14 +6,14 @@ include("Issuance_Queries.php");
 if($_GET['Module'] == 'Batches' && $_GET['id'])
 {
 	$_POST['rawmaterialid'] = $_GET['id'];
-	$Issuance = mysql_fetch_assoc(Select_Issuance_ById()); ?>
+	$Issuance = mysqli_fetch_assoc(Select_Issuance_ById()); ?>
 	<select id="" name="batchid" onchange='var OptionSplit = this.value.split("$"); document.getElementById("batchid").value = OptionSplit[0]; document.getElementById("batchnumber").value = OptionSplit[2]; document.getElementById("available_quantity").value = OptionSplit[1];  document.getElementById("location_space").value = OptionSplit[3];      document.getElementById("div_available_quantity").innerHTML = (OptionSplit[1])?"&nbsp;&nbsp;Available Quantity : "+OptionSplit[1]:"&nbsp;&nbsp;Available Quantity : -"; document.getElementById("div_location_space").innerHTML = (OptionSplit[3])?" &nbsp;&nbsp;Location : "+OptionSplit[3]:Location;'>
 		<option value="">Select</option>
 		<?php
 		$Batches = Select_All_BatchesByInspection();
-		while($Batch = mysql_fetch_assoc($Batches))
+		while($Batch = mysqli_fetch_assoc($Batches))
 		{
-			$issuebatch = mysql_fetch_assoc(mysql_query("SELECT batch.id, batch.number, sum(stockissuance.quantity) as quantity FROM batch
+			$issuebatch = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT batch.id, batch.number, sum(stockissuance.quantity) as quantity FROM batch
 					JOIN stock ON stock.batchid=batch.id
 					JOIN stockissuance ON stockissuance.batchid=batch.id
 					WHERE stock.quantity>0 && batch.rawmaterialid=".$_POST['rawmaterialid']." group by batch.id ORDER BY batch.id"));
@@ -36,14 +36,14 @@ if($_GET['Module'] == 'Batches' && $_GET['id'])
 if($_GET['Module'] == 'BatchesE' && $_GET['id'])
 {
 	$_POST['rawmaterialid'] = $_GET['id'];
-	$Issuance = mysql_fetch_assoc(Select_Issuance_ById()); ?>
+	$Issuance = mysqli_fetch_assoc(Select_Issuance_ById()); ?>
 	<select id="" name="batchidE" onchange='var OptionSplitE = this.value.split("$"); document.getElementById("batchidE").value = OptionSplitE[0]; document.getElementById("batchnumberE").value = OptionSplitE[2]; document.getElementById("available_quantityE").value = OptionSplitE[1]; document.getElementById("div_available_quantityE").innerHTML = (OptionSplitE[1])?"&nbsp;&nbsp;Available Quantity : "+OptionSplitE[1]:"&nbsp;&nbsp;Available Quantity : -";'>
 		<option value="">Select</option>
 		<?php
 		$Batches = Select_All_BatchesByInspection();
-		while($Batch = mysql_fetch_assoc($Batches))
+		while($Batch = mysqli_fetch_assoc($Batches))
 		{
-			$issuebatch = mysql_fetch_assoc(mysql_query("SELECT batch.id, batch.number, sum(stockissuance.quantity) as quantity FROM batch
+			$issuebatch = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT batch.id, batch.number, sum(stockissuance.quantity) as quantity FROM batch
 					JOIN stock ON stock.batchid=batch.id
 					JOIN stockissuance ON stockissuance.batchid=batch.id
 					WHERE stock.quantity>0 && batch.rawmaterialid=".$_POST['rawmaterialid']." group by batch.id ORDER BY batch.id"));

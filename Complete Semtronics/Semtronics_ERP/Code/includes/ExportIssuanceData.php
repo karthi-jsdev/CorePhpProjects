@@ -15,7 +15,7 @@ if(isset($_GET['export']))
 if($_GET['getdata']=='Issuance_Reports')
 	{ 
 		include("Issuance_Queries.php");
-	$TotalIssuance = mysql_fetch_assoc(Count_Issuance_ByGroup());
+	$TotalIssuance = mysqli_fetch_assoc(Count_Issuance_ByGroup());
 		?>	
 <table class="paginate sortable full" border="1">
 		<thead>
@@ -39,7 +39,7 @@ if($_GET['getdata']=='Issuance_Reports')
 			$i = $Start = ($_GET['pageno']-1)*$Limit;
 			$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 			$Issuances = Select_Issuance_ByGroupNoLimit();
-			while($Issuance = mysql_fetch_assoc($Issuances))
+			while($Issuance = mysqli_fetch_assoc($Issuances))
 			{
 				echo "<tr style='valign:middle;'>
 					<td align='center'>".++$i."</td>

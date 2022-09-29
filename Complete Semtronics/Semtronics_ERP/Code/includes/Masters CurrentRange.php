@@ -3,24 +3,24 @@
 		include('Config.php');
 		if(isset($_POST['Submit']))
 		{
-			mysql_query("INSERT INTO currentrange(currentrange,indexvalue) VALUES ('".$_POST['currentrange']."','".$_POST['indexvalue']."')");
+			mysqli_query($_SESSION['connection'],"INSERT INTO currentrange(currentrange,indexvalue) VALUES ('".$_POST['currentrange']."','".$_POST['indexvalue']."')");
 			$_POST['currentrange'] = "";
 			$_POST['indexvalue'] = "";
 		}
 		else if($_POST['Update'])
 		{
-			mysql_query("UPDATE currentrange SET currentrange='".$_POST['currentrange']."',indexvalue='".$_POST['indexvalue']."' WHERE id='".$_POST['id']."'");
+			mysqli_query($_SESSION['connection'],"UPDATE currentrange SET currentrange='".$_POST['currentrange']."',indexvalue='".$_POST['indexvalue']."' WHERE id='".$_POST['id']."'");
 			$_POST['currentrange'] = "";
 			$_POST['indexvalue'] = "";
 		}
 		if($_GET['id'] && $_GET['action']=='Edit')
 		{
-			$values = mysql_fetch_assoc(mysql_query("SELECT * FROM currentrange WHERE id='".$_GET['id']."'"));
+			$values = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM currentrange WHERE id='".$_GET['id']."'"));
 			$_POST['currentrange'] = $values['currentrange'];
 			$_POST['indexvalue'] = $values['indexvalue'];
 		}
 		if($_GET['id'] && $_GET['action']=='Delete')
-			mysql_query("DELETE FROM currentrange WHERE id='".$_GET['id']."'");
+			mysqli_query($_SESSION['connection'],"DELETE FROM currentrange WHERE id='".$_GET['id']."'");
 	?>
 	<div class="columns" style='width:902px;'>
 		<?php echo $message; ?>
@@ -62,8 +62,8 @@
 				<tbody>
 					<?php
 						$i=1;
-						$enabledisable = mysql_query("SELECT * FROM currentrange");
-						while($edisable = mysql_fetch_assoc($enabledisable))
+						$enabledisable = mysqli_query($_SESSION['connection'],"SELECT * FROM currentrange");
+						while($edisable = mysqli_fetch_assoc($enabledisable))
 						{
 							echo'<tr>
 									<td>'.$i++.'</td>

@@ -14,7 +14,7 @@
 		}
 		if($_GET['action']=='Edit' && $_GET['id'])
 		{
-			$excise = mysql_fetch_Assoc(Selectexciseid());
+			$excise = mysqli_fetch_assoc(Selectexciseid());
 			$_POST['excisetax'] = $excise['excisetax'];
 			$_POST['percent'] = $excise['percent'];
 			$_POST['description'] = $excise['description'];
@@ -71,7 +71,7 @@
 	<?php
 		$i=1;
 		$tax = Selectexcise();
-		while($excisetaxs = mysql_fetch_Assoc($tax))
+		while($excisetaxs = mysqli_fetch_assoc($tax))
 		{
 			echo '<tr>
 					<td align="center">'.$i++.'</td>

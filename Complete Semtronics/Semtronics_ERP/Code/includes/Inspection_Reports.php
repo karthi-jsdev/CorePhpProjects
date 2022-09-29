@@ -12,12 +12,12 @@
 	</thead>
 	<?php
 		$summary = Stock_Inspection();
-		if(!mysql_num_rows($summary))
+		if(!mysqli_num_rows($summary))
 			echo '<tr><td>No Data Found</td></tr>';
-		echo "<h3>Total Number Stocks to be Inspected -".mysql_num_rows($summary).'</h3>';
+		echo "<h3>Total Number Stocks to be Inspected -".mysqli_num_rows($summary).'</h3>';
 		echo '<div align="right"><a href="#" title="Download" onclick=Export_InspectionData()><img src="images/icons/download.png"></a></div>';
 		$i=1;
-		while($stock_summary = mysql_fetch_assoc($summary))
+		while($stock_summary = mysqli_fetch_assoc($summary))
 		{
 			echo'<tbody>
 				<tr>

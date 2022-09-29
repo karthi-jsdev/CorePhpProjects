@@ -17,7 +17,7 @@
 	date_default_timezone_set("Asia/Calcutta");
 	if($_GET['id'] && $_GET['action']=="edit")
 	{
-		$Opportunity_Edit = mysql_fetch_assoc(Opportunity_Item_Edit());
+		$Opportunity_Edit = mysqli_fetch_assoc(Opportunity_Item_Edit());
 		$_POST['id'] = $Opportunity_Edit['id']; 
 		$_POST['lead_id'] = $Opportunity_Edit['lead_id']; $_POST['description'] = $Opportunity_Edit['opp_description'];
 		$_POST['quantity'] = $Opportunity_Edit['quantity']; $_POST['date'] = $Opportunity_Edit['date'];
@@ -31,7 +31,7 @@
 	{
 		OpportunityManagement_StatusInsertion();
 		echo "<br /><div class='message success'><b>Message</b> : Opportunity Status Updated Successfully</div>";
-		$Opportunity_Edit = mysql_fetch_assoc(Opportunity_Item_Edit_Update());
+		$Opportunity_Edit = mysqli_fetch_assoc(Opportunity_Item_Edit_Update());
 		$_POST['id'] = $Opportunity_Edit['id']; $_POST['product_id'] = $Opportunity_Edit['pid'];
 		$_POST['product_category_id'] = $Opportunity_Edit['pcid']; $_POST['product_subcategory_id'] = $Opportunity_Edit['pscid'];
 		$_POST['lead_id'] = $Opportunity_Edit['lead_id']; $_POST['description'] = $Opportunity_Edit['opp_description'];
@@ -68,7 +68,7 @@
 					<?php
 					if($_GET['id']&&$_GET['action']=='edit')
 					{
-						$status_disable = mysql_fetch_assoc(Status_disableAction());
+						$status_disable = mysqli_fetch_assoc(Status_disableAction());
 						if($status_disable['tot']>=1)
 						{
 							?><label><strong>Status</strong>
@@ -84,7 +84,7 @@
 								<select name="status_id" id="status_id">
 									<option value="Select">Select</option>
 									<?php
-										while($opp_status = mysql_fetch_assoc($status))
+										while($opp_status = mysqli_fetch_assoc($status))
 										{
 											echo'<option value="'.$opp_status['id'].'">'.$opp_status['status'].'</option>';
 										}
@@ -109,7 +109,7 @@
 							<select name="status_id" id="status_id">
 								<option value="Select">Select</option>
 								<?php
-									while($opp_status = mysql_fetch_assoc($status1))
+									while($opp_status = mysqli_fetch_assoc($status1))
 									{
 										echo'<option value="'.$opp_status['id'].'">'.$opp_status['status'].'</option>';
 									}
@@ -118,7 +118,7 @@
 						</label>
 					<?php }?>
 						<?php 
-						$status_disabl = mysql_fetch_assoc(Status_disableAction());
+						$status_disabl = mysqli_fetch_assoc(Status_disableAction());
 						if($_POST['status_id']==12 || $_POST['status_id']==13 || $status_disabl['tot']>=1)
 						{?>
 						<label><strong>Project Amount</strong>
@@ -175,17 +175,17 @@
 					</div>
 					<div class="clearfix">
 					<?php
-						$oppid = mysql_fetch_assoc(SalesOrder_disableAction());
-						$createorder_disable = mysql_fetch_assoc(CreateOrder_Enable());
-						$accleads = mysql_fetch_assoc(SalesOrder_ForACCLead());
+						$oppid = mysqli_fetch_assoc(SalesOrder_disableAction());
+						$createorder_disable = mysqli_fetch_assoc(CreateOrder_Enable());
+						$accleads = mysqli_fetch_assoc(SalesOrder_ForACCLead());
 						if($oppid['total']>=1)
 							echo'<input type="hidden">';
 						else if(!isset($_POST['Update']) && $createorder_disable['total']==1 && $accleads['add_to_account']==1)
 							echo '<a href="?page=Sales&subpage=spage->Sale_Order&LeadId='.$_POST['lead_id'].'&oppurtunity_id='.$_GET['id'].'"  class="button button-orange">Create Sale Order</a>';
-						$check = mysql_fetch_assoc(Update_Disable());
+						$check = mysqli_fetch_assoc(Update_Disable());
 						if(isset($_POST['Update']))
 						{
-							$acclead = mysql_fetch_assoc(SalesOrder_ForACCLead());
+							$acclead = mysqli_fetch_assoc(SalesOrder_ForACCLead());
 							if($_POST['status_id']==12 && $acclead['add_to_account']==1)
 								echo '<a href="?page=Sales&subpage=spage->Sale_Order&LeadId='.$_POST['lead_id'].'&oppurtunity_id='.$_GET['id'].'"  class="button button-orange">Create Sale Order</a>';
 							//echo '<a href="?page=Sales&subpage=spage->Sale_Order" class="button button-green" name="saleorder">Create Sale Order</a>';
@@ -225,11 +225,11 @@
 	if(isset($_POST['Update']))
 	{
 		$opp_statusdisplay = OpportunityManagement_Status_Display1();
-		if(mysql_num_rows(OpportunityManagement_Status_Display1())==0)
+		if(mysqli_num_rows(OpportunityManagement_Status_Display1())==0)
 			echo '<tr><td style="color:red;" colspan="5"><center>No Data Found</center></td></tr>';
 		else
 		{
-			while($oppstatus = mysql_fetch_assoc($opp_statusdisplay))
+			while($oppstatus = mysqli_fetch_assoc($opp_statusdisplay))
 			{
 			echo
 				'<tr>
@@ -246,11 +246,11 @@
 	else
 	{
 		$oppstatusdisplay = OpportunityManagement_StatusDisplay();
-		if(mysql_num_rows(OpportunityManagement_StatusDisplay())==0)
+		if(mysqli_num_rows(OpportunityManagement_StatusDisplay())==0)
 			echo '<tr><td style="color:red;" colspan="5"><center>No Data Found</center></td></tr>';
 		else
 		{
-			while($oppstatus = mysql_fetch_assoc($oppstatusdisplay))
+			while($oppstatus = mysqli_fetch_assoc($oppstatusdisplay))
 			{
 			echo'<tr>
 					<td>'.date('d-m-Y',strtotime($oppstatus['date'])).'</td>

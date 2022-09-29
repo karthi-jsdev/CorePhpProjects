@@ -24,13 +24,13 @@ include('Config.php');
 	<?php
 	$i=1;
 	$Stock_status = Stock_SummaryByInspection();
-	if(mysql_num_rows($Stock_status)==0)
+	if(mysqli_num_rows($Stock_status)==0)
 		echo'<tr><td colspan="7" style="color:red;"><center>No data Found</center></td></tr>';
 	else
 	{
-		while($Stock_quantity = mysql_fetch_assoc($Stock_status))
+		while($Stock_quantity = mysqli_fetch_assoc($Stock_status))
 		{
-			$FetchRaw = mysql_num_rows(mysql_query("SELECT * FROM stockinventory JOIN batch ON stockinventory.batchid = batch.id JOIN rawmaterial ON batch.rawmaterialid ='".$Stock_quantity['id']."' WHERE stockinventory.inspection = '' GROUP BY stockinventory.batchid"));
+			$FetchRaw = mysqli_num_rows(mysqli_query($_SESSION['connection'],"SELECT * FROM stockinventory JOIN batch ON stockinventory.batchid = batch.id JOIN rawmaterial ON batch.rawmaterialid ='".$Stock_quantity['id']."' WHERE stockinventory.inspection = '' GROUP BY stockinventory.batchid"));
 			if($Stock_quantity['quantity']==null)
 				$Stock_quantity['quantity']='0';
 			if($Stock_quantity['amount']==null)

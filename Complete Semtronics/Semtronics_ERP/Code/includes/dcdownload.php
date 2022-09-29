@@ -95,9 +95,9 @@
 		->setCellValue('E26', 'Remarks')->getStyle('A26:E26')->applyFromArray($TableHeaderStyle);
  
 		$i=0;
-		$Vendors = mysql_query("SELECT stockinventory.unitprice,location.name,issuance.number, rawmaterial.id, rawmaterial.materialcode, rawmaterial.partnumber, rawmaterial.description, stockissuance.quantity, issuanceuser.issuanceuser as issuanceuser, issuance.issueddate FROM stockissuance JOIN batch ON batch.id=stockissuance.batchid JOIN rawmaterial ON rawmaterial.id=batch.rawmaterialid JOIN issuanceuser ON issuanceuser.id=stockissuance.issuedto JOIN issuance ON issuance.id=stockissuance.issuanceid JOIN stockinventory on batch.id=stockinventory.batchid join location on location.id=locationid WHERE issuance.number='".$_GET['number']."' ORDER BY stockissuance.id");
+		$Vendors = mysqli_query($_SESSION['connection'],"SELECT stockinventory.unitprice,location.name,issuance.number, rawmaterial.id, rawmaterial.materialcode, rawmaterial.partnumber, rawmaterial.description, stockissuance.quantity, issuanceuser.issuanceuser as issuanceuser, issuance.issueddate FROM stockissuance JOIN batch ON batch.id=stockissuance.batchid JOIN rawmaterial ON rawmaterial.id=batch.rawmaterialid JOIN issuanceuser ON issuanceuser.id=stockissuance.issuedto JOIN issuance ON issuance.id=stockissuance.issuanceid JOIN stockinventory on batch.id=stockinventory.batchid join location on location.id=locationid WHERE issuance.number='".$_GET['number']."' ORDER BY stockissuance.id");
 		SetHeader($Sheet, "DELIVERY CHALLAN");
-		while($VendorData = mysql_fetch_assoc($Vendors))
+		while($VendorData = mysqli_fetch_assoc($Vendors))
 		{
 			$objPHPExcel->setActiveSheetIndex($Sheet)
 			->setCellValue('A'.(26+(++$i)), $i)

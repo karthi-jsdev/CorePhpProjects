@@ -3,7 +3,7 @@
 		$Columns = array("id", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Credit = mysql_fetch_assoc(ReferenceGroup_Select_ById());
+			$Credit = mysqli_fetch_assoc(ReferenceGroup_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Credit[$Col];
 		}
@@ -18,7 +18,7 @@
 				$ReferenceGroupResource = ReferenceGroup_Select_ByNamePWD();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($ReferenceGroupResource))
+					if(mysqli_num_rows($ReferenceGroupResource))
 						$message = "<br /><div class='message error'><b>Message</b> : ReferenceGroup already exists</div>";
 					else
 					{
@@ -28,8 +28,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$ReferenceGroup = mysql_fetch_assoc($ReferenceGroupResource);
-					if(mysql_num_rows(ReferenceGroup_Select_ByNamePWDId()))
+					$ReferenceGroup = mysqli_fetch_assoc($ReferenceGroupResource);
+					if(mysqli_num_rows(ReferenceGroup_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This ReferenceGroup already exists</div>";
 					else
 					{
@@ -67,7 +67,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$ReferenceGroupTotalRows = mysql_fetch_assoc(ReferenceGroup_Count_All());
+				$ReferenceGroupTotalRows = mysqli_fetch_assoc(ReferenceGroup_Count_All());
 				echo "Total No. of Reference Group - ".$ReferenceGroupTotalRows['total'];
 				?>
 			</h3>
@@ -93,7 +93,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$ReferenceGroupRows = ReferenceGroup_Select_ByLimit($Start, $Limit);
-					while($ReferenceGroup = mysql_fetch_assoc($ReferenceGroupRows))
+					while($ReferenceGroup = mysqli_fetch_assoc($ReferenceGroupRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

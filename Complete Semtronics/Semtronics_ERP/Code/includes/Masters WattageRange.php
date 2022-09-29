@@ -3,24 +3,24 @@
 		include('Config.php');
 		if(isset($_POST['Submit']))
 		{
-			mysql_query("INSERT INTO wattagerange(wattagerange,indexvalue) VALUES ('".$_POST['wattagerange']."','".$_POST['indexvalue']."')");
+			mysqli_query($_SESSION['connection'],"INSERT INTO wattagerange(wattagerange,indexvalue) VALUES ('".$_POST['wattagerange']."','".$_POST['indexvalue']."')");
 			$_POST['wattagerange'] = "";
 			$_POST['indexvalue'] = "";
 		}
 		else if($_POST['Update'])
 		{
-			mysql_query("UPDATE wattagerange SET wattagerange='".$_POST['wattagerange']."',indexvalue='".$_POST['indexvalue']."' WHERE id='".$_POST['id']."'");
+			mysqli_query($_SESSION['connection'],"UPDATE wattagerange SET wattagerange='".$_POST['wattagerange']."',indexvalue='".$_POST['indexvalue']."' WHERE id='".$_POST['id']."'");
 			$_POST['wattagerange'] = "";
 			$_POST['indexvalue'] = "";
 		}
 		if($_GET['id'] && $_GET['action']=='Edit')
 		{
-			$values = mysql_fetch_assoc(mysql_query("SELECT * FROM wattagerange WHERE id='".$_GET['id']."'"));
+			$values = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM wattagerange WHERE id='".$_GET['id']."'"));
 			$_POST['wattagerange'] = $values['wattagerange'];
 			$_POST['indexvalue'] = $values['indexvalue'];
 		}
 		if($_GET['id'] && $_GET['action']=='Delete')
-			mysql_query("DELETE FROM wattagerange WHERE id='".$_GET['id']."'");
+			mysqli_query($_SESSION['connection'],"DELETE FROM wattagerange WHERE id='".$_GET['id']."'");
 	?>
 	<div class="columns" style='width:902px;'>
 		<?php echo $message; ?>
@@ -63,8 +63,8 @@
 				<tbody>
 					<?php
 						$i=1;
-						$enabledisable = mysql_query("SELECT * FROM wattagerange");
-						while($edisable = mysql_fetch_assoc($enabledisable))
+						$enabledisable = mysqli_query($_SESSION['connection'],"SELECT * FROM wattagerange");
+						while($edisable = mysqli_fetch_assoc($enabledisable))
 						{
 							echo'<tr>
 									<td>'.$i++.'</td>

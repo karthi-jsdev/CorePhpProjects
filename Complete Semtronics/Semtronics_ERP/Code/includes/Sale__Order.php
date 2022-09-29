@@ -14,7 +14,7 @@
 	$Columns = array("id","lead_id", "oppurtunity_id", "po_number", "shipping_address", "billing_address", "courier_by_id", "is_self_or_customer_pay");
 	if($_GET['action'] == 'Edit')
 	{
-		$User = mysql_fetch_assoc(SaleOrder_Select_ById());
+		$User = mysqli_fetch_assoc(SaleOrder_Select_ById());
 		foreach($Columns as $Col)
 			$_POST[$Col] = $User[$Col];
 	}
@@ -55,7 +55,7 @@
 					<?php
 					if($_GET['action'] != 'Edit')
 					{
-						$FetchSalesNo = mysql_fetch_assoc(Select_SalesNo());
+						$FetchSalesNo = mysqli_fetch_assoc(Select_SalesNo());
 						$Digits = array("", "0", "00", "000", "0000", "00000", "000000", "0000000");
 						$SONo = "SO".$Digits[7 - strlen($FetchSalesNo['id']+1)].($FetchSalesNo['id']+1);
 						echo $SONo;
@@ -74,7 +74,7 @@
 							<option value="">Select</option>
 							<?php
 							$SelectClient = Select_Client();
-							while($FetchClient = mysql_fetch_array($SelectClient))
+							while($FetchClient = mysqli_fetch_array($SelectClient))
 							{
 								if($_POST['lead_id']==$FetchClient['id'])
 									echo '<option value="'.$FetchClient['id'].'" selected>'.$FetchClient['name'].'</option>';
@@ -89,7 +89,7 @@
 								<option value="">Select</option>
 								<?php
 								$SelectProductCategory = SelectProductCategory();
-								while($FetchProductCategory = mysql_fetch_array($SelectProductCategory))
+								while($FetchProductCategory = mysqli_fetch_array($SelectProductCategory))
 									echo '<option value="'.$FetchProductCategory['id'].'">'.$FetchProductCategory['name'].'</option>';
 								?>
 						</select></div>
@@ -105,7 +105,7 @@
 							<option value="">Select</option>
 							<?php
 							$SelectCourier = SelectCourier();
-							while($FetchCourier = mysql_fetch_array($SelectCourier))
+							while($FetchCourier = mysqli_fetch_array($SelectCourier))
 							{
 								if($_POST['courier_by_id']==$FetchCourier['id'])
 									echo '<option value="'.$FetchCourier['id'].'" selected>'.$FetchCourier['couriers'].'</option>';
@@ -127,7 +127,7 @@
 							<option value="">Select</option>
 							<?php
 							$SelectProduct = SelectProduct();
-							while($FetchProduct = mysql_fetch_array($SelectProduct))
+							while($FetchProduct = mysqli_fetch_array($SelectProduct))
 								echo '<option value="'.$FetchProduct['id'].'">'.$FetchProduct['code'].'</option>';
 							?>
 						</select></div>
@@ -219,9 +219,9 @@
 		else 
 			$Search = $_GET['Search'];
 		if($Search)
-			$SaleOrderTotalRows = mysql_fetch_assoc(Select_Sales_orderSearch($Search));
+			$SaleOrderTotalRows = mysqli_fetch_assoc(Select_Sales_orderSearch($Search));
 		else
-			$SaleOrderTotalRows = mysql_fetch_assoc(Select_Sales_order());
+			$SaleOrderTotalRows = mysqli_fetch_assoc(Select_Sales_order());
 		echo "Total No. of Sale Orders -".$SaleOrderTotalRows['total'];
 		?>
 	</h3>
@@ -262,12 +262,12 @@
 		else
 			$Select_Sales_Order = SaleOrder_Select_ByLimit($Start, $Limit);
 		
-		while($Fetch_Sales_Order = mysql_fetch_array($Select_Sales_Order))
+		while($Fetch_Sales_Order = mysqli_fetch_array($Select_Sales_Order))
 		{
-			$FetchLeadName = mysql_fetch_array(FetchLeadById($Fetch_Sales_Order['lead_id']));
-			$FetchOppurtunity = mysql_fetch_array(Select_Opportunity($Fetch_Sales_Order['oppurtunity_id']));
-			$FetchProduct = mysql_fetch_array(SelectProductById($FetchOppurtunity['product_id']));
-			$FetchCourierBy =  mysql_fetch_array(SelectCourierById($Fetch_Sales_Order['courier_by_id']));
+			$FetchLeadName = mysqli_fetch_array(FetchLeadById($Fetch_Sales_Order['lead_id']));
+			$FetchOppurtunity = mysqli_fetch_array(Select_Opportunity($Fetch_Sales_Order['oppurtunity_id']));
+			$FetchProduct = mysqli_fetch_array(SelectProductById($FetchOppurtunity['product_id']));
+			$FetchCourierBy =  mysqli_fetch_array(SelectCourierById($Fetch_Sales_Order['courier_by_id']));
 			$Digits = array("", "0", "00", "000", "0000", "00000", "000000", "0000000");
 			$SONo = "SO".$Digits[7 - strlen($Fetch_Sales_Order['id'])].($Fetch_Sales_Order['id']);
 			if(!$Fetch_Sales_Order['approved_id'])

@@ -18,7 +18,7 @@
 	?>
 	<h3>Kitting Status
 	<?php
-	$ProductBOMStatusTotalRows = mysql_fetch_assoc(ProductBOMStatus_Select_Count_All_kitting($_GET['productid']));
+	$ProductBOMStatusTotalRows = mysqli_fetch_assoc(ProductBOMStatus_Select_Count_All_kitting($_GET['productid']));
 	echo " : No. of total Kitting - ".$ProductBOMStatusTotalRows['total'];
 	?>
 	</h3>			
@@ -52,9 +52,9 @@
 						$ProductBOMStatusRows = ProductBOMStatus_Select_ByLimit($_GET['productid']);
 						$Ids = explode(',', $_GET['Ids']);
 						echo $vendorleadtime;
-						while($ProductBOMStatus = mysql_fetch_array($ProductBOMStatusRows))
+						while($ProductBOMStatus = mysqli_fetch_array($ProductBOMStatusRows))
 						{
-							$Vendor = mysql_fetch_array(Vendor_Select_Names($Ids[$i-1])); 
+							$Vendor = mysqli_fetch_array(Vendor_Select_Names($Ids[$i-1])); 
 							echo "<tr style='valign:middle;'>
 								<td align='center'>".$i++."</td>
 								<td align='center'>".$ProductBOMStatus['productcode']."</td>

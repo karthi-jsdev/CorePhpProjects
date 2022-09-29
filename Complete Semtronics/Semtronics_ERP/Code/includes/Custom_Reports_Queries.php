@@ -1,19 +1,19 @@
 <?php
 	function Select_Vendors()
 	{
-		return mysql_query("SELECT vendor.*, creditperiod.period FROM vendor
+		return mysqli_query($_SESSION['connection'],"SELECT vendor.*, creditperiod.period FROM vendor
 		JOIN creditperiod on creditperiod.id=vendor.creditperiodid
 		WHERE ".str_replace("=''", "!=''", "vendor.id='".$_GET['vendor_category_id']."'")."
 		ORDER BY vendor.id DESC");
 	}
 	function Select_VendorCategory_ById($CategoryId)
 	{
-		return mysql_query("SELECT * FROM vendorcategory where id='".$CategoryId."'");
+		return mysqli_query($_SESSION['connection'],"SELECT * FROM vendorcategory where id='".$CategoryId."'");
 	}
 	
 	function Select_Invoices()
 	{
-		return mysql_query("SELECT stockinventory.locationid,minquantity, invoice.vendorid, vendor.name,invoice.id, invoice.number,sum(taxamount),sum(amount),invoice.invoicedate
+		return mysqli_query($_SESSION['connection'],"SELECT stockinventory.locationid,minquantity, invoice.vendorid, vendor.name,invoice.id, invoice.number,sum(taxamount),sum(amount),invoice.invoicedate
 		FROM stockinventory
 		JOIN invoice ON invoice.id = stockinventory.invoiceid
 		JOIN vendor ON vendor.id = invoice.vendorid
@@ -26,7 +26,7 @@
 	
 	function Select_Stock_Status_By_Limit()
 	{
-		return mysql_query("SELECT rawmaterial.id,rawmaterial.minquantity, stock.unitprice,category.name, sum(stock.amount) AS amount, sum(stock.quantity) AS quantity, rawmaterial.materialcode, rawmaterial.description, rawmaterial.partnumber
+		return mysqli_query($_SESSION['connection'],"SELECT rawmaterial.id,rawmaterial.minquantity, stock.unitprice,category.name, sum(stock.amount) AS amount, sum(stock.quantity) AS quantity, rawmaterial.materialcode, rawmaterial.description, rawmaterial.partnumber
 		FROM category
 		INNER JOIN rawmaterial ON categoryid = category.id
 		INNER JOIN batch ON rawmaterial.id = batch.rawmaterialid
@@ -37,7 +37,7 @@
 	
 	function Select_Stock_Status()
 	{
-		return mysql_query("SELECT rawmaterial.id,rawmaterial.minquantity, stock.unitprice,category.name, sum(stock.amount) AS amount, sum(stock.quantity) AS quantity, rawmaterial.materialcode, rawmaterial.description, rawmaterial.partnumber
+		return mysqli_query($_SESSION['connection'],"SELECT rawmaterial.id,rawmaterial.minquantity, stock.unitprice,category.name, sum(stock.amount) AS amount, sum(stock.quantity) AS quantity, rawmaterial.materialcode, rawmaterial.description, rawmaterial.partnumber
 		FROM category
 		INNER JOIN rawmaterial ON categoryid = category.id
 		INNER JOIN batch ON rawmaterial.id = batch.rawmaterialid
@@ -48,19 +48,19 @@
 	
 	function Select_Stock_Status_Inspection1($Stock_quantity)
 	{
-		//$Stock_quantity = mysql_fetch_assoc(Select_Stock_Status());
-		return mysql_fetch_assoc(mysql_query("select sum(quantity) as quantity,sum(amount) as amount from rawmaterial inner join batch on rawmaterial.id=rawmaterialid inner join stockinventory on batchid=batch.id where rawmaterial.id='".$Stock_quantity['id']."' && (stockinventory.inspection='0') group by rawmaterialid"));	
+		//$Stock_quantity = mysqli_fetch_assoc(Select_Stock_Status());
+		return mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select sum(quantity) as quantity,sum(amount) as amount from rawmaterial inner join batch on rawmaterial.id=rawmaterialid inner join stockinventory on batchid=batch.id where rawmaterial.id='".$Stock_quantity['id']."' && (stockinventory.inspection='0') group by rawmaterialid"));	
 	}
 	
 	function Select_Stock_Status_Inspection($Stock_quantity)
 	{
-		return mysql_fetch_assoc(mysql_query("select sum(quantity) as quantity,sum(amount) as amount from rawmaterial inner join batch on rawmaterial.id=rawmaterialid inner join stockinventory on batchid=batch.id where rawmaterial.id='".$Stock_quantity['id']."' && (stockinventory.inspection='2' || stockinventory.inspection='3') group by rawmaterialid"));	
+		return mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select sum(quantity) as quantity,sum(amount) as amount from rawmaterial inner join batch on rawmaterial.id=rawmaterialid inner join stockinventory on batchid=batch.id where rawmaterial.id='".$Stock_quantity['id']."' && (stockinventory.inspection='2' || stockinventory.inspection='3') group by rawmaterialid"));	
 	}
 
 	function Select_Stock_Location()
 	{
-		$Stock_quantity = mysql_fetch_assoc(Select_Stock_Status());
-		return mysql_fetch_assoc(mysql_query("SELECT location.name as locationname FROM category
+		$Stock_quantity = mysqli_fetch_assoc(Select_Stock_Status());
+		return mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT location.name as locationname FROM category
 		INNER JOIN rawmaterial ON categoryid = category.id
 		INNER JOIN batch ON rawmaterial.id = batch.rawmaterialid
 		INNER JOIN stockinventory ON stockinventory.batchid = batch.id
@@ -71,7 +71,7 @@
 	
 	function Select_Inspections()
 	{
-		return mysql_query("SELECT rawmaterial.materialcode, batch.id, stockinventory.inspection, stockinventory.status, stockinventory.inspectionquantity, stockinventory.inspectedby, stockinventory.datetime, stockinventory.id AS id, invoice.vendorid, vendor.name, invoice.number, sum(unitprice) , sum(amount) , sum(quantity) , invoice.invoicedate
+		return mysqli_query($_SESSION['connection'],"SELECT rawmaterial.materialcode, batch.id, stockinventory.inspection, stockinventory.status, stockinventory.inspectionquantity, stockinventory.inspectedby, stockinventory.datetime, stockinventory.id AS id, invoice.vendorid, vendor.name, invoice.number, sum(unitprice) , sum(amount) , sum(quantity) , invoice.invoicedate
 		FROM stockinventory
 		JOIN invoice ON invoice.id = stockinventory.invoiceid
 		JOIN vendor ON vendor.id = invoice.vendorid
@@ -83,7 +83,7 @@
 	
 	function Select_Issuances()
 	{
-		return mysql_query("SELECT *, COUNT(newtable.number) as total FROM
+		return mysqli_query($_SESSION['connection'],"SELECT *, COUNT(newtable.number) as total FROM
 		(SELECT issuance.issuancedate,issuance.number,issuance.id,stockissuance.issuedto,issuance.issueddate, issuanceuser.issuanceuser
 		FROM stockissuance
 		JOIN batch ON batch.id = stockissuance.batchid
@@ -95,7 +95,7 @@
 	
 	function Select_Product()
 	{
-		return mysql_query("SELECT * FROM product 
+		return mysqli_query($_SESSION['connection'],"SELECT * FROM product 
 		JOIN products on products.id=product.productcode 
 		WHERE ".str_replace("=''", "!=''", "product.productcode='".$_GET['productcode']."'")."
 		ORDER BY product.id DESC");

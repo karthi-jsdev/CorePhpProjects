@@ -20,9 +20,9 @@ $i=1;
 	</thead>
 <?php date_default_timezone_set('Asia/Kolkata');
 	$summary = Stock_InspectionSummary();
-	while($stock_summary = mysql_fetch_assoc($summary))
+	while($stock_summary = mysqli_fetch_assoc($summary))
 	{
-		$FetchName = mysql_fetch_array(mysql_query("Select * from user where id='".$stock_summary['inspectedby']."'"));
+		$FetchName = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * from user where id='".$stock_summary['inspectedby']."'"));
 		echo'<tbody>
 			<tr>
 				<td  style="vertical-align:top">'.$i++.'</td>

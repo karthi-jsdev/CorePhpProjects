@@ -3,17 +3,17 @@
 	$Columns = array("id", "news","enable");
 	if($_GET['index'])
 	{
-		$Fetch = mysql_fetch_array(mysql_query("select * from news where id='".$_GET['id']."'"));
+		$Fetch = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select * from news where id='".$_GET['id']."'"));
 		$_POST['news'] = explode('`',$Fetch['news']);
 		$Abc = array();
 		for($i=0;$i<count($_POST['news']);$i++)
 			if($i!=$_GET['index'])
 				$Abc[$i] = $_POST['news'][$i];
-		mysql_query("update news set news='".implode($Abc,'`')."'  where id='".$_GET['id']."'");
+		mysqli_query($_SESSION['connection'],"update news set news='".implode($Abc,'`')."'  where id='".$_GET['id']."'");
 	}
 	if($_GET['action'] == 'Edit')
 	{
-		$Credit = mysql_fetch_assoc(News_Select_ById());
+		$Credit = mysqli_fetch_assoc(News_Select_ById());
 		foreach($Columns as $Col)
 			$_POST[$Col] = $Credit[$Col];
 		if($_POST['news'])
@@ -28,7 +28,7 @@
 	if(isset($_POST['Submit']) || isset($_POST['Update']))
 	{
 			if($_POST['enable'])
-				mysql_query("update news set enable='0'");
+				mysqli_query($_SESSION['connection'],"update news set enable='0'");
 			//$NewsResource = News_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
@@ -37,10 +37,10 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				/*$News = mysql_fetch_assoc($NewsResource);
-				if(mysql_num_rows(News_Select_ByNamePWDId()))
+				/*$News = mysqli_fetch_assoc($NewsResource);
+				if(mysqli_num_rows(News_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Opportunity Status already exists</div>";
-				else if(mysql_num_rows(News_Select_Bysortorder()))
+				else if(mysqli_num_rows(News_Select_Bysortorder()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Opportunity Status Sort Order already exists</div>";
 				else
 				{*/
@@ -97,7 +97,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$NewsTotalRows = mysql_fetch_assoc(News_Select_Count_All());
+				$NewsTotalRows = mysqli_fetch_assoc(News_Select_Count_All());
 				echo "Total No. of News - ".$NewsTotalRows['total'];
 				?>
 			</h3>
@@ -124,7 +124,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$News_StatusRows = News_Select_ByLimit($Start, $Limit);
-					while($News = mysql_fetch_assoc($News_StatusRows))
+					while($News = mysqli_fetch_assoc($News_StatusRows))
 					{
 						$News['news'] = explode('`',$News['news']);
 						echo "<tr style='valign:middle;'>

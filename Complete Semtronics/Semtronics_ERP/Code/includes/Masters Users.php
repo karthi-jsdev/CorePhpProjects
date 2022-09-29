@@ -3,7 +3,7 @@
 		$Columns = array("id", "name", "password", "firstname", "lastname", "phone","status", "userrole_id","approver");
 		if($_GET['action'] == 'Edit')
 		{
-			$User = mysql_fetch_assoc(User_Select_ById());
+			$User = mysqli_fetch_assoc(User_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $User[$Col];
 		}
@@ -19,7 +19,7 @@
 			if(isset($_POST['Submit']))
 			{
 				//$status = implode('.',$_POST['status']);
-				if(mysql_num_rows($UserResource))
+				if(mysqli_num_rows($UserResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This User already exists</div>";
 				else
 				{
@@ -29,8 +29,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$User = mysql_fetch_assoc($UserResource);
-				if(mysql_num_rows(User_Select_ByNamePWDId()))
+				$User = mysqli_fetch_assoc($UserResource);
+				if(mysqli_num_rows(User_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This User already exists</div>";
 				else
 				{
@@ -74,9 +74,9 @@
 					<table>
 						<tr>
 				<?php
-					$s = mysql_query("SELECT * FROM dashboarded");
+					$s = mysqli_query($_SESSION['connection'],"SELECT * FROM dashboarded");
 					$i=0;$j=1;
-					while($ss = mysql_Fetch_Assoc($s))
+					while($ss = mysqli_fetch_assoc($s))
 					{
 						if($i%4==0)
 								echo'<tr>';	
@@ -103,7 +103,7 @@
 						<option value="" disabled>Select</option>
 						<?php
 						$Roles = UserRoles_Select_All();
-						while($Role = mysql_fetch_assoc($Roles))
+						while($Role = mysqli_fetch_assoc($Roles))
 						{
 							if($Role['id'] == $_POST['userrole_id'])
 								echo "<option value=".$Role['id']." selected>".$Role['role']."</option>";
@@ -127,7 +127,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$UserTotalRows = mysql_fetch_assoc(User_Select_Count_All());
+				$UserTotalRows = mysqli_fetch_assoc(User_Select_Count_All());
 				echo "Total No. of Users - ".$UserTotalRows['total'];
 				?>
 			</h3>
@@ -157,9 +157,9 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$UserRows = User_Select_ByLimit($Start, $Limit);
-					while($User = mysql_fetch_assoc($UserRows))
+					while($User = mysqli_fetch_assoc($UserRows))
 					{
-						$Role = mysql_fetch_assoc(UserRole_Select_ById($User['userrole_id']));
+						$Role = mysqli_fetch_assoc(UserRole_Select_ById($User['userrole_id']));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
 							<td>".$User['firstname']."</td>

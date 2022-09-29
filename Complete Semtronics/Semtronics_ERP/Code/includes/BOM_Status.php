@@ -8,13 +8,13 @@
 			<fieldset>
 				<div class="clearfix">
 					<?php
-						$productcode = mysql_query("SELECT * FROM products");
+						$productcode = mysqli_query($_SESSION['connection'],"SELECT * FROM products");
 					?>
 					<label>Product Code <font color="red">*</font>
 						<select id="productcode" name="productcode">
 							<option value="select">Select</option>
 							<?php
-								while($productcodes = mysql_fetch_array($productcode))
+								while($productcodes = mysqli_fetch_array($productcode))
 								{
 									if($_GET['productcode'] == $productcodes['id'] || $_POST['productcode'] == $productcodes['id'])
 										echo '<option value="'.$productcodes['id'].'" selected>'.$productcodes['productcode'].'</option>';
@@ -38,7 +38,7 @@
 	{ ?>
 		<h3>
 			<?php
-			$ProductBOMStatusTotalRows = mysql_fetch_array(ProductBOMStatus_Select_Count_All());
+			$ProductBOMStatusTotalRows = mysqli_fetch_array(ProductBOMStatus_Select_Count_All());
 			if(!$ProductBOMStatusTotalRows['total'])
 				$ProductBOMStatusTotalRows['total'] = 0;
 			?>
@@ -75,7 +75,7 @@
 				$i++;
 				$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 				$ProductBOMStatusRows = ProductBOMStatus($Start, $Limit);
-				while($ProductBOMStatus = mysql_fetch_array($ProductBOMStatusRows))
+				while($ProductBOMStatus = mysqli_fetch_array($ProductBOMStatusRows))
 				{
 					echo "<tr style='valign:middle;'>
 						<td align='center'>".$i++."</td>
@@ -102,7 +102,7 @@
 		<?php
 			$total = 0;
 			$ProductBOM_Value = ProductBOMStatus_Totalvalue();
-			while($ProductBOM_Values = mysql_fetch_assoc($ProductBOM_Value))
+			while($ProductBOM_Values = mysqli_fetch_assoc($ProductBOM_Value))
 			{
 				$total = $total + ($ProductBOM_Values['quantity'] * $ProductBOM_Values['unitprice']);
 			}

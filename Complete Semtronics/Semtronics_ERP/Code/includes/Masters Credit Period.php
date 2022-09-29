@@ -3,7 +3,7 @@
 		$Columns = array("id", "period");
 		if($_GET['action'] == 'Edit')
 		{
-			$Credit = mysql_fetch_assoc(Credit_Select_ById());
+			$Credit = mysqli_fetch_assoc(Credit_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Credit[$Col];
 		}
@@ -18,7 +18,7 @@
 				$CreditResource = Credit_Select_ByNamePWD();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($CreditResource))
+					if(mysqli_num_rows($CreditResource))
 						$message = "<br /><div class='message error'><b>Message</b> : Credit Period already exists</div>";
 					else
 					{
@@ -28,8 +28,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$Credit = mysql_fetch_assoc($CreditResource);
-					if(mysql_num_rows(Credit_Select_ByNamePWDId()))
+					$Credit = mysqli_fetch_assoc($CreditResource);
+					if(mysqli_num_rows(Credit_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Credit Period already exists</div>";
 					else
 					{
@@ -67,7 +67,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$CreditTotalRows = mysql_fetch_assoc(Credit_Select_Count_All());
+				$CreditTotalRows = mysqli_fetch_assoc(Credit_Select_Count_All());
 				echo "Total No. of Credit Period - ".$CreditTotalRows['total'];
 				?>
 			</h3>
@@ -93,7 +93,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$CreditRows = Credit_Select_ByLimit($Start, $Limit);
-					while($Credit = mysql_fetch_assoc($CreditRows))
+					while($Credit = mysqli_fetch_assoc($CreditRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

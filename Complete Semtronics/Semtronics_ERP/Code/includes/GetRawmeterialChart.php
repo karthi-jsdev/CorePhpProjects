@@ -3,9 +3,9 @@ include("Config.php");
  # The data for the bar chart
  $data1 = array(); 
  $labels = array(); 
- $SelectRawmeterials = mysql_query("select SUM(stock.quantity) as quantity,rawmaterial.materialcode as code from rawmaterial JOIN batch ON batch.rawmaterialid=rawmaterial.id JOIN stock ON stock.batchid=batch.id where categoryid='".$_GET['Category']."' group by rawmaterial.id");
+ $SelectRawmeterials = mysqli_query($_SESSION['connection'],"select SUM(stock.quantity) as quantity,rawmaterial.materialcode as code from rawmaterial JOIN batch ON batch.rawmaterialid=rawmaterial.id JOIN stock ON stock.batchid=batch.id where categoryid='".$_GET['Category']."' group by rawmaterial.id");
  $i =0;
- while($FetchRawmeterials = mysql_fetch_array($SelectRawmeterials))
+ while($FetchRawmeterials = mysqli_fetch_array($SelectRawmeterials))
  {
 	$labels[$i] = $FetchRawmeterials['code'];
 	$data1[$i] = $FetchRawmeterials['quantity'];

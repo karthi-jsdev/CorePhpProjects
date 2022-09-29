@@ -100,8 +100,8 @@
 		->setCellValue('K6', 'Lead Time')->getStyle('A6:K6')->applyFromArray($TableHeaderStyle);
 		$i=0;
 		$Vendors = Select_Vendors();
-		SetHeader($Sheet, "Vendor Report ", "Total Vendors : ".mysql_num_rows($Vendors));
-		while($VendorData = mysql_fetch_assoc($Vendors))
+		SetHeader($Sheet, "Vendor Report ", "Total Vendors : ".mysqli_num_rows($Vendors));
+		while($VendorData = mysqli_fetch_assoc($Vendors))
 		{
 			$VendorCategories = "";
 			$CreditIdExplode = explode('.',$VendorData['categoryid']);
@@ -109,7 +109,7 @@
 			foreach($CreditIdExplode as $CreditId)	
 			{
 				$k -= 1;
-				$FetchCreditId = mysql_fetch_array(Select_VendorCategory_ById($CreditId));
+				$FetchCreditId = mysqli_fetch_array(Select_VendorCategory_ById($CreditId));
 				$VendorCategories .= $FetchCreditId['name'];
 				if($k)
 					$VendorCategories .= $VendorCategories.',';
@@ -152,8 +152,8 @@
 
 		$i=0;
 		$Invoices = Select_Invoices();
-		SetHeader($Sheet, "Invoice Report ".date("d-M-Y", strtotime($_GET['startdate']))." : ".date("d-M-Y", strtotime($_GET['enddate'])), "Total Invoices : ".mysql_num_rows($Invoices));
-		while($InvoiceData = mysql_fetch_assoc($Invoices))
+		SetHeader($Sheet, "Invoice Report ".date("d-M-Y", strtotime($_GET['startdate']))." : ".date("d-M-Y", strtotime($_GET['enddate'])), "Total Invoices : ".mysqli_num_rows($Invoices));
+		while($InvoiceData = mysqli_fetch_assoc($Invoices))
 		{
 			$objPHPExcel->setActiveSheetIndex($Sheet)
 			->setCellValue('A'.(6+(++$i)), $i)
@@ -194,12 +194,12 @@
 		$i=0;
 		$AllStock_Status = Select_Stock_Status_By_Limit();
 		$Stock_location = Select_Stock_Location();
-		$Stock_quantity = mysql_fetch_assoc($AllStock_Status);
+		$Stock_quantity = mysqli_fetch_assoc($AllStock_Status);
 		$inspection1 = Select_Stock_Status_Inspection1($Stock_quantity);
 		$inspection = Select_Stock_Status_Inspection($Stock_quantity);
 		$AllStock_Status = Select_Stock_Status();
-		SetHeader($Sheet, "Stock Status Report ", "Total Number of Stocks : ".mysql_num_rows($AllStock_Status));
-		while($Stock_Status = mysql_fetch_assoc($AllStock_Status))
+		SetHeader($Sheet, "Stock Status Report ", "Total Number of Stocks : ".mysqli_num_rows($AllStock_Status));
+		while($Stock_Status = mysqli_fetch_assoc($AllStock_Status))
 		{
 			$objPHPExcel->setActiveSheetIndex($Sheet)
 			->setCellValue('A'.(6+(++$i)), $i)
@@ -237,8 +237,8 @@
 		->setCellValue('E6', 'Quantity')->getStyle('A6:E6')->applyFromArray($TableHeaderStyle);
 		$i=0;
 		$Inspections = Select_Inspections();
-		SetHeader($Sheet, "Inspection Report ", "Total Inspections : ".mysql_num_rows($Inspections));
-		while($InspectionData = mysql_fetch_assoc($Inspections))
+		SetHeader($Sheet, "Inspection Report ", "Total Inspections : ".mysqli_num_rows($Inspections));
+		while($InspectionData = mysqli_fetch_assoc($Inspections))
 		{
 			$objPHPExcel->setActiveSheetIndex($Sheet)
 			->setCellValue('A'.(6+(++$i)), $i)
@@ -273,8 +273,8 @@
 		->setCellValue('F6', 'Issuance Date')->getStyle('A6:F6')->applyFromArray($TableHeaderStyle);
 		$i=0;
 		$Issuances = Select_Issuances();
-		SetHeader($Sheet, "Issuance Report ".$Sdate." : ".$Edate, "Total Issuances : ".mysql_num_rows($Issuances));
-		while($IssuanceData = mysql_fetch_assoc($Issuances))
+		SetHeader($Sheet, "Issuance Report ".$Sdate." : ".$Edate, "Total Issuances : ".mysqli_num_rows($Issuances));
+		while($IssuanceData = mysqli_fetch_assoc($Issuances))
 		{
 			$objPHPExcel->setActiveSheetIndex($Sheet)
 			->setCellValue('A'.(6+(++$i)), $i)
@@ -320,8 +320,8 @@
 		->setCellValue('P6', 'Remarks')->getStyle('A6:P6')->applyFromArray($TableHeaderStyle);
 		$i=0;
 		$Product = Select_Product();
-		SetHeader($Sheet, "Product Report ", "Total No of Products : ".mysql_num_rows($Product));
-		while($ProductData = mysql_fetch_assoc($Product))
+		SetHeader($Sheet, "Product Report ", "Total No of Products : ".mysqli_num_rows($Product));
+		while($ProductData = mysqli_fetch_assoc($Product))
 		{
 			$objPHPExcel->setActiveSheetIndex($Sheet)
 			->setCellValue('A'.(6+(++$i)), $i)

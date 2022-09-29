@@ -9,7 +9,7 @@
 		}
 		if($_GET['action']=='Edit' && $_GET['id'])
 		{
-			$issuanceuser = mysql_fetch_Assoc(Selectissuanceuserid());
+			$issuanceuser = mysqli_fetch_assoc(Selectissuanceuserid());
 			$_POST['issuanceuser'] = $issuanceuser['issuanceuser'];
 		}
 		if($_POST['update'])
@@ -53,7 +53,7 @@
 	<?php
 		$i=1;
 		$users = Selectissuanceuser();
-		while($issuanceusers = mysql_fetch_Assoc($users))
+		while($issuanceusers = mysqli_fetch_assoc($users))
 		{
 			echo '<tr>
 					<td align="center">'.$i++.'</td>

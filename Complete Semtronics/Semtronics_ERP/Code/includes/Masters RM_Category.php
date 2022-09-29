@@ -3,7 +3,7 @@
 		$Columns = array("id", "name", "prefix");
 		if($_GET['action'] == 'Edit')
 		{
-			$Category = mysql_fetch_assoc(Category_Select_ById());
+			$Category = mysqli_fetch_assoc(Category_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Category[$Col];
 		}
@@ -17,9 +17,9 @@
 		{
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows(Category_Select_ByName()))
+				if(mysqli_num_rows(Category_Select_ByName()))
 					$message = "<br /><div class='message error'><b>Message</b> : This product category name already exists</div>";
-				else if(mysql_num_rows(Category_Select_ByPrefix()))
+				else if(mysqli_num_rows(Category_Select_ByPrefix()))
 					$message = "<br /><div class='message error'><b>Message</b> : This product category prefix already exists</div>";
 				else
 				{
@@ -29,9 +29,9 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				if(mysql_num_rows(Category_Select_ByNameUpdate()))
+				if(mysqli_num_rows(Category_Select_ByNameUpdate()))
 					$message = "<br /><div class='message error'><b>Message</b> : This product category name already exists</div>";
-				else if(mysql_num_rows(Category_Select_ByPrefixUpdate()))
+				else if(mysqli_num_rows(Category_Select_ByPrefixUpdate()))
 					$message = "<br /><div class='message error'><b>Message</b> : This product category prefix already exists</div>";
 				else
 				{
@@ -73,7 +73,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$CategoryTotalRows = mysql_fetch_assoc(Category_Select_Count_All());
+				$CategoryTotalRows = mysqli_fetch_assoc(Category_Select_Count_All());
 				echo "Total No. of RM-Category - ".$CategoryTotalRows['total'];
 				?>
 			</h3>
@@ -100,7 +100,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$CategoryRows = Category_Select_ByLimit($Start, $Limit);
-					while($Category = mysql_fetch_assoc($CategoryRows))
+					while($Category = mysqli_fetch_assoc($CategoryRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

@@ -3,7 +3,7 @@
 		$Columns = array("id","category_id", "name", "prefix");
 		if($_GET['action'] == 'Edit')
 		{
-			$Category = mysql_fetch_assoc(ProductCategory_Select_ById());
+			$Category = mysqli_fetch_assoc(ProductCategory_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Category[$Col];
 		}
@@ -17,9 +17,9 @@
 		{
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows(ProductCategory_Select_ByName()))
+				if(mysqli_num_rows(ProductCategory_Select_ByName()))
 					$message = "<br /><div class='message error'><b>Message</b> : This category name already exists</div>";
-				else if(mysql_num_rows(ProductCategory_Select_ByPrefix()))
+				else if(mysqli_num_rows(ProductCategory_Select_ByPrefix()))
 					$message = "<br /><div class='message error'><b>Message</b> : This category prefix already exists</div>";
 				else
 				{
@@ -29,9 +29,9 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				if(mysql_num_rows(ProductCategory_Select_ByNameUpdate()))
+				if(mysqli_num_rows(ProductCategory_Select_ByNameUpdate()))
 					$message = "<br /><div class='message error'><b>Message</b> : This category name already exists</div>";
-				else if(mysql_num_rows(ProductCategory_Select_ByPrefixUpdate()))
+				else if(mysqli_num_rows(ProductCategory_Select_ByPrefixUpdate()))
 					$message = "<br /><div class='message error'><b>Message</b> : This category prefix already exists</div>";
 				else
 				{
@@ -56,7 +56,7 @@
 						<option value="">Select</option>
 						<?php
 						$Products = Products_Select_All();
-						while($Product = mysql_fetch_assoc($Products))
+						while($Product = mysqli_fetch_assoc($Products))
 						{
 							if($Product['id'] == $_POST['category_id'])
 								echo "<option value=".$Product['id']." selected>".$Product['name']."</option>";
@@ -88,7 +88,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$ProductCategoryTotalRows = mysql_fetch_assoc(ProductCategory_Select_Count_All());
+				$ProductCategoryTotalRows = mysqli_fetch_assoc(ProductCategory_Select_Count_All());
 				echo "Total No. of Product Category - ".$ProductCategoryTotalRows['total'];
 				?>
 			</h3>
@@ -116,9 +116,9 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$ProductCategoryRows = ProductCategory_Select_ByLimit($Start, $Limit);
-					while($ProductCategory = mysql_fetch_assoc($ProductCategoryRows))
+					while($ProductCategory = mysqli_fetch_assoc($ProductCategoryRows))
 					{
-						$ProductsubCategory = mysql_fetch_assoc(ProductSubCategory($ProductCategory['category_id']));
+						$ProductsubCategory = mysqli_fetch_assoc(ProductSubCategory($ProductCategory['category_id']));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
 							<td>".$ProductsubCategory['name']."</td>

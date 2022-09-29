@@ -1,7 +1,7 @@
 <div class="columns">
 	<h3>
 		<?php
-		$LeadTotalRows = mysql_fetch_assoc(Lead_Select_Count_All());
+		$LeadTotalRows = mysqli_fetch_assoc(Lead_Select_Count_All());
 		echo '<div>'."Total No. of Leads - ".$LeadTotalRows['total'];
 		echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="Search" id="Search" name="Search"><a href="#" onclick="Search()"><img src="images/search.png" title="Search"></a><br/>';
@@ -38,7 +38,7 @@
 </div>
 <?php 
 
-$LeadfollowupTotalRows = mysql_num_rows(Lead_followupSelect_Count_All());
+$LeadfollowupTotalRows = mysqli_num_rows(Lead_followupSelect_Count_All());
 if($LeadfollowupTotalRows)
 {
 ?>
@@ -91,7 +91,7 @@ else
 	}
 	Ajax_Pagination("AllLeadSummary", 1);
 	<?php 
-	$LeadfollowupTotalRows = mysql_num_rows(Lead_followupSelect_Count_All());
+	$LeadfollowupTotalRows = mysqli_num_rows(Lead_followupSelect_Count_All());
 	if($LeadfollowupTotalRows)
 	{
 	?>

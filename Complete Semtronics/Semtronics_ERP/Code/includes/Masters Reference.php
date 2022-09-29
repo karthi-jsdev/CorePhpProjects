@@ -3,7 +3,7 @@
 		$Columns = array("id", "reference","mobile","address");
 		if($_GET['action'] == 'Edit')
 		{
-			$Credit = mysql_fetch_assoc(Reference_Select_ById());
+			$Credit = mysqli_fetch_assoc(Reference_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Credit[$Col];
 		}
@@ -22,7 +22,7 @@
 				*/
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($ReferenceResource))
+					if(mysqli_num_rows($ReferenceResource))
 						$message = "<br /><div class='message error'><b>Message</b> : Reference already exists</div>";
 					else
 					{
@@ -32,8 +32,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$Reference = mysql_fetch_assoc($ReferenceResource);
-					if(mysql_num_rows(Reference_Select_ByNamePWDId()))
+					$Reference = mysqli_fetch_assoc($ReferenceResource);
+					if(mysqli_num_rows(Reference_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Reference already exists</div>";
 					else
 					{
@@ -79,7 +79,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$ReferenceTotalRows = mysql_fetch_assoc(Reference_Count_All());
+				$ReferenceTotalRows = mysqli_fetch_assoc(Reference_Count_All());
 				echo "Total No. of Reference - ".$ReferenceTotalRows['total'];
 				?>
 			</h3>
@@ -107,7 +107,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$ReferenceRows = Reference_Select_ByLimit($Start, $Limit);
-					while($Reference = mysql_fetch_assoc($ReferenceRows))
+					while($Reference = mysqli_fetch_assoc($ReferenceRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

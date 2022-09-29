@@ -1,7 +1,7 @@
 <?php
 if($_GET['id'])
 {
-	$kittingvalues = mysql_fetch_assoc(mysql_query("SELECT 	issuance.id as iid,issuance.number as ino,issuance.issueddate as date,
+	$kittingvalues = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT 	issuance.id as iid,issuance.number as ino,issuance.issueddate as date,
 															issuanceuser.id as isuid,issuanceuser.issuanceuser as isuisu,
 															materialcode,rawmaterial.id as rawid,
 															stockissuance.id as sid,stockissuance.batchid as sib,stockissuance.quantity as siqty,stockissuance.amount as siamt,
@@ -50,7 +50,7 @@ if($_GET['id'])
 					<option value="">Select</option>
 					<?php
 					$Users = Select_All_Users();
-					while($User = mysql_fetch_assoc($Users))
+					while($User = mysqli_fetch_assoc($Users))
 					{
 						if($User['id'] == $_POST['issuedto'] || $kittingvalues['isuid']==$User['id'])
 							echo "<option value='".$User['id']."$".$User['issuanceuser']."' selected>".$User['issuanceuser']."</option>";
@@ -64,14 +64,14 @@ if($_GET['id'])
 			</div>
 			<div class="clearfix">
 				<?php 
-					$drivertype = mysql_query("SELECT * FROM drivertype");
-					$drivertypes = mysql_fetch_assoc(mysql_query("SELECT * FROM drivertype WHERE indexvalue='".$_POST['drivertype']."'"));
+					$drivertype = mysqli_query($_SESSION['connection'],"SELECT * FROM drivertype");
+					$drivertypes = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM drivertype WHERE indexvalue='".$_POST['drivertype']."'"));
 				?>
 				<label>Driver Type
 					<select id="drivertype" name="drivertype" onchange="dsiwcranges()">
 						<option value="select">Select</option>
 						<?php
-							while($drivers = mysql_fetch_assoc($drivertype))
+							while($drivers = mysqli_fetch_assoc($drivertype))
 							{
 								if($_GET['id'] && ($_POST['drivertype'] == $drivers['indexvalue']))
 									echo'<option value="'.$drivers['indexvalue'].'" selected>'.$drivers['drivertype'].'</option>';
@@ -85,8 +85,8 @@ if($_GET['id'])
 					<select id="structure" name="structure" onchange="dsiwcranges()">
 						<option value="select">Select</option>
 						<?php
-							$structure = mysql_query("SELECT * FROM structure");
-							while($structures = mysql_fetch_assoc($structure))
+							$structure = mysqli_query($_SESSION['connection'],"SELECT * FROM structure");
+							while($structures = mysqli_fetch_assoc($structure))
 							{
 								if($_GET['id'] && ($_POST['structure'] == $structures['indexvalue']))
 									echo'<option value="'.$structures['indexvalue'].'" selected>'.$structures['structure'].'</option>';
@@ -100,8 +100,8 @@ if($_GET['id'])
 					<select id="ic" name="ic" onchange="dsiwcranges()">
 						<option value="select">Select</option>
 						<?php
-							$ic = mysql_query("SELECT * FROM ic");
-							while($ics = mysql_fetch_assoc($ic))
+							$ic = mysqli_query($_SESSION['connection'],"SELECT * FROM ic");
+							while($ics = mysqli_fetch_assoc($ic))
 							{
 								if($_GET['id'] && ($_POST['ic'] == $ics['indexvalue']))
 									echo'<option value="'.$ics['indexvalue'].'" selected>'.$ics['ic'].'</option>';
@@ -115,8 +115,8 @@ if($_GET['id'])
 					<select id="wattagerange" name="wattagerange" onchange="dsiwcranges()">
 						<option value="select">Select</option>
 						<?php
-							$wattagerange =  mysql_query("SELECT * FROM wattagerange");
-							while($wattage = mysql_fetch_assoc($wattagerange))
+							$wattagerange =  mysqli_query($_SESSION['connection'],"SELECT * FROM wattagerange");
+							while($wattage = mysqli_fetch_assoc($wattagerange))
 							{
 								if($_GET['id'] && ($_POST['wattagerange'] == $wattage['indexvalue']))
 									echo'<option value="'.$wattage['indexvalue'].'" selected>'.$wattage['wattagerange'].'</option>';
@@ -132,8 +132,8 @@ if($_GET['id'])
 					<select id="currentrange" name="currentrange" onchange="dsiwcranges()">
 						<option value="select">Select</option>
 						<?php
-							$currentrange = mysql_query("SELECT * FROM currentrange");
-							while($current = mysql_fetch_assoc($currentrange))
+							$currentrange = mysqli_query($_SESSION['connection'],"SELECT * FROM currentrange");
+							while($current = mysqli_fetch_assoc($currentrange))
 							{
 								if($_GET['id'] && ($_POST['currentrange'] == $current['indexvalue']))
 									echo'<option value="'.$current['indexvalue'].'" selected>'.$current['currentrange'].'</option>';
@@ -144,11 +144,11 @@ if($_GET['id'])
 					</select>
 				</label>
 			<label>Product Code<font color="red">*</font>
-				<?php $product = mysql_query("SELECT * FROM products"); ?>
+				<?php $product = mysqli_query($_SESSION['connection'],"SELECT * FROM products"); ?>
 				<select name="productid" id="productid">
 					<option value="">Select</option>
 					<?php
-						while($product_value = mysql_fetch_assoc($product))
+						while($product_value = mysqli_fetch_assoc($product))
 						{
 							if($_GET['productid']==$product_value['id'])
 								echo '<option value="'.$product_value['id'].'" selected>'.$product_value['productcode'].'</option>';
@@ -175,7 +175,7 @@ if($_GET['id'])
 			<th>Issuance Quantity</th>
 		</tr>
 	<?php
-		$rawmateriallist= mysql_query("SELECT distinct(materialcode),rawmaterial.id,productbom.quantity as qty,productbom.productcode,sum(stockinventory.quantity) as quantity
+		$rawmateriallist= mysqli_query($_SESSION['connection'],"SELECT distinct(materialcode),rawmaterial.id,productbom.quantity as qty,productbom.productcode,sum(stockinventory.quantity) as quantity
 										FROM rawmaterial 
 										join batch on batch.rawmaterialid=rawmaterial.id 
 										join stockinventory on stockinventory.batchid=batch.id
@@ -184,16 +184,16 @@ if($_GET['id'])
 										where productbom.productcode='".$_GET['productid']."' && rawmaterial.id='".$_GET['rid']."'&& stockinventory.inspection='1' group by rawmaterial.id ");
 		$batchid =array();
 		$batchnumber =array();
-		while($rmwithqty = mysql_fetch_Assoc($rawmateriallist))
+		while($rmwithqty = mysqli_fetch_assoc($rawmateriallist))
 		{
-			$batchvalues = mysql_query("SELECT distinct(batch.id),batch.number
+			$batchvalues = mysqli_query($_SESSION['connection'],"SELECT distinct(batch.id),batch.number
 							FROM rawmaterial 
 							join batch on batch.rawmaterialid=rawmaterial.id 
 							join stockinventory on stockinventory.batchid=batch.id
 							join productbom on productbom.rawmaterialid=rawmaterial.id
 							join products on products.id=productbom.productcode 
 							where productbom.productcode='".$_GET['productid']."' && stockinventory.inspection='1' && rawmaterial.id='".$_GET['rid']."'");
-			while($batchvalue = mysql_fetch_Assoc($batchvalues))
+			while($batchvalue = mysqli_fetch_assoc($batchvalues))
 			{
 				$batchid[] = $batchvalue['id'];
 				$batchnumber[] = $batchvalue['number'];
@@ -257,7 +257,7 @@ if($_GET['id'])
 			<div class="clearfix">
 				<label>&nbsp;&nbsp;Issuance Code <font color="red">*</font></label>
 				<?php
-					if($Exixsts = mysql_fetch_array(Select_Issuance_ByNumber()))
+					if($Exixsts = mysqli_fetch_array(Select_Issuance_ByNumber()))
 						$Exixsts['number']++;
 					else
 						$Exixsts['number'] = date("Ym")."0000001";
@@ -272,7 +272,7 @@ if($_GET['id'])
 					<option value="">Select</option>
 					<?php
 					$Users = Select_All_Users();
-					while($User = mysql_fetch_assoc($Users))
+					while($User = mysqli_fetch_assoc($Users))
 					{
 						if($User['id'] == $_POST['issuedto'])
 							echo "<option value='".$User['id']."$".$User['issuanceuser']."' selected>".$User['issuanceuser']."</option>";
@@ -286,14 +286,14 @@ if($_GET['id'])
 			</div>
 			<div class="clearfix">
 				<?php 
-					$drivertype = mysql_query("SELECT * FROM drivertype");
-					$drivertypes = mysql_fetch_assoc(mysql_query("SELECT * FROM drivertype WHERE indexvalue='".$_POST['drivertype']."'"));
+					$drivertype = mysqli_query($_SESSION['connection'],"SELECT * FROM drivertype");
+					$drivertypes = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM drivertype WHERE indexvalue='".$_POST['drivertype']."'"));
 				?>
 				<label>Driver Type
 					<select id="drivertype" name="drivertype" onchange="dsiwcranges()">
 						<option value="select">Select</option>
 						<?php
-							while($drivers = mysql_fetch_assoc($drivertype))
+							while($drivers = mysqli_fetch_assoc($drivertype))
 							{
 								
 								if($_GET['id'] && ($_POST['drivertype'] == $drivers['indexvalue']))
@@ -308,8 +308,8 @@ if($_GET['id'])
 					<select id="structure" name="structure" onchange="dsiwcranges()">
 						<option value="select">Select</option>
 						<?php
-							$structure = mysql_query("SELECT * FROM structure");
-							while($structures = mysql_fetch_assoc($structure))
+							$structure = mysqli_query($_SESSION['connection'],"SELECT * FROM structure");
+							while($structures = mysqli_fetch_assoc($structure))
 							{
 								if($_GET['id'] && ($_POST['structure'] == $structures['indexvalue']))
 									echo'<option value="'.$structures['indexvalue'].'" selected>'.$structures['structure'].'</option>';
@@ -323,8 +323,8 @@ if($_GET['id'])
 					<select id="ic" name="ic" onchange="dsiwcranges()">
 						<option value="select">Select</option>
 						<?php
-							$ic = mysql_query("SELECT * FROM ic");
-							while($ics = mysql_fetch_assoc($ic))
+							$ic = mysqli_query($_SESSION['connection'],"SELECT * FROM ic");
+							while($ics = mysqli_fetch_assoc($ic))
 							{
 								if($_GET['id'] && ($_POST['ic'] == $ics['indexvalue']))
 									echo'<option value="'.$ics['indexvalue'].'" selected>'.$ics['ic'].'</option>';
@@ -338,8 +338,8 @@ if($_GET['id'])
 					<select id="wattagerange" name="wattagerange" onchange="dsiwcranges()">
 						<option value="select">Select</option>
 						<?php
-							$wattagerange =  mysql_query("SELECT * FROM wattagerange");
-							while($wattage = mysql_fetch_assoc($wattagerange))
+							$wattagerange =  mysqli_query($_SESSION['connection'],"SELECT * FROM wattagerange");
+							while($wattage = mysqli_fetch_assoc($wattagerange))
 							{
 								if($_GET['id'] && ($_POST['wattagerange'] == $wattage['indexvalue']))
 									echo'<option value="'.$wattage['indexvalue'].'" selected>'.$wattage['wattagerange'].'</option>';
@@ -355,8 +355,8 @@ if($_GET['id'])
 					<select id="currentrange" name="currentrange" onchange="dsiwcranges()">
 						<option value="select">Select</option>
 						<?php
-							$currentrange = mysql_query("SELECT * FROM currentrange");
-							while($current = mysql_fetch_assoc($currentrange))
+							$currentrange = mysqli_query($_SESSION['connection'],"SELECT * FROM currentrange");
+							while($current = mysqli_fetch_assoc($currentrange))
 							{
 								if($_GET['id'] && ($_POST['currentrange'] == $current['indexvalue']))
 									echo'<option value="'.$current['indexvalue'].'" selected>'.$current['currentrange'].'</option>';
@@ -367,11 +367,11 @@ if($_GET['id'])
 					</select>
 				</label>
 			<label>Product Code<font color="red">*</font>
-				<?php $product = mysql_query("SELECT * FROM products"); ?>
+				<?php $product = mysqli_query($_SESSION['connection'],"SELECT * FROM products"); ?>
 				<select name="productid" id="productid">
 					<option value="">Select</option>
 					<?php
-						while($product_value = mysql_fetch_assoc($product))
+						while($product_value = mysqli_fetch_assoc($product))
 						{
 							if($_POST['productid']==$product_value['id'])
 								echo '<option value="'.$product_value['id'].'" selected>'.$product_value['productcode'].'</option>';
@@ -401,7 +401,7 @@ if($_GET['id'])
 					<th>Available Quantity</th>
 					<th>Issuance Quantity</th>
 				</tr>';
-			$rawmateriallist= mysql_query("SELECT distinct(materialcode),rawmaterial.id,productbom.quantity as qty,productbom.productcode,sum(stockinventory.quantity) as quantity
+			$rawmateriallist= mysqli_query($_SESSION['connection'],"SELECT distinct(materialcode),rawmaterial.id,productbom.quantity as qty,productbom.productcode,sum(stockinventory.quantity) as quantity
 											FROM rawmaterial 
 											join batch on batch.rawmaterialid=rawmaterial.id 
 											join stockinventory on stockinventory.batchid=batch.id
@@ -410,9 +410,9 @@ if($_GET['id'])
 											where productbom.productcode='".$_POST['productid']."' && stockinventory.inspection='1' group by rawmaterial.id ");
 			$batchid =array();
 			$batchnumber =array();
-			while($rmwithqty = mysql_fetch_Assoc($rawmateriallist))
+			while($rmwithqty = mysqli_fetch_assoc($rawmateriallist))
 			{
-				$batchvalues = mysql_query("SELECT distinct(batch.id),batch.number
+				$batchvalues = mysqli_query($_SESSION['connection'],"SELECT distinct(batch.id),batch.number
 								FROM rawmaterial 
 								join batch on batch.rawmaterialid=rawmaterial.id 
 								join stockinventory on stockinventory.batchid=batch.id
@@ -420,7 +420,7 @@ if($_GET['id'])
 								join productbom on productbom.rawmaterialid=rawmaterial.id
 								join products on products.id=productbom.productcode 
 								where productbom.productcode='".$_POST['productid']."' && stock.quantity>0 && stockinventory.inspection='1' && rawmaterial.id='".$rmwithqty['id']."'");
-				while($batchvalue = mysql_fetch_Assoc($batchvalues))
+				while($batchvalue = mysqli_fetch_assoc($batchvalues))
 				{
 					$batchid[] = $batchvalue['id'];
 					$batchnumber[] = $batchvalue['number'];
@@ -449,7 +449,7 @@ if($_GET['id'])
 		}
 		if($_POST['submit'])
 		{
-			if(mysql_num_rows($rawmateriallist)!=0)
+			if(mysqli_num_rows($rawmateriallist)!=0)
 			{
 			?>
 				<tr><td><a class="button button-green" onclick="window.location.assign('?page=Stores&subpage=spage->Issuance,ssubpage->Status&number='+document.getElementById('number').value)">Finish</a></td></tr>
@@ -501,9 +501,9 @@ if($_GET['id'])
 		{
 			<?php
 				$_POST['id'] = $_GET['id'];
-				$StockIssuance = mysql_fetch_array(mysql_query("SELECT * FROM stockissuance WHERE id='".$_POST['id']."'"));
-				mysql_query("UPDATE stock SET quantity=quantity+".$StockIssuance['quantity'].", amount=amount+".$StockIssuance['amount'].", taxamount=taxamount+".$StockIssuance['taxamount']." WHERE batchid='".$StockIssuance['batchid']."'");
-				mysql_query("DELETE FROM stockissuance WHERE id='".$_POST['id']."'");
+				$StockIssuance = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM stockissuance WHERE id='".$_POST['id']."'"));
+				mysqli_query($_SESSION['connection'],"UPDATE stock SET quantity=quantity+".$StockIssuance['quantity'].", amount=amount+".$StockIssuance['amount'].", taxamount=taxamount+".$StockIssuance['taxamount']." WHERE batchid='".$StockIssuance['batchid']."'");
+				mysqli_query($_SESSION['connection'],"DELETE FROM stockissuance WHERE id='".$_POST['id']."'");
 			?>
 		}
 		else

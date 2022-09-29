@@ -30,7 +30,7 @@
 	}
 	if($_GET['id'] && $_GET['action']=="edit")
 	{
-		$Opportunity_Edit = mysql_fetch_assoc(Opportunity_Item_Edit());
+		$Opportunity_Edit = mysqli_fetch_assoc(Opportunity_Item_Edit());
 		$_POST['id'] = $Opportunity_Edit['id']; $_POST['product_id'] = $Opportunity_Edit['pid'];
 		$_POST['product_category_id'] = $Opportunity_Edit['pcid']; $_POST['product_subcategory_id'] = $Opportunity_Edit['pscid'];
 		$_POST['lead_id'] = $Opportunity_Edit['lead_id']; $_POST['description'] = $Opportunity_Edit['opp_description'];
@@ -59,7 +59,7 @@
 				<div class="clearfix">
 					<label>
 					<?php 
-					$Work = mysql_fetch_assoc(Workid());
+					$Work = mysqli_fetch_assoc(Workid());
 					$Work_id = $Work['id'];
 					$Work_id = ++$Work_id; 
 					if(strlen($Work_id)==0)
@@ -86,7 +86,7 @@
 						<select name="lead_id" id="lead_id">
 							<option value="Select">Select</option>
 							<?php
-							while($lead_name = mysql_fetch_assoc($leadname))
+							while($lead_name = mysqli_fetch_assoc($leadname))
 							{
 								if($lead_name['id']==$_POST['lead_id'])
 									echo'<option value="'.$lead_name['id'].'" selected>'.$lead_name['name'].'</option>';
@@ -101,7 +101,7 @@
 						<select name="product_category_id" id="product_category_id" onchange="product_subcategory();">
 							<option value="Select">Select</option>
 							<?php
-							/* while($productcategory = mysql_fetch_assoc($product_category))
+							/* while($productcategory = mysqli_fetch_assoc($product_category))
 							{
 								if($_POST['product_category_id']==$productcategory['id'])
 									echo '<option value="'.$productcategory['id'].'" selected>'.$productcategory['name'].'</option>';
@@ -118,7 +118,7 @@
 							<?php 
 							/* if($_GET['id'])
 							{
-								while($product_subvalue = mysql_fetch_assoc($product_subcatvalue))
+								while($product_subvalue = mysqli_fetch_assoc($product_subcatvalue))
 								{
 									if($_POST['product_subcategory_id']==$product_subvalue['pscid'])
 										echo '<option value="'.$product_subvalue['pscid'].'" selected>'.$product_subvalue['name'].'</option>';
@@ -134,7 +134,7 @@
 						<select name="product_id" id="product_id">
 							<option value="Select">Select</option>
 							<?php
-							while($product_values = mysql_fetch_assoc($product_value))
+							while($product_values = mysqli_fetch_assoc($product_value))
 							{
 								if($_GET['id'] && $_POST['product_id']==$product_values['id'])
 									echo '<option value="'.$product_values['id'].'" selected>'.$product_values['productcode'].'</option>';
@@ -256,10 +256,10 @@
 		{
 			$_POST['contentSearch']=$_GET['contentSearch'];
 		}
-		$totaldata = mysql_fetch_assoc(Opportunity_Search_Count());
+		$totaldata = mysqli_fetch_assoc(Opportunity_Search_Count());
 	}
 	else
-		$totaldata = mysql_fetch_assoc(Opportunity_Item_List_Count());
+		$totaldata = mysqli_fetch_assoc(Opportunity_Item_List_Count());
 	$Limit = 5;
 	
 	if(!$totaldata['total'])
@@ -273,9 +273,9 @@
 	if($_POST['contentSearch']=="")
 	{
 		$opportunity_list = Opportunity_Item_List($Start,$Limit);
-		while($list = mysql_fetch_assoc($opportunity_list))
+		while($list = mysqli_fetch_assoc($opportunity_list))
 		{
-			//$Work_display = mysql_fetch_assoc(Workid());
+			//$Work_display = mysqli_fetch_assoc(Workid());
 			$Work_d = $list['id'];
 			if(strlen($Work_d)==1)
 				$work = "WK000000".$Work_d;
@@ -312,7 +312,7 @@
 	if((isset($_POST['contentSearch']))||$_GET['contentSearch'])
 	{
 		$opportunity_search = Opportunity_Search($Start,$Limit);
-		while($search = mysql_fetch_assoc($opportunity_search))
+		while($search = mysqli_fetch_assoc($opportunity_search))
 		{
 			$Work_d = $search['id'];
 			if(strlen($Work_d)==1)

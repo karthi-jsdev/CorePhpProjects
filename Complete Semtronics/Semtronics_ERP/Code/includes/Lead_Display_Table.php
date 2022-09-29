@@ -1,7 +1,7 @@
 <?php
 	include("Config.php");
 	include("Reports_Queries.php");
-	$LeadTotalRows = mysql_fetch_assoc(Lead_Select_displayCount_All());
+	$LeadTotalRows = mysqli_fetch_assoc(Lead_Select_displayCount_All());
 		echo "<h4>Total No. of Leads - ".$LeadTotalRows['total']."</h4>";
 		echo '<div align="right"><a href="#" title="Download" onclick=\'Export_LeadData("getdata=Lead_Report")\'><img src="images/icons/download.png"></a></div>';
 		if(!$_GET['account'])
@@ -37,7 +37,7 @@
 							echo '<tr><td colspan="20"><font color="red"><center>No data found</center></font></td></tr>';
 						$i = 1;
 						$LeadRows = Lead_Select_BydisplayNoLimit();
-						while($Lead = mysql_fetch_assoc($LeadRows))
+						while($Lead = mysqli_fetch_assoc($LeadRows))
 						{
 							$Digits = array("","0", "00", "000", "0000", "00000", "000000");
 							$LDNo = "LD".$Digits[6 - strlen($Lead['id'])].($Lead['id']);
@@ -100,7 +100,7 @@
 							echo '<tr><td colspan="20"><font color="red"><center>No data found</center></font></td></tr>';
 						$i = 1;
 						$LeadRows = Lead_Select_BydisplayNoLimit();
-						while($Lead = mysql_fetch_assoc($LeadRows))
+						while($Lead = mysqli_fetch_assoc($LeadRows))
 						{
 							$Digits = array("","0", "00", "000", "0000", "00000", "000000");
 							$LDNo = "LD".$Digits[6 - strlen($Lead['id'])].($Lead['id']);

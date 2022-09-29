@@ -5,11 +5,11 @@
 		SaleOrder_UpdateComments();
 	if($_GET['saleorderid'])
 	{
-		$SaleOrder = mysql_fetch_assoc(SaleOrder_Select_ById());
+		$SaleOrder = mysqli_fetch_assoc(SaleOrder_Select_ById());
 		foreach($Columns as $Col)
 			$_POST[$Col] = $SaleOrder[$Col];
-		$FetchOppurtunity = mysql_fetch_array(Select_Opportunity($_POST['oppurtunity_id']));
-		$FetchProduct = mysql_fetch_array(SelectProductById($FetchOppurtunity['product_id']));
+		$FetchOppurtunity = mysqli_fetch_array(Select_Opportunity($_POST['oppurtunity_id']));
+		$FetchProduct = mysqli_fetch_array(SelectProductById($FetchOppurtunity['product_id']));
 	 ?>
 	<link rel="stylesheet" type="text/css" href="css/datepicker/jquery-ui.css">
 	<link rel="stylesheet" type="text/css" href="css/datepicker/demos.css">
@@ -44,7 +44,7 @@
 					<label>
 						<strong>Lead :</strong>
 						<?php 
-						$FetchClientName = mysql_fetch_array(FetchLeadById($_POST['lead_id']));
+						$FetchClientName = mysqli_fetch_array(FetchLeadById($_POST['lead_id']));
 						echo $FetchClientName['name']."<br/><br/><strong>Product Type:</strong>".$FetchProduct['code']; 
 						?>
 					</label>
@@ -72,7 +72,7 @@
 							<option value="">Select</option>
 							<?php
 								$SelectStatus = SelectStatus();
-								while($FetchStatus = mysql_fetch_array($SelectStatus))
+								while($FetchStatus = mysqli_fetch_array($SelectStatus))
 								{
 									echo '<option value="'.$FetchStatus['id'].'">'.$FetchStatus['sales_status'].'</option>';
 								}
@@ -93,7 +93,7 @@
 		</div>
 		<h3>
 			<?php
-			$SaleOrderCommentsTotalRows = mysql_fetch_assoc(Select_Comments());
+			$SaleOrderCommentsTotalRows = mysqli_fetch_assoc(Select_Comments());
 			echo "Total No. of Sale Orders -".$SaleOrderCommentsTotalRows['total'];
 			?>
 		</h3>
@@ -119,10 +119,10 @@
 			$i++;
 			$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 			$SelectComments = Select_CommentsByLimit($Start, $Limit);
-			while($FetchComments = mysql_fetch_array($SelectComments))
+			while($FetchComments = mysqli_fetch_array($SelectComments))
 			{
-				$FetchStatus = mysql_fetch_array(FetchStatus($FetchComments['status_id']));
-				$FetchUser  = mysql_fetch_array(FetchUser($FetchComments['updatedby']));
+				$FetchStatus = mysqli_fetch_array(FetchStatus($FetchComments['status_id']));
+				$FetchUser  = mysqli_fetch_array(FetchUser($FetchComments['updatedby']));
 				$Digits = array("", "0", "00", "000", "0000", "00000", "000000", "0000000");
 				$SONo = "SO".$Digits[7 - strlen($_GET['saleorderid'])].($_GET['saleorderid']);
 				echo '<tr>
@@ -168,9 +168,9 @@
 			else 
 				$Search = $_GET['Search'];
 			if($_GET['Search'])
-				$SaleOrderTotalRows = mysql_fetch_assoc(Select_Sales_orderSearch($Search));
+				$SaleOrderTotalRows = mysqli_fetch_assoc(Select_Sales_orderSearch($Search));
 			else
-				$SaleOrderTotalRows = mysql_fetch_assoc(Select_Sales_order());
+				$SaleOrderTotalRows = mysqli_fetch_assoc(Select_Sales_order());
 			
 			?>
 		<input type="text" placeholder="Search" id="Search" name="search">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="Search()" class="button button-orange" >Search</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo "<h3>Total No. of Sale Orders -".$SaleOrderTotalRows['total'].'</h3>'; ?>
@@ -210,23 +210,23 @@
 			else
 				$Select_Sales_Order = SaleOrder_Select_ByLimit($Start, $Limit);
 			
-			while($Fetch_Sales_Order = mysql_fetch_array($Select_Sales_Order))
+			while($Fetch_Sales_Order = mysqli_fetch_array($Select_Sales_Order))
 			{
-				$FetchLeadName = mysql_fetch_array(FetchLeadById($Fetch_Sales_Order['lead_id']));
-				$FetchOppurtunity = mysql_fetch_array(Select_Opportunity($Fetch_Sales_Order['oppurtunity_id']));
-				$FetchProduct = mysql_fetch_array(SelectProductById($FetchOppurtunity['product_id']));
-				$FetchCourierBy =  mysql_fetch_array(SelectCourierById($Fetch_Sales_Order['courier_by_id']));
-				$FetchComments = mysql_fetch_array(FetchComments($Fetch_Sales_Order['id']));
-				$FetchStatus = mysql_fetch_array(FetchStatus($FetchComments['status_id']));
+				$FetchLeadName = mysqli_fetch_array(FetchLeadById($Fetch_Sales_Order['lead_id']));
+				$FetchOppurtunity = mysqli_fetch_array(Select_Opportunity($Fetch_Sales_Order['oppurtunity_id']));
+				$FetchProduct = mysqli_fetch_array(SelectProductById($FetchOppurtunity['product_id']));
+				$FetchCourierBy =  mysqli_fetch_array(SelectCourierById($Fetch_Sales_Order['courier_by_id']));
+				$FetchComments = mysqli_fetch_array(FetchComments($Fetch_Sales_Order['id']));
+				$FetchStatus = mysqli_fetch_array(FetchStatus($FetchComments['status_id']));
 				$Digits = array("", "0", "00", "000", "0000", "00000", "000000", "0000000");
 				$SONo = "SO".$Digits[7 - strlen($Fetch_Sales_Order['id'])].($Fetch_Sales_Order['id']);
 				$Users = "";
 				$SelectAprovers = SelectApprovers($Fetch_Sales_Order['id']);
-				$Approvers = mysql_num_rows($SelectAprovers);
-				while($FetchAprovers = mysql_fetch_array($SelectAprovers))
+				$Approvers = mysqli_num_rows($SelectAprovers);
+				while($FetchAprovers = mysqli_fetch_array($SelectAprovers))
 				{
 					$Approvers--;
-					$FetchApproversName = mysql_fetch_array(FetchUser($FetchAprovers['approved_by']));
+					$FetchApproversName = mysqli_fetch_array(FetchUser($FetchAprovers['approved_by']));
 					$Users .= $FetchApproversName['firstname'];
 					if($Approvers)
 						$Users .= ",";
@@ -241,9 +241,9 @@
 				else
 					$Fetch_Sales_Order['is_self_or_customer_pay'] = "Customer";
 				echo '<tr>';
-				//if($FetchUser = mysql_fetch_array($SelectUser))
+				//if($FetchUser = mysqli_fetch_array($SelectUser))
 				//{
-					if(mysql_num_rows($SelectUser) == mysql_num_rows(SelectApprovers($Fetch_Sales_Order['id'])))
+					if(mysqli_num_rows($SelectUser) == mysqli_num_rows(SelectApprovers($Fetch_Sales_Order['id'])))
 						echo '<td><a href="?index.php&page=Sales&subpage=spage->Sale_Order,ssubpage->'.$_GET['ssubpage'].'&saleorderid='.$Fetch_Sales_Order['id'].'">'.$SONo.'</a></td>';
 					else	
 						echo '<td>'.$SONo.'</td>';

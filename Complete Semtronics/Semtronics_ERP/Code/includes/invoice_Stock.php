@@ -27,7 +27,7 @@
 							<option value="">Select</option>
 							<?php
 							$vendor = Vendor_Dropdowndisplay();
-							while($vendor_name = mysql_fetch_assoc($vendor))
+							while($vendor_name = mysqli_fetch_assoc($vendor))
 							{
 								if($_POST['vendorid']==$vendor_name['id'])
 									echo '<option value="'.$vendor_name['id'].'" selected="selected">'.$vendor_name['name'].'</option>';
@@ -44,8 +44,8 @@
 						<select multiple="multiple" name="excises[]" id="excises">
 							<option value="Select">Select</option>
 							<?php
-							$excisetax = mysql_query("SELECT * FROM excisetax");
-							while($excise = mysql_fetch_assoc($excisetax))
+							$excisetax = mysqli_query($_SESSION['connection'],"SELECT * FROM excisetax");
+							while($excise = mysqli_fetch_assoc($excisetax))
 							{
 								if($_POST['excise']==$excise['id'])
 									echo'<option value='.$excise['percent'].' selected>'.$excise['percent'].'</option>';
@@ -179,7 +179,7 @@
 									<option value="">Select</option>
 									<?php
 									$rawmaterialcode = Raw_material_Data();
-									while($materialcode = mysql_fetch_assoc($rawmaterialcode))
+									while($materialcode = mysqli_fetch_assoc($rawmaterialcode))
 									{
 										if($_POST['materialcode']==$materialcode['id'])
 											echo '<option value="'.$materialcode['id'].'$'.$materialcode['partnumber'].'$'.$materialcode['description'].'" selected="selected">'.$materialcode['materialcode'].'</option>';
@@ -213,7 +213,7 @@
 									<option value="">Select</option>
 									<?php
 									$Taxs = Select_All_Tax();
-									while($Tax = mysql_fetch_assoc($Taxs))
+									while($Tax = mysqli_fetch_assoc($Taxs))
 									{
 										echo '<option onchange="taxamount();" value="'.$Tax['id'].','.$Tax['percent'].'">'.$Tax['type'].'-'.$Tax['percent'].'%</option>';
 									} ?>
@@ -233,7 +233,7 @@
 								<option value="">Select</option>
 								<?php
 								$Location = Location_Select_All();
-								while($Locations = mysql_fetch_array($Location))
+								while($Locations = mysqli_fetch_array($Location))
 								{
 									echo '<option value="'.$Locations['id'].'">'.$Locations['name'].'</option>';
 								} ?>

@@ -34,9 +34,9 @@
 					</tr>
 				</thead>
 			<?php	
-			$SelectKittingData = mysql_query("Select * From kitting where kittingname='".$_GET['kittingname']."'");
+			$SelectKittingData = mysqli_query($_SESSION['connection'],"Select * From kitting where kittingname='".$_GET['kittingname']."'");
 			$i = 1;
-			while($FetchKittingData = mysql_fetch_array($SelectKittingData))
+			while($FetchKittingData = mysqli_fetch_array($SelectKittingData))
 			{
 				echo '<tr>
 						<td>'.$i++.'</td>

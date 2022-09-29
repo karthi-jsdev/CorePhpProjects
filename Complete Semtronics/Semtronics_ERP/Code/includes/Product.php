@@ -4,7 +4,7 @@
 		$Columns = array("id","productcode", "description", "watt", "wattmax", "inputvoltage", "inputvoltagemax", "outputvoltage", "outputvoltagemax", "outputcurrent", "efficiency", "l", "b", "h","packquantity","remarks");
 		if($_GET['action'] == 'Edit')
 		{
-			$Product = mysql_fetch_assoc(Product_Select_ById());
+			$Product = mysqli_fetch_assoc(Product_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Product[$Col];
 		}
@@ -18,9 +18,9 @@
 			if(isset($_POST['Submit']))
 			{
 				$ExplodeProductCode = explode("/",$_POST['product_subcategoryid']);
-				$FetchCode = mysql_fetch_assoc(Select_ProductCode(substr($ExplodeProductCode[1],0,3)));
+				$FetchCode = mysqli_fetch_assoc(Select_ProductCode(substr($ExplodeProductCode[1],0,3)));
 				$Digits = array("", "0", "00", "000");
-				if(mysql_num_rows(Select_ProductCode(substr($ExplodeProductCode[1],0,3))))
+				if(mysqli_num_rows(Select_ProductCode(substr($ExplodeProductCode[1],0,3))))
 					$Code = substr($ExplodeProductCode[1],0,3).$Digits[3 - strlen((substr($FetchCode['code'], -3))+1)].((substr($FetchCode['code'], -3))+1);
 				else
 					$Code = substr($ExplodeProductCode[1],0,3).$Digits[3 - strlen((substr($FetchCode['code'], -3)))].((substr($FetchCode['code'], -3)));
@@ -47,13 +47,13 @@
 			<fieldset>
 				<div class="clearfix">
 					<?php
-						$productcode = mysql_query("SELECT * FROM products");
+						$productcode = mysqli_query($_SESSION['connection'],"SELECT * FROM products");
 					?>
 					<label>Product Code <font color="red">*</font>
 					<select id="productcode" name="productcode" onchange="product_subcategory()">
 						<option value="">Select</option>
 						<?php
-							while($productcodes = mysql_fetch_array($productcode))
+							while($productcodes = mysqli_fetch_array($productcode))
 							{
 								if($_GET['id'] && $_POST['productcode'] == $productcodes['id'])
 									echo '<option value="'.$productcodes['id'].'" selected>'.$productcodes['productcode'].'</option>';
@@ -127,7 +127,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$ProductTotalRows = mysql_fetch_assoc(Product_Select_Count_All());
+				$ProductTotalRows = mysqli_fetch_assoc(Product_Select_Count_All());
 				echo "Total No. of Products - ".$ProductTotalRows['total'];
 				?>
 			</h3>
@@ -167,7 +167,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$ProductRows = Product_Select_ByLimit($Start, $Limit);
-					while($Product = mysql_fetch_assoc($ProductRows))
+					while($Product = mysqli_fetch_assoc($ProductRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

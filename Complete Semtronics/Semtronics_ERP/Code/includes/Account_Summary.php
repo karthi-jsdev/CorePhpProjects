@@ -1,7 +1,7 @@
 <div class="columns">
 	<h3>
 		<?php
-		$LeadTotalRows = mysql_fetch_assoc(Lead_AddtoaccountSelect_Count_All());
+		$LeadTotalRows = mysqli_fetch_assoc(Lead_AddtoaccountSelect_Count_All());
 		echo "<div>Total No. of Leads - ".$LeadTotalRows['total'];
 		echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -35,7 +35,7 @@
 				<?php
 				if(!$_GET['Search'])
 				{
-					$LeadTotalRows = mysql_fetch_assoc(Lead_AddtoaccountSelect_Count_All());
+					$LeadTotalRows = mysqli_fetch_assoc(Lead_AddtoaccountSelect_Count_All());
 					if(!$LeadTotalRows['total'])
 						echo '<tr><td colspan="15"><font color="red"><center>No data found</center></font></td></tr>';
 					$Limit = 10;
@@ -47,14 +47,14 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$LeadRows = Lead_AddtoaccountSelect_ByLimit($Start, $Limit);
-					while($Lead = mysql_fetch_assoc($LeadRows))
+					while($Lead = mysqli_fetch_assoc($LeadRows))
 					{
 						$Digits = array("","0","00","000","0000","00000","000000");
 						$LDNO = "LD".$Digits[6-strlen($Lead['id'])].($Lead['id']);
-						$Vendorcategory = mysql_fetch_array(Client_Category_Name($Lead['client_category_id']));
-						$Reference = mysql_fetch_array(Reference_Name($Lead['reference_id']));
-						$ReferenceGroup = mysql_fetch_array(Reference_GroupName($Lead['reference_group_id']));
-						$Industrycategory = mysql_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
+						$Vendorcategory = mysqli_fetch_array(Client_Category_Name($Lead['client_category_id']));
+						$Reference = mysqli_fetch_array(Reference_Name($Lead['reference_id']));
+						$ReferenceGroup = mysqli_fetch_array(Reference_GroupName($Lead['reference_group_id']));
+						$Industrycategory = mysqli_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
 							<td><a href='?page=Sales&subpage=spage->Lead,ssubpage->Lead__Management&leadid=".$Lead['id']."'>".$LDNO."</td>
@@ -104,7 +104,7 @@
 					foreach($Array as $A)
 						$Search.=$A;
 					$Search = strrev($Search);
-					$LeadTotalRowsSearch = mysql_fetch_assoc(Lead_AddtoaccountSelect_Count_All_By_Search($Search));
+					$LeadTotalRowsSearch = mysqli_fetch_assoc(Lead_AddtoaccountSelect_Count_All_By_Search($Search));
 					if(!$LeadTotalRowsSearch['total'])
 						echo '<tr><td colspan="15"><font color="red"><center>No data found</center></font></td></tr>';
 					$Limit = 10;
@@ -116,14 +116,14 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$LeadRows = Lead_AddtoaccountSelect_ByLimitSearch($Start, $Limit ,$Search);
-					while($Lead = mysql_fetch_assoc($LeadRows))
+					while($Lead = mysqli_fetch_assoc($LeadRows))
 					{
 						$Digits = array("","0","00","000","0000","00000","000000");
 						$LDNO = "LD".$Digits[6-strlen($Lead['id'])].($Lead['id']);
-						$Vendorcategory = mysql_fetch_array(Client_Category_Name($Lead['client_category_id']));
-						$Reference = mysql_fetch_array(Reference_Name($Lead['reference_id']));
-						$ReferenceGroup = mysql_fetch_array(Reference_GroupName($Lead['reference_group_id']));
-						$Industrycategory = mysql_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
+						$Vendorcategory = mysqli_fetch_array(Client_Category_Name($Lead['client_category_id']));
+						$Reference = mysqli_fetch_array(Reference_Name($Lead['reference_id']));
+						$ReferenceGroup = mysqli_fetch_array(Reference_GroupName($Lead['reference_group_id']));
+						$Industrycategory = mysqli_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
 							<td><a href='?page=Sales&subpage=spage->Lead,ssubpage->Lead__Management&leadid=".$Lead['id']."'>".$LDNO."</td>

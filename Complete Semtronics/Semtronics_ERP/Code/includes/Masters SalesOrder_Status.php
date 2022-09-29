@@ -3,7 +3,7 @@
 		$Columns = array("id", "sales_status","enabled","sort_order");
 		if($_GET['action'] == 'Edit')
 		{
-			$Credit = mysql_fetch_assoc(Salesorder_Status_Select_ById());
+			$Credit = mysqli_fetch_assoc(Salesorder_Status_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Credit[$Col];
 		}
@@ -18,7 +18,7 @@
 				$Salesorder_StatusResource = Salesorder_Status_Select_ByNamePWD();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($Salesorder_StatusResource))
+					if(mysqli_num_rows($Salesorder_StatusResource))
 						$message = "<br /><div class='message error'><b>Message</b> : Salesorder Status or sort Order already exists</div>";
 					else
 					{
@@ -28,10 +28,10 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$Salesorder_Status = mysql_fetch_assoc($Salesorder_StatusResource);
-					if(mysql_num_rows(Salesorder_Status_Select_ByNamePWDId()))
+					$Salesorder_Status = mysqli_fetch_assoc($Salesorder_StatusResource);
+					if(mysqli_num_rows(Salesorder_Status_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Salesorder Status already exists</div>";
-					else if(mysql_num_rows(Salesorder_Status_Select_BySortorder()))
+					else if(mysqli_num_rows(Salesorder_Status_Select_BySortorder()))
 						$message = "<br /><div class='message error'><b>Message</b> : This sort order already exists</div>";
 					else
 					{
@@ -82,7 +82,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$Salesorder_StatusTotalRows = mysql_fetch_assoc(Salesorder_Status_Count_All());
+				$Salesorder_StatusTotalRows = mysqli_fetch_assoc(Salesorder_Status_Count_All());
 				echo "Total No. of Sales Order Status - ".$Salesorder_StatusTotalRows['total'];
 				?>
 			</h3>
@@ -110,7 +110,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$Salesorder_StatusRows = Salesorder_Status_Select_ByLimit($Start, $Limit);
-					while($Salesorder_Status = mysql_fetch_assoc($Salesorder_StatusRows))
+					while($Salesorder_Status = mysqli_fetch_assoc($Salesorder_StatusRows))
 					{echo $Salesorder_Status['enable'];
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

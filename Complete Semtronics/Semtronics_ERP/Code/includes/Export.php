@@ -14,7 +14,7 @@
 				//<select name="customer" onchange="load_Customer(this.value)">
 				
 				//For Ajax on change to list order number from reports_job_order
-				/*while($customer_list = mysql_fetch_assoc($customer))
+				/*while($customer_list = mysqli_fetch_assoc($customer))
 				{
 					if($_POST['customer']==$customer_list['name'])
 						echo '<option selected="selected" value='.$customer_list['id'].'>'.$customer_list['name'].'</option>';		
@@ -22,7 +22,7 @@
 						echo '<option value='.$customer_list['id'].'>'.$customer_list['name'].'</option>';		
 				}*/
 				
-				while($customer_list = mysql_fetch_assoc($customer))
+				while($customer_list = mysqli_fetch_assoc($customer))
 				{
 					if($_POST['customer']==$customer_list['id'])
 						echo '<option selected="selected" value='.$customer_list['id'].'>'.$customer_list['name'].'</option>';		
@@ -35,7 +35,7 @@
 					<label>Order Number</label>';
 					echo'<select name="order_num">
 					<option value="">All</option>';
-					while($order = mysql_fetch_assoc($order_number))
+					while($order = mysqli_fetch_assoc($order_number))
 					{
 						if($_POST['order_num']==$order['id'])
 							echo'<option selected="selected" value='.$order['id'].'>'.$order['number'].'</option>';
@@ -59,7 +59,7 @@
 				echo '<label>Machine</label>
 						<select name="machine_number">
 						<option value="">All</option>';
-				while($machine_list = mysql_fetch_assoc($machine))
+				while($machine_list = mysqli_fetch_assoc($machine))
 				{
 					if($machine_list['id']==$_POST['machine_number'])
 						echo'<option selected="selected" value='.$machine_list['id'].'>'.$machine_list['machine_number'].'</option>';
@@ -94,11 +94,11 @@
 				<tbody>
 				<?php
 				$job_report = Job_Report();
-				if(mysql_num_rows($job_report)==0)
+				if(mysqli_num_rows($job_report)==0)
 					echo'<tr><td colspan="17" style="color:red;"><center>No Data Found</center></td></tr>';
 				else
 				{
-					while($report = mysql_fetch_assoc($job_report))
+					while($report = mysqli_fetch_assoc($job_report))
 					{
 						echo '<tr>
 								<td>'.$i++.'</td>

@@ -7,7 +7,7 @@
 								<option value="">Select</option>
 								<?php
 									$SelectStatus = SelectStatus();
-									while($FetchStatus = mysql_fetch_array($SelectStatus))
+									while($FetchStatus = mysqli_fetch_array($SelectStatus))
 									{
 										echo '<option value="'.$FetchStatus['id'].'">'.$FetchStatus['sales_status'].'</option>';
 									}

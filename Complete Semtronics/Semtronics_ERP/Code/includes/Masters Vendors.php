@@ -3,7 +3,7 @@
 		$Columns = array("id", "vendorid", "name", "address", "phonenumber", "email", "contactperson", "categoryid", "creditlimit", "creditperiodid", "leadtime");
 		if($_GET['action'] == 'Edit')
 		{
-			$Vendor = mysql_fetch_assoc(Vendor_Select_ById());
+			$Vendor = mysqli_fetch_assoc(Vendor_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Vendor[$Col];
 		}
@@ -34,7 +34,7 @@
 			<?php
 			if($_GET['action'] != 'Edit')
 			{
-				$FetchVendorId = mysql_fetch_assoc(Select_Vendor());
+				$FetchVendorId = mysqli_fetch_assoc(Select_Vendor());
 				$Digits = array("", "0", "00", "000", "0000");
 				$VendorNo = "VIN".$Digits[4 - strlen((substr($FetchVendorId['vendorid'], -4))+1)].((substr($FetchVendorId['vendorid'], -4))+1);
 				echo '<input type="hidden" name="vendorid" value="'.$VendorNo.'" required="required"/>';
@@ -89,7 +89,7 @@
 										
 										$AvailableCategory = "";
 										$SelectVendorCategory = Select_VendorCategory();
-										while($FetchVendorCategory = mysql_fetch_array($SelectVendorCategory))
+										while($FetchVendorCategory = mysqli_fetch_array($SelectVendorCategory))
 										{
 											if(in_array($FetchVendorCategory['id'], $_POST['categoryid']))
 												echo "<option value='".$FetchVendorCategory['id']."'>".$FetchVendorCategory['name']."</option>";
@@ -121,7 +121,7 @@
 						<option value="">Select</option>
 						<?php
 							$SelectCreditPeriod = SelectCreditPeriod();
-							while($FetchCreditPeriod = mysql_fetch_array($SelectCreditPeriod))
+							while($FetchCreditPeriod = mysqli_fetch_array($SelectCreditPeriod))
 							{
 								if($_POST['creditperiodid'] == $FetchCreditPeriod['id'])
 									echo '<option value="'.$FetchCreditPeriod['id'].'" selected>'.$FetchCreditPeriod['period'].' Days</option>';
@@ -151,7 +151,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$VendorTotalRows = mysql_fetch_assoc(Vendor_Select_Count_All());
+				$VendorTotalRows = mysqli_fetch_assoc(Vendor_Select_Count_All());
 				echo "Total No. of Vendors - ".$VendorTotalRows['total'];
 				?>
 			</h3>
@@ -186,10 +186,10 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$VendorRows = Vendor_Select_ByLimit($Start, $Limit);
-					while($Vendor = mysql_fetch_assoc($VendorRows))
+					while($Vendor = mysqli_fetch_assoc($VendorRows))
 					{
 						$CreditIdExplode = explode('.',$Vendor['categoryid']);
-						$FetchCreditPeriod = mysql_fetch_array(FetchCreditPeriodById($Vendor['creditperiodid']));
+						$FetchCreditPeriod = mysqli_fetch_array(FetchCreditPeriodById($Vendor['creditperiodid']));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
 							<td>".$Vendor['vendorid']."</td>
@@ -198,7 +198,7 @@
 							foreach($CreditIdExplode as $CreditId)	
 							{
 								$I -= 1;
-								$FetchCreditId = mysql_fetch_array(Select_VendorCategoryById($CreditId));
+								$FetchCreditId = mysqli_fetch_array(Select_VendorCategoryById($CreditId));
 								echo $FetchCreditId['name'];
 								if($I)
 									echo ',';

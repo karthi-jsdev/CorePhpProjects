@@ -25,7 +25,7 @@
 		include("Stock_Management_Queries.php");
 		$i=1;
 		$home = Invoice_Summary_Download();
-		while($stock_summary = mysql_Fetch_Assoc($home))
+		while($stock_summary = mysqli_fetch_assoc($home))
 		{
 			if($stock_summary['excise'] == 0)
 				$totalamount = $stock_summary['amount']+$stock_summary['taxamount'];

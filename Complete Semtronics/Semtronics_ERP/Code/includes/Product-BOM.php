@@ -4,7 +4,7 @@
 		$Columns = array("id", "productid","rawmaterialid", "quantity", "reference");
 		if($_GET['action'] == 'Edit')
 		{
-			$ProductBOM = mysql_fetch_assoc(ProductBOM_Select_ById());
+			$ProductBOM = mysqli_fetch_assoc(ProductBOM_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $ProductBOM[$Col];
 		}
@@ -45,9 +45,9 @@
 						<option value="">Select</option>
 						<?php
 							$SelectProductcategorycode = SelectProductcategorycode();
-							while($FetchProductcategorycode = mysql_fetch_array($SelectProductcategorycode))
+							while($FetchProductcategorycode = mysqli_fetch_array($SelectProductcategorycode))
 							{
-								$FetchProductCode = mysql_fetch_array(SelectProductCode($_POST['productid']));
+								$FetchProductCode = mysqli_fetch_array(SelectProductCode($_POST['productid']));
 								if(substr($FetchProductCode['code'],0,2) == substr($FetchProductcategorycode['prefix'],0,2))
 									echo '<option value="'.$FetchProductcategorycode['prefix'].'" selected>'.$FetchProductcategorycode['name']."-".$FetchProductcategorycode['prefix'].'</option>';
 								else
@@ -64,7 +64,7 @@
 						<option value="">Select</option>
 						<?php
 							$SelectRawMeterialcode = SelectRawMeterialcode();
-							while($FetchRawMeterialcode = mysql_fetch_array($SelectRawMeterialcode))
+							while($FetchRawMeterialcode = mysqli_fetch_array($SelectRawMeterialcode))
 							{
 								if($_POST['rawmaterialid'] == $FetchRawMeterialcode['id'])
 									echo '<option value="'.$FetchRawMeterialcode['id'].'" selected>'.$FetchRawMeterialcode['materialcode'].'</option>';
@@ -96,7 +96,7 @@
 		<div class="columns">
 			<h3>Product-BOM List
 				<?php
-				$ProductBOMTotalRows = mysql_fetch_assoc(ProductBOM_Select_Count_All());
+				$ProductBOMTotalRows = mysqli_fetch_assoc(ProductBOM_Select_Count_All());
 				echo " : No. of total Product - ".$ProductBOMTotalRows['total'];
 				?>
 			</h3>
@@ -106,9 +106,9 @@
 					<option value="">Select</option>
 					<?php
 						$SelectProductcategorycode = SelectProductcategorycode();
-						while($FetchProductcategorycode = mysql_fetch_array($SelectProductcategorycode))
+						while($FetchProductcategorycode = mysqli_fetch_array($SelectProductcategorycode))
 						{
-							$FetchProductCode = mysql_fetch_array(SelectProductCode($_POST['productid']));
+							$FetchProductCode = mysqli_fetch_array(SelectProductCode($_POST['productid']));
 							if(substr($FetchProductCode['code'],0,2) == substr($FetchProductcategorycode['prefix'],0,2))
 								echo '<option value="'.$FetchProductcategorycode['prefix'].'" selected>'.$FetchProductcategorycode['name']."-".$FetchProductcategorycode['prefix'].'</option>';
 							else
@@ -145,10 +145,10 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$ProductBOMRows = ProductBOM_Select_ByLimit($Start, $Limit);
-					while($ProductBOM = mysql_fetch_assoc($ProductBOMRows))
+					while($ProductBOM = mysqli_fetch_assoc($ProductBOMRows))
 					{
-						$FetchProductCode = mysql_fetch_array(SelectProductCode($ProductBOM['productid']));
-						$FetchRawMeterial = mysql_fetch_array(SelectRawMeterial($ProductBOM['rawmaterialid']));
+						$FetchProductCode = mysqli_fetch_array(SelectProductCode($ProductBOM['productid']));
+						$FetchRawMeterial = mysqli_fetch_array(SelectRawMeterial($ProductBOM['rawmaterialid']));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
 							<td align='center'>".$FetchProductCode['code']."</td>
@@ -248,7 +248,7 @@
 	<?php
 	if($_POST['productid'])
 	{
-		$FetchProductCode = mysql_fetch_array(SelectProductCode($_POST['productid']));
+		$FetchProductCode = mysqli_fetch_array(SelectProductCode($_POST['productid']));
 	?>
 	GetProductCode(<?php echo substr($FetchProductCode['code'],0,2).",".$_POST['productid']; ?>);
 	<?php

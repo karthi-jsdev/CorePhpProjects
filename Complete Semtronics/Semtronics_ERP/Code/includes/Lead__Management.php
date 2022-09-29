@@ -16,7 +16,7 @@
 		$Columns = array("id", "name","address", "email_id", "contact_no", "contact_person1", "designation1", "email_id1", "contact_no1", "contact_person2", "designation2", "email_id2", "contact_no2", "client_category_id", "reference_id","reference_group_id","industry_category_id","add_to_account");
 		if($_GET['action'] == 'Edit')
 		{
-			$Lead = mysql_fetch_assoc(Lead_Select_ById());
+			$Lead = mysqli_fetch_assoc(Lead_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Lead[$Col];
 		}
@@ -26,7 +26,7 @@
 			$message = "<br /><div class='message success'><b>Message</b> : One Lead deleted successfully</div>";
 		}
 		if($_GET['leadid'])
-			$Leads = mysql_fetch_assoc(Lead_Select_ById());
+			$Leads = mysqli_fetch_assoc(Lead_Select_ById());
 		if($_POST['Update']=='Comments')
 		{
 			Leads_Insert();
@@ -41,7 +41,7 @@
 				$LeadResource = Lead_Select_ByName();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($LeadResource))
+					if(mysqli_num_rows($LeadResource))
 						$message = "<br /><div class='message error'><b>Message</b> : This Lead already exists</div>";
 					else
 					{
@@ -51,8 +51,8 @@
 				}
 				else if($_POST['Update']=="Update")
 				{
-					/*$Lead = mysql_fetch_assoc($LeadResource);
-					if(mysql_num_rows(Lead_Select_ByName()))
+					/*$Lead = mysqli_fetch_assoc($LeadResource);
+					if(mysqli_num_rows(Lead_Select_ByName()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Lead already exists</div>";
 					else
 					{*/
@@ -83,7 +83,7 @@
 							<option value="">Select</option>
 							<?php
 							$SelectClientcategory = SelectClientcategorycode();
-							while($FetchClientcategory = mysql_fetch_array($SelectClientcategory))
+							while($FetchClientcategory = mysqli_fetch_array($SelectClientcategory))
 							{
 								if($FetchClientcategory['id']== $_POST['client_category_id'])
 									echo "<option value='".$FetchClientcategory['id']."'selected>".$FetchClientcategory['clientcategory']."</option>";
@@ -102,7 +102,7 @@
 							<option value="">Select</option>
 							<?php
 								$Selectreferredby = Selectreferredbycode();
-								while($Fetchreferredby = mysql_fetch_array($Selectreferredby))
+								while($Fetchreferredby = mysqli_fetch_array($Selectreferredby))
 								{
 									if($Fetchreferredby['id']==$_POST['reference_id'])
 										echo "<option value='".$Fetchreferredby['id']."'selected>".$Fetchreferredby['reference']."</option>";
@@ -122,7 +122,7 @@
 							<option value="">Select</option>
 							<?php
 								$Selectreferredgroupby = Selectreferencegroup();
-								while($Fetchreferredgroupby = mysql_fetch_array($Selectreferredgroupby))
+								while($Fetchreferredgroupby = mysqli_fetch_array($Selectreferredgroupby))
 								{
 									if($Fetchreferredgroupby['id']==$_POST['reference_group_id'])
 										echo "<option value='".$Fetchreferredgroupby['id']."'selected>".$Fetchreferredgroupby['name']."</option>";
@@ -142,7 +142,7 @@
 							<option value="">Select</option>
 							<?php
 								$Selectindustryby = Selectindustrycode();
-								while($Fetchindustryby = mysql_fetch_array($Selectindustryby))
+								while($Fetchindustryby = mysqli_fetch_array($Selectindustryby))
 								{
 									if($Fetchindustryby['id']==$_POST['industry_category_id'])
 										echo "<option value='".$Fetchindustryby['id']."'selected>".$Fetchindustryby['name']."</option>";
@@ -208,10 +208,10 @@
 					}
 					else 
 						$Search = $_GET['Search'];
-					$LeadTotalRows = mysql_fetch_assoc(Lead_Select_Count_All_Search($Search));
+					$LeadTotalRows = mysqli_fetch_assoc(Lead_Select_Count_All_Search($Search));
 				}
 				else
-					$LeadTotalRows = mysql_fetch_assoc(Lead_Select_Count_All());
+					$LeadTotalRows = mysqli_fetch_assoc(Lead_Select_Count_All());
 				echo "<div>Total No. of Leads - ".$LeadTotalRows['total'];
 				echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -261,12 +261,12 @@
 						$i++;
 						$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 						$LeadRows = Lead_Select_ByLimit($Start, $Limit);
-						while($Lead = mysql_fetch_assoc($LeadRows))
+						while($Lead = mysqli_fetch_assoc($LeadRows))
 						{
-							$Clientcategory = mysql_fetch_array(Client_Category_Name($Lead['client_category_id']));
-							$Reference = mysql_fetch_array(Reference_Name($Lead['reference_id']));
-							$ReferenceGroup = mysql_fetch_array(Reference_GroupName($Lead['reference_group_id']));
-							$Industrycategory = mysql_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
+							$Clientcategory = mysqli_fetch_array(Client_Category_Name($Lead['client_category_id']));
+							$Reference = mysqli_fetch_array(Reference_Name($Lead['reference_id']));
+							$ReferenceGroup = mysqli_fetch_array(Reference_GroupName($Lead['reference_group_id']));
+							$Industrycategory = mysqli_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
 							$Digits = array("","0", "00", "000", "0000", "00000", "000000");
 							$LDNo = "LD".$Digits[6 - strlen($Lead['id'])].($Lead['id']);
 							echo "<tr style='valign:middle;'>
@@ -309,12 +309,12 @@
 						$i++;
 						$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 						$LeadRows = Lead_Select_ByLimitSearch($Start, $Limit,$Search);
-						while($Lead = mysql_fetch_assoc($LeadRows))
+						while($Lead = mysqli_fetch_assoc($LeadRows))
 						{
-							$Vendorcategory = mysql_fetch_array(Vendor_Category_Name($Lead['vendor_category_id']));
-							$Reference = mysql_fetch_array(Reference_Name($Lead['reference_id']));
-							$ReferenceGroup = mysql_fetch_array(Reference_GroupName($Lead['reference_group_id']));
-							$Industrycategory = mysql_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
+							$Vendorcategory = mysqli_fetch_array(Vendor_Category_Name($Lead['vendor_category_id']));
+							$Reference = mysqli_fetch_array(Reference_Name($Lead['reference_id']));
+							$ReferenceGroup = mysqli_fetch_array(Reference_GroupName($Lead['reference_group_id']));
+							$Industrycategory = mysqli_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
 							$Digits = array("","0", "00", "000", "0000", "00000", "000000");
 							$LDNo = "LD".$Digits[6 - strlen($Lead['id'])].($Lead['id']);
 							echo "<tr style='valign:middle;'>
@@ -367,7 +367,7 @@
 			<?php 
 				if($_GET['leadid'])
 				{
-					$Leads = mysql_fetch_assoc(Lead_Select_ById()); 
+					$Leads = mysqli_fetch_assoc(Lead_Select_ById()); 
 					$Digits = array("","0", "00", "000", "0000", "00000", "000000");
 					$LDNo = "LD".$Digits[6 - strlen($Leads['id'])].($Leads['id']);	
 				}
@@ -382,28 +382,28 @@
 					<div style="padding-left:20em;"><legend>Primary Contact</legend></div><div style="padding-left:60em;margin-top:-15px;"><legend>Secondary Contact</legend></div>
 					<label>Contact Person Name: '.$Leads['contact_person1'].'</label>
 					<label>Contact Person Name: '.$Leads['contact_person2'].'</label>';
-					$Vendorcategorysummary = mysql_fetch_array(Vendor_Category_Name_Summary($Leads['vendor_category_id']));
+					$Vendorcategorysummary = mysqli_fetch_array(Vendor_Category_Name_Summary($Leads['vendor_category_id']));
 					echo '<label>Vendor Category : '.$Vendorcategorysummary['name'].'</label>
 					<label>Address: '.$Leads['address'].'</label>
 				</div>
 				<div class="clearfix">
 					<div style="padding-left:20em;"><label>Designation: '.$Leads['designation1'].'</label></div>
 					<label>Designation: '.$Leads['designation2'].'</label>';
-					$Referencesummary = mysql_fetch_array(Reference_Name_Summary($Leads['reference_id']));
+					$Referencesummary = mysqli_fetch_array(Reference_Name_Summary($Leads['reference_id']));
 				echo '<label>Referred By: '.$Referencesummary['reference'].'</label>
 				</div>
 				<div class="clearfix">
 					<label>Company Email: '.$Leads['email_id'].'</label>
 					<label>Contact Person Email: '.$Leads['email_id1'].'</label>
 					<label>Contact Person Email: '.$Leads['email_id2'].'</label>';
-					$ReferenceGroupsummary = mysql_fetch_array(Reference_GroupName_Summary($Leads['reference_group_id']));
+					$ReferenceGroupsummary = mysqli_fetch_array(Reference_GroupName_Summary($Leads['reference_group_id']));
 				echo '<label>Reference: '.$ReferenceGroupsummary['name'].'</label>
 				</div>
 				<div class="clearfix">
 				<label>Phone No. '.$Leads['contact_no'].'</label>
 				<label>Contact Person Phone No. '.$Leads['contact_no1'].'</label>
 				<label>Contact Person Phone No. '.$Leads['contact_no2'].'</label>';
-				$Industrycategorysummary = mysql_fetch_array(Industrycategory_Name_Summary($Leads['industry_category_id']));
+				$Industrycategorysummary = mysqli_fetch_array(Industrycategory_Name_Summary($Leads['industry_category_id']));
 			echo '<label>Industry: '.$Industrycategorysummary['name'].'</label>
 			</div>';
 			if($Leads['id'])
@@ -421,7 +421,7 @@
 		</form>
 	<h3>
 		<?php
-		$LeadcommentsTotalRows = mysql_fetch_assoc(Leadcomments_Select_Count_All());
+		$LeadcommentsTotalRows = mysqli_fetch_assoc(Leadcomments_Select_Count_All());
 		echo "No. of Updates - ".$LeadcommentsTotalRows['total'];
 		?>
 	</h3>
@@ -448,9 +448,9 @@
 			$i = $Start = ($_GET['pageno']-1)*$Limit;
 			$i++;
 			$LeadcommentsRows = Leadcomments_Select_ByLimit($Start, $Limit);
-			while($LeadComments = mysql_fetch_assoc($LeadcommentsRows))
+			while($LeadComments = mysqli_fetch_assoc($LeadcommentsRows))
 			{
-				$Updatedby = mysql_fetch_array(UpdatedBy_Name($LeadComments['updatedby']));
+				$Updatedby = mysqli_fetch_array(UpdatedBy_Name($LeadComments['updatedby']));
 				echo "<tr style='valign:middle;'>
 					<td align='center'>".$i++."</td>
 					<td>".$LeadComments['commentsdate']."</td>

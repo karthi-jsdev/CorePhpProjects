@@ -18,11 +18,11 @@
 		</thead>
 		<?php
 		$i=1;
-			$add_stock = mysql_query("SELECT rawmaterial.materialcode,category.name,rawmaterial.partnumber,rawmaterial.description,stock.quantity,stock.unitprice,stock.amount,stock.exciseamount FROM rawmaterial
+			$add_stock = mysqli_query($_SESSION['connection'],"SELECT rawmaterial.materialcode,category.name,rawmaterial.partnumber,rawmaterial.description,stock.quantity,stock.unitprice,stock.amount,stock.exciseamount FROM rawmaterial
 										inner join batch on batch.rawmaterialid=rawmaterial.id
 										inner join stock on stock.batchid=batch.id
 										inner join category on category.id=rawmaterial.categoryid");
-			while($stock = mysql_fetch_assoc($add_stock))
+			while($stock = mysqli_fetch_assoc($add_stock))
 			{
 				echo'
 					<tr>

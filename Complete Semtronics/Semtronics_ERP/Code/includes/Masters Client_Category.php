@@ -3,7 +3,7 @@
 		$Columns = array("id", "clientcategory");
 		if($_GET['action'] == 'Edit')
 		{
-			$Credit = mysql_fetch_assoc(Client_Category_Select_ById());
+			$Credit = mysqli_fetch_assoc(Client_Category_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Credit[$Col];
 		}
@@ -18,7 +18,7 @@
 				$Client_CategoryResource = Client_Category_Select_ByNamePWD();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($Client_CategoryResource))
+					if(mysqli_num_rows($Client_CategoryResource))
 						$message = "<br /><div class='message error'><b>Message</b> : Client Category already exists</div>";
 					else
 					{
@@ -28,8 +28,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$Client_Category = mysql_fetch_assoc($Client_CategoryResource);
-					if(mysql_num_rows(Client_Category_Select_ByNamePWDId()))
+					$Client_Category = mysqli_fetch_assoc($Client_CategoryResource);
+					if(mysqli_num_rows(Client_Category_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Client Category already exists</div>";
 					else
 					{
@@ -67,7 +67,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$Client_CategoryTotalRows = mysql_fetch_assoc(Client_Category_Count_All());
+				$Client_CategoryTotalRows = mysqli_fetch_assoc(Client_Category_Count_All());
 				echo "Total No. of Client Categories - ".$Client_CategoryTotalRows['total'];
 				?>
 			</h3>
@@ -93,7 +93,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$Client_CategoryRows = Client_Category_Select_ByLimit($Start, $Limit);
-					while($Client_Category = mysql_fetch_assoc($Client_CategoryRows))
+					while($Client_Category = mysqli_fetch_assoc($Client_CategoryRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

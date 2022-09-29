@@ -24,37 +24,37 @@ $i=1;
 <?php
 	if($_GET['id'])
 	{
-		$inventory = mysql_fetch_assoc(mysql_query("SELECT invoiceid,batchid,sum(quantity) as quantity,sum(amount) as amount FROM stockinventory WHERE invoiceid='".$_GET['id']."' group by invoiceid, batchid"));
+		$inventory = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT invoiceid,batchid,sum(quantity) as quantity,sum(amount) as amount FROM stockinventory WHERE invoiceid='".$_GET['id']."' group by invoiceid, batchid"));
 		
 		echo "SELECT count(stock.batchid ) AS total FROM stock JOIN stockinventory ON stock.batchid = stockinventory.batchid WHERE invoiceid ='".$inventory['invoiceid']."'";
-		$stock_value = mysql_fetch_assoc(mysql_query("SELECT count(stock.batchid ) AS total FROM stock JOIN stockinventory ON stock.batchid = stockinventory.batchid WHERE invoiceid ='".$inventory['invoiceid']."'"));
-		$stock_invoice = mysql_fetch_assoc(mysql_query("SELECT count(stockinventory.invoiceid ) AS total FROM stockinventory WHERE batchid ='".$inventory['batchid']."'"));
+		$stock_value = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT count(stock.batchid ) AS total FROM stock JOIN stockinventory ON stock.batchid = stockinventory.batchid WHERE invoiceid ='".$inventory['invoiceid']."'"));
+		$stock_invoice = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT count(stockinventory.invoiceid ) AS total FROM stockinventory WHERE batchid ='".$inventory['batchid']."'"));
 		if($stock_value['total']==1 && $stock_invoice['total']==1)
-			mysql_query("DELETE FROM stock where batchid in(SELECT batchid from stockinventory where invoiceid='".$_GET['id']."' && batchid='".$inventory['batchid']."')");
+			mysqli_query($_SESSION['connection'],"DELETE FROM stock where batchid in(SELECT batchid from stockinventory where invoiceid='".$_GET['id']."' && batchid='".$inventory['batchid']."')");
 		
 		else
 		{
-			$stock_value = mysql_fetch_assoc(mysql_query("SELECT * FROM stock WHERE batchid='".$inventory['batchid']."'"));
-			mysql_query("UPDATE stock set quantity='".$stock_value['quantity']."'-'".$inventory['quantity']."',amount='".$stock_value['amount']."'-'".$inventory['amount']."' WHERE batchid='".$inventory['batchid']."' ");
-			$stock_value = mysql_fetch_assoc(mysql_query("SELECT * FROM stock WHERE batchid='".$inventory['batchid']."'"));
-			mysql_query("UPDATE stock set unitprice='".$stock_value['amount']."'/'".$stock_value['quantity']."' WHERE batchid!='".$inventory['batchid']."'");
-			mysql_query("DELETE FROM stock where batchid in(SELECT batchid from stockinventory where invoiceid='".$_GET['id']."' && batchid!='".$inventory['batchid']."')");
+			$stock_value = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM stock WHERE batchid='".$inventory['batchid']."'"));
+			mysqli_query($_SESSION['connection'],"UPDATE stock set quantity='".$stock_value['quantity']."'-'".$inventory['quantity']."',amount='".$stock_value['amount']."'-'".$inventory['amount']."' WHERE batchid='".$inventory['batchid']."' ");
+			$stock_value = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM stock WHERE batchid='".$inventory['batchid']."'"));
+			mysqli_query($_SESSION['connection'],"UPDATE stock set unitprice='".$stock_value['amount']."'/'".$stock_value['quantity']."' WHERE batchid!='".$inventory['batchid']."'");
+			mysqli_query($_SESSION['connection'],"DELETE FROM stock where batchid in(SELECT batchid from stockinventory where invoiceid='".$_GET['id']."' && batchid!='".$inventory['batchid']."')");
 		}
-		/* $stock_value = mysql_fetch_assoc(mysql_query("SELECT count(stockissuance.batchid ) AS total FROM stockissuance JOIN stockinventory ON stockissuance.batchid = stockinventory.batchid WHERE invoiceid ='".$inventory['invoiceid']."'"));
+		/* $stock_value = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT count(stockissuance.batchid ) AS total FROM stockissuance JOIN stockinventory ON stockissuance.batchid = stockinventory.batchid WHERE invoiceid ='".$inventory['invoiceid']."'"));
 		if($stock_value['total']==1)
-			mysql_query("DELETE FROM stock where batchid in(SELECT batchid from stockinventory where invoiceid='".$_GET['id']."' && batchid='".$inventory['batchid']."')");
+			mysqli_query($_SESSION['connection'],"DELETE FROM stock where batchid in(SELECT batchid from stockinventory where invoiceid='".$_GET['id']."' && batchid='".$inventory['batchid']."')");
 		else
 		{
-			$stock_value = mysql_fetch_assoc(mysql_query("SELECT * FROM stockissuance WHERE batchid='".$inventory['batchid']."'"));
-			mysql_query("UPDATE stockissuance set quantity='".$stock_value['quantity']."'-'".$inventory['quantity']."',amount='".$stock_value['amount']."'-'".$inventory['amount']."' WHERE batchid='".$inventory['batchid']."' ");
-			$stock_value = mysql_fetch_assoc(mysql_query("SELECT * FROM stock WHERE batchid='".$inventory['batchid']."'"));
-			mysql_query("UPDATE stockissuance set unitprice='".$stock_value['amount']."'/'".$stock_value['quantity']."' WHERE batchid='".$inventory['batchid']."'");
-			mysql_query("DELETE FROM stockissuance where batchid in(SELECT batchid from stockinventory where invoiceid='".$_GET['id']."' && batchid!='".$inventory['batchid']."')");
+			$stock_value = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM stockissuance WHERE batchid='".$inventory['batchid']."'"));
+			mysqli_query($_SESSION['connection'],"UPDATE stockissuance set quantity='".$stock_value['quantity']."'-'".$inventory['quantity']."',amount='".$stock_value['amount']."'-'".$inventory['amount']."' WHERE batchid='".$inventory['batchid']."' ");
+			$stock_value = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM stock WHERE batchid='".$inventory['batchid']."'"));
+			mysqli_query($_SESSION['connection'],"UPDATE stockissuance set unitprice='".$stock_value['amount']."'/'".$stock_value['quantity']."' WHERE batchid='".$inventory['batchid']."'");
+			mysqli_query($_SESSION['connection'],"DELETE FROM stockissuance where batchid in(SELECT batchid from stockinventory where invoiceid='".$_GET['id']."' && batchid!='".$inventory['batchid']."')");
 		} */
-		mysql_query("DELETE FROM stockinventory WHERE invoiceid='".$_GET['id']."'");
-		mysql_query("DELETE FROM invoice WHERE invoice.id='".$_GET['id']."'");
+		mysqli_query($_SESSION['connection'],"DELETE FROM stockinventory WHERE invoiceid='".$_GET['id']."'");
+		mysqli_query($_SESSION['connection'],"DELETE FROM invoice WHERE invoice.id='".$_GET['id']."'");
 	}
-	$TotalRows = mysql_fetch_assoc(Stock_Status_Summary_Count());
+	$TotalRows = mysqli_fetch_assoc(Stock_Status_Summary_Count());
 	if($TotalRows['total']==0)
 		echo '<td style="color:red;" colspan=14><center>No Data Found</center></td>';
 	$Limit = 10;
@@ -65,8 +65,8 @@ $i=1;
 	$i++;
 	$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");		
 	$summary = Stock_Status_Summary($Start,$Limit);
-	echo "<br/><h3>INVOICE SUMMARY:Total Number of Invoices #".mysql_num_rows($summary).'</h3><br/>';
-	while($stock_summary = mysql_fetch_assoc($summary))
+	echo "<br/><h3>INVOICE SUMMARY:Total Number of Invoices #".mysqli_num_rows($summary).'</h3><br/>';
+	while($stock_summary = mysqli_fetch_assoc($summary))
 	{
 		if($stock_summary['excise'] == 0)
 			$totalamount = $stock_summary['amount']+$stock_summary['taxamount'];

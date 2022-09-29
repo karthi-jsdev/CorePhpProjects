@@ -5,7 +5,7 @@
 		echo "<h3>Please add Issuance or Select Summary to view Issuance Status</h3>";
 	else
 	{
-		$TotalIssuance = mysql_fetch_assoc(Count_All_Issuance_ById());
+		$TotalIssuance = mysqli_fetch_assoc(Count_All_Issuance_ById());
 		echo "<h3>Issuance Code : ".$_GET['number'].", Total Raw Materials : ".$TotalIssuance['total']."</h3>";
 			echo '<div align="right"><a href="" title="Download" onclick=\'Export_Data("getdata=Issuance_Status_Report")\'><img src="images/icons/download.png"></a></div>';
 		?>
@@ -36,7 +36,7 @@
 				$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 				
 				$Issuances = Select_Issuance_ByLimit($Start, $Limit);
-				while($Issuance = mysql_fetch_assoc($Issuances))
+				while($Issuance = mysqli_fetch_assoc($Issuances))
 				{
 					echo "<tr style='valign:middle;'>
 						<td align='center'>".++$i."</td>

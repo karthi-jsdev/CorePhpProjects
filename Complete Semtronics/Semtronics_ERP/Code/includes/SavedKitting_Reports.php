@@ -4,11 +4,11 @@
 				<fieldset>
 					<div class="clearfix">
 						<label>Product Category<font color="red">*</font>
-						<?php $SelectProductCode = mysql_query("select * from product_category");?>
+						<?php $SelectProductCode = mysqli_query($_SESSION['connection'],"select * from product_category");?>
 						<select name="productcode" id="productcode" onchange="product_subcategory();">
 							<option value="">Select</option>
 							<?php
-								while($FetchProductCode = mysql_fetch_array($SelectProductCode))
+								while($FetchProductCode = mysqli_fetch_array($SelectProductCode))
 								{
 									if($_POST['productcode']==$FetchProductCode['id'])
 										echo '<option value="'.$FetchProductCode['id'].'" selected>'.$FetchProductCode['name'].'</option>';
@@ -27,7 +27,7 @@
 								$_GET['product_category_id'] = $_POST['productcode'];
 								$product_sub = Product_Subcategory();
 								$productsubcategory = explode("/",$_POST['product_subcategory_id']);
-								while($product_subvalue = mysql_fetch_assoc($product_sub))
+								while($product_subvalue = mysqli_fetch_assoc($product_sub))
 								{
 									if($productsubcategory[0]==$product_subvalue['id'])
 										echo '<option value="'.$product_subvalue['id'].'" selected>'.$product_subvalue['name'].'</option>';
@@ -47,7 +47,7 @@
 								$_GET['product_subcategory_id'] = $_POST['product_subcategory_id'];
 								$product = Product1();
 								$productexplode = explode("/",$_POST['productid']);
-								while($product_value = mysql_fetch_assoc($product))
+								while($product_value = mysqli_fetch_assoc($product))
 								{
 									if($productexplode[0]==$product_value['id'])
 										echo '<option value="'.$product_value['id'].'" selected>'.$product_value['code'].'</option>';
@@ -63,12 +63,12 @@
 								<select name="kittingname" id="kittingname">
 									<option value="">Select</option>
 									<?php
-									$FetchProductCode = mysql_fetch_array(mysql_query("Select * From product Where id='".$_GET['productid']."'"));
-									$Select_Kitting  = mysql_query("Select * From kitting "); 
+									$FetchProductCode = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From product Where id='".$_GET['productid']."'"));
+									$Select_Kitting  = mysqli_query($_SESSION['connection'],"Select * From kitting "); 
 									if($_POST['kittingname'])
 									{
 										$Kitting = array();
-										while($FetchKittingName = mysql_fetch_array($Select_Kitting))
+										while($FetchKittingName = mysqli_fetch_array($Select_Kitting))
 										{
 											if(!in_array($FetchKittingName['kittingname'],$Kitting))
 											{
@@ -91,7 +91,7 @@
 				<hr />
 			</form>
 		<?php
-		if($_POST['kittingname'] && mysql_num_rows(mysql_query("Select * From kitting where kittingname='".$_POST['kittingname']."'")))
+		if($_POST['kittingname'] && mysqli_num_rows(mysqli_query($_SESSION['connection'],"Select * From kitting where kittingname='".$_POST['kittingname']."'")))
 		{ ?>
 				
 			<table class="paginate sortable full">
@@ -114,9 +114,9 @@
 				</thead>
 		<div align="right"><a href="#" title="Download" onclick='Export_Data("getdata=KittingName_Report")'><img src="images/icons/download.png"></a></div>
 			<?php	
-			$SelectKittingData = mysql_query("Select * From kitting where kittingname='".$_POST['kittingname']."'");
+			$SelectKittingData = mysqli_query($_SESSION['connection'],"Select * From kitting where kittingname='".$_POST['kittingname']."'");
 			$i = 1;
-			while($FetchKittingData = mysql_fetch_array($SelectKittingData))
+			while($FetchKittingData = mysqli_fetch_array($SelectKittingData))
 			{
 				echo '<tr>
 						<td>'.$i++.'</td>

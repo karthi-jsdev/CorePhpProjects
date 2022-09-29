@@ -16,7 +16,7 @@
 		
 	if($_GET['getdata']=='Lead_Report')
 	{ 
-	$LeadTotalRows = mysql_fetch_assoc(Lead_Select_Count_All());
+	$LeadTotalRows = mysqli_fetch_assoc(Lead_Select_Count_All());
 		echo "<h4>Total No. of Leads - ".$LeadTotalRows['total']."</h4>";
 	?>	
 	<div style="width: 1000px; overflow-x: auto;" >
@@ -51,12 +51,12 @@
 					$i = 1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$LeadRows = Lead_Select_ByNoLimit();
-					while($Lead = mysql_fetch_assoc($LeadRows))
+					while($Lead = mysqli_fetch_assoc($LeadRows))
 					{
-						$Clientcategory = mysql_fetch_array(Client_Category_Name($Lead['client_category_id']));
-						$Reference = mysql_fetch_array(Reference_Name($Lead['reference_id']));
-						$ReferenceGroup = mysql_fetch_array(Reference_GroupName($Lead['reference_group_id']));
-						$Industrycategory = mysql_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
+						$Clientcategory = mysqli_fetch_array(Client_Category_Name($Lead['client_category_id']));
+						$Reference = mysqli_fetch_array(Reference_Name($Lead['reference_id']));
+						$ReferenceGroup = mysqli_fetch_array(Reference_GroupName($Lead['reference_group_id']));
+						$Industrycategory = mysqli_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
 						$Digits = array("","0", "00", "000", "0000", "00000", "000000");
 						$LDNo = "LD".$Digits[6 - strlen($Lead['id'])].($Lead['id']);
 						echo "<tr style='valign:middle;'>

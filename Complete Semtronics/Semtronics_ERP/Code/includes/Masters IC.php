@@ -3,24 +3,24 @@
 		include('Config.php');
 		if(isset($_POST['Submit']))
 		{
-			mysql_query("INSERT INTO ic(ic,indexvalue) VALUES ('".$_POST['ic']."','".$_POST['indexvalue']."')");
+			mysqli_query($_SESSION['connection'],"INSERT INTO ic(ic,indexvalue) VALUES ('".$_POST['ic']."','".$_POST['indexvalue']."')");
 			$_POST['ic'] = "";
 			$_POST['indexvalue'] = "";
 		}
 		else if($_POST['Update'])
 		{
-			mysql_query("UPDATE ic SET ic='".$_POST['ic']."',indexvalue='".$_POST['indexvalue']."' WHERE id='".$_POST['id']."'");
+			mysqli_query($_SESSION['connection'],"UPDATE ic SET ic='".$_POST['ic']."',indexvalue='".$_POST['indexvalue']."' WHERE id='".$_POST['id']."'");
 			$_POST['ic'] = "";
 			$_POST['indexvalue'] = "";
 		}
 		if($_GET['id'] && $_GET['action']=='Edit')
 		{
-			$values = mysql_fetch_assoc(mysql_query("SELECT * FROM ic WHERE id='".$_GET['id']."'"));
+			$values = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM ic WHERE id='".$_GET['id']."'"));
 			$_POST['ic'] = $values['ic'];
 			$_POST['indexvalue'] = $values['indexvalue'];
 		}
 		if($_GET['id'] && $_GET['action']=='Delete')
-			mysql_query("DELETE FROM ic WHERE id='".$_GET['id']."'");
+			mysqli_query($_SESSION['connection'],"DELETE FROM ic WHERE id='".$_GET['id']."'");
 	?>
 	<div class="columns" style='width:902px;'>
 		<?php echo $message; ?>
@@ -62,8 +62,8 @@
 				<tbody>
 					<?php
 						$i=1;
-						$enabledisable = mysql_query("SELECT * FROM ic");
-						while($edisable = mysql_fetch_assoc($enabledisable))
+						$enabledisable = mysqli_query($_SESSION['connection'],"SELECT * FROM ic");
+						while($edisable = mysqli_fetch_assoc($enabledisable))
 						{
 							echo'<tr>
 									<td>'.$i++.'</td>

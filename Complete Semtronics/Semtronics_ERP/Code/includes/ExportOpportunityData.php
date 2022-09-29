@@ -10,7 +10,7 @@
 		/*echo '<div style="float:left">
 		<img src="http://localhost/Semtronics_ERP/Code/images/semtronics1.png" alt="semtronics" width="30%" height="10%"/>
 		</div><br />';*/
-		$Opportunityname = mysql_fetch_assoc(mysql_query("SELECT oppurtunity_status.status as statusname, status,MAX(status_id) as s,oppurtunities.id, leads.name, product.description, oppurtunities.description AS opp_description, oppurtunities.quantity, oppurtunities.`date` , oppurtunities.contact_person, oppurtunities.designation, oppurtunities.email_id, oppurtunities.contact_no, oppurtunities.company
+		$Opportunityname = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT oppurtunity_status.status as statusname, status,MAX(status_id) as s,oppurtunities.id, leads.name, product.description, oppurtunities.description AS opp_description, oppurtunities.quantity, oppurtunities.`date` , oppurtunities.contact_person, oppurtunities.designation, oppurtunities.email_id, oppurtunities.contact_no, oppurtunities.company
 										FROM oppurtunities
 										INNER JOIN leads ON lead_id = leads.id
 										INNER JOIN product ON oppurtunities.product_id = product.id
@@ -25,14 +25,14 @@
 	{ 
 		if($_GET['status_id'])
 		{
-			$Allstatus = mysql_query("SELECT status,MAX(status_id) as s,oppurtunities.id, leads.name, product.description, oppurtunities.description AS opp_description, oppurtunities.quantity, oppurtunities.`date` , oppurtunities.contact_person, oppurtunities.designation, oppurtunities.email_id, oppurtunities.contact_no, oppurtunities.company
+			$Allstatus = mysqli_query($_SESSION['connection'],"SELECT status,MAX(status_id) as s,oppurtunities.id, leads.name, product.description, oppurtunities.description AS opp_description, oppurtunities.quantity, oppurtunities.`date` , oppurtunities.contact_person, oppurtunities.designation, oppurtunities.email_id, oppurtunities.contact_no, oppurtunities.company
 										FROM oppurtunities
 										INNER JOIN leads ON lead_id = leads.id
 										INNER JOIN product ON oppurtunities.product_id = product.id
 										INNER JOIN oppurtunities_comments ON oppurtunities_id = oppurtunities.id
 										INNER JOIN oppurtunity_status ON status_id = oppurtunity_status.id
 										GROUP BY oppurtunities_id having s='".$_GET['status_id']."' ORDER BY oppurtunities_id DESC");
-			echo "<h4>Total Number of Opportunites -". mysql_num_rows($Allstatus)."</h4>";
+			echo "<h4>Total Number of Opportunites -". mysqli_num_rows($Allstatus)."</h4>";
 			echo '<table class="paginate sortable full" border="1">
 			<thead>
 				<tr>
@@ -50,9 +50,9 @@
 					<th>Status</th>
 				</tr>
 			</thead>';
-			if(!mysql_num_rows($Allstatus))
+			if(!mysqli_num_rows($Allstatus))
 				echo '<tr><td colspan="11"><font color="red"><center>No data found</center></font></td></tr>';							
-			while($Status = mysql_fetch_array($Allstatus))
+			while($Status = mysqli_fetch_array($Allstatus))
 			{
 				$Work_d = $Status['id'];
 				if(strlen($Work_d)==1)

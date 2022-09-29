@@ -23,7 +23,7 @@
 						<option value="">All</option>
 						<?php
 						$Users = Select_All_Users();
-						while($User = mysql_fetch_assoc($Users))
+						while($User = mysqli_fetch_assoc($Users))
 						{
 							if($User['id'] == $_POST['issuedto'])
 								echo "<option value='".$User['id']."' selected>".$User['issuanceuser']."</option>";

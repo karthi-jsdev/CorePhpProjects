@@ -19,7 +19,7 @@ if(isset($_GET['export']))
 	<div class="columns">
 			<h3>
 				<?php
-				$ProductTotalRows = mysql_fetch_assoc(Product_Select_Count_All());
+				$ProductTotalRows = mysqli_fetch_assoc(Product_Select_Count_All());
 				?>
 			</h3>			
 			<table class="paginate sortable full" style="width:1000px;" border="1">
@@ -49,7 +49,7 @@ if(isset($_GET['export']))
 						echo '<tr><td colspan="7"><font color="red"><center>No data found</center></font></td></tr>';
 					$i=1;
 					$ProductRows = Product_Select_ByNoLimit();
-					while($Product = mysql_fetch_assoc($ProductRows))
+					while($Product = mysqli_fetch_assoc($ProductRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

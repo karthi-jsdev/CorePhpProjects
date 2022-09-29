@@ -11,7 +11,7 @@
 		/*echo '<div style="float:left">
 		<img src="http://localhost/Semtronics_ERP/Code/images/semtronics1.png" alt="semtronics" width="30%" height="10%"/>
 		</div><br />';*/
-		$vendorname = mysql_fetch_assoc(mysql_query("SELECT * FROM vendorcategory WHERE id= '".$_GET["vendor_category_id"]."'"));
+		$vendorname = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM vendorcategory WHERE id= '".$_GET["vendor_category_id"]."'"));
 		echo '<div align="center">
 		<h4>Vendor Name:'.$vendorname['name'].'</div><div align="right">Report Date:'.date("d-m-Y").'
 		</h4></div>';
@@ -36,7 +36,7 @@
 	</thead>
 	<tbody>
 	<?php
-	$VendorTotalRows = mysql_fetch_assoc(VendorsCategory_Count());
+	$VendorTotalRows = mysqli_fetch_assoc(VendorsCategory_Count());
 	//echo "<h4>Vendor Status: Total Number of Vendors - ".$VendorTotalRows["total"]."</h4>";
 		if(!$VendorTotalRows['total'])
 			echo '<tr><td colspan="11"><font color="red"><center>No data found</center></font></td></tr>';
@@ -49,10 +49,10 @@
 		$i=1;
 		//$VendorRows = Vendor_Category_Select_ByLimit($Start, $Limit);
 		$VendorRows = Vendor_Category_Select_ByLimit();
-		while($Vendor = mysql_fetch_assoc($VendorRows))
+		while($Vendor = mysqli_fetch_assoc($VendorRows))
 		{
 			$CreditIdExplode = explode('.',$Vendor['categoryid']);
-			$FetchCreditPeriod = mysql_fetch_array(FetchCreditPeriodById($Vendor['creditperiodid']));
+			$FetchCreditPeriod = mysqli_fetch_array(FetchCreditPeriodById($Vendor['creditperiodid']));
 			echo "<tr style='valign:middle;'>
 				<td align='center'>".$i++."</td>
 				<td>".$Vendor['vendorid']."</td>
@@ -61,7 +61,7 @@
 				foreach($CreditIdExplode as $CreditId)	
 				{
 					$I -= 1;
-					$FetchCreditId = mysql_fetch_array(Select_VendorCategoryById($CreditId));
+					$FetchCreditId = mysqli_fetch_array(Select_VendorCategoryById($CreditId));
 					echo $FetchCreditId['name'];
 					if($I)
 						echo ',';

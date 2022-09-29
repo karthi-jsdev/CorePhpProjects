@@ -2,13 +2,13 @@
 	<fieldset>
 		<div class="clearfix" style="width:1000px;">
 			<?php
-				$productcode = mysql_query("SELECT * FROM products");
+				$productcode = mysqli_query($_SESSION['connection'],"SELECT * FROM products");
 			?>
 			<label>Product Code <font color="red">*</font>
 				<select id="productcode" name="productcode" onchange="product_subcategory()">
 					<option value="">Select</option>
 					<?php
-						while($productcodes = mysql_fetch_array($productcode))
+						while($productcodes = mysqli_fetch_array($productcode))
 						{
 							if($_POST['productcode'] == $productcodes['id'])
 								echo '<option value="'.$productcodes['id'].'" selected>'.$productcodes['productcode'].'</option>';
@@ -27,7 +27,7 @@
 	<div class="columns">
 		<h3>
 			<?php
-			$ProductTotalRows = mysql_fetch_assoc(Product_Select_Count_All());
+			$ProductTotalRows = mysqli_fetch_assoc(Product_Select_Count_All());
 			echo "<h4>Total No. of Products - ".$ProductTotalRows['total']."</h4>";
 			if(!$_POST['productcode'])
 				echo '<div align="right"><a href="#" title="Download" onclick=\'Export_Data()\'><img src="images/icons/download.png"></a></div>';
@@ -64,7 +64,7 @@
 				if($_POST['productcode'])
 				{
 					$ProductRows = Product_Select_Subcategory_ByNoLimit();
-					while($Product = mysql_fetch_assoc($ProductRows))
+					while($Product = mysqli_fetch_assoc($ProductRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
@@ -89,7 +89,7 @@
 				else
 				{
 					$ProductRows = Product_Select_ByNoLimit();
-					while($Product = mysql_fetch_assoc($ProductRows))
+					while($Product = mysqli_fetch_assoc($ProductRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

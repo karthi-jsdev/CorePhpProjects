@@ -9,7 +9,7 @@ if($_GET['bom_category'])
 	<select name="rawmaterialid" id="rawmaterialid">
 		<option value="">Select</option>
 		<?php
-		while($brawmaterial = mysql_fetch_assoc($bomrawmaterial))
+		while($brawmaterial = mysqli_fetch_assoc($bomrawmaterial))
 		{
 			echo '<option value="'.$brawmaterial['id'].'">'.$brawmaterial['materialcode'].'</option>';
 		} ?>

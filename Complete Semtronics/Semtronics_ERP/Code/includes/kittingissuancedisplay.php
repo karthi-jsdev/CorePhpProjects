@@ -2,7 +2,7 @@
 include("config.php");
 if($_GET['productid'] && $_GET['issuedto'])
 {
-	$kittinglist = mysql_query("SELECT materialcode,rawmaterial.id,productbom.quantity as qty,productbom.productcode,sum(stockinventory.quantity) as quantity,sum(stockissuance.quantity) as squantity
+	$kittinglist = mysqli_query($_SESSION['connection'],"SELECT materialcode,rawmaterial.id,productbom.quantity as qty,productbom.productcode,sum(stockinventory.quantity) as quantity,sum(stockissuance.quantity) as squantity
 									FROM rawmaterial 
 									join batch on batch.rawmaterialid=rawmaterial.id 
 									join stockinventory on stockinventory.batchid=batch.id
@@ -12,7 +12,7 @@ if($_GET['productid'] && $_GET['issuedto'])
 									join productbom on productbom.rawmaterialid=rawmaterial.id
 									join products on products.id=productbom.productcode 
 									where productbom.productcode='".$_GET['productid']."' && issuedto='".$_GET['issuedto']."' stockinventory.inspection='1' group by rawmaterial.id");
-	while($kitting_list = mysql_fetch_assoc($kittinglist))
+	while($kitting_list = mysqli_fetch_assoc($kittinglist))
 	{
 		echo '<tr>
 				<td>'.$kitting_list['materialcode'].'</td>

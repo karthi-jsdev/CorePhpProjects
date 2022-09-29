@@ -6,7 +6,7 @@
 					<option value="">All</option>
 					<?php 
 						$vendor_category = vendor_category_name();
-						while($vendor_category_number = mysql_fetch_assoc($vendor_category))
+						while($vendor_category_number = mysqli_fetch_assoc($vendor_category))
 						{
 							if($_GET['vendor_category_id']==$vendor_category_number['id'])
 								echo '<option value="'.$vendor_category_number['id'].'" selected="selected">'.$vendor_category_number['name'].'</option>';
@@ -25,7 +25,7 @@
 	{ ?>
 		<section role="main" id="main">
 		<?php
-		$VendorTotalRows = mysql_fetch_assoc(Vendors_Count());
+		$VendorTotalRows = mysqli_fetch_assoc(Vendors_Count());
 		echo "<h4>Vendor Status: Total Number of Vendors - ".$VendorTotalRows["total"]."</h4>";
 		echo '<div align="right"><a href="" title="Download" onclick=\'Export_Vendor_Data()\'><img src="images/icons/download.png"></a></div>';
 			if($VendorTotalRows["total"])
@@ -61,10 +61,10 @@
 						//$VendorRows = Vendor_Select_ByLimit($Start, $Limit);
 						$i=1;
 						$VendorRows = Vendor_Select_ByLimit();
-						while($Vendor = mysql_fetch_assoc($VendorRows))
+						while($Vendor = mysqli_fetch_assoc($VendorRows))
 						{
 							$CreditIdExplode = explode('.',$Vendor['categoryid']);
-							$FetchCreditPeriod = mysql_fetch_array(FetchCreditPeriodById($Vendor['creditperiodid']));
+							$FetchCreditPeriod = mysqli_fetch_array(FetchCreditPeriodById($Vendor['creditperiodid']));
 							echo "<tr style='valign:middle;'>
 								<td align='center'>".$i++."</td>
 								<td>".$Vendor['vendorid']."</td>
@@ -73,7 +73,7 @@
 								foreach($CreditIdExplode as $CreditId)	
 								{
 									$I -= 1;
-									$FetchCreditId = mysql_fetch_array(Select_VendorCategoryById($CreditId));
+									$FetchCreditId = mysqli_fetch_array(Select_VendorCategoryById($CreditId));
 									echo $FetchCreditId['name'];
 									if($I)
 										echo ',';

@@ -5,60 +5,60 @@
 		{
 			$productcode = "LIKE '%S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."%'";
 			if(strlen($_POST['ranges'])==3)
-				$productvalues = mysql_fetch_array(mysql_query("SELECT count(*) as total FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='3' ORDER BY id DESC"));
+				$productvalues = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT count(*) as total FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='3' ORDER BY id DESC"));
 			else if(strlen($_POST['ranges'])==4 && ($_POST['ranges']>=1200&&$_POST['ranges']<=2000))
-				$productvalues = mysql_fetch_array(mysql_query("SELECT count(*) as total FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='4' ORDER BY id DESC"));
+				$productvalues = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT count(*) as total FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='4' ORDER BY id DESC"));
 			else if(strlen($_POST['ranges'])==4 && ($_POST['ranges']>=1000&&$_POST['ranges']<=1199))
-				$productvalues = mysql_fetch_array(mysql_query("SELECT count(*) as total FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='4' ORDER BY id DESC"));
+				$productvalues = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT count(*) as total FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='4' ORDER BY id DESC"));
 			$productcodeA = array();
 			$productcodeA = $productvalues['productcode'];
 			$productcodes = "S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."";
-			$values = mysql_num_rows(mysql_query("SELECT * FROM products WHERE productcode ".$productcode." && ranges='".$_POST['ranges']."'"));
+			$values = mysqli_num_rows(mysqli_query($_SESSION['connection'],"SELECT * FROM products WHERE productcode ".$productcode." && ranges='".$_POST['ranges']."'"));
 			if($values>0)
 				echo "<br/><div class='message error'><b>Message</b> :Product Code and Ranges already exists.Please change</div>";
 			else
 			{
 				//if($productvalues['total']==0 && ($productvalues['productcode'] != $productcodes &&  $productvalues['ranges']!=$_POST['ranges']))
 				if($productvalues['total']==0)
-					mysql_query("INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."','".$_POST['ranges']."-')");
+					mysqli_query($_SESSION['connection'],"INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."','".$_POST['ranges']."-')");
 				
 				else if($productvalues['total']>1 && (strlen($_POST['ranges'])==3))
 				{
-					$rangelimit = mysql_fetch_array(mysql_query("SELECT * FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='3' ORDER BY id DESC LIMIT 0,1"));
+					$rangelimit = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='3' ORDER BY id DESC LIMIT 0,1"));
 					$productcodes = array();
 					$productcodes = $rangelimit['productcode'];
 					$proincrement = $productcodes[7];
 					$asciicodes = ord($proincrement)+1;
 					$asciivalue = chr($asciicodes);
-					mysql_query("INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."-".$asciivalue."','".$_POST['ranges']."')");
+					mysqli_query($_SESSION['connection'],"INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."-".$asciivalue."','".$_POST['ranges']."')");
 					$_POST['ranges'] = "";
 				}
 				else if((strlen($_POST['ranges'])==4) && $productvalues['total']>1 && ($_POST['ranges']>=1200&&$_POST['ranges']<=2000))
 				{
-					$rangelimit = mysql_fetch_array(mysql_query("SELECT * FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='4' ORDER BY id DESC LIMIT 0,1"));
+					$rangelimit = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='4' ORDER BY id DESC LIMIT 0,1"));
 					$productcodes = array();
 					$productcodes = $rangelimit['productcode'];
 					$proincrement = $productcodes[8];
 					$asciicodes = ord($proincrement)+1;
 					$asciivalue = chr($asciicodes);
-					mysql_query("INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."-".$asciivalue."','".$_POST['ranges']."')");
+					mysqli_query($_SESSION['connection'],"INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."-".$asciivalue."','".$_POST['ranges']."')");
 					$_POST['ranges'] = "";
 				}
 				else if((strlen($_POST['ranges'])==4) && $productvalues['total']>1 && ($_POST['ranges']>=1000&&$_POST['ranges']<=1199))
 				{ 
-					$rangelimit = mysql_fetch_array(mysql_query("SELECT * FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='4' ORDER BY id DESC LIMIT 0,1"));
+					$rangelimit = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='4' ORDER BY id DESC LIMIT 0,1"));
 					$productcodes = array();
 					$productcodes = $rangelimit['productcode'];
 					$proincrement = $productcodes[8];
 					$asciicodes = ord($proincrement)+1;
 					$asciivalue = chr($asciicodes);
-					mysql_query("INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."-".$asciivalue."','".$_POST['ranges']."')");
+					mysqli_query($_SESSION['connection'],"INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."-".$asciivalue."','".$_POST['ranges']."')");
 					$_POST['ranges'] = "";
 				}
 				else if($productvalues['total']==1)
 				{
 					$asciivalue = 'A';
-					mysql_query("INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."-".$asciivalue."','".$_POST['ranges']."')");
+					mysqli_query($_SESSION['connection'],"INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."-".$asciivalue."','".$_POST['ranges']."')");
 					$_POST['drivertype'] = "";
 					$_POST['structure'] = "";
 					$_POST['ic'] = "";
@@ -68,11 +68,11 @@
 				}
 			}
 		}
-			/* $productvalues = mysql_fetch_array(mysql_query("SELECT * FROM products WHERE ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && (length(ranges)='3' || length(ranges)='4') ORDER BY id DESC LIMIT 0,1"));
+			/* $productvalues = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM products WHERE ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && (length(ranges)='3' || length(ranges)='4') ORDER BY id DESC LIMIT 0,1"));
 			$productcodeA = array();
 			$productcodeA = $productvalues['productcode'];
 			$productcode = "'S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."'";
-			$values = mysql_num_rows(mysql_query("SELECT * FROM products WHERE productcode='".$productvalues['productcode']."' && ranges='".$_POST['ranges']."'"));
+			$values = mysqli_num_rows(mysqli_query($_SESSION['connection'],"SELECT * FROM products WHERE productcode='".$productvalues['productcode']."' && ranges='".$_POST['ranges']."'"));
 			$productcodes = "S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."";
 			if($values>0)
 				echo "<br/><div class='message error'><b>Message</b> :Product Code and Ranges already exists.Please change</div>";
@@ -81,7 +81,7 @@
 				$zerocount = substr_count($_POST['ranges'],0);
 				if($zerocount==2)
 				{
-					mysql_query("INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."','".$_POST['ranges']."')");
+					mysqli_query($_SESSION['connection'],"INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."','".$_POST['ranges']."')");
 					$_POST['drivertype'] = "";
 					$_POST['structure'] = "";
 					$_POST['ic'] = "";
@@ -91,7 +91,7 @@
 				}
 				else if($_POST['ranges']==1000 || $_POST['ranges']==2000)
 				{
-					mysql_query("INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."','".$_POST['ranges']."')");
+					mysqli_query($_SESSION['connection'],"INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."','".$_POST['ranges']."')");
 					$_POST['drivertype'] = "";
 					$_POST['structure'] = "";
 					$_POST['ic'] = "";
@@ -101,7 +101,7 @@
 				}
 				else if($zerocount==2 && strlen($_POST['ranges'])==4 && )
 				{
-					mysql_query("INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."','".$_POST['ranges']."')");
+					mysqli_query($_SESSION['connection'],"INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."','".$_POST['ranges']."')");
 					$_POST['drivertype'] = "";
 					$_POST['structure'] = "";
 					$_POST['ic'] = "";
@@ -111,29 +111,29 @@
 				}
 				else if(strlen($_POST['ranges'])==3 && ($productvalues['productcode']!=$productcodes && $productvalues['ranges']!=$_POST['ranges']))
 				{
-					$rangelimit = mysql_fetch_array(mysql_query("SELECT * FROM products WHERE ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='3' ORDER BY id DESC LIMIT 0,1"));
+					$rangelimit = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM products WHERE ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='3' ORDER BY id DESC LIMIT 0,1"));
 					$productcodes = array();
 					$productcodes = $rangelimit['productcode'];
 					$proincrement = $productcodes[6];
 					$asciicodes = ord($proincrement)+1;
 					$asciivalue = chr($asciicodes);
-					mysql_query("INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."".$asciivalue."','".$_POST['ranges']."')");
+					mysqli_query($_SESSION['connection'],"INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."".$asciivalue."','".$_POST['ranges']."')");
 					$_POST['ranges'] = "";
 				}
 				else if(strlen($_POST['ranges'])==4 && ($productvalues['productcode']!=$productcodes && $productvalues['ranges']!=$_POST['ranges']))
 				{
-					$rangelimit = mysql_fetch_array(mysql_query("SELECT * FROM products WHERE ranges LIKE '%".substr($_POST['ranges'],0,2)."%' && length(ranges)='4' ORDER BY id DESC LIMIT 0,1"));
+					$rangelimit = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM products WHERE ranges LIKE '%".substr($_POST['ranges'],0,2)."%' && length(ranges)='4' ORDER BY id DESC LIMIT 0,1"));
 					$productascii = array();
 					$productascii = $rangelimit['productcode'];
 					$proincrement = $productascii[7];
 					$asciicodes = ord($proincrement)+1;
 					$asciivalue = chr($asciicodes);
-					mysql_query("INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."".$asciivalue."','".$_POST['ranges']."')");
+					mysqli_query($_SESSION['connection'],"INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."".$asciivalue."','".$_POST['ranges']."')");
 				}
 				else
 				{
 					$asciivalue = 'A';
-					mysql_query("INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."".$asciivalue."','".$_POST['ranges']."')");
+					mysqli_query($_SESSION['connection'],"INSERT INTO products VALUES ('','S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."".$asciivalue."','".$_POST['ranges']."')");
 					$_POST['drivertype'] = "";
 					$_POST['structure'] = "";
 					$_POST['ic'] = "";
@@ -148,62 +148,62 @@
 			$productcod = "LIKE '%S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."%'";
 			echo "SELECT count(*) as total FROM products WHERE productcode ".$productcod." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='3' ORDER BY id DESC";
 			if(strlen($_POST['ranges'])==3)
-				$productvalues = mysql_fetch_array(mysql_query("SELECT count(*) as total FROM products WHERE productcode ".$productcod." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='3' ORDER BY id DESC"));
+				$productvalues = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT count(*) as total FROM products WHERE productcode ".$productcod." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='3' ORDER BY id DESC"));
 			else if(strlen($_POST['ranges'])==4 && ($_POST['ranges']>=1200&&$_POST['ranges']<=2000))
-				$productvalues = mysql_fetch_array(mysql_query("SELECT count(*) as total FROM products WHERE productcode ".$productcod." and ranges LIKE '%".substr($_POST['ranges'],0,2)."%' && length(ranges)='4' ORDER BY id DESC"));
+				$productvalues = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT count(*) as total FROM products WHERE productcode ".$productcod." and ranges LIKE '%".substr($_POST['ranges'],0,2)."%' && length(ranges)='4' ORDER BY id DESC"));
 			else if(strlen($_POST['ranges'])==4 && ($_POST['ranges']>=1000&&$_POST['ranges']<=1199))
-				$productvalues = mysql_fetch_array(mysql_query("SELECT count(*) as total FROM products WHERE productcode ".$productcod." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='4' ORDER BY id DESC"));
+				$productvalues = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT count(*) as total FROM products WHERE productcode ".$productcod." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='4' ORDER BY id DESC"));
 			$productcodeA = array();
 			$productcodeA = $productvalues['productcode'];
 			$productcodes = "S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."";
-			$values = mysql_num_rows(mysql_query("SELECT * FROM products WHERE productcode ".$productcod." && ranges='".$_POST['ranges']."' WHERE id='".$_POST['id']."'"));
+			$values = mysqli_num_rows(mysqli_query($_SESSION['connection'],"SELECT * FROM products WHERE productcode ".$productcod." && ranges='".$_POST['ranges']."' WHERE id='".$_POST['id']."'"));
 			echo $productvalues['total'];
 			if($values>0)
 				echo "<br/><div class='message error'><b>Message</b> :Product Code and Ranges already exists.Please change</div>";
 			else
 			{
 				if($productvalues['total']==0)
-					mysql_query("UPDATE products SET productcode='S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."',ranges='".$_POST['ranges']."' WHERE id='".$_POST['id']."'");
+					mysqli_query($_SESSION['connection'],"UPDATE products SET productcode='S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."',ranges='".$_POST['ranges']."' WHERE id='".$_POST['id']."'");
 				
 				else if($productvalues['total']>=2 && (strlen($_POST['ranges'])==3))
 				{
 					echo "SELECT * FROM products WHERE productcode=".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='3' ORDER BY id DESC";
-					$rangelimit = mysql_fetch_array(mysql_query("SELECT * FROM products WHERE productcode ".$productcod." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='3' ORDER BY id DESC "));
+					$rangelimit = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM products WHERE productcode ".$productcod." and ranges LIKE '%".substr($_POST['ranges'],0,1)."%' && length(ranges)='3' ORDER BY id DESC "));
 					$productcodes = array();
 					$productcodes = $rangelimit['productcode'];
 					echo $proincrement = $productcodes[6];
 					$asciicodes = ord($proincrement)+1;
 					$asciivalue = chr($asciicodes);
 					if($_POST['ranges']==$rangelimit['ranges'] && $rangelimit['productcode']==$productcode)
-						mysql_query("UPDATE products SET productcode='S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."".$asciivalue."',ranges='".$_POST['ranges']."' WHERE id='".$_POST['id']."'");
+						mysqli_query($_SESSION['connection'],"UPDATE products SET productcode='S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."".$asciivalue."',ranges='".$_POST['ranges']."' WHERE id='".$_POST['id']."'");
 					$_POST['ranges'] = "";
 				}
 				else if((strlen($_POST['ranges'])==4) && $productvalues['total']>1 && ($_POST['ranges']>=1200&&$_POST['ranges']<=2000))
 				{
-					$rangelimit = mysql_fetch_array(mysql_query("SELECT * FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,2)."%' && length(ranges)='4' ORDER BY id DESC LIMIT 0,1"));
+					$rangelimit = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,2)."%' && length(ranges)='4' ORDER BY id DESC LIMIT 0,1"));
 					$productcodes = array();
 					$productcodes = $rangelimit['productcode'];
 					$proincrement = $productcodes[7];
 					$asciicodes = ord($proincrement)+1;
 					$asciivalue = chr($asciicodes);
-					mysql_query("UPDATE products SET productcode='S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."".$asciivalue."',ranges='".$_POST['ranges']."' WHERE id='".$_POST['id']."'");
+					mysqli_query($_SESSION['connection'],"UPDATE products SET productcode='S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."".$asciivalue."',ranges='".$_POST['ranges']."' WHERE id='".$_POST['id']."'");
 					$_POST['ranges'] = "";
 				}
 				else if((strlen($_POST['ranges'])==4) && $productvalues['total']>1 && ($_POST['ranges']>=1000&&$_POST['ranges']<=1199))
 				{
-					$rangelimit = mysql_fetch_array(mysql_query("SELECT * FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,2)."%' && length(ranges)='4' ORDER BY id DESC LIMIT 0,1"));
+					$rangelimit = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM products WHERE productcode ".$productcode." and ranges LIKE '%".substr($_POST['ranges'],0,2)."%' && length(ranges)='4' ORDER BY id DESC LIMIT 0,1"));
 					$productcodes = array();
 					$productcodes = $rangelimit['productcode'];
 					$proincrement = $productcodes[7];
 					$asciicodes = ord($proincrement)+1;
 					$asciivalue = chr($asciicodes);
-					mysql_query("UPDATE products SET productcode='S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."".$asciivalue."',ranges='".$_POST['ranges']."' WHERE id='".$_POST['id']."'");
+					mysqli_query($_SESSION['connection'],"UPDATE products SET productcode='S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."".$asciivalue."',ranges='".$_POST['ranges']."' WHERE id='".$_POST['id']."'");
 					$_POST['ranges'] = "";
 				}
 				else if($productvalues['total']>=1)
 				{
 					$asciivalue = 'A';
-					mysql_query("UPDATE products SET productcode='S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."".$asciivalue."',ranges='".$_POST['ranges']."' WHERE id='".$_POST['id']."'");
+					mysqli_query($_SESSION['connection'],"UPDATE products SET productcode='S".$_POST['drivertype']."".$_POST['structure']."".$_POST['ic']."".$_POST['wattagerange']."".$_POST['currentrange']."".$asciivalue."',ranges='".$_POST['ranges']."' WHERE id='".$_POST['id']."'");
 					$_POST['drivertype'] = "";
 					$_POST['structure'] = "";
 					$_POST['ic'] = "";
@@ -216,7 +216,7 @@
 		}
 		if($_GET['id'] && $_GET['action']=='Edit')
 		{
-			$values = mysql_fetch_assoc(mysql_query("SELECT * FROM products WHERE id='".$_GET['id']."'"));
+			$values = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM products WHERE id='".$_GET['id']."'"));
 			$productcode = array();
 			$productcode = $values['productcode'];
 			$_POST['drivertype'] = $productcode[1];
@@ -227,7 +227,7 @@
 			$_POST['ranges'] = $values['ranges'];
 		}
 		if($_GET['id'] && $_GET['action']=='Delete')
-			mysql_query("DELETE FROM products WHERE id='".$_GET['id']."'");
+			mysqli_query($_SESSION['connection'],"DELETE FROM products WHERE id='".$_GET['id']."'");
 	?>
 	<div class="columns" style='width:902px;'>
 		<?php echo $message; ?>
@@ -238,14 +238,14 @@
 			<fieldset>
 				<div class="clearfix">
 					<?php 
-						$drivertype = mysql_query("SELECT * FROM drivertype");
-						$drivertypes = mysql_fetch_assoc(mysql_query("SELECT * FROM drivertype WHERE indexvalue='".$_POST['drivertype']."'"));
+						$drivertype = mysqli_query($_SESSION['connection'],"SELECT * FROM drivertype");
+						$drivertypes = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM drivertype WHERE indexvalue='".$_POST['drivertype']."'"));
 					?>
 					<label>Driver Type</label>
 					<select id="drivertype" name="drivertype">
 						<option value="select">Select</option>
 						<?php
-							while($drivers = mysql_fetch_assoc($drivertype))
+							while($drivers = mysqli_fetch_assoc($drivertype))
 							{
 								
 								if($_GET['id'] && ($_POST['drivertype'] == $drivers['indexvalue']))
@@ -263,8 +263,8 @@
 					<select id="structure" name="structure">
 						<option value="select">Select</option>
 						<?php
-							$structure = mysql_query("SELECT * FROM structure");
-							while($structures = mysql_fetch_assoc($structure))
+							$structure = mysqli_query($_SESSION['connection'],"SELECT * FROM structure");
+							while($structures = mysqli_fetch_assoc($structure))
 							{
 								if($_GET['id'] && ($_POST['structure'] == $structures['indexvalue']))
 									echo'<option value="'.$structures['indexvalue'].'" selected>'.$structures['structure'].'</option>';
@@ -281,8 +281,8 @@
 					<select id="ic" name="ic">
 						<option value="select">Select</option>
 						<?php
-							$ic = mysql_query("SELECT * FROM ic");
-							while($ics = mysql_fetch_assoc($ic))
+							$ic = mysqli_query($_SESSION['connection'],"SELECT * FROM ic");
+							while($ics = mysqli_fetch_assoc($ic))
 							{
 								if($_GET['id'] && ($_POST['ic'] == $ics['indexvalue']))
 									echo'<option value="'.$ics['indexvalue'].'" selected>'.$ics['ic'].'</option>';
@@ -299,8 +299,8 @@
 					<select id="wattagerange" name="wattagerange">
 						<option value="select">Select</option>
 						<?php
-							$wattagerange =  mysql_query("SELECT * FROM wattagerange");
-							while($wattage = mysql_fetch_assoc($wattagerange))
+							$wattagerange =  mysqli_query($_SESSION['connection'],"SELECT * FROM wattagerange");
+							while($wattage = mysqli_fetch_assoc($wattagerange))
 							{
 								if($_GET['id'] && ($_POST['wattagerange'] == $wattage['indexvalue']))
 									echo'<option value="'.$wattage['indexvalue'].'" selected>'.$wattage['wattagerange'].'</option>';
@@ -317,8 +317,8 @@
 					<select id="currentrange" name="currentrange">
 						<option value="select">Select</option>
 						<?php
-							$currentrange = mysql_query("SELECT * FROM currentrange");
-							while($current = mysql_fetch_assoc($currentrange))
+							$currentrange = mysqli_query($_SESSION['connection'],"SELECT * FROM currentrange");
+							while($current = mysqli_fetch_assoc($currentrange))
 							{
 								if($_GET['id'] && ($_POST['currentrange'] == $current['indexvalue']))
 									echo'<option value="'.$current['indexvalue'].'" selected>'.$current['currentrange'].'</option>';
@@ -359,12 +359,12 @@
 				<tbody>
 					<?php
 						$i=1;
-						$enabledisable = mysql_query("SELECT * FROM products");
-						if(mysql_num_rows($enabledisable)==0)
+						$enabledisable = mysqli_query($_SESSION['connection'],"SELECT * FROM products");
+						if(mysqli_num_rows($enabledisable)==0)
 							echo '<tr><td colspan="4" style="color:red;"><center>No data found</center></td></tr>';
 						else
 						{
-							while($edisable = mysql_fetch_assoc($enabledisable))
+							while($edisable = mysqli_fetch_assoc($enabledisable))
 							{
 								echo'<tr>
 										<td>'.$i++.'</td>

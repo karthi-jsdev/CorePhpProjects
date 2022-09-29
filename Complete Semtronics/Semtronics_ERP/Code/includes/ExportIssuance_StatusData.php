@@ -31,7 +31,7 @@
 				<?php	
 				$i = 0;
 				$Issuances = Select_Issuance_ByNoLimit();
-				while($Issuance = mysql_fetch_assoc($Issuances))
+				while($Issuance = mysqli_fetch_assoc($Issuances))
 				{
 					echo "<tr style='valign:middle;'>
 						<td align='center'>".++$i."</td>

@@ -20,7 +20,7 @@
 			<div class="clearfix">
 				<label>&nbsp;&nbsp;Issuance Code <font color="red">*</font></label>
 				<?php
-					if($Exixsts = mysql_fetch_array(Select_Issuance_ByNumber()))
+					if($Exixsts = mysqli_fetch_array(Select_Issuance_ByNumber()))
 						$Exixsts['number']++;
 					else
 						$Exixsts['number'] = date("Ym")."0000001";
@@ -37,7 +37,7 @@
 					<option value="">Select</option>
 					<?php
 					$Users = Select_All_Users();
-					while($User = mysql_fetch_assoc($Users))
+					while($User = mysqli_fetch_assoc($Users))
 					{
 						if($User['id'] == $_POST['issuedto'])
 							echo "<option value='".$User['id']."$".$User['issuanceuser']."' selected>".$User['issuanceuser']."</option>";
@@ -71,8 +71,8 @@
 					<select name="category" id="category" onchange="category1()">
 						<option value="">Select</option>
 							<?php
-								$category = mysql_query("SELECT * FROM category");
-								while($categorylist = mysql_fetch_array($category))
+								$category = mysqli_query($_SESSION['connection'],"SELECT * FROM category");
+								while($categorylist = mysqli_fetch_array($category))
 								{
 									if($_POST['category']==$categorylist['id'])
 										echo "<option value='".$categorylist['id']."' selected>".$categorylist['name']."</option>";
@@ -88,7 +88,7 @@
 						<option value="">Select</option>
 						<?php
 						/* $RawMaterials = Select_All_RawMaterial();
-						while($RawMaterial = mysql_fetch_assoc($RawMaterials))
+						while($RawMaterial = mysqli_fetch_assoc($RawMaterials))
 						{
 							if($RawMaterial['id'] == $_POST['rawmaterialid'])
 								echo "<option value='".$RawMaterial['id']."$".$RawMaterial['partnumber']."$".$RawMaterial['materialcode']."$".$RawMaterial['description']."' selected>".$RawMaterial['materialcode']."</option>";

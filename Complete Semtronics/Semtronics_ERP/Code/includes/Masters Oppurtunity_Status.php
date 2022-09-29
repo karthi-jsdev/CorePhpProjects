@@ -3,7 +3,7 @@
 	$Columns = array("id", "status","enabled","sortorder");
 	if($_GET['action'] == 'Edit')
 	{
-		$Credit = mysql_fetch_assoc(Oppurtunity_Status_Select_ById());
+		$Credit = mysqli_fetch_assoc(Oppurtunity_Status_Select_ById());
 		foreach($Columns as $Col)
 			$_POST[$Col] = $Credit[$Col];
 	}
@@ -18,7 +18,7 @@
 			$Oppurtunity_StatusResource = Oppurtunity_Status_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($Oppurtunity_StatusResource))
+				if(mysqli_num_rows($Oppurtunity_StatusResource))
 					$message = "<br /><div class='message error'><b>Message</b> : Opportunity Status or sortorder already exists</div>";
 				else
 				{
@@ -28,10 +28,10 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Oppurtunity_Status = mysql_fetch_assoc($Oppurtunity_StatusResource);
-				if(mysql_num_rows(Oppurtunity_Status_Select_ByNamePWDId()))
+				$Oppurtunity_Status = mysqli_fetch_assoc($Oppurtunity_StatusResource);
+				if(mysqli_num_rows(Oppurtunity_Status_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Opportunity Status already exists</div>";
-				else if(mysql_num_rows(Oppurtunity_Status_Select_Bysortorder()))
+				else if(mysqli_num_rows(Oppurtunity_Status_Select_Bysortorder()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Opportunity Status Sort Order already exists</div>";
 				else
 				{
@@ -81,7 +81,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$Opportunity_StatusTotalRows = mysql_fetch_assoc(Oppurtunity_Status_Select_Count_All());
+				$Opportunity_StatusTotalRows = mysqli_fetch_assoc(Oppurtunity_Status_Select_Count_All());
 				echo "Total No. of Opportunity Status - ".$Opportunity_StatusTotalRows['total'];
 				?>
 			</h3>
@@ -109,7 +109,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$Opportunity_StatusRows = Oppurtunity_Status_Select_ByLimit($Start, $Limit);
-					while($Oppurtunity_Status = mysql_fetch_assoc($Opportunity_StatusRows))
+					while($Oppurtunity_Status = mysqli_fetch_assoc($Opportunity_StatusRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

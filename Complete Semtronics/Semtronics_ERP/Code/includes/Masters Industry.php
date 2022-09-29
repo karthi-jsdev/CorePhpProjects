@@ -3,7 +3,7 @@
 		$Columns = array("id", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Credit = mysql_fetch_assoc(Industry_Select_ById());
+			$Credit = mysqli_fetch_assoc(Industry_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Credit[$Col];
 		}
@@ -18,7 +18,7 @@
 				$IndustryResource = Industry_Select_ByNamePWD();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($IndustryResource))
+					if(mysqli_num_rows($IndustryResource))
 						$message = "<br /><div class='message error'><b>Message</b> : Industry already exists</div>";
 					else
 					{
@@ -28,8 +28,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$Industry = mysql_fetch_assoc($IndustryResource);
-					if(mysql_num_rows(Industry_Select_ByNamePWDId()))
+					$Industry = mysqli_fetch_assoc($IndustryResource);
+					if(mysqli_num_rows(Industry_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Industry already exists</div>";
 					else
 					{
@@ -67,7 +67,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$IndustryTotalRows = mysql_fetch_assoc(Industry_Select_Count_All());
+				$IndustryTotalRows = mysqli_fetch_assoc(Industry_Select_Count_All());
 				echo "Total No. of Industries - ".$IndustryTotalRows['total'];
 				?>
 			</h3>
@@ -93,7 +93,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$IndustryRows = Industry_Select_ByLimit($Start, $Limit);
-					while($Industry = mysql_fetch_assoc($IndustryRows))
+					while($Industry = mysqli_fetch_assoc($IndustryRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

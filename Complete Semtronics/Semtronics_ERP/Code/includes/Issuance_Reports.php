@@ -22,8 +22,8 @@
 					<select id="issuedto" name="issuedto">
 						<option value="">All</option>
 						<?php
-						$Users = mysql_query("SELECT * FROM issuanceuser ORDER BY id");
-						while($User = mysql_fetch_assoc($Users))
+						$Users = mysqli_query($_SESSION['connection'],"SELECT * FROM issuanceuser ORDER BY id");
+						while($User = mysqli_fetch_assoc($Users))
 						{
 							if($User['id'] == $_POST['issuedto'])
 								echo "<option value='".$User['id']."' selected>".$User['issuanceuser']."</option>";

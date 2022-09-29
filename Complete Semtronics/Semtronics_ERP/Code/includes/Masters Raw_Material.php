@@ -3,7 +3,7 @@
 		$Columns = array("id", "materialcode", "categorynumber", "categoryid", "partnumber", "description","tax","minquantity","bom_category");
 		if($_GET['action'] == 'Edit')
 		{
-			$Rawmaterial = mysql_fetch_assoc(Rawmaterial_Select_ById());
+			$Rawmaterial = mysqli_fetch_assoc(Rawmaterial_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Rawmaterial[$Col];
 		}
@@ -17,13 +17,13 @@
 			$RawmaterialResource = Rawmaterial_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				//if(mysql_num_rows($RawmaterialResource))
+				//if(mysqli_num_rows($RawmaterialResource))
 					//$message = "<br /><div class='message error'><b>Message</b> : Rawmaterial already exists</div>";
 				//else
 				//{
 					/*$ExplodeProductCode = explode("/",$_POST['categoryid']);
-					$prefixe = mysql_fetch_assoc(mysql_query("select * from category where id='".$ExplodeProductCode[0]."'"));
-					$categoryid = mysql_fetch_assoc(mysql_query("select * from rawmaterial where id='".$ExplodeProductCode[0]."'"));
+					$prefixe = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select * from category where id='".$ExplodeProductCode[0]."'"));
+					$categoryid = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select * from rawmaterial where id='".$ExplodeProductCode[0]."'"));
 					echo "select * from rawmaterial where id='".$ExplodeProductCode[0]."'";
 					echo $categoryid['categoryid'];
 					if($categoryid['categoryid']>0)
@@ -36,10 +36,10 @@
 					}Rawmaterial_Insert($Code);
 					*/
 					$ExplodeProductCode = explode("/",$_POST['categoryid']);
-					$prefixe = mysql_fetch_assoc(mysql_query("select * from category where id='".$ExplodeProductCode[0]."'"));
-					$FetchCode = mysql_fetch_assoc(Select_RawMaterialCode($ExplodeProductCode[1]));
+					$prefixe = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select * from category where id='".$ExplodeProductCode[0]."'"));
+					$FetchCode = mysqli_fetch_assoc(Select_RawMaterialCode($ExplodeProductCode[1]));
 					$Digits = array("", "0", "00", "000");
-					if(mysql_num_rows(Select_RawMaterialCode($ExplodeProductCode[1])))
+					if(mysqli_num_rows(Select_RawMaterialCode($ExplodeProductCode[1])))
 					{
 						$Inc = ((int)str_replace($ExplodeProductCode[1], "", $FetchCode['materialcode'])+1);
 						//$Code = $ExplodeProductCode[1].$Digits[3 - strlen(substr($FetchCode['materialcode'],5,7))+1].((substr($FetchCode['materialcode'],5,7))+1);
@@ -53,8 +53,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Rawmaterial = mysql_fetch_assoc($UserResource);
-				if(mysql_num_rows(Rawmaterial_Select_ByNamePWDId()))
+				$Rawmaterial = mysqli_fetch_assoc($UserResource);
+				if(mysqli_num_rows(Rawmaterial_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Rawmaterial already exists</div>";
 				else
 				{
@@ -87,7 +87,7 @@
 						<option value=''>Select</option>
 						<?php
 							$RawmaterialSection = Rawmaterial_Section();
-							while($MaterialSection = mysql_fetch_array($RawmaterialSection))
+							while($MaterialSection = mysqli_fetch_array($RawmaterialSection))
 							{
 								if($MaterialSection['id'] == $_POST['categoryid'])
 									echo '<option value="'.$MaterialSection['id'].'/'.$MaterialSection['prefix'].'" selected>'.$MaterialSection['name'].'</option>';
@@ -109,7 +109,7 @@
 					<label>Tax </label>
 					<?php
 						$SelectTax = Select_Tax();
-						while($FetchTax = mysql_fetch_array($SelectTax))
+						while($FetchTax = mysqli_fetch_array($SelectTax))
 						{
 							if($_POST['tax']==$FetchTax['id'])
 								echo "<span class='radio-input'><input type='radio' value='".$FetchTax['id']."' id='tax' onclick='Taxdesc(this.value)' name='tax' checked />".$FetchTax['percent']."</input></span>";
@@ -128,7 +128,7 @@
 					<option value=''>Select</option>
 						<?php
 							$bom_category = SelectBomCategory();
-							while($bomcategory = mysql_fetch_array($bom_category))
+							while($bomcategory = mysqli_fetch_array($bom_category))
 							{
 								if($_POST['bom_category'] == $bomcategory['id'])
 									echo '<option value="'.$bomcategory['id'].'" selected>'.$bomcategory['bom_category'].'</option>';
@@ -154,9 +154,9 @@
 		<h3>
 			<?php
 			if($_GET['Search'])
-				$RawmaterialTotalRows = mysql_fetch_assoc(Rawmaterial_Select_Count_AllSearch($_GET['Search']));
+				$RawmaterialTotalRows = mysqli_fetch_assoc(Rawmaterial_Select_Count_AllSearch($_GET['Search']));
 			else
-				$RawmaterialTotalRows = mysql_fetch_assoc(Rawmaterial_Select_Count_All());
+				$RawmaterialTotalRows = mysqli_fetch_assoc(Rawmaterial_Select_Count_All());
 			echo "Total No. of Rawmaterials -".$RawmaterialTotalRows['total'];
 			?>
 		</h3>
@@ -201,10 +201,10 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$RawmaterialRows = Rawmaterial_Select_ByLimit($Start, $Limit);
-					while($Rawmaterial = mysql_fetch_assoc($RawmaterialRows))
+					while($Rawmaterial = mysqli_fetch_assoc($RawmaterialRows))
 					{
-						$Category_Name = mysql_fetch_assoc(Categoryname($Rawmaterial['categoryid']));
-						$FetchTax = mysql_fetch_array(Tax_SelectById($Rawmaterial['tax']));
+						$Category_Name = mysqli_fetch_assoc(Categoryname($Rawmaterial['categoryid']));
+						$FetchTax = mysqli_fetch_array(Tax_SelectById($Rawmaterial['tax']));
 						if(!$FetchTax['percent'])
 							$FetchTax['percent'] = "-";
 						echo "<tr style='valign:middle;'>
@@ -234,10 +234,10 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$RawmaterialRows = Rawmaterial_Select_ByLimitSearch($Start, $Limit,$_GET['Search']);
-					while($Rawmaterial = mysql_fetch_assoc($RawmaterialRows))
+					while($Rawmaterial = mysqli_fetch_assoc($RawmaterialRows))
 					{
-						$Category_Name = mysql_fetch_assoc(Categoryname($Rawmaterial['categoryid']));
-						$FetchTax = mysql_fetch_array(Tax_SelectById($Rawmaterial['tax']));
+						$Category_Name = mysqli_fetch_assoc(Categoryname($Rawmaterial['categoryid']));
+						$FetchTax = mysqli_fetch_array(Tax_SelectById($Rawmaterial['tax']));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
 							<td>".$Rawmaterial['materialcode']."</td>

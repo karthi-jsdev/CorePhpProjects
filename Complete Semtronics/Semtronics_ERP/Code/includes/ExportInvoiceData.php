@@ -15,7 +15,7 @@
 	}
 	if($_GET['getdata']=='Invoice_Report')
 	{
-	$TotalRows = mysql_fetch_assoc(Stock_Status_Summary_Count());
+	$TotalRows = mysqli_fetch_assoc(Stock_Status_Summary_Count());
 		?>
 		<section role="main" id="main">
 		<table class="paginate sortable full" style="width:1000px;"border="1">
@@ -33,7 +33,7 @@
 			<?php
 			$i=1;
 			$summary = Stock_Status_Summary();
-			while($stock_summary = mysql_fetch_assoc($summary))
+			while($stock_summary = mysqli_fetch_assoc($summary))
 			{
 				$totalamount = round($stock_summary['sum(amount)']+$stock_summary['sum(taxamount)'],2);
 				echo'<tbody>

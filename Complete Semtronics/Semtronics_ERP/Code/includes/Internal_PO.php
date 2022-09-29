@@ -1,14 +1,14 @@
 <section role="main" id="main">
 	<?php
 		include("Internal_PO_Queries.php");
-		$userid = mysql_fetch_assoc(Stores_Selection());
-		$polist = mysql_fetch_assoc(mysql_query("select * from internal_po where id='".$_GET['id']."'"));
-		$pOlist = mysql_fetch_assoc(mysql_query("select * from internal_po"));
-		$usertotal = mysql_fetch_assoc(mysql_query("select sum(user) as total from approver"));
+		$userid = mysqli_fetch_assoc(Stores_Selection());
+		$polist = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select * from internal_po where id='".$_GET['id']."'"));
+		$pOlist = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select * from internal_po"));
+		$usertotal = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select sum(user) as total from approver"));
 		$approval_total = array_sum(explode(',',$pOlist['approval']));
 
-		$userrole = mysql_fetch_assoc(mysql_query("select * from user where id='".$_SESSION['id']."'"));
-		$plist = mysql_fetch_assoc(mysql_query("select * from internal_po join user on user.id=user join user_role on user_role.id = userrole_id where user.id='".$_SESSION['id']."'"));
+		$userrole = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select * from user where id='".$_SESSION['id']."'"));
+		$plist = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select * from internal_po join user on user.id=user join user_role on user_role.id = userrole_id where user.id='".$_SESSION['id']."'"));
 		
 		if(isset($_POST['Submit']))
 		{
@@ -27,7 +27,7 @@
 		}
 		if($_GET['id'] && $_GET['action']=='edit' && !$_POST['inhouse_categoryid']&&!$_POST['inhouse_statusid'])
 		{
-			$inhouse_edit = mysql_fetch_assoc(Inhouse_Edit());
+			$inhouse_edit = mysqli_fetch_assoc(Inhouse_Edit());
 			$_POST['inhouse_categoryid']=$inhouse_edit['inhouse_categoryid'];
 			$_POST['quantity']=$inhouse_edit['quantity'];
 			$_POST['cost']=$inhouse_edit['cost'];
@@ -70,7 +70,7 @@
  			<input type="hidden" value="<?php echo $_POST['id'] = $_GET['id'];?>" name="id">
 				<div class="clearfix">
 				<?php
-					$user = mysql_fetch_assoc(mysql_query("SELECT user from approver"));
+					$user = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT user from approver"));
 					
 					if(($_GET['action']=='edit') && ($userrole['userrole_id']==4 || $userrole['userrole_id']==8) && ($plist['user']==4 || $plist['user']==8))
 					{?>
@@ -82,7 +82,7 @@
 								//$Category = Inhouse_Edit();
 							//else
 							$Category = Inhouse_Category();
-							while($Category_list = mysql_fetch_assoc($Category))
+							while($Category_list = mysqli_fetch_assoc($Category))
 							{
 								if($Category_list['id'] == $_POST['inhouse_categoryid'])
 									echo "<option value=".$Category_list['id']." selected>".$Category_list['name']."</option>";
@@ -105,7 +105,7 @@
 							<option value="Select">Select</option>
 							<?php
 							$Status = Inhouse_Status();
-							while($Status_id = mysql_fetch_assoc($Status))
+							while($Status_id = mysqli_fetch_assoc($Status))
 							{
 								if($Status_id['id'] == $_POST['inhouse_statusid'])
 									echo "<option value=".$Status_id['id']." selected>".$Status_id['status']."</option>";
@@ -127,7 +127,7 @@
 								//$Category = Inhouse_Edit();
 							//else
 							$Category = Inhouse_Category();
-							while($Category_list = mysql_fetch_assoc($Category))
+							while($Category_list = mysqli_fetch_assoc($Category))
 							{
 								if($Category_list['id'] == $_POST['inhouse_categoryid'])
 									echo "<option value=".$Category_list['id']." selected>".$Category_list['name']."</option>";
@@ -150,7 +150,7 @@
 							<option value="Select">Select</option>
 							<?php
 							$Status = Inhouse_Status();
-							while($Status_id = mysql_fetch_assoc($Status))
+							while($Status_id = mysqli_fetch_assoc($Status))
 							{
 								if($Status_id['id'] == $_POST['inhouse_statusid'])
 									echo "<option value=".$Status_id['id']." selected>".$Status_id['status']."</option>";
@@ -171,7 +171,7 @@
 								//$Category = Inhouse_Edit();
 							//else
 							$Category = Inhouse_Category();
-							while($Category_list = mysql_fetch_assoc($Category))
+							while($Category_list = mysqli_fetch_assoc($Category))
 							{
 								if($Category_list['id'] == $_POST['inhouse_categoryid'])
 									echo "<option value=".$Category_list['id']." selected>".$Category_list['name']."</option>";
@@ -197,7 +197,7 @@
 							<option value="Select">Select</option>
 							<?php
 							$Status = Inhouse_Status();
-							while($Status_id = mysql_fetch_assoc($Status))
+							while($Status_id = mysqli_fetch_assoc($Status))
 							{
 								if($Status_id['id'] == $_POST['inhouse_statusid'])
 									echo "<option value=".$Status_id['id']." selected>".$Status_id['status']."</option>";
@@ -215,7 +215,7 @@
 								<option value="Select">Select</option>
 								<?php
 								$Status = Inhouse_Status();
-								while($Status_id = mysql_fetch_assoc($Status))
+								while($Status_id = mysqli_fetch_assoc($Status))
 								{
 									if($Status_id['id'] == $_POST['inhouse_statusid'])
 										echo "<option value=".$Status_id['id']." selected>".$Status_id['status']."</option>";
@@ -263,11 +263,11 @@
 		</form>
 	</div>
 		<?php
-		$all = mysql_fetch_assoc(All_Count());
-		$notapproved = mysql_fetch_assoc(NotApproved_Count());
-		$approved = mysql_fetch_assoc(Approved_Count());
-		$issued = mysql_fetch_assoc(Issued_Count());
-		$notissued = mysql_fetch_assoc(NotIssued_Count());
+		$all = mysqli_fetch_assoc(All_Count());
+		$notapproved = mysqli_fetch_assoc(NotApproved_Count());
+		$approved = mysqli_fetch_assoc(Approved_Count());
+		$issued = mysqli_fetch_assoc(Issued_Count());
+		$notissued = mysqli_fetch_assoc(NotIssued_Count());
 		?>
 		<div class="columns">
 			<a href="?page=Stores&subpage=spage->Internal_PO&status_id=">All(<?php if(!$all['alldata']) echo $all['alldata']=0;else echo $all['alldata']; ?>)</a>
@@ -291,7 +291,7 @@
 				</thead>
 				<tbody>
 					<?php
-					$totaldata = mysql_fetch_assoc(Inhouse_Selection_ByCount());
+					$totaldata = mysqli_fetch_assoc(Inhouse_Selection_ByCount());
 					$i=1;
 					$Limit = 10;
 					if(!$totaldata['total'])
@@ -303,9 +303,9 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");		
 	
-					$userid = mysql_fetch_assoc(mysql_query("select * from user join approver on user.id=approver.user where user.id='".$_SESSION['id']."'"));
+					$userid = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select * from user join approver on user.id=approver.user where user.id='".$_SESSION['id']."'"));
 					$PO_list = Inhouse_Selection($Start,$Limit);	
-					while($POlist = mysql_fetch_assoc($PO_list))
+					while($POlist = mysqli_fetch_assoc($PO_list))
 					{			
 						echo'<tr>
 								<td>'.$i++.'</td>
@@ -323,12 +323,12 @@
 						<?php
 							if($_POST['approv'] == $POlist['id'])
 							{	
-								mysql_query("Update internal_po set approval='".$POlist['approval'].",".$_SESSION['id']."' where id='".$_POST['approv']."'");
+								mysqli_query($_SESSION['connection'],"Update internal_po set approval='".$POlist['approval'].",".$_SESSION['id']."' where id='".$_POST['approv']."'");
 								echo '<td><button class="button button-gray" type="Submit" disabled>Approved</button></td>';
 							}
 							else
 							{
-								$s = mysql_fetch_assoc(mysql_query("select * from internal_po where id='".$POlist['id']."'"));
+								$s = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select * from internal_po where id='".$POlist['id']."'"));
 								$sss = explode(',',$s['approval']);
 								if(in_array($_SESSION['id'], $sss))
 									echo '<td><button class="button button-gray" type="Submit" disabled>Approved</button></td>';
@@ -346,7 +346,7 @@
 						}
 						else
 						{
-							$coun = mysql_fetch_assoc(mysql_query("select sum(user) as total from approver"));
+							$coun = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select sum(user) as total from approver"));
 							$ss = array_sum(explode(',',$POlist['approval']));
 							if((!$POlist['approval'] && $POlist['user']==$_SESSION['id'])||(($userrole['userrole_id']==4 || $userrole['userrole_id']==8)&&($ss==$coun['total'])))
 							{
@@ -354,14 +354,14 @@
 								</tr>';
 							}
 						}
-						$usertotal = mysql_fetch_assoc(mysql_query("select sum(user) as total from approver"));
-						$list = mysql_fetch_assoc(mysql_query("select * from internal_po where id='".$POlist['id']."'"));
+						$usertotal = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select sum(user) as total from approver"));
+						$list = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select * from internal_po where id='".$POlist['id']."'"));
 						$approval_total = array_sum(explode(',',$list['approval']));
 						if($approval_total==$usertotal['total'] && ($POlist['inhouse_statusid']==1))
 						{
-							$list = mysql_fetch_assoc(mysql_query("select * from internal_po where id='".$POlist['id']."'"));
+							$list = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select * from internal_po where id='".$POlist['id']."'"));
 							$approval_total = array_sum(explode(',',$list['approval']));
-							mysql_query("UPDATE internal_po set inhouse_statusid='2' where inhouse_statusid='1' && id='".$list['id']."'");
+							mysqli_query($_SESSION['connection'],"UPDATE internal_po set inhouse_statusid='2' where inhouse_statusid='1' && id='".$list['id']."'");
 							header("Location:?page=Stores&subpage=spage->Internal_PO");
 						}
 						else

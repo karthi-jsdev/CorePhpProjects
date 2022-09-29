@@ -84,8 +84,8 @@ include('Config.php');
 				<tbody>
 			<?php
 			$i=1;
-			$issuance_dc = mysql_query("SELECT stockinventory.unitprice,location.name,issuance.number,rawmaterial.id, rawmaterial.materialcode, rawmaterial.partnumber, rawmaterial.description, stockissuance.quantity, issuanceuser.issuanceuser as issuanceuser, issuance.issueddate FROM stockissuance JOIN batch ON batch.id=stockissuance.batchid JOIN rawmaterial ON rawmaterial.id=batch.rawmaterialid JOIN issuanceuser ON issuanceuser.id=stockissuance.issuedto JOIN issuance ON issuance.id=stockissuance.issuanceid JOIN stockinventory on batch.id=stockinventory.batchid join location on location.id=locationid WHERE issuance.number='".$_GET['number']."' ORDER BY stockissuance.id");
-			while($issuance = mysql_fetch_Assoc($issuance_dc))
+			$issuance_dc = mysqli_query($_SESSION['connection'],"SELECT stockinventory.unitprice,location.name,issuance.number,rawmaterial.id, rawmaterial.materialcode, rawmaterial.partnumber, rawmaterial.description, stockissuance.quantity, issuanceuser.issuanceuser as issuanceuser, issuance.issueddate FROM stockissuance JOIN batch ON batch.id=stockissuance.batchid JOIN rawmaterial ON rawmaterial.id=batch.rawmaterialid JOIN issuanceuser ON issuanceuser.id=stockissuance.issuedto JOIN issuance ON issuance.id=stockissuance.issuanceid JOIN stockinventory on batch.id=stockinventory.batchid join location on location.id=locationid WHERE issuance.number='".$_GET['number']."' ORDER BY stockissuance.id");
+			while($issuance = mysqli_fetch_assoc($issuance_dc))
 			{
 				echo '<tr>
 						<td>'.$i++.'</td>

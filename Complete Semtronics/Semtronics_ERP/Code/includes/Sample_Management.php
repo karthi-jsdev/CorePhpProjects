@@ -43,7 +43,7 @@
 	}
 	if($_GET['action']=="edit" && $_GET['id'])
 	{
-		$sampleedit = mysql_fetch_assoc(Sample_Edit());
+		$sampleedit = mysqli_fetch_assoc(Sample_Edit());
 		$_POST['id'] = $sampleedit['sid']; 
 		$_POST['lead_id'] = $sampleedit['lid'];
 		$_POST['oppurtunity_id'] = $sampleedit['oppurtunity_id']; 
@@ -80,7 +80,7 @@
 				<div class="clearfix">
 					<label>
 					<?php 
-					$Sample_id = mysql_fetch_assoc(Samples_Id());
+					$Sample_id = mysqli_fetch_assoc(Samples_Id());
 					$Samplesid = $Sample_id['id'];
 					$Samplesid = ++$Samplesid; 
 					if(strlen($Samplesid)==0)
@@ -107,7 +107,7 @@
 						<select name="lead_id" id="lead_id" onchange="Work_no(this.value);">
 							<option value="Select">Select</option>
 							<?php
-								while($lead_name = mysql_fetch_assoc($leadname))
+								while($lead_name = mysqli_fetch_assoc($leadname))
 								{
 								if($_POST['lead_id'] == $lead_name['id'])
 									echo'<option value="'.$lead_name['id'].'" selected>'.$lead_name['name'].'</option>';
@@ -124,7 +124,7 @@
 							<?php
 							if($_GET['id'])
 							{
-								$list = mysql_fetch_assoc(Sample_Opportunity_id());
+								$list = mysqli_fetch_assoc(Sample_Opportunity_id());
 								$Work_d = $list['oppurtunity_id'];
 								if(strlen($Work_d)==1)
 									$work = "WK000000".$Work_d;
@@ -153,7 +153,7 @@
 						<select name="product_id" id="product_id">
 							<option value="Select">Select</option>
 							<?php 
-								while($sample_values = mysql_fetch_assoc($sample_value))
+								while($sample_values = mysqli_fetch_assoc($sample_value))
 								{
 									if($_GET['id'] && $_POST['product_id'] == $sample_values['id'])
 										echo '<option value="'.$sample_values['id'].'" selected>'.$sample_values['productcode'].'</option>';
@@ -201,7 +201,7 @@
 						<select name="product_id" id="product_id">
 							<option value="Select">Select</option>
 							<?php
-							/*while($product_value = mysql_fetch_assoc($product))
+							/*while($product_value = mysqli_fetch_assoc($product))
 							{
 							if($_POST['product_id']==$product_value['id'])
 								echo '<option value="'.$product_value['id'].'" selected>'.$product_value['description'].'</option>';
@@ -312,10 +312,10 @@
 		{
 			$_POST['contentSearch']=$_GET['contentSearch'];
 		}
-			$totaldata = mysql_fetch_assoc(Sample_Selection_ByValueCount());
+			$totaldata = mysqli_fetch_assoc(Sample_Selection_ByValueCount());
 	}
 	else
-		$totaldata = mysql_fetch_assoc(Sample_Selection_ByCount());
+		$totaldata = mysqli_fetch_assoc(Sample_Selection_ByCount());
 	$Limit = 10;
 	if(!$totaldata['total'])
 		echo'<tr><td style="color:#FF0000;" colspan="16"><center>No data Found</center></td></tr>';
@@ -328,7 +328,7 @@
 	if($_POST['contentSearch']=="")
 	{
 		$sample_list = Sample_Selection($Start,$Limit);
-		while($samplelist = mysql_fetch_assoc($sample_list))
+		while($samplelist = mysqli_fetch_assoc($sample_list))
 		{
 			$Samplesid = $samplelist['id'];
 			if(strlen($Samplesid)==1)
@@ -385,7 +385,7 @@
 	else if((isset($_POST['contentSearch']))||$_GET['contentSearch'])
 	{
 		$sample_list = Sample_Selection_Leadname($Start,$Limit);
-		while($samplelist = mysql_fetch_assoc($sample_list))
+		while($samplelist = mysqli_fetch_assoc($sample_list))
 		{
 			$Samplesid = $samplelist['id'];
 			if(strlen($Samplesid)==1)

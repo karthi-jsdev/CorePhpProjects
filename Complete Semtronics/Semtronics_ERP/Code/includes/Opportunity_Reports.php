@@ -6,7 +6,7 @@
 								<select name="status_id" id="status_id">
 									<option value="Select">Select</option>
 									<?php
-										while($opp_status = mysql_fetch_assoc($status))
+										while($opp_status = mysqli_fetch_assoc($status))
 										{
 											echo'<option value="'.$opp_status['id'].'">'.$opp_status['status'].'</option>';
 										}

@@ -21,7 +21,7 @@
 					<option value="">All</option>
 					<?php 
 					$vendor_name_id = select_invoice_number();
-					while($All_vendor_name = mysql_fetch_assoc($vendor_name_id))
+					while($All_vendor_name = mysqli_fetch_assoc($vendor_name_id))
 					{
 						
 						if($_GET['vendor_name_id']==$All_vendor_name['id'])
@@ -44,7 +44,7 @@
 	<section role="main" id="main">
 		<?php
 		if(!$_GET['vendor_id'])
-		{	$TotalRows = mysql_fetch_assoc(Stock_Status_Summary_Count());
+		{	$TotalRows = mysqli_fetch_assoc(Stock_Status_Summary_Count());
 			echo "<h4>INVOICE SUMMARY:Total Number of Invoices -".$TotalRows['total'].'</h4>';
 			echo '<div align="right"><a href="#" title="Download" onclick=\'Export_Invoice_Data()\'><img src="images/icons/download.png"></a></div>';
 			?>
@@ -74,7 +74,7 @@
 				//$summary = Stock_Status_Summary($Start,$Limit);
 				$i=1;
 				$summary = Stock_Status_Summary();
-				while($stock_summary = mysql_fetch_assoc($summary))
+				while($stock_summary = mysqli_fetch_assoc($summary))
 				{
 					$totalamount = round($stock_summary['sum(amount)']+$stock_summary['sum(taxamount)'],2);
 					echo'<tbody>

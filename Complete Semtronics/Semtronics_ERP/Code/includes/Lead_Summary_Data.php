@@ -35,10 +35,10 @@ if($_GET['PaginationFor'] == "AllLeadSummary")
 		}
 		else 
 			$Search = $_GET['Search'];
-		$LeadTotalRows = mysql_fetch_assoc(Lead_Select_Count_All_Search($Search));
+		$LeadTotalRows = mysqli_fetch_assoc(Lead_Select_Count_All_Search($Search));
 	}
 	else
-		$LeadTotalRows = mysql_fetch_assoc(Lead_Select_Count_All());
+		$LeadTotalRows = mysqli_fetch_assoc(Lead_Select_Count_All());
 	if(!$_GET['Search'])
 	{
 		if(!$LeadTotalRows['total'])
@@ -52,15 +52,15 @@ if($_GET['PaginationFor'] == "AllLeadSummary")
 		$i++;
 		$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 		$LeadRows = Lead_Select_ByLimit($Start, $Limit);
-		while($Lead = mysql_fetch_assoc($LeadRows))
+		while($Lead = mysqli_fetch_assoc($LeadRows))
 		{
 			$Digits = array("","0", "00", "000", "0000", "00000", "000000");
 			$LDNo = "LD".$Digits[6 - strlen($Lead['id'])].($Lead['id']);	
-			$Vendorcategory = mysql_fetch_array(Client_Category_Name($Lead['client_category_id']));
-			$Reference = mysql_fetch_array(Reference_Name($Lead['reference_id']));
-			$ReferenceGroup = mysql_fetch_array(Reference_GroupName($Lead['reference_group_id']));
-			$Industrycategory = mysql_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
-			$fetchleadfollowupdate = mysql_fetch_array(mysql_query("SELECT * FROM leadscomments WHERE leadid='".$Lead['id']."' ORDER BY id desc"));
+			$Vendorcategory = mysqli_fetch_array(Client_Category_Name($Lead['client_category_id']));
+			$Reference = mysqli_fetch_array(Reference_Name($Lead['reference_id']));
+			$ReferenceGroup = mysqli_fetch_array(Reference_GroupName($Lead['reference_group_id']));
+			$Industrycategory = mysqli_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
+			$fetchleadfollowupdate = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM leadscomments WHERE leadid='".$Lead['id']."' ORDER BY id desc"));
 			echo "<tr style='valign:middle;'>
 				<td align='center'>".$i++."</td>
 				<td><a href='?page=Sales&subpage=spage->Lead,ssubpage->Lead__Management&leadid=".$Lead['id']."'>".$LDNo."</td>
@@ -101,15 +101,15 @@ if($_GET['PaginationFor'] == "AllLeadSummary")
 		$i++;
 		$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 		$LeadRows = Lead_Select_ByLimitSearch($Start, $Limit, $Search);
-		while($Lead = mysql_fetch_assoc($LeadRows))
+		while($Lead = mysqli_fetch_assoc($LeadRows))
 		{
 			$Digits = array("","0", "00", "000", "0000", "00000", "000000");
 			$LDNo = "LD".$Digits[6 - strlen($Lead['id'])].($Lead['id']);	
-			$Vendorcategory = mysql_fetch_array(Client_Category_Name($Lead['client_category_id']));
-			$Reference = mysql_fetch_array(Reference_Name($Lead['reference_id']));
-			$ReferenceGroup = mysql_fetch_array(Reference_GroupName($Lead['reference_group_id']));
-			$Industrycategory = mysql_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
-			$fetchleadfollowupdate = mysql_fetch_array(mysql_query("SELECT * FROM leadscomments WHERE leadid='".$Lead['id']."' ORDER BY id desc"));
+			$Vendorcategory = mysqli_fetch_array(Client_Category_Name($Lead['client_category_id']));
+			$Reference = mysqli_fetch_array(Reference_Name($Lead['reference_id']));
+			$ReferenceGroup = mysqli_fetch_array(Reference_GroupName($Lead['reference_group_id']));
+			$Industrycategory = mysqli_fetch_array(Industrycategory_Name($Lead['industry_category_id']));
+			$fetchleadfollowupdate = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM leadscomments WHERE leadid='".$Lead['id']."' ORDER BY id desc"));
 			echo "<tr style='valign:middle;'>
 				<td align='center'>".$i++."</td>
 				<td><a href='?page=Sales&subpage=spage->Lead,ssubpage->Lead__Management&leadid=".$Lead['id']."'>".$LDNo."</td>
@@ -164,9 +164,9 @@ else if($_GET['PaginationFor'] == "FollowupLeadSummary")
 			$Search.=$A;
 		$Search = strrev($Search);
 	if(!$_GET['Search1'])
-		$LeadfollowupTotalRows = mysql_num_rows(Lead_followupSelect_Count_All());
+		$LeadfollowupTotalRows = mysqli_num_rows(Lead_followupSelect_Count_All());
 	else
-		$LeadfollowupTotalRows = mysql_num_rows(Lead_followupSelect_Count_AllBySearch($Search));
+		$LeadfollowupTotalRows = mysqli_num_rows(Lead_followupSelect_Count_AllBySearch($Search));
 	if(!$_GET['Search1'])
 	{
 		if(!$LeadfollowupTotalRows)
@@ -180,14 +180,14 @@ else if($_GET['PaginationFor'] == "FollowupLeadSummary")
 		$i++;
 		$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 		$LeadLasttwoweekRows = Lead_Select_ByLasttwoweekLimit($Start, $Limit);
-		while($Leadlasttwoweeks = mysql_fetch_assoc($LeadLasttwoweekRows))
+		while($Leadlasttwoweeks = mysqli_fetch_assoc($LeadLasttwoweekRows))
 		{	
 			$Digits = array("","0", "00", "000", "0000", "00000", "000000");
 			$LDNo = "LD".$Digits[6 - strlen($Leadlasttwoweeks['id'])].($Leadlasttwoweeks['id']);
-			$Vendorcategory = mysql_fetch_array(client_Category_Name($Leadlasttwoweeks['client_category_id']));
-			$Reference = mysql_fetch_array(Reference_Name($Leadlasttwoweeks['reference_id']));
-			$ReferenceGroup = mysql_fetch_array(Reference_GroupName($Leadlasttwoweeks['reference_group_id']));
-			$Industrycategory = mysql_fetch_array(Industrycategory_Name($Leadlasttwoweeks['industry_category_id']));
+			$Vendorcategory = mysqli_fetch_array(client_Category_Name($Leadlasttwoweeks['client_category_id']));
+			$Reference = mysqli_fetch_array(Reference_Name($Leadlasttwoweeks['reference_id']));
+			$ReferenceGroup = mysqli_fetch_array(Reference_GroupName($Leadlasttwoweeks['reference_group_id']));
+			$Industrycategory = mysqli_fetch_array(Industrycategory_Name($Leadlasttwoweeks['industry_category_id']));
 			
 			if($Leadlasttwoweeks['followupdate']<= date('Y-m-d', strtotime('+2 days')))
 				echo "<tr style='valign:middle;color:red;'>";
@@ -229,14 +229,14 @@ else if($_GET['PaginationFor'] == "FollowupLeadSummary")
 		$i++;
 		$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 		$LeadLasttwoweekRows = Lead_Select_ByLasttwoweekLimitSearch($Start, $Limit, $Search);
-		while($Leadlasttwoweeks = mysql_fetch_assoc($LeadLasttwoweekRows))
+		while($Leadlasttwoweeks = mysqli_fetch_assoc($LeadLasttwoweekRows))
 		{	
 			$Digits = array("","0", "00", "000", "0000", "00000", "000000");
 			$LDNo = "LD".$Digits[6 - strlen($Leadlasttwoweeks['id'])].($Leadlasttwoweeks['id']);
-			$Vendorcategory = mysql_fetch_array(client_Category_Name($Leadlasttwoweeks['client_category_id']));
-			$Reference = mysql_fetch_array(Reference_Name($Leadlasttwoweeks['reference_id']));
-			$ReferenceGroup = mysql_fetch_array(Reference_GroupName($Leadlasttwoweeks['reference_group_id']));
-			$Industrycategory = mysql_fetch_array(Industrycategory_Name($Leadlasttwoweeks['industry_category_id']));
+			$Vendorcategory = mysqli_fetch_array(client_Category_Name($Leadlasttwoweeks['client_category_id']));
+			$Reference = mysqli_fetch_array(Reference_Name($Leadlasttwoweeks['reference_id']));
+			$ReferenceGroup = mysqli_fetch_array(Reference_GroupName($Leadlasttwoweeks['reference_group_id']));
+			$Industrycategory = mysqli_fetch_array(Industrycategory_Name($Leadlasttwoweeks['industry_category_id']));
 			echo "<tr style='valign:middle;'>
 				<td align='center'>".$i++."</td>
 				<td><a href='?page=Sales&subpage=spage->Lead,ssubpage->Lead__Management&leadid=".$Leadlasttwoweeks['id']."'>".$LDNo."</td>

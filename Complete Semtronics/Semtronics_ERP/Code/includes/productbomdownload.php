@@ -3,7 +3,7 @@
 	include("Config.php");
 	if(isset($_GET['bid']))
 	{
-		$row = mysql_fetch_assoc(mysql_query("SELECT * FROM productbom_versioning WHERE id='".$_GET['bid']."'"));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM productbom_versioning WHERE id='".$_GET['bid']."'"));
 		$names = explode('!@#%',$row['name']);
 		$filedata = explode('!@#%',$row['files']);
 		$type = explode('!@#%',$row['type']);

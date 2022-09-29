@@ -19,7 +19,7 @@
 
 		<section role="main" id="main">
 			<?php
-			$VendorTotalRows = mysql_fetch_assoc(Vendors_Count());
+			$VendorTotalRows = mysqli_fetch_assoc(Vendors_Count());
 		//	echo "<h4>Vendor Status: Total Number of Vendors - ".$VendorTotalRows["total"]."</h4>";
 			?>
 			<table class="paginate sortable full" border="1">
@@ -52,10 +52,10 @@
 					$VendorRows = Vendor_Select_ByLimit($Start, $Limit);*/
 					$VendorRows = Vendor_Select_ByLimit();
 					$i=1;
-					while($Vendor = mysql_fetch_assoc($VendorRows))
+					while($Vendor = mysqli_fetch_assoc($VendorRows))
 					{
 						$CreditIdExplode = explode('.',$Vendor['categoryid']);
-						$FetchCreditPeriod = mysql_fetch_array(FetchCreditPeriodById($Vendor['creditperiodid']));
+						$FetchCreditPeriod = mysqli_fetch_array(FetchCreditPeriodById($Vendor['creditperiodid']));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
 							<td>".$Vendor['vendorid']."</td>
@@ -64,7 +64,7 @@
 							foreach($CreditIdExplode as $CreditId)	
 							{
 								$I -= 1;
-								$FetchCreditId = mysql_fetch_array(Select_VendorCategoryById($CreditId));
+								$FetchCreditId = mysqli_fetch_array(Select_VendorCategoryById($CreditId));
 								echo $FetchCreditId['name'];
 								if($I)
 									echo ',';

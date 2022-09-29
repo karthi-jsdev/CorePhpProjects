@@ -18,7 +18,7 @@ include("Product_Management Queries.php");
 		<?php
 		$i = 1;
 		$Vendors = Vendor_Select_ByRawmaterial();
-		while($Vendor = mysql_fetch_assoc($Vendors))
+		while($Vendor = mysqli_fetch_assoc($Vendors))
 		{
 			$Vendor_rawmaterialid = explode(".", $Vendor['rawmaterialid']);
 			//if(in_array($_GET['rawmaterialid'], $Vendor_rawmaterialid))

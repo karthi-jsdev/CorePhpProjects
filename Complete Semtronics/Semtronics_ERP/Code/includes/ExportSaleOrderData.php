@@ -11,7 +11,7 @@ if(isset($_GET['export']))
 		/*echo '<div style="float:left">
 		<img src="http://localhost/Semtronics_ERP/Code/images/semtronics1.png" alt="semtronics" width="30%" height="10%"/>
 		</div><br />';*/
-		$sales_status = mysql_fetch_assoc(mysql_query("select * from saleorder_comments JOIN salesorder_status ON saleorder_comments.status_id = salesorder_status.id where status_id='".$_GET['status']."' order by saleorder_comments.id desc"));
+		$sales_status = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select * from saleorder_comments JOIN salesorder_status ON saleorder_comments.status_id = salesorder_status.id where status_id='".$_GET['status']."' order by saleorder_comments.id desc"));
 		echo '<div align="center">
 		<h4>SalesOrderStatus:'.$sales_status['sales_status'].'</div><div align="right">Report Date:'.date("d-m-Y").'
 		</h4></div>';
@@ -19,7 +19,7 @@ if(isset($_GET['export']))
 	}
 	if($_GET['getdata']=='SaleOrder_Report')
 	{ 
-				$SaleOrderCommentsTotalRows = mysql_fetch_assoc(Select_Comments());
+				$SaleOrderCommentsTotalRows = mysqli_fetch_assoc(Select_Comments());
 				echo "<h4>Sale Order Comments List - ".$SaleOrderCommentsTotalRows['total']."</h4>";
 			?>
 		<table  class="paginate sortable full" border="1">
@@ -38,10 +38,10 @@ if(isset($_GET['export']))
 				$i = 1;
 				$i++;
 				$SelectComments = Select_CommentsNolimitdiplay();
-				while($FetchComments = mysql_fetch_array($SelectComments))
+				while($FetchComments = mysqli_fetch_array($SelectComments))
 				{
-					$FetchStatus = mysql_fetch_array(FetchStatus($FetchComments['status_id']));
-					$FetchUser  = mysql_fetch_array(FetchUser($FetchComments['updatedby']));
+					$FetchStatus = mysqli_fetch_array(FetchStatus($FetchComments['status_id']));
+					$FetchUser  = mysqli_fetch_array(FetchUser($FetchComments['updatedby']));
 				$Digits = array("", "0", "00", "000", "0000", "00000", "000000", "0000000");
 						$SONo = "SO".$Digits[7 - strlen($FetchComments['sales_orderid'])].($FetchComments['sales_orderid']);
 					echo '<tr>

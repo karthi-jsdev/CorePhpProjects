@@ -3,24 +3,24 @@
 		include('Config.php');
 		if(isset($_POST['Submit']))
 		{
-			mysql_query("INSERT INTO dashboarded(modulename,status) VALUES ('".$_POST['modulename']."','".$_POST['status']."')");
+			mysqli_query($_SESSION['connection'],"INSERT INTO dashboarded(modulename,status) VALUES ('".$_POST['modulename']."','".$_POST['status']."')");
 			$_POST['modulename'] = "";
 			$_POST['status'] = "";
 		}
 		else if($_POST['Update'])
 		{
-			mysql_query("UPDATE dashboarded SET status='".$_POST['status']."' WHERE id='".$_POST['id']."'");
+			mysqli_query($_SESSION['connection'],"UPDATE dashboarded SET status='".$_POST['status']."' WHERE id='".$_POST['id']."'");
 			$_POST['modulename'] = "";
 			$_POST['status'] = "";
 		}
 		if($_GET['id'] && $_GET['action']=='Edit')
 		{
-			$values = mysql_fetch_assoc(mysql_query("SELECT * FROM dashboarded WHERE id='".$_GET['id']."'"));
+			$values = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM dashboarded WHERE id='".$_GET['id']."'"));
 			$_POST['modulename'] = $values['modulename'];
 			$_POST['status'] = $values['status'];
 		}
 		if($_GET['id'] && $_GET['action']=='Delete')
-			mysql_query("DELETE FROM dashboarded WHERE id='".$_GET['id']."'");
+			mysqli_query($_SESSION['connection'],"DELETE FROM dashboarded WHERE id='".$_GET['id']."'");
 	?>
 	<div class="columns" style='width:902px;'>
 		<?php echo $message; ?>
@@ -74,8 +74,8 @@
 				<tbody>
 					<?php
 						$i=1;
-						$enabledisable = mysql_query("SELECT * FROM dashboarded");
-						while($edisable = mysql_fetch_assoc($enabledisable))
+						$enabledisable = mysqli_query($_SESSION['connection'],"SELECT * FROM dashboarded");
+						while($edisable = mysqli_fetch_assoc($enabledisable))
 						{
 							echo'<tr>
 									<td>'.$i++.'</td>

@@ -17,7 +17,7 @@
 	$Columns = array("id","vendorid","number","amount","invoicedate");
 	if($_GET['action'] == 'Edit')
 	{
-		$invoice1 = mysql_fetch_assoc(Invoice_Selection_Byid());
+		$invoice1 = mysqli_fetch_assoc(Invoice_Selection_Byid());
 		foreach($Columns as $Col)
 			$_POST[$Col] = $invoice1[$Col];
 	}
@@ -27,7 +27,7 @@
 		$message = "<br /><div class='message success'><b>Message</b> : One invoice deleted successfully</div>";
 	}
 	$invoice_num = Invoice_Selection1();
-	while($invoice_number = mysql_fetch_assoc($invoice_num))
+	while($invoice_number = mysqli_fetch_assoc($invoice_num))
 	
 	if(isset($_POST['Submit']) || isset($_POST['Update']))
 	{
@@ -67,7 +67,7 @@
 						<option value="">Select</option>
 						<?php
 						$vendor = Vendor_Dropdowndisplay();
-						while($vendor_name = mysql_fetch_assoc($vendor))
+						while($vendor_name = mysqli_fetch_assoc($vendor))
 						{
 							if($_POST['vendorid']==$vendor_name['id'])
 								echo '<option value="'.$vendor_name['id'].'" selected="selected">'.$vendor_name['name'].'</option>';
@@ -99,7 +99,7 @@
 	<div class="columns">
 		<h3>Invoice List
 			<?php
-			$InvoiceTotalRows = mysql_fetch_assoc(Invoice_Selection_ByCount());
+			$InvoiceTotalRows = mysqli_fetch_assoc(Invoice_Selection_ByCount());
 			echo " : No. of total invoice - ".$InvoiceTotalRows['total'];
 			$Limit = 10;
 			$total_pages = ceil($InvoiceTotalRows['total'] / $Limit);
@@ -122,11 +122,11 @@
 			</thead>
 	<?php
 		$invoice = Invoice_Selection();
-		if(mysql_num_rows(Invoice_Selection()==0))
+		if(mysqli_num_rows(Invoice_Selection()==0))
 			echo '<tr><td style="color:red;" colspan="5"><center>No data Found</center></td></tr>';
 		else
 		{
-			while($invoice_list = mysql_fetch_assoc($invoice))
+			while($invoice_list = mysqli_fetch_assoc($invoice))
 			{
 				echo'
 					<tbody>

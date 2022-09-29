@@ -3,7 +3,7 @@
 	$Columns = array("id", "productcode","rawmaterialid", "quantity", "reference", "tolerance", "package", "make", "files");
 	if($_GET['action'] == 'Edit')
 	{
-		$ProductBOM = mysql_fetch_assoc(ProductBOM_Select_ById());
+		$ProductBOM = mysqli_fetch_assoc(ProductBOM_Select_ById());
 		foreach($Columns as $Col)
 			$_POST[$Col] = $ProductBOM[$Col];
 	}
@@ -18,7 +18,7 @@
 		if(isset($_POST['Submit']))
 		{
 			//$Product = explode("/",$_POST['productid']);
-			if(mysql_num_rows(mysql_query("SELECT * FROM productbom WHERE productcode='".$_POST['productcode']."' AND rawmaterialid='".$_POST['rawmaterialid']."'")))
+			if(mysqli_num_rows(mysqli_query($_SESSION['connection'],"SELECT * FROM productbom WHERE productcode='".$_POST['productcode']."' AND rawmaterialid='".$_POST['rawmaterialid']."'")))
 				$message = "<br /><div class='message error'><b>Message</b> : Product and Rawmaterial already exist </div>";
 			else
 			{
@@ -52,8 +52,8 @@
 					$fileSize = implode('!@#%',$fileSizes);
 					$fileType = implode('!@#%',$fileTypes);
 					$product_subcategory = explode("/",$_POST['product_subcategory_id']);
-					mysql_query("INSERT INTO productbom values('','".$_POST['productcode']."','".$_POST['rawmaterialid']."','".$_POST['quantity']."','".$_POST['reference']."','".$_POST['tolerance']."','".$_POST['package']."','".$_POST['make']."','".$fileType."','".$fileName."','".$fileSize."','".$content."')");
-					mysql_query("INSERT INTO productbom_versioning values('','".$_POST['productcode']."','".$_POST['quantity']."','".$_POST['reference']."','".$_POST['tolerance']."','".$_POST['package']."','".$_POST['make']."','','1','".$fileType."','".$fileName."','".$fileSize."','".$content."')");
+					mysqli_query($_SESSION['connection'],"INSERT INTO productbom values('','".$_POST['productcode']."','".$_POST['rawmaterialid']."','".$_POST['quantity']."','".$_POST['reference']."','".$_POST['tolerance']."','".$_POST['package']."','".$_POST['make']."','".$fileType."','".$fileName."','".$fileSize."','".$content."')");
+					mysqli_query($_SESSION['connection'],"INSERT INTO productbom_versioning values('','".$_POST['productcode']."','".$_POST['quantity']."','".$_POST['reference']."','".$_POST['tolerance']."','".$_POST['package']."','".$_POST['make']."','','1','".$fileType."','".$fileName."','".$fileSize."','".$content."')");
 				}
 				$message = "<br /><div class='message success'><b>Message</b> : Product added successfully</div>";
 			}
@@ -75,12 +75,12 @@
 			<hr />				
 			<fieldset>
 				<div class="clearfix">
-				<?php $productcode = mysql_query("SELECT * FROM products");?>
+				<?php $productcode = mysqli_query($_SESSION['connection'],"SELECT * FROM products");?>
 				<label>Product Code <font color="red">*</font>
 					<select id="productcode" name="productcode">
 						<option value="select">Select</option>
 						<?php
-							while($productcodes = mysql_fetch_array($productcode))
+							while($productcodes = mysqli_fetch_array($productcode))
 							{
 								if($_GET['id'] && $_POST['productcode'] == $productcodes['id'])
 									echo '<option value="'.$productcodes['id'].'" selected>'.$productcodes['productcode'].'</option>';
@@ -95,7 +95,7 @@
 						<option value="">Select</option>
 						<?php
 						$bom_category = SelectBomCategory();
-						while($bomcategory = mysql_fetch_array($bom_category))
+						while($bomcategory = mysqli_fetch_array($bom_category))
 						{
 							if($_POST['bom_category'] == $bomcategory['id'])
 								echo '<option value="'.$bomcategory['id'].'" selected>'.$bomcategory['bom_category'].'</option>';
@@ -109,7 +109,7 @@
 						<option value="">Select</option>
 						<?php
 						// $SelectRawMeterialcode = SelectRawMeterialcode();
-						// while($FetchRawMeterialcode = mysql_fetch_array($SelectRawMeterialcode))
+						// while($FetchRawMeterialcode = mysqli_fetch_array($SelectRawMeterialcode))
 						// {
 							// if($_POST['rawmaterialid'] == $FetchRawMeterialcode['id'])
 								// echo '<option value="'.$FetchRawMeterialcode['id'].'" selected>'.$FetchRawMeterialcode['materialcode'].'</option>';
@@ -154,7 +154,7 @@
 	<div class="columns">
 		<h3>
 			<?php
-			$ProductBOMTotalRows = mysql_fetch_assoc(ProductBOM_Select_Count_All());
+			$ProductBOMTotalRows = mysqli_fetch_assoc(ProductBOM_Select_Count_All());
 			echo "Total No. of Product-BOM - ".$ProductBOMTotalRows['total'];
 			?>
 		</h3>
@@ -186,12 +186,12 @@
 				$i++;
 				$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 				$ProductBOMRows = ProductBOM_Select_ByLimit($Start, $Limit);
-				while($ProductBOM = mysql_fetch_assoc($ProductBOMRows))
+				while($ProductBOM = mysqli_fetch_assoc($ProductBOMRows))
 				{
-					/* $FetchProductCode = mysql_fetch_array(SelectProductCode($ProductBOM['productid']));
-					$FetchRawMeterial = mysql_fetch_array(SelectRawMeterial($ProductBOM['rawmaterialid']));
-					$Fetchproductcategory = mysql_fetch_array(SelectProductcategory($ProductBOM['productcategory_id']));
-					$Fetchproductsubcategory = mysql_fetch_array(SelectProductsubcategory($ProductBOM['productsubcategory_id'])); */
+					/* $FetchProductCode = mysqli_fetch_array(SelectProductCode($ProductBOM['productid']));
+					$FetchRawMeterial = mysqli_fetch_array(SelectRawMeterial($ProductBOM['rawmaterialid']));
+					$Fetchproductcategory = mysqli_fetch_array(SelectProductcategory($ProductBOM['productcategory_id']));
+					$Fetchproductsubcategory = mysqli_fetch_array(SelectProductsubcategory($ProductBOM['productsubcategory_id'])); */
 					echo "<tr style='valign:middle;'>
 						<td align='center'>".$i++."</td>
 						<td align='center'>".$ProductBOM['productcode']."</td>
@@ -365,7 +365,7 @@
 	<?php
 	if($_POST['productid'])
 	{
-		$FetchProductCode = mysql_fetch_array(SelectProductCode($_POST['productid']));
+		$FetchProductCode = mysqli_fetch_array(SelectProductCode($_POST['productid']));
 	?>
 	GetProductCode(<?php echo substr($FetchProductCode['code'],0,2).",".$_POST['productid']; ?>);
 	<?php

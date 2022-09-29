@@ -11,7 +11,7 @@
 		/*echo '<div style="float:left">
 		<img src="http://localhost/Semtronics_ERP/Code/images/semtronics1.png" alt="semtronics" width="30%" height="10%"/>
 		</div><br />';*/
-		$vendorname = mysql_fetch_assoc(mysql_query("SELECT samples.id,`oppurtunity_id`, leads.name,product.description,samples.date,samples.company,samples.contact_person,samples.designation,samples.email_id,samples.contact_no,samples.assigned_to,samples.sample_prize,samples.no_of_samples,samples.follow_up,samples.`specification` 
+		$vendorname = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT samples.id,`oppurtunity_id`, leads.name,product.description,samples.date,samples.company,samples.contact_person,samples.designation,samples.email_id,samples.contact_no,samples.assigned_to,samples.sample_prize,samples.no_of_samples,samples.follow_up,samples.`specification` 
 							from samples join leads on lead_id = leads.id join oppurtunities on oppurtunities.id = samples.oppurtunity_id  join product on product.id=samples.product_id WHERE samples.date BETWEEN '".date('Y-m-d',strtotime($_GET["startdate"]))."' AND '".date('Y-m-d',strtotime($_GET["enddate"]))."' ORDER BY samples.id DESC"));
 		echo '<div align="center">
 		<h4>Sample Management Report &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$_GET['startdate'].  '-' .$_GET['enddate'].'</div><div align="right">Report Date:'.date("d-m-Y").'
@@ -19,7 +19,7 @@
 	}
 	if($_GET['getdata']=='SampleManagement_Report')
 	{ 
-	$totaldata = mysql_fetch_assoc(Sample_Selection_ByCountdisplay());
+	$totaldata = mysqli_fetch_assoc(Sample_Selection_ByCountdisplay());
 	?>
 	<h4>Total Number of Samples -  <?php echo $totaldata["total"];?></h4>
 	<table class="paginate sortable full" border="1">
@@ -48,7 +48,7 @@
 	$i = 1;
 	$i++;
 	$sample_list = Sample_Selection();
-	while($samplelist = mysql_fetch_assoc($sample_list))
+	while($samplelist = mysqli_fetch_assoc($sample_list))
 	{
 		$Samplesid = $samplelist['id'];
 		if(strlen($Samplesid)==1)

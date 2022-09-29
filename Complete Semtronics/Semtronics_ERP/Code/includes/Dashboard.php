@@ -36,21 +36,21 @@
 		<div style="width:610px;" id="sortable">
 			<?php
 			include("includes/Dashboard_Queries.php");
-			$condition = mysql_fetch_assoc(UserSelection());
+			$condition = mysqli_fetch_assoc(UserSelection());
 			$status = explode('.',$condition['status']);
 			foreach($status as $s)
 			{	
 				$sss = Dashboardids($s);
-				$das = mysql_fetch_assoc($sss);
+				$das = mysqli_fetch_assoc($sss);
 				if((in_array($das['id'],$status)) && $das['modulename']=="NewsBlink")
 				{
-					if(mysql_num_rows(Latest_News()))
+					if(mysqli_num_rows(Latest_News()))
 					{ ?>
 					<div class='message success'>
 						<font size=2px>
 						<span id="blink"><b>Latest News:
 						<?php
-							$LatestNews = mysql_fetch_array(Latest_News());
+							$LatestNews = mysqli_fetch_array(Latest_News());
 							echo ''.$LatestNews['news'].'</span>';
 						?>
 						</b>
@@ -61,8 +61,8 @@
 				}
 				if((in_array($das['id'],$status)) && $das['modulename']=="News")
 				{
-					$FetchNews = mysql_fetch_array(News());
-					if(mysql_num_rows(News()))
+					$FetchNews = mysqli_fetch_array(News());
+					if(mysqli_num_rows(News()))
 					{ ?>
 					<div class="widget" >
 						<font size=2px>
@@ -96,17 +96,17 @@
 						</header>
 						<section>
 							 <?php
-								$Stock_status = mysql_query("SELECT rawmaterial.id,sum(stock.amount) AS amount FROM category
+								$Stock_status = mysqli_query($_SESSION['connection'],"SELECT rawmaterial.id,sum(stock.amount) AS amount FROM category
 															INNER JOIN rawmaterial ON categoryid = category.id
 															INNER JOIN batch ON rawmaterial.id = batch.rawmaterialid
 															INNER JOIN stock ON stock.batchid = batch.id
 															WHERE rawmaterial.id IS NOT NULL || rawmaterial.id IS NULL 
 															GROUP BY batch.rawmaterialid");
 								$StackVirtualValues = $StockValue = 0;
-								while($Fetch_Status = mysql_fetch_array($Stock_status))
+								while($Fetch_Status = mysqli_fetch_array($Stock_status))
 								{
-									$inspection = mysql_fetch_assoc(mysql_query("select sum(quantity) as quantity,sum(amount) as amount from rawmaterial inner join batch on rawmaterial.id=rawmaterialid inner join stockinventory on batchid=batch.id where rawmaterial.id='".$Fetch_Status['id']."' && (stockinventory.inspection='2' || stockinventory.inspection='3') group by rawmaterialid"));	
-									$inspection1 = mysql_fetch_assoc(mysql_query("select sum(quantity) as quantity,sum(amount) as amount from rawmaterial inner join batch on rawmaterial.id=rawmaterialid inner join stockinventory on batchid=batch.id where rawmaterial.id='".$Fetch_Status['id']."' && (stockinventory.inspection='0') group by rawmaterialid"));	
+									$inspection = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select sum(quantity) as quantity,sum(amount) as amount from rawmaterial inner join batch on rawmaterial.id=rawmaterialid inner join stockinventory on batchid=batch.id where rawmaterial.id='".$Fetch_Status['id']."' && (stockinventory.inspection='2' || stockinventory.inspection='3') group by rawmaterialid"));	
+									$inspection1 = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select sum(quantity) as quantity,sum(amount) as amount from rawmaterial inner join batch on rawmaterial.id=rawmaterialid inner join stockinventory on batchid=batch.id where rawmaterial.id='".$Fetch_Status['id']."' && (stockinventory.inspection='0') group by rawmaterialid"));	
 									$StackVirtualValues += ($Fetch_Status['amount']);
 									$StockValue += ($Fetch_Status['amount']-$inspection1['amount']);
 								}
@@ -179,8 +179,8 @@
 					 <?php
 						echo 
 						'<select id="category" onchange="GetRawmeterialChart(this.value)">';
-						$SelectCategory=mysql_query("select * from category"); 
-						while($FetchCategory = mysql_fetch_array($SelectCategory))
+						$SelectCategory=mysqli_query($_SESSION['connection'],"select * from category"); 
+						while($FetchCategory = mysqli_fetch_array($SelectCategory))
 							echo '<option value="'.$FetchCategory['id'].'">'.$FetchCategory['name'].'</option>';
 						echo "</select></dt><dt>
 						<div id='chart'>
@@ -203,7 +203,7 @@
 						</header>
 						<section>
 							 <?php
-								$Inspections = mysql_query("SELECT rawmaterial.materialcode, batch.id, stockinventory.inspection, stockinventory.status, stockinventory.inspectionquantity, stockinventory.inspectedby, stockinventory.datetime, stockinventory.id AS id, invoice.vendorid, vendor.name, invoice.number, sum(unitprice) , sum(amount) , sum(quantity) , invoice.invoicedate
+								$Inspections = mysqli_query($_SESSION['connection'],"SELECT rawmaterial.materialcode, batch.id, stockinventory.inspection, stockinventory.status, stockinventory.inspectionquantity, stockinventory.inspectedby, stockinventory.datetime, stockinventory.id AS id, invoice.vendorid, vendor.name, invoice.number, sum(unitprice) , sum(amount) , sum(quantity) , invoice.invoicedate
 															FROM stockinventory
 															JOIN invoice ON invoice.id = stockinventory.invoiceid
 															JOIN vendor ON vendor.id = invoice.vendorid
@@ -211,8 +211,8 @@
 															JOIN rawmaterial ON rawmaterial.id = rawmaterialid  where (inspection='' and status='') || (inspection!='1' && inspection!='2' && inspection!='3') 
 															GROUP BY invoiceid, batchid ORDER BY stockinventory.inspection asc");
 								//echo "<br/><b>List of Items Needs To Be Inspected:";
-								if(mysql_num_rows($Inspections))
-									echo '<a href="index.php?page=Stores&subpage=spage->Stock_Management,ssubpage->Inspection">List of Items Needs To Be Inspected:&nbsp;&nbsp;&nbsp;'.mysql_num_rows($Inspections).'</a></b><br/>';
+								if(mysqli_num_rows($Inspections))
+									echo '<a href="index.php?page=Stores&subpage=spage->Stock_Management,ssubpage->Inspection">List of Items Needs To Be Inspected:&nbsp;&nbsp;&nbsp;'.mysqli_num_rows($Inspections).'</a></b><br/>';
 								else	
 									echo '<br/><font color="red">No Inspection Items</b></font><br/>';
 								
@@ -232,12 +232,12 @@
 						<section>
 							 <?php
 								//echo '<b>List of Pending Approvals</b><br/>';
-								if(mysql_num_rows(mysql_query("select * from approver where module='Sales' and user='".$_SESSION['id']."'")))
+								if(mysqli_num_rows(mysqli_query($_SESSION['connection'],"select * from approver where module='Sales' and user='".$_SESSION['id']."'")))
 								{
-									$SelectSaleOrders = mysql_query("SELECT * FROM `sales_order` WHERE id not in(select sales_order_id from sales_order_approval where approved_by='".$_SESSION['id']."')");
-									if(mysql_num_rows($SelectSaleOrders))
+									$SelectSaleOrders = mysqli_query($_SESSION['connection'],"SELECT * FROM `sales_order` WHERE id not in(select sales_order_id from sales_order_approval where approved_by='".$_SESSION['id']."')");
+									if(mysqli_num_rows($SelectSaleOrders))
 									{
-										while($FetchSaleOrders = mysql_fetch_array($SelectSaleOrders))
+										while($FetchSaleOrders = mysqli_fetch_array($SelectSaleOrders))
 										{
 											$Digits = array("", "0", "00", "000", "0000", "00000", "000000", "0000000");
 											$SONo = "SO".$Digits[7 - strlen($FetchSaleOrders['id'])].($FetchSaleOrders['id']);
@@ -266,17 +266,17 @@
 		<tr class="tr1">
 		  <td  id="1" class="td1" style="width:300px;" colspan="0">
 			  <?php
-				$Stock_status = mysql_query("SELECT rawmaterial.id,sum(stock.amount) AS amount FROM category
+				$Stock_status = mysqli_query($_SESSION['connection'],"SELECT rawmaterial.id,sum(stock.amount) AS amount FROM category
 				INNER JOIN rawmaterial ON categoryid = category.id
 				INNER JOIN batch ON rawmaterial.id = batch.rawmaterialid
 				INNER JOIN stock ON stock.batchid = batch.id
 				WHERE rawmaterial.id IS NOT NULL || rawmaterial.id IS NULL 
 				GROUP BY batch.rawmaterialid");
 				$StackVirtualValues = $StockValue = 0;
-				while($Fetch_Status = mysql_fetch_array($Stock_status))
+				while($Fetch_Status = mysqli_fetch_array($Stock_status))
 				{
-					$inspection = mysql_fetch_assoc(mysql_query("select sum(quantity) as quantity,sum(amount) as amount from rawmaterial inner join batch on rawmaterial.id=rawmaterialid inner join stockinventory on batchid=batch.id where rawmaterial.id='".$Fetch_Status['id']."' && (stockinventory.inspection='2' || stockinventory.inspection='3') group by rawmaterialid"));	
-					$inspection1 = mysql_fetch_assoc(mysql_query("select sum(quantity) as quantity,sum(amount) as amount from rawmaterial inner join batch on rawmaterial.id=rawmaterialid inner join stockinventory on batchid=batch.id where rawmaterial.id='".$Fetch_Status['id']."' && (stockinventory.inspection='0') group by rawmaterialid"));	
+					$inspection = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select sum(quantity) as quantity,sum(amount) as amount from rawmaterial inner join batch on rawmaterial.id=rawmaterialid inner join stockinventory on batchid=batch.id where rawmaterial.id='".$Fetch_Status['id']."' && (stockinventory.inspection='2' || stockinventory.inspection='3') group by rawmaterialid"));	
+					$inspection1 = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"select sum(quantity) as quantity,sum(amount) as amount from rawmaterial inner join batch on rawmaterial.id=rawmaterialid inner join stockinventory on batchid=batch.id where rawmaterial.id='".$Fetch_Status['id']."' && (stockinventory.inspection='0') group by rawmaterialid"));	
 					$StackVirtualValues += ($Fetch_Status['amount']);
 					$StockValue += ($Fetch_Status['amount']-$inspection1['amount']);
 				}
@@ -287,8 +287,8 @@
 		  <td class="td1" id="2" style="width:200px;">
 			<h3>Stock Quantity</h3>
 			<select id="category" onchange="GetRawmeterialChart(this.value)">
-				<?php $SelectCategory=mysql_query("select * from category"); 
-				while($FetchCategory = mysql_fetch_array($SelectCategory))
+				<?php $SelectCategory=mysqli_query($_SESSION['connection'],"select * from category"); 
+				while($FetchCategory = mysqli_fetch_array($SelectCategory))
 					echo '<option value="'.$FetchCategory['id'].'">'.$FetchCategory['name'].'</option>';
 				?>
 			</select>
@@ -297,7 +297,7 @@
 		  <?php //}
 			if($_SESSION['roleid'] == 2)
 			{
-				$FetchNews = mysql_fetch_array(mysql_query("select news from news where enable='1'"));
+				$FetchNews = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select news from news where enable='1'"));
 			?>
 				<td class="td1"  rowspan="2">
 					
@@ -305,10 +305,10 @@
 					<br/>
 					<h4>Sale Orders To Be Approve</h4>
 					<?php
-						if(mysql_num_rows(mysql_query("select * from approver where module='Sales' and user='".$_SESSION['id']."'")))
+						if(mysqli_num_rows(mysqli_query($_SESSION['connection'],"select * from approver where module='Sales' and user='".$_SESSION['id']."'")))
 						{
-							$SelectSaleOrders = mysql_query("SELECT * FROM `sales_order` WHERE id not in(select sales_order_id from sales_order_approval where approved_by='".$_SESSION['id']."')");
-							while($FetchSaleOrders = mysql_fetch_array($SelectSaleOrders))
+							$SelectSaleOrders = mysqli_query($_SESSION['connection'],"SELECT * FROM `sales_order` WHERE id not in(select sales_order_id from sales_order_approval where approved_by='".$_SESSION['id']."')");
+							while($FetchSaleOrders = mysqli_fetch_array($SelectSaleOrders))
 							{
 								$Digits = array("", "0", "00", "000", "0000", "00000", "000000", "0000000");
 								$SONo = "SO".$Digits[7 - strlen($FetchSaleOrders['id'])].($FetchSaleOrders['id']);

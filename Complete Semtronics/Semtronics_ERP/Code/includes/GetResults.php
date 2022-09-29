@@ -2,7 +2,7 @@
 include("Config.php");
 if($_GET['Type']=="Invoice")
 {
-	$FetchData = mysql_fetch_array(mysql_query("SELECT count( * ) AS total, SUM( stockinventory.amount ) as amount , SUM( tax.percent ) AS percentage, SUM( stockinventory.amount + stockinventory.taxamount ) AS amounttax
+	$FetchData = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT count( * ) AS total, SUM( stockinventory.amount ) as amount , SUM( tax.percent ) AS percentage, SUM( stockinventory.amount + stockinventory.taxamount ) AS amounttax
 	FROM `invoice`
 	JOIN stockinventory ON stockinventory.invoiceid = invoice.id
 	JOIN tax ON tax.id = stockinventory.taxid
@@ -15,7 +15,7 @@ if($_GET['Type']=="Invoice")
 }
 else if($_GET['Type']=="Issuance")
 {
-	$FetchData = mysql_fetch_array(mysql_query("SELECT count( * ) AS total, SUM( stockissuance.amount ) as amount 
+	$FetchData = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT count( * ) AS total, SUM( stockissuance.amount ) as amount 
 	FROM `stockissuance`
 	JOIN issuance ON stockissuance.issuanceid = issuance.id
 	WHERE issuance.issueddate between '".date('Y-m-d',strtotime($_GET['startdate1']))."' and '".date('Y-m-d',strtotime($_GET['enddate1']))."'"));

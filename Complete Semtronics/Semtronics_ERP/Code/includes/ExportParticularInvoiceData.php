@@ -11,14 +11,14 @@
 		/*echo '<div style="float:left">
 		<img src="http://localhost/Semtronics_ERP/Code/images/semtronics1.png" alt="semtronics" width="30%" height="10%"/>
 		</div><br />';*/
-		$vendorname = mysql_fetch_assoc(mysql_query("SELECT * FROM invoice JOIN  vendorcategory ON invoice.vendorid = vendorcategory.id  WHERE invoice.vendorid= '".$_GET["vendor_id"]."'"));
+		$vendorname = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM invoice JOIN  vendorcategory ON invoice.vendorid = vendorcategory.id  WHERE invoice.vendorid= '".$_GET["vendor_id"]."'"));
 		echo '<div align="center">
 		<h4>Vendor Name:'.$vendorname['name'].'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$_GET['startdate'].'-'.$_GET['enddate'].'</div><div align="right">Report Date:'.date("d-m-Y").'
 		</h4></div>';
 	}
 	if($_GET['getdata']=='Invoice_Report')
 	{ 
-	$TotalRows = mysql_fetch_array(Stock_Status_Summary_Count_display());
+	$TotalRows = mysqli_fetch_array(Stock_Status_Summary_Count_display());
 		?>
 		<section role="main" id="main">
 			<table class="paginate sortable full" style="width:1000px;" border="1">
@@ -46,7 +46,7 @@
 			$summary = Stock_Status_Summary_display($Start,$Limit);*/
 			$i =1;
 			$summary = Stock_Status_Summary_display();
-			while($stock_summary = mysql_fetch_assoc($summary))
+			while($stock_summary = mysqli_fetch_assoc($summary))
 			{
 				$totalamount = round($stock_summary['sum(amount)']+$stock_summary['sum(taxamount)'],2);
 				echo'<tbody>

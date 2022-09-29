@@ -8,17 +8,17 @@
 		header("Location:index.php");
 	else if(isset($_POST["posting"]))
 	{
-		$_POST["name"] = mysql_real_escape_string($_POST["name"]); //$var2=md5($_POST["password"]);
-		$_POST["password"] = mysql_real_escape_string($_POST["password"]);
+		$_POST["name"] = mysqli_real_escape_string($_SESSION['connection'],$_POST["name"]); //$var2=md5($_POST["password"]);
+		$_POST["password"] = mysqli_real_escape_string($_SESSION['connection'],$_POST["password"]);
 		$User_Data = User_Login();
-		if($User = mysql_fetch_assoc($User_Data))
+		if($User = mysqli_fetch_assoc($User_Data))
 		{
 			$_SESSION['id'] = $User['id'];
 			$_SESSION['name'] = $User['name'];
 			$_SESSION['firstname'] = $User['firstname'];
 			$_SESSION['phone'] = $User['phone'];
 			$_SESSION['roleid'] = $User['userrole_id'];
-			$UserRole = mysql_fetch_assoc(User_Role($User['userrole_id']));
+			$UserRole = mysqli_fetch_assoc(User_Role($User['userrole_id']));
 			$_SESSION['role'] = $UserRole['role'];
 			header("Location:index.php");
 		}

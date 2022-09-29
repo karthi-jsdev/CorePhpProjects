@@ -5,7 +5,7 @@
 	{
 ?>	
 			<?php
-				$SaleOrderCommentsTotalRows = mysql_fetch_assoc(Select_Comments());
+				$SaleOrderCommentsTotalRows = mysqli_fetch_assoc(Select_Comments());
 				echo "<h4>Sale Order Comments List - ".$SaleOrderCommentsTotalRows['total']."</h4>";
 				echo '<div align="right"><a href="#" title="Download" onclick=\'Export_Data("getdata=SaleOrder_Report")\'><img src="images/icons/download.png"></a></div>';			
 			?>
@@ -25,10 +25,10 @@
 				$i = 1;
 				$i++;
 				$SelectComments = Select_CommentsNolimitdiplay();
-				while($FetchComments = mysql_fetch_array($SelectComments))
+				while($FetchComments = mysqli_fetch_array($SelectComments))
 				{
-					$FetchStatus = mysql_fetch_array(FetchStatus($FetchComments['status_id']));
-					$FetchUser  = mysql_fetch_array(FetchUser($FetchComments['updatedby']));
+					$FetchStatus = mysqli_fetch_array(FetchStatus($FetchComments['status_id']));
+					$FetchUser  = mysqli_fetch_array(FetchUser($FetchComments['updatedby']));
 				$Digits = array("", "0", "00", "000", "0000", "00000", "000000", "0000000");
 						$SONo = "SO".$Digits[7 - strlen($FetchComments['sales_orderid'])].($FetchComments['sales_orderid']);
 					echo '<tr>

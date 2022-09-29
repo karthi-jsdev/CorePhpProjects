@@ -1,21 +1,21 @@
 <br/><br/>
 <?php
-	$All = mysql_fetch_assoc(Status_Count_All());
-	$Prospect = mysql_fetch_assoc(Status_Count_Prospecting());
-	$Prospect1 = mysql_fetch_assoc(Status_Count_Prospecting1());
+	$All = mysqli_fetch_assoc(Status_Count_All());
+	$Prospect = mysqli_fetch_assoc(Status_Count_Prospecting());
+	$Prospect1 = mysqli_fetch_assoc(Status_Count_Prospecting1());
 	$Prospecting = $Prospect1['prospect']+$Prospect['total'];
-	$Analysis = mysql_fetch_assoc(Status_Count_Analysi());
-	$Presentation = mysql_fetch_assoc(Status_Count_Presentation());
-	$Samplesprovided = mysql_fetch_assoc(Status_Count_SamplesProvided());
-	$Samplesapproved = mysql_fetch_assoc(Status_Count_SamplesApproved());
-	$Ntp = mysql_fetch_assoc(Status_Count_NegotiationtoPilot());
-	$Plo = mysql_fetch_assoc(Status_Count_PilotLotOrder());
-	$Qtest = mysql_fetch_assoc(Status_Count_Quotedtest());
-	$Freview = mysql_fetch_assoc(Status_Count_FindReview());
-	$Hp = mysql_fetch_assoc(Status_Count_HoldPostpone());
-	$Cw = mysql_fetch_assoc(Status_Count_ClosedWon());
-	$Cl = mysql_fetch_assoc(Status_Count_ClosedLost());
-	$Other = mysql_fetch_assoc(Status_Count_Others());
+	$Analysis = mysqli_fetch_assoc(Status_Count_Analysi());
+	$Presentation = mysqli_fetch_assoc(Status_Count_Presentation());
+	$Samplesprovided = mysqli_fetch_assoc(Status_Count_SamplesProvided());
+	$Samplesapproved = mysqli_fetch_assoc(Status_Count_SamplesApproved());
+	$Ntp = mysqli_fetch_assoc(Status_Count_NegotiationtoPilot());
+	$Plo = mysqli_fetch_assoc(Status_Count_PilotLotOrder());
+	$Qtest = mysqli_fetch_assoc(Status_Count_Quotedtest());
+	$Freview = mysqli_fetch_assoc(Status_Count_FindReview());
+	$Hp = mysqli_fetch_assoc(Status_Count_HoldPostpone());
+	$Cw = mysqli_fetch_assoc(Status_Count_ClosedWon());
+	$Cl = mysqli_fetch_assoc(Status_Count_ClosedLost());
+	$Other = mysqli_fetch_assoc(Status_Count_Others());
 ?>
 <table>
 	<tr>
@@ -39,7 +39,7 @@
 </table>
 	<h3>
 		<?php
-		$totaldata = mysql_fetch_assoc(Opportunity_Item_List_Count());
+		$totaldata = mysqli_fetch_assoc(Opportunity_Item_List_Count());
 		echo "Total No. of Opportunities -".$totaldata['total'];
 		?>
 		</h3>
@@ -61,7 +61,7 @@
 		</tr>
 	</thead>
 <?php
-	$totaldata = mysql_fetch_assoc(Opportunity_Item_List_Count());
+	$totaldata = mysqli_fetch_assoc(Opportunity_Item_List_Count());
 	$Limit = 10;
 	$total_pages = ceil($totaldata['total'] / $Limit);
 	if($total_pages==0)
@@ -74,10 +74,10 @@
 	if($_GET['status_id'])
 	{
 		$opportunity_list = OpportunityManagement_Item_List($Start,$Limit);
-		$st = mysql_fetch_assoc(Status_List_WithCount());
+		$st = mysqli_fetch_assoc(Status_List_WithCount());
 		if($_GET['status_id']=='2')
 			$st['status']='Prospecting';
-		while($list = mysql_fetch_assoc($opportunity_list))
+		while($list = mysqli_fetch_assoc($opportunity_list))
 		{
 			$Work_d = $list['id'];
 			if(strlen($Work_d)==1)
@@ -115,10 +115,10 @@
 	else
 	{
 		$opportunity_list = OpportunityManagement_Item_List($Start,$Limit);
-		while($list = mysql_fetch_assoc($opportunity_list))
+		while($list = mysqli_fetch_assoc($opportunity_list))
 		{	
 			$_POST['id'] = $list['id'];
-			$status_detail = mysql_fetch_assoc(Status_List());
+			$status_detail = mysqli_fetch_assoc(Status_List());
 			if($status_detail['total']>=1)
 				$status_detail['status'];
 			else
@@ -165,18 +165,18 @@
 ?>
 <form action="" method="POST">
 	<?php 
-	$saleorder = mysql_fetch_assoc(Sales_Order_Issue_Count());
+	$saleorder = mysqli_fetch_assoc(Sales_Order_Issue_Count());
 	if($saleorder['salesordertotal']==0)
 	{?>
 	<div style="float:left">
-		<h3>Sales Order to be issued(<?php $sales_total = mysql_fetch_assoc(Sales_Order_Issue_Count());
+		<h3>Sales Order to be issued(<?php $sales_total = mysqli_fetch_assoc(Sales_Order_Issue_Count());
 									echo $sales_total['salesordertotal'];?>)
 	</div>
 	<?php } 
 	else
 	{?>
 	<div style="float:left">
-		<h3>Sales Order to be issued(<?php $sales_total = mysql_fetch_assoc(Sales_Order_Issue_Count());
+		<h3>Sales Order to be issued(<?php $sales_total = mysqli_fetch_assoc(Sales_Order_Issue_Count());
 									echo $sales_total['salesordertotal'];?>)
 	</div>
 	<div style="float:right">
@@ -204,13 +204,13 @@
 		<?php
 		if($_POST['contentSearch']=="")
 		{
-			$opportunity_list = mysql_num_rows(Sales_Order_Issue());
+			$opportunity_list = mysqli_num_rows(Sales_Order_Issue());
 			if($opportunity_list==0)
 				echo'<tr><td style="color:#FF0000;" colspan="12"><center>No Data found</center></td></tr>';
 			else
 			{
 				$opportunity_list = Sales_Order_Issue();
-				while($list = mysql_fetch_assoc($opportunity_list))
+				while($list = mysqli_fetch_assoc($opportunity_list))
 				{	
 					$Work_d = $list['id'];
 					if(strlen($Work_d)==1)
@@ -249,13 +249,13 @@
 		}
 		else if(isset($_POST['search']))
 		{
-			$opportunity_list = mysql_num_rows(Sales_Order_Issue_Search());
+			$opportunity_list = mysqli_num_rows(Sales_Order_Issue_Search());
 			if($opportunity_list==0)
 				echo'<tr><td style="color:#FF0000;" colspan="12"><center>No Data found</center></td></tr>';
 			else
 			{
 				$opportunity_list = Sales_Order_Issue_Search();
-				while($list = mysql_fetch_assoc($opportunity_list))
+				while($list = mysqli_fetch_assoc($opportunity_list))
 				{	
 					$Work_d = $list['id'];
 					if(strlen($Work_d)==1)

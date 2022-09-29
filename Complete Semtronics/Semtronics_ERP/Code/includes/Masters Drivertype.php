@@ -3,24 +3,24 @@
 		include('Config.php');
 		if(isset($_POST['Submit']))
 		{
-			mysql_query("INSERT INTO drivertype(drivertype,indexvalue) VALUES ('".$_POST['drivertype']."','".$_POST['indexvalue']."')");
+			mysqli_query($_SESSION['connection'],"INSERT INTO drivertype(drivertype,indexvalue) VALUES ('".$_POST['drivertype']."','".$_POST['indexvalue']."')");
 			$_POST['drivertype'] = "";
 			$_POST['indexvalue'] = "";
 		}
 		else if($_POST['Update'])
 		{
-			mysql_query("UPDATE drivertype SET drivertype='".$_POST['drivertype']."',indexvalue='".$_POST['indexvalue']."' WHERE id='".$_POST['id']."'");
+			mysqli_query($_SESSION['connection'],"UPDATE drivertype SET drivertype='".$_POST['drivertype']."',indexvalue='".$_POST['indexvalue']."' WHERE id='".$_POST['id']."'");
 			$_POST['drivertype'] = "";
 			$_POST['indexvalue'] = "";
 		}
 		if($_GET['id'] && $_GET['action']=='Edit')
 		{
-			$values = mysql_fetch_assoc(mysql_query("SELECT * FROM drivertype WHERE id='".$_GET['id']."'"));
+			$values = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM drivertype WHERE id='".$_GET['id']."'"));
 			$_POST['drivertype'] = $values['drivertype'];
 			$_POST['indexvalue'] = $values['indexvalue'];
 		}
 		if($_GET['id'] && $_GET['action']=='Delete')
-			mysql_query("DELETE FROM drivertype WHERE id='".$_GET['id']."'");
+			mysqli_query($_SESSION['connection'],"DELETE FROM drivertype WHERE id='".$_GET['id']."'");
 	?>
 	<div class="columns" style='width:902px;'>
 		<?php echo $message; ?>
@@ -62,12 +62,12 @@
 				<tbody>
 					<?php
 						$i=1;
-						$enabledisable = mysql_query("SELECT * FROM drivertype");
-						if(mysql_num_rows($enabledisable)==0)
+						$enabledisable = mysqli_query($_SESSION['connection'],"SELECT * FROM drivertype");
+						if(mysqli_num_rows($enabledisable)==0)
 							echo '<tr><td colspan="4" style="color:red;"><center>No data found<center></td></tr>';
 						else
 						{
-							while($edisable = mysql_fetch_assoc($enabledisable))
+							while($edisable = mysqli_fetch_assoc($enabledisable))
 							{
 								echo'<tr>
 										<td>'.$i++.'</td>

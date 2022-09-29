@@ -8,7 +8,7 @@ include('Opportunities_Queries.php');
 if($_GET['lead_id'])
 {
 	$Sample_list = Sample_Opportunity_Item_List();
-	while($list = mysql_fetch_assoc($Sample_list))
+	while($list = mysqli_fetch_assoc($Sample_list))
 	{
 		$Work_d = $list['id'];
 		if(strlen($Work_d)==1)

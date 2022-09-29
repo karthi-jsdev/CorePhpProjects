@@ -8,7 +8,7 @@ if($_GET['product_category_id'])
 	<select name="product_subcategory_id" id="product_subcategory_id">
 		<option value="Select">Select</option>
 		<?php
-		while($product_subvalue = mysql_fetch_assoc($product_sub))
+		while($product_subvalue = mysqli_fetch_assoc($product_sub))
 		{
 			if($_POST['id']==$product_subvalue['id'])
 				echo '<option value="'.$product_subvalue['id'].'" selected>'.$product_subvalue['name'].'</option>';
@@ -26,7 +26,7 @@ else if($_GET['product_subcategory_id'])
 	<select name="product_id" id="product_id">
 		<option value="Select">Select</option>
 <?php
-	while($product_value = mysql_fetch_assoc($product))
+	while($product_value = mysqli_fetch_assoc($product))
 		{
 			if($_GET['id']==$product_value['id'])
 				echo '<option value="'.$product_value['id'].'" selected>'.$product_value['code'].'</option>';

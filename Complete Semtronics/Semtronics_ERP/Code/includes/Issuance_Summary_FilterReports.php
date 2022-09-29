@@ -6,7 +6,7 @@ if(!$_GET['Initial'])
 	<?php
 	include("Config.php");
 	include("Issuance_Queries.php");
-	$TotalIssuance = mysql_fetch_assoc(Count_Issuance_ByGroup());
+	$TotalIssuance = mysqli_fetch_assoc(Count_Issuance_ByGroup());
 	echo "Total No. of Issuance Summaries - ".$TotalIssuance['total'];
 	echo '<div align="right"><a href="#" title="Download" onclick="Export_Data()"><img src="images/icons/download.png"></a></div>';
 	?>
@@ -35,7 +35,7 @@ if(!$_GET['Initial'])
 			$i = $Start = ($_GET['pageno']-1)*$Limit;
 			$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 			$Issuances = Select_Issuance_ByGroupNoLimit();
-			while($Issuance = mysql_fetch_assoc($Issuances))
+			while($Issuance = mysqli_fetch_assoc($Issuances))
 			{
 				echo "<tr style='valign:middle;'>
 					<td align='center'>".++$i."</td>

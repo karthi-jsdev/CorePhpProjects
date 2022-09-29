@@ -30,31 +30,31 @@
 					$fileSize = implode('!@#%',$fileSizes);
 					$fileType = implode('!@#%',$fileTypes);
 		}
-		$Prodcutbomveresions = mysql_fetch_array(mysql_query("SELECT * FROM productbom_versioning JOIN products on products.id=productbom_versioning.productcode where productbom_versioning.productcode='".$_POST['productid'][0]."'  order by versions desc LIMIT 0,1"));
-		if($s = mysql_num_rows(mysql_query("SELECT * FROM productbom_versioning JOIN products on products.id=productbom_versioning.productcode where productbom_versioning.productcode='".$_POST['productid'][0]."'  order by versions desc")))
+		$Prodcutbomveresions = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM productbom_versioning JOIN products on products.id=productbom_versioning.productcode where productbom_versioning.productcode='".$_POST['productid'][0]."'  order by versions desc LIMIT 0,1"));
+		if($s = mysqli_num_rows(mysqli_query($_SESSION['connection'],"SELECT * FROM productbom_versioning JOIN products on products.id=productbom_versioning.productcode where productbom_versioning.productcode='".$_POST['productid'][0]."'  order by versions desc")))
 		{
 			for($i=0;$i<count($_POST['productid']);$i++)
-				mysql_query("INSERT INTO productbom_versioning(id,productcode,quantity,reference,tolerance,package,make,comments,versions,type,name,MAX_FILE_SIZE,files) VALUES ('','".$_POST['productid'][$i]."','".$_POST['quantity'][$i]."','".$_POST['reference'][$i]."','".$_POST['tolerance'][$i]."','".$_POST['package'][$i]."','".$_POST['make'][$i]."','".$_POST['comments']."','".($Prodcutbomveresions['versions']+1)."','".$fileType."','".$fileName."','".$fileSize."','".$content."')");
+				mysqli_query($_SESSION['connection'],"INSERT INTO productbom_versioning(id,productcode,quantity,reference,tolerance,package,make,comments,versions,type,name,MAX_FILE_SIZE,files) VALUES ('','".$_POST['productid'][$i]."','".$_POST['quantity'][$i]."','".$_POST['reference'][$i]."','".$_POST['tolerance'][$i]."','".$_POST['package'][$i]."','".$_POST['make'][$i]."','".$_POST['comments']."','".($Prodcutbomveresions['versions']+1)."','".$fileType."','".$fileName."','".$fileSize."','".$content."')");
 		}
 		else
 		{
 			for($i=0;$i<count($_POST['productid']);$i++)
-				mysql_query("INSERT INTO productbom_versioning(id,productcode,quantity,reference,tolerance,package,make,comments,versions,type,name,MAX_FILE_SIZE,files) VALUES ('','".$_POST['productid'][$i]."','".$_POST['quantity'][$i]."','".$_POST['reference'][$i]."','".$_POST['tolerance'][$i]."','".$_POST['package'][$i]."','".$_POST['make'][$i]."','".$_POST['comments']."','1','".$fileType."','".$fileName."','".$fileSize."','".$content."')");
+				mysqli_query($_SESSION['connection'],"INSERT INTO productbom_versioning(id,productcode,quantity,reference,tolerance,package,make,comments,versions,type,name,MAX_FILE_SIZE,files) VALUES ('','".$_POST['productid'][$i]."','".$_POST['quantity'][$i]."','".$_POST['reference'][$i]."','".$_POST['tolerance'][$i]."','".$_POST['package'][$i]."','".$_POST['make'][$i]."','".$_POST['comments']."','1','".$fileType."','".$fileName."','".$fileSize."','".$content."')");
 		}
 		$_POST['productid']=""; 
 		$_POST['versions']=""; 
 	}
 	if($_POST['Update'])
 	{
-		mysql_query("UPDATE productbom SET productcode ='".$_POST['productcode']."', quantity ='".$_POST['quantity']."', reference='".$_POST['reference']."',tolerance='".$_POST['tolerance']."',package='".$_POST['package']."',make='".$_POST['make']."' WHERE id='".$_POST['id']."'");
+		mysqli_query($_SESSION['connection'],"UPDATE productbom SET productcode ='".$_POST['productcode']."', quantity ='".$_POST['quantity']."', reference='".$_POST['reference']."',tolerance='".$_POST['tolerance']."',package='".$_POST['package']."',make='".$_POST['make']."' WHERE id='".$_POST['id']."'");
 	}
 	if($_GET['versionid'])
 	{
-		mysql_query("delete from productbom_versioning WHERE id='".$_GET['versionid']."'");
+		mysqli_query($_SESSION['connection'],"delete from productbom_versioning WHERE id='".$_GET['versionid']."'");
 	}
 	if($_GET['id'])
 	{
-		$FetchProductbom = mysql_fetch_array(mysql_query("SELECT productbom.id as id,products.productcode,products.id as productid,productbom.quantity as quantity,productbom.reference as reference,productbom.tolerance,productbom.package,productbom.make FROM productbom JOIN products ON products.id = productbom.productcode WHERE productbom.id='".$_GET['id']."'"));
+		$FetchProductbom = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT productbom.id as id,products.productcode,products.id as productid,productbom.quantity as quantity,productbom.reference as reference,productbom.tolerance,productbom.package,productbom.make FROM productbom JOIN products ON products.id = productbom.productcode WHERE productbom.id='".$_GET['id']."'"));
 		$_POST['productid'] = $FetchProductbom['productid'];
 		?>
 		<div class="columns" style='width:902px;'>
@@ -65,12 +65,12 @@
 			<hr />			
 			<fieldset>
 				<div class="clearfix">
-					<?php $productcode = mysql_query("SELECT * FROM products");?>
+					<?php $productcode = mysqli_query($_SESSION['connection'],"SELECT * FROM products");?>
 					<label>Product Code <font color="red">*</font>
 						<select id="productcode" name="productcode">
 							<option value="select">Select</option>
 							<?php
-								while($productcodes = mysql_fetch_array($productcode))
+								while($productcodes = mysqli_fetch_array($productcode))
 								{
 									if($_POST['productid'] == $productcodes['id'])
 										echo '<option value="'.$productcodes['id'].'" selected>'.$productcodes['productcode'].'</option>';
@@ -84,10 +84,10 @@
 					<select id="bom_category" name="bom_category" onchange="bomcategory_rawmaterial()">
 						<option value="">Select</option>
 						<?php
-						$bom_category = mysql_query("SELECT bom_category.id,bom_category.bom_category from bom_category");
-						while($bomcategory = mysql_fetch_array($bom_category))
+						$bom_category = mysqli_query($_SESSION['connection'],"SELECT bom_category.id,bom_category.bom_category from bom_category");
+						while($bomcategory = mysqli_fetch_array($bom_category))
 						{
-							$bom = mysql_fetch_Assoc(mysql_query("Select * From rawmaterial join bom_category on bom_category.id=rawmaterial.bom_category where rawmaterial.id='".$_GET['rawmaterialid']."'"));
+							$bom = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"Select * From rawmaterial join bom_category on bom_category.id=rawmaterial.bom_category where rawmaterial.id='".$_GET['rawmaterialid']."'"));
 							if(($_POST['bom_category'] == $bomcategory['id'])|| ($bomcategory['id'] == $bom['id']))
 								echo '<option value="'.$bomcategory['id'].'" selected>'.$bomcategory['bom_category'].'</option>';
 							else
@@ -99,8 +99,8 @@
 					<select id="rawmaterialid" name="rawmaterialid">
 						<option value="">Select</option>
 						<?php
-							$rawmaterialid = mysql_query("SELECT * from rawmaterial");
-							while($rawmaterial = mysql_fetch_array($rawmaterialid))
+							$rawmaterialid = mysqli_query($_SESSION['connection'],"SELECT * from rawmaterial");
+							while($rawmaterial = mysqli_fetch_array($rawmaterialid))
 							{
 								if($_GET['rawmaterialid'] == $rawmaterial['id'])
 									echo '<option value="'.$rawmaterial['id'].'" selected>'.$rawmaterial['materialcode'].'</option>';
@@ -146,12 +146,12 @@
 			<hr />			
 			<fieldset>
 				<div class="clearfix">
-					<?php $productcode = mysql_query("SELECT * FROM products");?>
+					<?php $productcode = mysqli_query($_SESSION['connection'],"SELECT * FROM products");?>
 					<label>Product Code <font color="red">*</font>
 						<select id="productcode" name="productcode" onchange="Versions();">
 							<option value="select">Select</option>
 							<?php
-								while($productcodes = mysql_fetch_array($productcode))
+								while($productcodes = mysqli_fetch_array($productcode))
 								{
 									if($_GET['id'] && $_POST['productcode'] == $productcodes['id'])
 										echo '<option value="'.$productcodes['id'].'" selected>'.$productcodes['productcode'].'</option>';
@@ -173,7 +173,7 @@
 									$InArray = array();
 									$_GET['productid'] = $_POST['productid'];
 									$productversion = ProductVersions();
-									while($product_versions = mysql_fetch_assoc($productversion))
+									while($product_versions = mysqli_fetch_assoc($productversion))
 									{
 										if(!in_array($product_versions['versions'],$InArray))
 										{
@@ -205,7 +205,7 @@
 		{ ?>
 			<h3>
 				<?php
-				$ProductBOMStatusTotalRows = mysql_fetch_array(ProductBOMStatus_Select_Count_All());
+				$ProductBOMStatusTotalRows = mysqli_fetch_array(ProductBOMStatus_Select_Count_All());
 				if(!$ProductBOMStatusTotalRows['total'])
 					$ProductBOMStatusTotalRows['total'] = 0;
 				echo "Total No. of Product-BOM - ".$ProductBOMStatusTotalRows['total'];
@@ -244,7 +244,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$ProductBOMStatusRows = ProductBOMStatus($Start, $Limit);
-					while($ProductBOMStatus = mysql_fetch_array($ProductBOMStatusRows))
+					while($ProductBOMStatus = mysqli_fetch_array($ProductBOMStatusRows))
 					{
 						echo '<input type="hidden" value="'.$ProductBOMStatus['quantity'].'" name="quantity[]">';
 						echo '<input type="hidden" value="'.$ProductBOMStatus['reference'].'" name="reference[]">';
@@ -271,8 +271,8 @@
 							echo "<td align='center'><a href='index.php?page=".$_GET['page']."&subpage=".$_GET['subpage']."&productid=".$ProductBOMStatus['productid']."&rawmaterialid=".$ProductBOMStatus['rawmaterialid']."&id=".$ProductBOMStatus['id']."&pageno=".$_GET['pageno']."&action=Edit'>Edit</a>  &nbsp; <a href='#' onclick='deleterow(".$ProductBOMStatus['id'].")'>Delete</a></td>
 						</tr>";
 					}
-					/* $bomfile = mysql_query("SELECT * FROM productbom_versioning WHERE versions='".$_POST['versions']."'");
-					while($bomfiles = mysql_fetch_array($bomfile))
+					/* $bomfile = mysqli_query($_SESSION['connection'],"SELECT * FROM productbom_versioning WHERE versions='".$_POST['versions']."'");
+					while($bomfiles = mysqli_fetch_array($bomfile))
 					{
 						if($_GET['bid'])
 						{}
@@ -308,7 +308,7 @@
 	<form enctype="multipart/form-data" method="POST" action="?page=<?php echo $_GET['page']."&subpage=".$_GET['subpage']."&pageno=".$_GET['pageno']; ?>" onsubmit="returtn validation();">
 	<input type="hidden" name="MAX_FILE_SIZE" value="20000000">
 		<?php
-		$ProductBOMStatusTotalRows = mysql_fetch_array(ProductBOMVersioning_Select_Count_All());
+		$ProductBOMStatusTotalRows = mysqli_fetch_array(ProductBOMVersioning_Select_Count_All());
 		if(!$ProductBOMStatusTotalRows['total'])
 			$ProductBOMStatusTotalRows['total'] = 0;
 		echo "<h3>Total No. of Product-BOM - ".$ProductBOMStatusTotalRows['total']."</h3>";
@@ -347,8 +347,8 @@
 				$i = $Start = ($_GET['pageno']-1)*$Limit;
 				$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 				$ProductBOMStatusRows = ProductBOMVersioningStatus($Start, $Limit);
-				$AllRows = mysql_num_rows($ProductBOMStatusRows);
-				while($ProductBOMStatus = mysql_fetch_array($ProductBOMStatusRows))
+				$AllRows = mysqli_num_rows($ProductBOMStatusRows);
+				while($ProductBOMStatus = mysqli_fetch_array($ProductBOMStatusRows))
 				{
 					echo "<tr style='valign:middle;'>
 						<td align='center'>".++$i."</td>
@@ -368,13 +368,13 @@
 							echo "<td align='center'>".$ProductBOMStatus['stockquantity']."</td>";
 						echo "<td>".$ProductBOMStatus['comments']."</td>";
 						echo "<td>";
-						$LastVersions = mysql_fetch_array(mysql_query("SELECT versions FROM productbom_versioning WHERE product_id='".$ProductBOMStatus['product_id']."' ORDER BY versions DESC LIMIT 1"));
+						$LastVersions = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT versions FROM productbom_versioning WHERE product_id='".$ProductBOMStatus['product_id']."' ORDER BY versions DESC LIMIT 1"));
 						if($ProductBOMStatus["versions"] > ($LastVersions["versions"]-1))
 							echo "<a href='index.php?page=".$_GET['page']."&subpage=".$_GET['subpage']."&productid=".$ProductBOMStatus['productid']."&id=".$ProductBOMStatus['id']."&rawmaterialid=".$ProductBOMStatus['rawmaterialid']."&pageno=".$_GET['pageno']."&action=Edit'>Edit</a>  &nbsp; <a href='#' onclick='deleterow(".$ProductBOMStatus['versionid'].")'>Delete</a>";
 					echo "</td>
 					";
 				}
-					$bomfile = mysql_fetch_assoc(mysql_query("SELECT * FROM productbom_versioning WHERE versions='".$_POST['versions']."'"));
+					$bomfile = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM productbom_versioning WHERE versions='".$_POST['versions']."'"));
 					$names = explode('!@#%',$bomfile['name']);
 					foreach($names as $namea)
 					{ ?>
@@ -386,9 +386,9 @@
 		</table>
 		<?php
 		$ProductBOM_Value = ProductBOMStatus_Totalvalue();
-		$ProductBOM_Values = mysql_fetch_assoc($ProductBOM_Value);
+		$ProductBOM_Values = mysqli_fetch_assoc($ProductBOM_Value);
 		echo "<strong>Total Cost is ".number_format($ProductBOM_Values['totalvalues'],2)."</strong>";
-		$versionno = mysql_fetch_assoc(mysql_query("SELECT * FROM productbom_versioning ORDER BY id DESC"));
+		$versionno = mysqli_fetch_assoc(mysqli_query($_SESSION['connection'],"SELECT * FROM productbom_versioning ORDER BY id DESC"));
 		if($_POST['versions'] != 1)
 		{
 		?>

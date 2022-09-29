@@ -9,7 +9,7 @@
 			<option value="">Select</option>
 			<?php
 				$Select_ProductCode = Select_ProductCodeByAsc(substr($_GET['Prefix'],0,3)); 
-				while($FetchProductCode = mysql_fetch_array($Select_ProductCode))
+				while($FetchProductCode = mysqli_fetch_array($Select_ProductCode))
 				{
 					if($_GET['productid']==$FetchProductCode['id'])
 						echo '<option value="'.$FetchProductCode['id'].'" selected>'.$FetchProductCode['code'].'</option>';

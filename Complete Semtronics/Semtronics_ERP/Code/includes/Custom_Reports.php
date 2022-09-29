@@ -45,7 +45,7 @@ else
 	?>
 	<section role="main" id="main">
 	<?php
-		$TotalRows = mysql_fetch_assoc(Stock_Status_Summary_Count());
+		$TotalRows = mysqli_fetch_assoc(Stock_Status_Summary_Count());
 		echo "<h4>INVOICE SUMMARY : Total Number of Invoices -".$TotalRows['total'].'</h4>';
 		?>
 		<table class="paginate sortable full" id="Filter_Display">
@@ -65,7 +65,7 @@ else
 				echo '<tr><td colspan="7"><font color="red"><center>No data found</center></font></td></tr>';
 			$i=1;
 			$summary = Stock_Status_Summary();
-			while($stock_summary = mysql_fetch_assoc($summary))
+			while($stock_summary = mysqli_fetch_assoc($summary))
 			{
 				$totalamount = round($stock_summary['sum(amount)']+$stock_summary['sum(taxamount)'],2);
 				echo'<tbody>

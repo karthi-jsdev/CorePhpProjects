@@ -4,7 +4,7 @@ $i=1;
 ?>
 <form action="?index.php&page=Stores&subpage=spage->Stock_Management,ssubpage->Inspection" method="post">
 <?php 
-if(mysql_num_rows(Stock_Inspection())==0)
+if(mysqli_num_rows(Stock_Inspection())==0)
 	echo "<br/><h3>Total Number Stocks to be Inspected -".'0'.'</h3><br/>';
 else
 {
@@ -25,8 +25,8 @@ else
 	</thead>
 <?php
 	$summary = Stock_Inspection();
-	echo "<br/><h3>Total Number Stocks to be Inspected -".mysql_num_rows($summary).'</h3><br/>';
-	while($stock_summary = mysql_fetch_assoc($summary))
+	echo "<br/><h3>Total Number Stocks to be Inspected -".mysqli_num_rows($summary).'</h3><br/>';
+	while($stock_summary = mysqli_fetch_assoc($summary))
 	{
 		echo'<tbody>
 			<tr>

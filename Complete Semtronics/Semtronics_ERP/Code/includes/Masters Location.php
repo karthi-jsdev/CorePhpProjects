@@ -3,7 +3,7 @@
 		$Columns = array("id", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Credit = mysql_fetch_assoc(Location_Select_ById());
+			$Credit = mysqli_fetch_assoc(Location_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Credit[$Col];
 		}
@@ -18,7 +18,7 @@
 				$LocationResource = Location_Select_ByNamePWD();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($LocationResource))
+					if(mysqli_num_rows($LocationResource))
 						$message = "<br /><div class='message error'><b>Message</b> : Location already exists</div>";
 					else
 					{
@@ -28,8 +28,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$Location = mysql_fetch_assoc($LocationResource);
-					if(mysql_num_rows(Location_Select_ByNamePWDId()))
+					$Location = mysqli_fetch_assoc($LocationResource);
+					if(mysqli_num_rows(Location_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Location already exists</div>";
 					else
 					{
@@ -67,7 +67,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$LocationTotalRows = mysql_fetch_assoc(Location_Count_All());
+				$LocationTotalRows = mysqli_fetch_assoc(Location_Count_All());
 				echo "Total No. of Locations - ".$LocationTotalRows['total'];
 				?>
 			</h3>
@@ -93,7 +93,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$LocationRows = Location_Select_ByLimit($Start, $Limit);
-					while($Location = mysql_fetch_assoc($LocationRows))
+					while($Location = mysqli_fetch_assoc($LocationRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

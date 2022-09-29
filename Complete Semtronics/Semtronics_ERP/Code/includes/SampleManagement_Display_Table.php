@@ -1,7 +1,7 @@
 <?php
 	include("Config.php");
 	include("Reports_Queries.php");
-	$totaldata = mysql_fetch_assoc(Sample_Selection_ByCountdisplay());
+	$totaldata = mysqli_fetch_assoc(Sample_Selection_ByCountdisplay());
 ?>
 <h4>Total Number of Samples -  <?php echo $totaldata["total"];?></h4>
 <div align="right"><a href="#" title="Download" onclick='Export_Data("getdata=SampleManagement_Report")'><img src="images/icons/download.png"></a></div>
@@ -31,7 +31,7 @@
 	$i = 1;
 	$i++;
 	$sample_list = Sample_Selection();
-	while($samplelist = mysql_fetch_assoc($sample_list))
+	while($samplelist = mysqli_fetch_assoc($sample_list))
 	{
 		$Samplesid = $samplelist['id'];
 		if(strlen($Samplesid)==1)

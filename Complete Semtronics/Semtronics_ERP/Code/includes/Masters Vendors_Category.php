@@ -3,7 +3,7 @@
 		$Columns = array("id", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Category = mysql_fetch_assoc(VendorCategory_Select_ById());
+			$Category = mysqli_fetch_assoc(VendorCategory_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Category[$Col];
 		}
@@ -17,7 +17,7 @@
 		{
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows(VendorCategory_Select_ByName()))
+				if(mysqli_num_rows(VendorCategory_Select_ByName()))
 					$message = "<br /><div class='message error'><b>Message</b> : This category name already exists</div>";
 				else
 				{
@@ -27,7 +27,7 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				if(mysql_num_rows(VendorCategory_Select_ByNameUpdate()))
+				if(mysqli_num_rows(VendorCategory_Select_ByNameUpdate()))
 					$message = "<br /><div class='message error'><b>Message</b> : This category name already exists</div>";
 				else
 				{
@@ -65,7 +65,7 @@
 		<div class="columns">
 			<h3>
 				<?php
-				$VendorCategoryTotalRows = mysql_fetch_assoc(VendorCategory_Select_Count_All());
+				$VendorCategoryTotalRows = mysqli_fetch_assoc(VendorCategory_Select_Count_All());
 				echo "Total No. of Vendor Categories - ".$VendorCategoryTotalRows['total'];
 				?>
 			</h3>
@@ -91,7 +91,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$VendorCategoryRows = VendorCategory_Select_ByLimit($Start, $Limit);
-					while($VendorCategory = mysql_fetch_assoc($VendorCategoryRows))
+					while($VendorCategory = mysqli_fetch_assoc($VendorCategoryRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

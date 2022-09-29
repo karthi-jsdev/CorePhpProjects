@@ -8,7 +8,7 @@ if($_GET['product_category_id'])
 	<select name="product_subcategory_id" id="product_subcategory_id">
 		<option value="">All</option>
 		<?php
-		while($product_subvalue = mysql_fetch_assoc($product_sub))
+		while($product_subvalue = mysqli_fetch_assoc($product_sub))
 		{
 			echo '<option value="'.$product_subvalue['id'].'/'.$product_subvalue['prefix'].'">'.$product_subvalue['name'].'</option>';
 		} ?>
@@ -22,7 +22,7 @@ else if($_GET['product_subcategory_id'])
 	<select name="productid" id="productid">
 		<option value="">All</option>
 		<?php
-		while($product_value = mysql_fetch_assoc($product))
+		while($product_value = mysqli_fetch_assoc($product))
 		{
 			echo '<option value="'.$product_value['id'].'">'.$product_value['code'].'</option>';
 		} ?>
@@ -36,7 +36,7 @@ else if($_GET['product_subcategoryid'])
 	<select name="productid" id="productid">
 		<option value="">All</option>
 		<?php
-		while($product_value = mysql_fetch_assoc($product))
+		while($product_value = mysqli_fetch_assoc($product))
 		{
 			if($_GET['id']==$product_value['id'])
 				echo '<option value="'.$product_value['id'].'/'.$product_value['prefix'].'" selected>'.$product_value['prefix'].'</option>';
@@ -49,7 +49,7 @@ else if($_GET['product_subcategoryid'])
 else if($_GET['productid'])
 {
 	$product = ProductVersions();
-	if(mysql_num_rows($product))
+	if(mysqli_num_rows($product))
 	{
 		$InArray = array();
 		?>
@@ -57,7 +57,7 @@ else if($_GET['productid'])
 		<select name="versions" id="versions">
 			<option value="">All</option>
 			<?php
-			while($product_value = mysql_fetch_assoc($product))
+			while($product_value = mysqli_fetch_assoc($product))
 			{
 				if(!in_array($product_value['versions'],$InArray))
 				{
