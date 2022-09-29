@@ -3,7 +3,7 @@
 		$Columns = array("id", "role", "modules");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Roles_Select_ById());
+			$Class = mysqli_fetch_assoc(Roles_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			$RoleResource = Roles_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($RoleResource))
+				if(mysqli_num_rows($RoleResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Roles name already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Class = mysql_fetch_assoc($RoleResource);
-				if(mysql_num_rows(Roles_Select_ByNamePWDId()))
+				$Class = mysqli_fetch_assoc($RoleResource);
+				if(mysqli_num_rows(Roles_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : Roles name already exists</div>";
 				else
 				{
@@ -116,7 +116,7 @@
 		<div class="columns">
 			<h3>Roles List
 				<?php
-				$RolesTotalRows = mysql_fetch_assoc(Roles_Select_Count_All());
+				$RolesTotalRows = mysqli_fetch_assoc(Roles_Select_Count_All());
 				echo " : No. of total Users - ".$RolesTotalRows['total'];
 				?>
 			</h3>
@@ -143,7 +143,7 @@
 					$i=1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$ClassRows = Roles_Select_ByLimit($Start, $Limit);
-					while($Roles = mysql_fetch_assoc($ClassRows))
+					while($Roles = mysqli_fetch_assoc($ClassRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

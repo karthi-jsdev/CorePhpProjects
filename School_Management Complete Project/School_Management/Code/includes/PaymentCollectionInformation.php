@@ -13,7 +13,7 @@
 								<option value="">All</option>
 								<?php
 									$Selectclass = Class_List();
-									while($Fetchclass  = mysql_fetch_array($Selectclass))
+									while($Fetchclass  = mysqli_fetch_array($Selectclass))
 									{
 										if($Fetchclass['sectionid']==$_POST['sectionid'])
 											echo '<option value="'.$Fetchclass['sectionid'].'" selected>'.$Fetchclass['classname'].'  &  '.$Fetchclass['sname'].'</option>';
@@ -31,7 +31,7 @@
 									<option value="">All</option>
 									<?php
 										$Feescategory = Feescategory_List();
-										while($FetchFeescategory  = mysql_fetch_array($Feescategory))
+										while($FetchFeescategory  = mysqli_fetch_array($Feescategory))
 										{
 											if($FetchFeescategory['id']==$_POST['feescategoryid'])
 												echo '<option value="'.$FetchFeescategory['id'].'" selected>'.$FetchFeescategory['name'].'</option>';
@@ -72,7 +72,7 @@
 				<a href="" title="Download" onclick='Exportalldata("getdata=Payment_Collection_Information")'><img src="images/icons/download.png"></a>	
 				<h3>Payment Collection Information List
 					<?php
-						$PaymentcollectionTotalRows = mysql_fetch_assoc(Paymentcollection_Select_Count_All());
+						$PaymentcollectionTotalRows = mysqli_fetch_assoc(Paymentcollection_Select_Count_All());
 						echo " : No. of PaymentDetails - ".$PaymentcollectionTotalRows['total'];
 					?>
 				</h3>
@@ -103,13 +103,13 @@
 						if($PaymentcollectionTotalRows['total'])
 						{
 							$paymentcollection_info = Paymentcollection_Select_ByLimit();
-							while($paymentcollection = mysql_fetch_assoc($paymentcollection_info))
+							while($paymentcollection = mysqli_fetch_assoc($paymentcollection_info))
 							{
 								$Feescategory = "";
 								if($paymentcollection['fees_catagoryids'])
 								{
-									$CatNames = mysql_query("SELECT fees_catagory.name FROM  fees_category_assign JOIN fees_catagory on fees_category_assign.feescategoryid = fees_catagory.id where fees_category_assign.id=".str_replace(",", " || fees_category_assign.id=", $paymentcollection['fees_catagoryids']));
-									while($CatName = mysql_fetch_array($CatNames))
+									$CatNames = mysqli_query($_SESSION['connection'],"SELECT fees_catagory.name FROM  fees_category_assign JOIN fees_catagory on fees_category_assign.feescategoryid = fees_catagory.id where fees_category_assign.id=".str_replace(",", " || fees_category_assign.id=", $paymentcollection['fees_catagoryids']));
+									while($CatName = mysqli_fetch_array($CatNames))
 										$Feescategory .= $CatName['name'].", ";
 								}
 								$Totalamount = $paymentcollection['paidamount'] - $paymentcollection['scholarshipamount'] + $paymentcollection['fineamount'];

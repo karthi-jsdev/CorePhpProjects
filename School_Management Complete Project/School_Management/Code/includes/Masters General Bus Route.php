@@ -3,7 +3,7 @@
 		$Columns = array("id", "name", "timings");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Bus_Select_ById());
+			$Class = mysqli_fetch_assoc(Bus_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows(Bus_Select_ByNamePWD()))
+				if(mysqli_num_rows(Bus_Select_ByNamePWD()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Bus Route name and Timings already exists</div>";
 				else
 				{
@@ -28,7 +28,7 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				if(mysql_num_rows(Bus_Select_ByNamePWDId()))
+				if(mysqli_num_rows(Bus_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Bus Route name and Timings already exists</div>";
 				else
 				{
@@ -69,7 +69,7 @@
 		<div class="columns">
 			<h3>Bus Route List
 				<?php
-				$BusTotalRows = mysql_fetch_assoc(Bus_Select_Count_All());
+				$BusTotalRows = mysqli_fetch_assoc(Bus_Select_Count_All());
 				echo " : No. of Total Bus Route - ".$BusTotalRows['total'];
 				?>
 			</h3>
@@ -99,9 +99,9 @@
 						$i =1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$BusRows = Bus_Select_ByLimit($Start, $Limit);
-					while($Bus = mysql_fetch_assoc($BusRows))
+					while($Bus = mysqli_fetch_assoc($BusRows))
 					{
-						$FetchCategory = mysql_fetch_array(FetchCategoryById($Bus['categoryid']));
+						$FetchCategory = mysqli_fetch_array(FetchCategoryById($Bus['categoryid']));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
 							<td>".$Bus['name']."</td>

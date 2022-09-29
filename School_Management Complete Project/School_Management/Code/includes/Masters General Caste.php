@@ -3,7 +3,7 @@
 		$Columns = array("id", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Caste_Select_ById());
+			$Class = mysqli_fetch_assoc(Caste_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			$ClassResource = Caste_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($ClassResource))
+				if(mysqli_num_rows($ClassResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Caste already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Class = mysql_fetch_assoc($ClassResource);
-				if(mysql_num_rows(Caste_Select_ByNamePWDId()))
+				$Class = mysqli_fetch_assoc($ClassResource);
+				if(mysqli_num_rows(Caste_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Caste Group already exists</div>";
 				else
 				{
@@ -66,7 +66,7 @@
 		<div class="columns">
 			<h3>Caste List
 				<?php
-				$CasteTotalRows = mysql_fetch_assoc(Caste_Select_Count_All());
+				$CasteTotalRows = mysqli_fetch_assoc(Caste_Select_Count_All());
 				echo " : No. of Total Caste - ".$CasteTotalRows['total'];
 				?>
 			</h3>
@@ -95,7 +95,7 @@
 						$i =1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$CasteRows = Caste_Select_ByLimit($Start, $Limit);
-					while($Caste = mysql_fetch_assoc($CasteRows))
+					while($Caste = mysqli_fetch_assoc($CasteRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

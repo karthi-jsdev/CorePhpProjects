@@ -2,7 +2,7 @@
 	$Columns = array("id","name","emp_no","section_id","subject_ids","is_class_teacher");
 	if($_GET['action'] == 'Edit')
 	{
-		$FetchStaff = mysql_fetch_assoc(StaffDetails_Select_ById());
+		$FetchStaff = mysqli_fetch_assoc(StaffDetails_Select_ById());
 		foreach($Columns as $Col)
 			$_POST[$Col] = $FetchStaff[$Col];
 	}
@@ -29,9 +29,9 @@
 					<option value="">Select</option>
 					<?php
 						$SelectSection = Select_Section();
-						while($FetchSection  = mysql_fetch_array($SelectSection))
+						while($FetchSection  = mysqli_fetch_array($SelectSection))
 						{
-							$ClassFetch = mysql_fetch_array(mysql_query("Select * From class where id='".$FetchSection['classid']."'"));
+							$ClassFetch = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From class where id='".$FetchSection['classid']."'"));
 							if($FetchSection['id']==$_POST['section_id'])
 								echo '<option value="'.$FetchSection['id'].'" selected>'.$ClassFetch['name'].'-'.$FetchSection['name'].'</option>';
 							else
@@ -46,7 +46,7 @@
 					<?php
 						$SelectSubject = Select_Subject();
 						$Subjects = explode(",",$_POST['subject_ids']);
-						while($FetchSubject  = mysql_fetch_array($SelectSubject))
+						while($FetchSubject  = mysqli_fetch_array($SelectSubject))
 						{
 							if($_POST['subject_ids'])
 							{
@@ -82,7 +82,7 @@
 </form>
 <?php
 	$SelectStaffDetails = Select_Staff_Details();
-	if(mysql_num_rows($SelectStaffDetails))
+	if(mysqli_num_rows($SelectStaffDetails))
 	{
 		echo '<table class="paginate sortable full">
 					<thead>
@@ -94,17 +94,17 @@
 							<th align="left">Action</th>
 						</tr>
 					</thead>';
-		while($FetchStaffDetails = mysql_fetch_array($SelectStaffDetails))
+		while($FetchStaffDetails = mysqli_fetch_array($SelectStaffDetails))
 		{
-			$FetchSection = mysql_fetch_array(Select_SectionById($FetchStaffDetails['section_id']));
-			$ClassFetch = mysql_fetch_array(mysql_query("Select * From class where id='".$FetchSection['classid']."'"));
+			$FetchSection = mysqli_fetch_array(Select_SectionById($FetchStaffDetails['section_id']));
+			$ClassFetch = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From class where id='".$FetchSection['classid']."'"));
 			$Sub = explode(",",$FetchStaffDetails['subject_ids']);
 			echo '<tr>
 					<td>'.$FetchStaffDetails['name'].'</td>
 					<td>'.$ClassFetch['name'].'/'.$FetchSection['name'].'</td><td>';
 					foreach($Sub as $Subjects)
 					{
-						$FetchSubjects = mysql_fetch_array(mysql_query("Select * From subject where id='".$Subjects."'"));
+						$FetchSubjects = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From subject where id='".$Subjects."'"));
 						echo $FetchSubjects['name'].',';
 					}
 					echo '</td><td>';

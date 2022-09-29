@@ -3,7 +3,7 @@
 		$Columns = array("id", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Category_Select_ById());
+			$Class = mysqli_fetch_assoc(Category_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			$CategoryResource = Category_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($CategoryResource))
+				if(mysqli_num_rows($CategoryResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Category name already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Class = mysql_fetch_assoc($CategoryResource);
-				if(mysql_num_rows(Category_Select_ByNamePWDId()))
+				$Class = mysqli_fetch_assoc($CategoryResource);
+				if(mysqli_num_rows(Category_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Category name already exists</div>";
 				else
 				{
@@ -67,7 +67,7 @@
 		<div class="columns">
 			<h3>Category List
 				<?php
-				$CategoryTotalRows = mysql_fetch_assoc(Category_Select_Count_All());
+				$CategoryTotalRows = mysqli_fetch_assoc(Category_Select_Count_All());
 				echo " : No. of total Users - ".$CategoryTotalRows['total'];
 				?>
 			</h3>
@@ -96,7 +96,7 @@
 						$i = $CategoryTotalRows['total'];
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$CategoryRows = Category_Select_ByLimit($Start, $Limit);
-					while($Category = mysql_fetch_assoc($CategoryRows))
+					while($Category = mysqli_fetch_assoc($CategoryRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i--."</td>

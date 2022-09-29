@@ -5,7 +5,7 @@
 	"last_institutution_worked","last_institution_address","major_subjects_taught_id","salary","total_experience");
 	if($_GET['action'] == 'Edit')
 	{
-		$FetchEmployee = mysql_fetch_assoc(Employee_Select_ById());
+		$FetchEmployee = mysqli_fetch_assoc(Employee_Select_ById());
 		foreach($Columns as $Col)
 			$_POST[$Col] = $FetchEmployee[$Col];
 	}
@@ -118,7 +118,7 @@
 								<option value="">Select</option>
 								<?php
 									$Selectqualification = Select_Qualification();
-									while($Fetchqualification  = mysql_fetch_array($Selectqualification))
+									while($Fetchqualification  = mysqli_fetch_array($Selectqualification))
 									{
 										if($_POST['qualification_id']==$Fetchqualification['id'])
 											echo '<option value="'.$Fetchqualification['id'].'" selected>'.$Fetchqualification['name'].'</option>';
@@ -139,7 +139,7 @@
 									<option value="">Select</option>
 									<?php
 										$Selectdesignation = Select_Designation();
-										while($Fetchdesignation  = mysql_fetch_array($Selectdesignation))
+										while($Fetchdesignation  = mysqli_fetch_array($Selectdesignation))
 										{
 											if($_POST['designation_id']==$Fetchdesignation['id'])
 												echo '<option value="'.$Fetchdesignation['id'].'" selected>'.$Fetchdesignation['name'].'</option>';
@@ -167,7 +167,7 @@
 									<option value="">Select</option>
 									<?php
 										$Selectdepartment = Select_Department();
-										while($Fetchdepartment  = mysql_fetch_array($Selectdepartment))
+										while($Fetchdepartment  = mysqli_fetch_array($Selectdepartment))
 										{
 											if($_POST['department_id']==$Fetchdepartment['id'])
 												echo '<option value="'.$Fetchdepartment['id'].'" selected>'.$Fetchdepartment['name'].'</option>';
@@ -188,7 +188,7 @@
 								<?php
 									//
 									$Selectdesignation = Select_Grade();
-									while($Fetchdesignation  = mysql_fetch_array($Selectdesignation))
+									while($Fetchdesignation  = mysqli_fetch_array($Selectdesignation))
 									{
 										if($_POST['grade_id']==$Fetchdesignation['id'])
 											echo '<option value="'.$Fetchdesignation['id'].'" selected>'.$Fetchdesignation['name'].'</option>';
@@ -204,7 +204,7 @@
 				<?php
 					$SelectParticulars = SelectParticulars();
 					$i = 0;
-					while($FetchParticulars = mysql_fetch_array($SelectParticulars))
+					while($FetchParticulars = mysqli_fetch_array($SelectParticulars))
 					{
 						if($i%2 == 0)
 							echo '<tr>';
@@ -256,7 +256,7 @@
 					<option value="">Select</option>
 					<?php
 						$SelectBlood = Select_Blood();
-						while($FetchBlood  = mysql_fetch_array($SelectBlood))
+						while($FetchBlood  = mysqli_fetch_array($SelectBlood))
 						{
 							if($_POST['blood_group_id']==$FetchBlood['id'])
 								echo '<option value="'.$FetchBlood['id'].'" selected>'.$FetchBlood['name'].'</option>';
@@ -274,7 +274,7 @@
 					<option value="">Select</option>
 					<?php
 						$SelectNationality = Select_Nationality();
-						while($FetchNationality  = mysql_fetch_array($SelectNationality))
+						while($FetchNationality  = mysqli_fetch_array($SelectNationality))
 						{
 							if($_POST['nationality_id']==$FetchNationality['id'])
 								echo '<option value="'.$FetchNationality['id'].'" selected>'.$FetchNationality['name'].'</option>';
@@ -287,7 +287,7 @@
 					<option value="">Select</option>
 					<?php
 						$SelectReligion = Select_Religion();
-						while($FetchReligion  = mysql_fetch_array($SelectReligion))
+						while($FetchReligion  = mysqli_fetch_array($SelectReligion))
 						{
 							if($_POST['religion_id']==$FetchReligion['id'])
 								echo '<option value="'.$FetchReligion['id'].'" selected>'.$FetchReligion['name'].'</option>';
@@ -304,8 +304,8 @@
 				<select name="community" id="community" >
 					<option value="">Select</option>
 					<?php
-						$SelectCommunity = mysql_query("select * from community");
-						while($FetchCommunity =  mysql_fetch_array($SelectCommunity))
+						$SelectCommunity = mysqli_query($_SESSION['connection'],"select * from community");
+						while($FetchCommunity =  mysqli_fetch_array($SelectCommunity))
 						{
 							if($_POST['community']==$FetchCommunity['id'])
 								echo '<option value="'.$FetchCommunity['id'].'" selected>'.$FetchCommunity['name'].'</option>';
@@ -326,7 +326,7 @@
 					<option value="">Select</option>
 					<?php
 						$SelectSubject = Select_Subject();
-						while($FetchSubject  = mysql_fetch_array($SelectSubject))
+						while($FetchSubject  = mysqli_fetch_array($SelectSubject))
 						{
 							if($_POST['major_subjects_taught_id']==$FetchSubject['id'])
 								echo '<option value="'.$FetchSubject['id'].'" selected>'.$FetchSubject['name'].'</option>';

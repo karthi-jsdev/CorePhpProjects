@@ -2,14 +2,14 @@
 	$Columns = array("id","employee_id","department_id","grade_id","basic_pay","da","hra","cca","ma","lop","month","year");
 	if($_GET['action'])
 	{
-		$FetchSalary = mysql_fetch_assoc(Salary_Select_ById());
+		$FetchSalary = mysqli_fetch_assoc(Salary_Select_ById());
 		foreach($Columns as $Col)
 			$_POST[$Col] = $FetchSalary[$Col];
 	}
 	if($_POST['save'])
 	{
-		$SelectAssignSal = mysql_query("select * from employee_salary_assignment where employee_id='".$_POST['name']."' && month='".$_POST['month']."' && year='".$_POST['year']."'");
-		if(mysql_num_rows($SelectAssignSal))
+		$SelectAssignSal = mysqli_query($_SESSION['connection'],"select * from employee_salary_assignment where employee_id='".$_POST['name']."' && month='".$_POST['month']."' && year='".$_POST['year']."'");
+		if(mysqli_num_rows($SelectAssignSal))
 			echo '<br/><div class="message error"><b>Message</b> : For this month and year salary assigned</div>';
 		else
 		{
@@ -25,7 +25,7 @@
 						$Query .= ",";
 				}
 			}
-			mysql_query("insert into employee_salary_assignment(id,employee_id,basic_pay,da,hra,cca,ma,lop,datetime,month,year,status) values('','".$_POST['name']."',$Query,'".date('Y-m-d h:i:s')."','".$_POST['month']."','".$_POST['year']."','1')");
+			mysqli_query($_SESSION['connection'],"insert into employee_salary_assignment(id,employee_id,basic_pay,da,hra,cca,ma,lop,datetime,month,year,status) values('','".$_POST['name']."',$Query,'".date('Y-m-d h:i:s')."','".$_POST['month']."','".$_POST['year']."','1')");
 		}	
 		/*if($_POST['partculars'])
 		{
@@ -54,7 +54,7 @@
 				$i++;
 			}
 		}*/
-		//mysql_query("Update salary_assignment set monthyear='".($_POST['month'].'/'.$_POST['year'])."',$Query,datetime='".date('Y-m-d h:i:s')."',status='1' where id='".$_POST['id']."'");
+		//mysqli_query($_SESSION['connection'],"Update salary_assignment set monthyear='".($_POST['month'].'/'.$_POST['year'])."',$Query,datetime='".date('Y-m-d h:i:s')."',status='1' where id='".$_POST['id']."'");
 	}
 ?>
 <form method="POST" name="form1" action="?page=<?php echo $_GET['page']."&subpage=".$_GET['subpage']."&pageno=".$_GET['pageno']; ?>" id="form" class="form panel"  enctype="multipart/form-data">
@@ -98,7 +98,7 @@
 					echo '<select name="name" id="name" onchange="GetSalDetails(this.value)">
 						<option value="Select">Select</option>';
 					$SelectEmployeeName = Select_Employee();
-					while($FetchEmployeeName = mysql_fetch_array($SelectEmployeeName))
+					while($FetchEmployeeName = mysqli_fetch_array($SelectEmployeeName))
 					{
 						if($_POST['employee_id']==$FetchEmployeeName['id'])
 							echo '<option value="'.$FetchEmployeeName['id'].'" selected>'.$FetchEmployeeName['first_name'].'</option>';
@@ -117,7 +117,7 @@
 					/*echo '<select name="department" id="department">
 						<option value="Select">Select</option>';
 					$Selectdepartment = Select_department();
-					while($Fetchdepartment = mysql_fetch_array($Selectdepartment))
+					while($Fetchdepartment = mysqli_fetch_array($Selectdepartment))
 					{
 						echo '<option value="'.$Fetchdepartment['id'].'">'.$Fetchdepartment['name'].'</option>';
 					}
@@ -132,7 +132,7 @@
 					/*echo '<select name="department" id="department">
 						<option value="Select">Select</option>';
 					$Selectdepartment = Select_department();
-					while($Fetchdepartment = mysql_fetch_array($Selectdepartment))
+					while($Fetchdepartment = mysqli_fetch_array($Selectdepartment))
 					{
 						echo '<option value="'.$Fetchdepartment['id'].'">'.$Fetchdepartment['name'].'</option>';
 					}
@@ -145,7 +145,7 @@
 				/*	echo '<select name="designation" id="designation">
 						<option value="Select">Select</option>';
 					$Selectdesignation = Select_designation();
-					while($Fetchdesignation = mysql_fetch_array($Selectdesignation))
+					while($Fetchdesignation = mysqli_fetch_array($Selectdesignation))
 					{
 						echo '<option value="'.$Fetchdesignation['id'].'">'.$Fetchdesignation['name'].'</option>';
 					}
@@ -158,7 +158,7 @@
 				$SelectParticulars = SelectParticulars();
 				$i = 1;
 				$j = 3;
-				while($FetchParticulars = mysql_fetch_array($SelectParticulars))
+				while($FetchParticulars = mysqli_fetch_array($SelectParticulars))
 				{
 					echo '<label><strong>'.$FetchParticulars['particular'].' </strong><font color="red">*</font><br/>
 							<input type="text" name="partculars[]" id="'.$j.'"  value="'.$_POST[$i].'" required="required" onkeypress="return isNumeric(event)">
@@ -175,7 +175,7 @@
 <?php
 if($_POST['save'])
 {
-	$SelectSal = mysql_query("select * From employee_salary_assignment order by id desc");
+	$SelectSal = mysqli_query($_SESSION['connection'],"select * From employee_salary_assignment order by id desc");
 	$Total = 0;
 	echo '<table class="paginate sortable full">
 				<thead>
@@ -197,7 +197,7 @@ if($_POST['save'])
 					</tr>
 				</thead>';
 	$Status = "";			
-	$FetchSal = mysql_fetch_array($SelectSal);	
+	$FetchSal = mysqli_fetch_array($SelectSal);	
 	$months = array("Select","January","Febuary","March","April","May","June","July","August","September","October","November","December");			
 	$Months = "";	
 		for($i=0;$i<count($months);$i++)
@@ -210,7 +210,7 @@ if($_POST['save'])
 		else
 			$Status = "Salary not assigned";
 		$Total = $FetchSal['basic_pay']+$FetchSal['da']+$FetchSal['hra']+$FetchSal['cca']+$FetchSal['ma']+$FetchSal['lop'];
-		$SelectEmployee = mysql_fetch_array(mysql_query("Select * From staff_admission Where id='".$FetchSal['employee_id']."'"));
+		$SelectEmployee = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From staff_admission Where id='".$FetchSal['employee_id']."'"));
 		echo '<tr>
 				<td><img src="data:image/jpeg;base64,'.base64_encode($SelectEmployee['user_img']).'"  width="90px" height="90px" alt="photo"/></td>
 				<td style="vertical-align:middle">'.date('Y-m-d').'</td>

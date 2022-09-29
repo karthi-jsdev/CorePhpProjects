@@ -5,14 +5,14 @@
 		</header>
 		<dl>
 			<?php
-			$Users = mysql_query("SELECT * FROM user");
+			$Users = mysqli_query($_SESSION['connection'],"SELECT * FROM user");
 			?>
-			<dt>Users: <?php echo mysql_num_rows($Users); ?></dt>
-			<dd><div class="progress progress-orange"><span style="width: 10%;"><b><?php echo mysql_num_rows($Users); ?></b></span></div></dd>
-			<dt>Users: <?php echo mysql_num_rows($Users); ?></dt>
-			<dd><div class="progress progress-red"><span style="width: 100%;"><b><?php echo mysql_num_rows($Users); ?></b></span></div></dd>
-			<dt>Users: <?php echo mysql_num_rows($Users); ?></dt>
-			<dd><div class="progress progress-red"><span style="width: 100%;"><b><?php echo mysql_num_rows($Users); ?></b></span></div></dd>
+			<dt>Users: <?php echo mysqli_num_rows($Users); ?></dt>
+			<dd><div class="progress progress-orange"><span style="width: 10%;"><b><?php echo mysqli_num_rows($Users); ?></b></span></div></dd>
+			<dt>Users: <?php echo mysqli_num_rows($Users); ?></dt>
+			<dd><div class="progress progress-red"><span style="width: 100%;"><b><?php echo mysqli_num_rows($Users); ?></b></span></div></dd>
+			<dt>Users: <?php echo mysqli_num_rows($Users); ?></dt>
+			<dd><div class="progress progress-red"><span style="width: 100%;"><b><?php echo mysqli_num_rows($Users); ?></b></span></div></dd>
 		</dl>
 		<br />
 	</div>
@@ -24,8 +24,8 @@
         <section>
             <dl>
 			<?php
-			$result = mysql_query("SELECT * FROM user");
-			while($row = mysql_fetch_assoc($result))
+			$result = mysqli_query($_SESSION['connection'],"SELECT * FROM user");
+			while($row = mysqli_fetch_assoc($result))
 				echo "<dt>".$row['status']."</dt><dd>".$row['status']."</dd><hr />";
 			?>
             </dl>

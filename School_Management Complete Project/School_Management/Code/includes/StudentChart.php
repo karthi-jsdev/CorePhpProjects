@@ -8,19 +8,19 @@ $data = array();
 //$SelectClassAndSectionNames = Select_Section();
 $labels = array(); 
 $i=0;
-$SelectClassAndSectionNames = mysql_query("select section.id as SectionId,class.name as ClassName,section.name as SectionName,class.id as ClassId from section join class on section.classid=class.id");
-while($FetchClassAndSectionNames = mysql_fetch_array($SelectClassAndSectionNames))
+$SelectClassAndSectionNames = mysqli_query($_SESSION['connection'],"select section.id as SectionId,class.name as ClassName,section.name as SectionName,class.id as ClassId from section join class on section.classid=class.id");
+while($FetchClassAndSectionNames = mysqli_fetch_array($SelectClassAndSectionNames))
 {
 	$labels[$i] = $FetchClassAndSectionNames['ClassName']."/".$FetchClassAndSectionNames['SectionName'];
 	$i++;
 } 
 $j=0;
-$SelectSections = mysql_query("select * from section");
-while($FetchSections = mysql_fetch_array($SelectSections))
+$SelectSections = mysqli_query($_SESSION['connection'],"select * from section");
+while($FetchSections = mysqli_fetch_array($SelectSections))
 {
-	$data[$j++] = mysql_num_rows(mysql_query("select * from student_admission where section_id='".$FetchSections['id']."'"));
+	$data[$j++] = mysqli_num_rows(mysqli_query($_SESSION['connection'],"select * from student_admission where section_id='".$FetchSections['id']."'"));
 }
-/*$FetchStudentsCount = mysql_fetch_array(mysql_query("select count(*) as total from student_admission where section_id='".$SelectClassAndSectionNames['SectionId']."'"));
+/*$FetchStudentsCount = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select count(*) as total from student_admission where section_id='".$SelectClassAndSectionNames['SectionId']."'"));
 	if($FetchStudentsCount['total'])
 	{
 		$data[$i] = $FetchStudentsCount['total'];

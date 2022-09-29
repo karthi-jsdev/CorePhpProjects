@@ -6,18 +6,18 @@ $data0 = array();
 $data1 = array();
 $data2 = array(); 
 $labels = array(); 
-$SelectBusRoute = mysql_query("SELECT b1.id,b1.name FROM `busroute` b1 JOIN busroute b2 ON b1.name=b2.name group by b1.name");
-//$i = mysql_num_rows(mysql_query("SELECT b1.id,b1.name FROM `busroute` b1 JOIN busroute b2 ON b1.name=b2.name group by b1.name"));
-while($FetchBusRoute = mysql_fetch_array($SelectBusRoute))
+$SelectBusRoute = mysqli_query($_SESSION['connection'],"SELECT b1.id,b1.name FROM `busroute` b1 JOIN busroute b2 ON b1.name=b2.name group by b1.name");
+//$i = mysqli_num_rows(mysqli_query($_SESSION['connection'],"SELECT b1.id,b1.name FROM `busroute` b1 JOIN busroute b2 ON b1.name=b2.name group by b1.name"));
+while($FetchBusRoute = mysqli_fetch_array($SelectBusRoute))
 {
-		$SelectBusId = mysql_query("Select * from busroute where name='".$FetchBusRoute['name']."' order by timings asc");
+		$SelectBusId = mysqli_query($_SESSION['connection'],"Select * from busroute where name='".$FetchBusRoute['name']."' order by timings asc");
 		$labels[] = $FetchBusRoute['name'];
 		$test = array();
-		while($FetchBusId = mysql_fetch_array($SelectBusId))
+		while($FetchBusId = mysqli_fetch_array($SelectBusId))
 		{
-			$FetchQuery7 = mysql_fetch_array(mysql_query("select count(*) as total from student_admission where busroute_id='".$FetchBusId['id']."' and busroute_id in(select id from busroute where timings like '7%')"));
-			$FetchQuery8 = mysql_fetch_array(mysql_query("select count(*) as total from student_admission where busroute_id='".$FetchBusId['id']."' and busroute_id in(select id from busroute where timings like '8%')"));
-			$FetchQuery9 = mysql_fetch_array(mysql_query("select count(*) as total from student_admission where busroute_id='".$FetchBusId['id']."' and busroute_id in(select id from busroute where timings like '9%')"));
+			$FetchQuery7 = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select count(*) as total from student_admission where busroute_id='".$FetchBusId['id']."' and busroute_id in(select id from busroute where timings like '7%')"));
+			$FetchQuery8 = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select count(*) as total from student_admission where busroute_id='".$FetchBusId['id']."' and busroute_id in(select id from busroute where timings like '8%')"));
+			$FetchQuery9 = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select count(*) as total from student_admission where busroute_id='".$FetchBusId['id']."' and busroute_id in(select id from busroute where timings like '9%')"));
 			if(count($data0) == 0)
 			{
 				$test[0] = $FetchQuery7['total'];
@@ -43,9 +43,9 @@ while($FetchBusRoute = mysql_fetch_array($SelectBusRoute))
 	{
 		$labels[] = $FetchBusRoute['name'];
 	}*/
-	/*$FetchQuery7 = mysql_fetch_array(mysql_query("select count(*) as total from student_admission where busroute_id='".$FetchBusRoute['id']."' and busroute_id in(select id from busroute where timings like '7%')"));
-	$FetchQuery8 = mysql_fetch_array(mysql_query("select count(*) as total from student_admission where busroute_id='".$FetchBusRoute['id']."' and busroute_id in(select id from busroute where timings like '8%')"));
-	$FetchQuery9 = mysql_fetch_array(mysql_query("select count(*) as total from student_admission where busroute_id='".$FetchBusRoute['id']."' and busroute_id in(select id from busroute where timings like '9%')"));
+	/*$FetchQuery7 = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select count(*) as total from student_admission where busroute_id='".$FetchBusRoute['id']."' and busroute_id in(select id from busroute where timings like '7%')"));
+	$FetchQuery8 = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select count(*) as total from student_admission where busroute_id='".$FetchBusRoute['id']."' and busroute_id in(select id from busroute where timings like '8%')"));
+	$FetchQuery9 = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select count(*) as total from student_admission where busroute_id='".$FetchBusRoute['id']."' and busroute_id in(select id from busroute where timings like '9%')"));
 	$data0[] = $FetchQuery7['total'];
 	$data1[] = $FetchQuery8['total'];
 	$data2[] = $FetchQuery9['total'];

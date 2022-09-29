@@ -3,7 +3,7 @@
 		$Columns = array("id", "name","categoryid");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Fees_particular_Select_ById());
+			$Class = mysqli_fetch_assoc(Fees_particular_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			$SubjectResource = Fees_particular_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($SubjectResource))
+				if(mysqli_num_rows($SubjectResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Fees Particular already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Class = mysql_fetch_assoc($SubjectResource);
-				if(mysql_num_rows(Fees_particular_Select_ByNamePWDId()))
+				$Class = mysqli_fetch_assoc($SubjectResource);
+				if(mysqli_num_rows(Fees_particular_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Fees Particular already exists</div>";
 				else
 				{
@@ -54,7 +54,7 @@
 						<option value="">Select</option>
 						<?php
 							$SelectCategory = Select_Category();
-							while($FetchCategory  = mysql_fetch_array($SelectCategory))
+							while($FetchCategory  = mysqli_fetch_array($SelectCategory))
 							{
 								if($FetchCategory['id']==$_POST['categoryid'])
 									echo '<option value="'.$FetchCategory['id'].'" selected>'.$FetchCategory['name'].'</option>';
@@ -82,7 +82,7 @@
 		<div class="columns">
 			<h3>Fees particular List
 				<?php
-				$Fees_particularTotalRows = mysql_fetch_assoc(Fees_particular_Select_Count_All());
+				$Fees_particularTotalRows = mysqli_fetch_assoc(Fees_particular_Select_Count_All());
 				echo " : No. of Total Fees particular - ".$Fees_particularTotalRows['total'];
 				?>
 			</h3>
@@ -112,9 +112,9 @@
 						$i =1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$Fees_particularRows = Fees_particular_Select_ByLimit($Start, $Limit);
-					while($Fees_particular = mysql_fetch_assoc($Fees_particularRows))
+					while($Fees_particular = mysqli_fetch_assoc($Fees_particularRows))
 					{
-						$FetchCategoryById = mysql_fetch_array(FetchCategoryById($Fees_particular['categoryid']));
+						$FetchCategoryById = mysqli_fetch_array(FetchCategoryById($Fees_particular['categoryid']));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
 							<td>".$FetchCategoryById['name']."</td>

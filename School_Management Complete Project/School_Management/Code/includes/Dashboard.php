@@ -35,8 +35,8 @@
 				<tbody>
 					<?php
 						$i=1;
-						$Birthday_Celebrities = mysql_query("SELECT class.name as classname,section.name as sectionname,`student_admission`.first_name as firstname,`student_admission`.last_name as lastname FROM `student_admission` join section ON section.id = `student_admission`.section_id join class on section.classid = class.id where MONTH(dob) = MONTH(CURDATE()) and  DAY(dob) = DAY(CURDATE()) order by section.classid");
-						while($Birthday = mysql_fetch_array($Birthday_Celebrities))
+						$Birthday_Celebrities = mysqli_query($_SESSION['connection'],"SELECT class.name as classname,section.name as sectionname,`student_admission`.first_name as firstname,`student_admission`.last_name as lastname FROM `student_admission` join section ON section.id = `student_admission`.section_id join class on section.classid = class.id where MONTH(dob) = MONTH(CURDATE()) and  DAY(dob) = DAY(CURDATE()) order by section.classid");
+						while($Birthday = mysqli_fetch_array($Birthday_Celebrities))
 						{
 							echo "<tr>
 								<td>".$i++."</td>";
@@ -59,16 +59,16 @@
 				<!--th>Payed</th-->
 				<th>Pending</th>
 			</tr></thead><tbody>';
-			$SelectTerms = mysql_query("select * from term");
+			$SelectTerms = mysqli_query($_SESSION['connection'],"select * from term");
 			$ArryValue = array();
 			$TotalAmount = 0;
 			$TotalPending = 0;
-			while($FetchTerms = mysql_fetch_array($SelectTerms))
+			while($FetchTerms = mysqli_fetch_array($SelectTerms))
 			{	
 				echo '<tr>
 						<td align="center">'.$FetchTerms['name'].'</td>';
-				$SelectStudentTotalFees = mysql_query("select * from student_fees");
-				while($FetchStudentTotalFees = mysql_fetch_array($SelectStudentTotalFees))
+				$SelectStudentTotalFees = mysqli_query($_SESSION['connection'],"select * from student_fees");
+				while($FetchStudentTotalFees = mysqli_fetch_array($SelectStudentTotalFees))
 				{
 					$ExplodeTerms = explode('.',$FetchStudentTotalFees['terms']);
 					foreach($ExplodeTerms as $ExplodeTerm)

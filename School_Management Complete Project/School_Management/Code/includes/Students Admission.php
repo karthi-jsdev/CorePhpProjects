@@ -3,13 +3,13 @@
 			"annual_income","address","contact_no","email_id","contact_person","relation_id","prev_school_name","prev_school_address","prev_school_medium","prev_studied_std","promoted","busroute_id","fees_catagoryids");
 	if($_GET['action'] == 'Edit')
 	{
-		$FetchStudent = mysql_fetch_assoc(Student_Select_ById());
+		$FetchStudent = mysqli_fetch_assoc(Student_Select_ById());
 		foreach($Columns as $Col)
 			$_POST[$Col] = $FetchStudent[$Col];
 	}
 	if(!$_GET['action'])
 	{
-		$Admission = mysql_fetch_assoc(Fetch_LastAdmissionNum());
+		$Admission = mysqli_fetch_assoc(Fetch_LastAdmissionNum());
 		$Admission_Num = explode(" ",$Admission['admission_no']);
 		$Digits = array("", "0", "00", "000", "0000");
 		$AdmissionNum = "Adm ".$Digits[4 - strlen($Admission_Num[1]+1)].($Admission_Num[1]+1);
@@ -105,9 +105,9 @@
 					<option value="">Select</option>
 					<?php
 						$SelectSection = Select_Section();
-						while($FetchSection  = mysql_fetch_array($SelectSection))
+						while($FetchSection  = mysqli_fetch_array($SelectSection))
 						{
-							$ClassFetch = mysql_fetch_array(mysql_query("Select * From class where id='".$FetchSection['classid']."'"));
+							$ClassFetch = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From class where id='".$FetchSection['classid']."'"));
 							if($FetchSection['id']==$_POST['section_id'])
 								echo '<option value="'.$FetchSection['id'].'" selected>'.$ClassFetch['name'].'-'.$FetchSection['name'].'</option>';
 							else
@@ -141,7 +141,7 @@
 					<option value="">Select</option>
 					<?php
 						$SelectBlood = Select_Blood();
-						while($FetchBlood  = mysql_fetch_array($SelectBlood))
+						while($FetchBlood  = mysqli_fetch_array($SelectBlood))
 						{
 							if($_POST['blood_group_id']==$FetchBlood['id'])
 								echo '<option value="'.$FetchBlood['id'].'" selected>'.$FetchBlood['name'].'</option>';
@@ -162,7 +162,7 @@
 					/* $i=0;
 					if($_POST['fees_particulars'])
 						$FeesParticulars = explode('.',$_POST['fees_particulars']);
-					while($FetchParticular = mysql_fetch_array($SelectParticular))
+					while($FetchParticular = mysqli_fetch_array($SelectParticular))
 					{
 						$exist = 0;									//echo "<span class='radio-input'>";
 						foreach($FeesParticulars as $FeesParticular)
@@ -187,7 +187,7 @@
 					<option value="">Select</option>
 				<?php
 					$SelectNationality = Select_Nationality();
-					while($FetchNationality  = mysql_fetch_array($SelectNationality))
+					while($FetchNationality  = mysqli_fetch_array($SelectNationality))
 					{
 						if($_POST['nationality_id']==$FetchNationality['id'])
 							echo '<option value="'.$FetchNationality['id'].'" selected>'.$FetchNationality['name'].'</option>';
@@ -202,7 +202,7 @@
 					<option value="">Select</option>
 				<?php
 					$SelectCast = Select_Cast();
-					while($FetchCast  = mysql_fetch_array($SelectCast))
+					while($FetchCast  = mysqli_fetch_array($SelectCast))
 					{
 						if($_POST['cast_id']==$FetchCast['id'])
 							echo '<option value="'.$FetchCast['id'].'" selected>'.$FetchCast['name'].'</option>';
@@ -219,7 +219,7 @@
 					<option value="">Select</option>
 				<?php
 					$SelectSubCast = Select_SubCast();
-					while($FetchSubCast  = mysql_fetch_array($SelectSubCast))
+					while($FetchSubCast  = mysqli_fetch_array($SelectSubCast))
 					{
 						if($_POST['subcast_id']==$FetchSubCast['id'])
 							echo '<option value="'.$FetchSubCast['id'].'" selected>'.$FetchSubCast['name'].'</option>';
@@ -234,7 +234,7 @@
 					<option value="">Select</option>
 					<?php
 						$Selectreligion = Select_Religion();
-						while($Fetchreligion  = mysql_fetch_array($Selectreligion))
+						while($Fetchreligion  = mysqli_fetch_array($Selectreligion))
 						{
 							if($_POST['region_id']==$Fetchreligion['id'])
 								echo '<option value="'.$Fetchreligion['id'].'" selected>'.$Fetchreligion['name'].'</option>';
@@ -249,7 +249,7 @@
 					<option value="">Select</option>
 				<?php
 					$SelectBusRoute = Select_BusRoute();
-					while($FetchBusRoute  = mysql_fetch_array($SelectBusRoute))
+					while($FetchBusRoute  = mysqli_fetch_array($SelectBusRoute))
 					{
 						if($_POST['busroute_id']==$FetchBusRoute['id'])
 							echo '<option value="'.$FetchBusRoute['id'].'" selected>'.$FetchBusRoute['name'].'-'.$FetchBusRoute['timings'].'</option>';
@@ -269,7 +269,7 @@
 					<option value="">Select</option>
 				<?php
 					$SelectOccupation = Select_Occupation();
-					while($FetchOccupation  = mysql_fetch_array($SelectOccupation))
+					while($FetchOccupation  = mysqli_fetch_array($SelectOccupation))
 					{
 						if($_POST['father_occupation_id']==$FetchOccupation['id'])
 							echo '<option value="'.$FetchOccupation['id'].'" selected>'.$FetchOccupation['name'].'</option>';
@@ -288,8 +288,8 @@
 				<select  id="moccupation" name="moccupation"> 
 					<option value="">Select</option>
 					<?php
-						$SelectOccupation = mysql_query("Select * From occupation");
-						while($FetchOccupation  = mysql_fetch_array($SelectOccupation))
+						$SelectOccupation = mysqli_query($_SESSION['connection'],"Select * From occupation");
+						while($FetchOccupation  = mysqli_fetch_array($SelectOccupation))
 						{
 							if($_POST['mother_occupation_id']==$FetchOccupation['id'])
 								echo '<option value="'.$FetchOccupation['id'].'" selected>'.$FetchOccupation['name'].'</option>';
@@ -317,7 +317,7 @@
 					<option value="">Select</option>
 					<?php
 						$Selectrelation = Select_Relation();
-						while($Fetchrelation  = mysql_fetch_array($Selectrelation))
+						while($Fetchrelation  = mysqli_fetch_array($Selectrelation))
 						{
 							if($_POST['relation_id']==$Fetchrelation['id'])
 								echo '<option value="'.$Fetchrelation['id'].'" selected>'.$Fetchrelation['name'].'</option>';
@@ -344,11 +344,11 @@
 				if($_GET['action'])
 				{
 					$i = 1;
-					$Feescategoryids = mysql_fetch_array(mysql_query("SELECT fees_catagoryids FROM student_admission  where id='".$_GET['id']."'"));
-					$Feescategory = mysql_query("SELECT fees_catagory.name,fees_category_assign.id,fees_category_assign.classids,fees_category_assign.categorydes FROM fees_category_assign
+					$Feescategoryids = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT fees_catagoryids FROM student_admission  where id='".$_GET['id']."'"));
+					$Feescategory = mysqli_query($_SESSION['connection'],"SELECT fees_catagory.name,fees_category_assign.id,fees_category_assign.classids,fees_category_assign.categorydes FROM fees_category_assign
 					JOIN fees_catagory ON fees_catagory.id = fees_category_assign.feescategoryid
 					order by fees_category_assign.id desc");
-					while($Fees = mysql_fetch_array($Feescategory))
+					while($Fees = mysqli_fetch_array($Feescategory))
 					{
 						$i++;
 						$Seperatedfeedcategorynames = explode(",",$Feescategoryids['fees_catagoryids']);

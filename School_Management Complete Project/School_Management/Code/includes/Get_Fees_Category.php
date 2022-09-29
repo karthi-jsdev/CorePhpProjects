@@ -8,12 +8,12 @@
 			<?php
 				$i = 1;
 				$Existflag = 0;
-				$Classid = mysql_fetch_array(mysql_query("SELECT classid FROM section  where id='".$_POST['sectionid']."'"));
+				$Classid = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT classid FROM section  where id='".$_POST['sectionid']."'"));
 				
-				$Feescategory = mysql_query("SELECT fees_catagory.name,fees_category_assign.id,fees_category_assign.classids FROM fees_category_assign
+				$Feescategory = mysqli_query($_SESSION['connection'],"SELECT fees_catagory.name,fees_category_assign.id,fees_category_assign.classids FROM fees_category_assign
 				JOIN fees_catagory ON fees_catagory.id = fees_category_assign.feescategoryid
 				order by fees_category_assign.id desc");
-				while($Fees = mysql_fetch_array($Feescategory))
+				while($Fees = mysqli_fetch_array($Feescategory))
 				{
 					$i++;
 					$Seperatedfeedcategorynames = explode(",",$Fees['classids']);

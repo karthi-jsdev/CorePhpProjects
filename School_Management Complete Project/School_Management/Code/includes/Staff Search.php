@@ -9,7 +9,7 @@
 				<option value="">Select</option>
 				<?php
 					$SelectName = Select_Name();
-					while($FetchName  = mysql_fetch_array($SelectName))
+					while($FetchName  = mysqli_fetch_array($SelectName))
 					{
 						echo '<option value="'.$FetchName['first_name'].'">'.$FetchName['first_name'].' '.$FetchName['last_name'].'</option>';
 					}
@@ -22,10 +22,10 @@
 <?php
 	if($_GET['name'])
 	{
-		$SelectEmployee = mysql_fetch_array(mysql_query("Select * From staff_admission Where first_name='".$_GET['name']."'"));
-		$DepartmentFetch = mysql_fetch_array(mysql_query("Select * From department where id='".$SelectEmployee['department_id']."'"));
-		$DesignationFetch = mysql_fetch_array(mysql_query("Select * From designation where id='".$SelectEmployee['designation_id']."'"));
-		$RelationFetch = mysql_fetch_array(mysql_query("Select * From relation where id='".$SelectStudent['relation_id']."'"));
+		$SelectEmployee = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From staff_admission Where first_name='".$_GET['name']."'"));
+		$DepartmentFetch = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From department where id='".$SelectEmployee['department_id']."'"));
+		$DesignationFetch = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From designation where id='".$SelectEmployee['designation_id']."'"));
+		$RelationFetch = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From relation where id='".$SelectStudent['relation_id']."'"));
 		echo '<img src="data:image/jpeg;base64,'.base64_encode($SelectEmployee['user_img']).'"  width="90px" height="90px" alt="photo"/>';
 		echo '<table class="paginate sortable full">
 				<thead>

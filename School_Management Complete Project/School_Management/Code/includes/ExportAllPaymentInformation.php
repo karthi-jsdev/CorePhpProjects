@@ -18,7 +18,7 @@
 <div class="columns">
 	<h3>Payment Information List
 		<?php
-			$PaymentTotalRows = mysql_fetch_assoc(Payment_Select_Count_All());
+			$PaymentTotalRows = mysqli_fetch_assoc(Payment_Select_Count_All());
 			echo " : No. of PaymentDetails - ".$PaymentTotalRows['total'];
 		?>
 	</h3>
@@ -52,15 +52,15 @@
 			$i = $Start = ($_GET['pageno']-1)*$Limit; */
 			$i = 1;
 			$payment_info = Payment_Select_ByLimit($Start, $Limit);
-			while($payment = mysql_fetch_assoc($payment_info))
+			while($payment = mysqli_fetch_assoc($payment_info))
 			{
 				$Amountpaid = $payment['paidamount'] - $payment['scholarshipamount'] + $payment['fineamount'];
 						$Correctamount = $payment['paidamount'] - $payment['scholarshipamount'];
 						$Feescategory = "";
 						if($payment['fees_catagoryids'])
 						{
-							$CatNames = mysql_query("SELECT fees_catagory.name FROM  fees_category_assign JOIN fees_catagory on fees_category_assign.feescategoryid = fees_catagory.id where fees_category_assign.id=".str_replace(",", " || fees_category_assign.id=", $payment['fees_catagoryids']));
-							while($CatName = mysql_fetch_array($CatNames))
+							$CatNames = mysqli_query($_SESSION['connection'],"SELECT fees_catagory.name FROM  fees_category_assign JOIN fees_catagory on fees_category_assign.feescategoryid = fees_catagory.id where fees_category_assign.id=".str_replace(",", " || fees_category_assign.id=", $payment['fees_catagoryids']));
+							while($CatName = mysqli_fetch_array($CatNames))
 								$Feescategory .= $CatName['name'].", ";
 						}
 						echo "<tr style='valign:middle;'>

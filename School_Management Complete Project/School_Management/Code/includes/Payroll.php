@@ -9,8 +9,8 @@
 					<select name="department" id="department">	
 						<option value="">All</option>
 						<?php
-						$SelectDepartmentName = mysql_query("select * from 	department  order by name asc");
-						while($FetchDepartmentName = mysql_fetch_array($SelectDepartmentName))
+						$SelectDepartmentName = mysqli_query($_SESSION['connection'],"select * from 	department  order by name asc");
+						while($FetchDepartmentName = mysqli_fetch_array($SelectDepartmentName))
 						{
 							if($_POST['department']==$FetchDepartmentName['id'])
 								echo '<option value="'.$FetchDepartmentName['id'].'" selected>'.$FetchDepartmentName['name'].'</option>';
@@ -58,7 +58,7 @@
 					<br/>
 					<input type="submit" class="button button-green" name="Search" value="Search">&nbsp;
 					<?php
-					//if(mysql_num_rows(Report_Department()) && $_POST['Search'])
+					//if(mysqli_num_rows(Report_Department()) && $_POST['Search'])
 						//echo '<a class="button button-green" onclick=\'Export("subpage='.$_GET['subpage'].'&department='.$_POST['department'].'&status='.$_POST['status'].'&complaintdate='.$_POST['complaintdate'].'&resolveddate='.$_POST['resolveddate'].'&Search=1")\'>Download</a>';
 					?>
 				</td>
@@ -89,8 +89,8 @@
 					<th>Payment Due</th>
 				</tr>
 			</thead>';
-		$SelectSalaryAssignment = mysql_query("select department.name as Department,staff_grade.name as Grade,staff_admission.first_name as FirstName,staff_admission.last_name as LastName,basic_pay,da,hra,cca,ma,lop,status,approvestatus from employee_salary_assignment JOIN staff_admission ON staff_admission.id=employee_id JOIN staff_grade ON staff_grade.id=staff_admission.grade_id JOIN department ON department.id=staff_admission.department_id ".str_replace("=''", "!=''", $Query));
-		while($FetchSalaryAssignment = mysql_fetch_array($SelectSalaryAssignment))
+		$SelectSalaryAssignment = mysqli_query($_SESSION['connection'],"select department.name as Department,staff_grade.name as Grade,staff_admission.first_name as FirstName,staff_admission.last_name as LastName,basic_pay,da,hra,cca,ma,lop,status,approvestatus from employee_salary_assignment JOIN staff_admission ON staff_admission.id=employee_id JOIN staff_grade ON staff_grade.id=staff_admission.grade_id JOIN department ON department.id=staff_admission.department_id ".str_replace("=''", "!=''", $Query));
+		while($FetchSalaryAssignment = mysqli_fetch_array($SelectSalaryAssignment))
 		{
 			echo '<tr>
 					<td align="center">'.$FetchSalaryAssignment['FirstName'].' '.$FetchSalaryAssignment['LastName'].'</td>

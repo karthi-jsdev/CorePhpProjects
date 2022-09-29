@@ -11,8 +11,8 @@
 		</tr>
 		<?php
 		$i = 1;
-		$Scholarshipname = mysql_query("SELECT * From discount order by id asc");
-		while($scholarship = mysql_fetch_array($Scholarshipname))
+		$Scholarshipname = mysqli_query($_SESSION['connection'],"SELECT * From discount order by id asc");
+		while($scholarship = mysqli_fetch_array($Scholarshipname))
 		{
 			echo "<tr><td>".$i++."</td>
 			<td><a href='#' style='text-decoration:none;' onclick='post_value(".$scholarship['id'].",".$scholarship['discount'].",".$scholarship['mode'].")'>".$scholarship['name']."</a></td>

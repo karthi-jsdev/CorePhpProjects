@@ -4,7 +4,7 @@
 	{
 		$category = implode($_POST['category'],'.');
 		$amount = implode($_POST['amount'],'.');
-		mysql_query("INSERT INTO miscellaneous_history values('','".$_POST['payto']."','".date('Y-m-d',strtotime($_POST['date']))."','".$category."','".$amount."')");
+		mysqli_query($_SESSION['connection'],"INSERT INTO miscellaneous_history values('','".$_POST['payto']."','".date('Y-m-d',strtotime($_POST['date']))."','".$category."','".$amount."')");
 	}
 ?>
 <head>
@@ -42,7 +42,7 @@
 								<option value="">Select</option>
 							<?php
 								$SelectCategory = Select_Category();
-								while($FetchCategory = mysql_fetch_array($SelectCategory))
+								while($FetchCategory = mysqli_fetch_array($SelectCategory))
 								{
 									echo '<option value="'.$FetchCategory['name'].'">'.$FetchCategory['name'].'</option>';
 								}
@@ -143,7 +143,7 @@ $(document).ready(function()
 			if(i < MaxFileInputs)
 			{
 				i++;
-				$('<span style="padding-left:50px;"><br/><select name="category[]" id="category'+i+'"><option value="">Select</option><?php $Select = mysql_query("select * from miscellaneous"); while($Fetch = mysql_fetch_array($Select)) { ?><option value="<?php echo $Fetch['name']; ?>"><?php echo $Fetch['name']; ?></option><?php } ?></select><span style="" /><input type="text" name="amount[]" id="amount'+i+'"  class="addedInput" /><a href="#" id="removeFileBox"><img src="images/overlay/close.png" border="0" height="25" width="25"/></a></span>').appendTo(FileInputsHolder);
+				$('<span style="padding-left:50px;"><br/><select name="category[]" id="category'+i+'"><option value="">Select</option><?php $Select = mysqli_query($_SESSION['connection'],"select * from miscellaneous"); while($Fetch = mysqli_fetch_array($Select)) { ?><option value="<?php echo $Fetch['name']; ?>"><?php echo $Fetch['name']; ?></option><?php } ?></select><span style="" /><input type="text" name="amount[]" id="amount'+i+'"  class="addedInput" /><a href="#" id="removeFileBox"><img src="images/overlay/close.png" border="0" height="25" width="25"/></a></span>').appendTo(FileInputsHolder);
 			}
 			return false;
 		});

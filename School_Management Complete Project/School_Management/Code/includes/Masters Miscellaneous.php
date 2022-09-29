@@ -3,7 +3,7 @@
 		$Columns = array("id", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Misc_Catagory_Select_ById());
+			$Class = mysqli_fetch_assoc(Misc_Catagory_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			$Misc_CatagoryResource = Misc_Catagory_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($Misc_CatagoryResource))
+				if(mysqli_num_rows($Misc_CatagoryResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Catagory name already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Class = mysql_fetch_assoc($Misc_CatagoryResource);
-				if(mysql_num_rows(Misc_Catagory_Select_ByNamePWDId()))
+				$Class = mysqli_fetch_assoc($Misc_CatagoryResource);
+				if(mysqli_num_rows(Misc_Catagory_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Catagory name already exists</div>";
 				else
 				{
@@ -66,7 +66,7 @@
 		<div class="columns">
 			<h3>Misc Catagory List
 				<?php
-				$Misc_CatagoryTotalRows = mysql_fetch_assoc(Misc_Catagory_Select_Count_All());
+				$Misc_CatagoryTotalRows = mysqli_fetch_assoc(Misc_Catagory_Select_Count_All());
 				echo " : No. of Total Misc Catagory - ".$Misc_CatagoryTotalRows['total'];
 				?>
 			</h3>
@@ -95,7 +95,7 @@
 						$i =1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$Misc_CatagoryRows = Misc_Catagory_Select_ByLimit($Start, $Limit);
-					while($Misc_Catagory = mysql_fetch_assoc($Misc_CatagoryRows))
+					while($Misc_Catagory = mysqli_fetch_assoc($Misc_CatagoryRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

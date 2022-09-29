@@ -13,7 +13,7 @@
 								<option value="">All</option>
 								<?php
 									$Selectclass = Class_List();
-									while($Fetchclass  = mysql_fetch_array($Selectclass))
+									while($Fetchclass  = mysqli_fetch_array($Selectclass))
 									{
 										if($Fetchclass['sectionid']==$_POST['sectionid'])
 											echo '<option value="'.$Fetchclass['sectionid'].'" selected>'.$Fetchclass['classname'].'  &  '.$Fetchclass['sname'].'</option>';
@@ -74,7 +74,7 @@
 				<a href="" title="Download" onclick='Exportalldata("getdata=Student_Paid_Status")'><img src="images/icons/download.png"></a>	
 				<h3>Student Paid Information List
 					<?php
-						$PaymentpaidTotalRows = mysql_fetch_assoc(Paymentpaid_Select_Count_All());
+						$PaymentpaidTotalRows = mysqli_fetch_assoc(Paymentpaid_Select_Count_All());
 						echo " : No. of PaymentDetails - ".$PaymentpaidTotalRows['total'];
 					?>
 				</h3>
@@ -109,13 +109,13 @@
 						if($PaymentpaidTotalRows['total'])
 						{
 							$paymentstatus_info = Paymentstatus_Select_ByLimit();
-							while($paymentstatus = mysql_fetch_assoc($paymentstatus_info))
+							while($paymentstatus = mysqli_fetch_assoc($paymentstatus_info))
 							{
 								$Feescategory = "";
 								if($paymentstatus['fees_catagoryids'])
 								{
-									$CatNames = mysql_query("SELECT fees_catagory.name FROM  fees_category_assign JOIN fees_catagory on fees_category_assign.feescategoryid = fees_catagory.id where fees_category_assign.id=".str_replace(",", " || fees_category_assign.id=", $paymentstatus['fees_catagoryids']));
-									while($CatName = mysql_fetch_array($CatNames))
+									$CatNames = mysqli_query($_SESSION['connection'],"SELECT fees_catagory.name FROM  fees_category_assign JOIN fees_catagory on fees_category_assign.feescategoryid = fees_catagory.id where fees_category_assign.id=".str_replace(",", " || fees_category_assign.id=", $paymentstatus['fees_catagoryids']));
+									while($CatName = mysqli_fetch_array($CatNames))
 										$Feescategory .= $CatName['name'].", ";
 								}
 								$Totalamount = $paymentstatus['paidamount'] - $paymentstatus['scholarshipamount'] + $paymentstatus['fineamount'];

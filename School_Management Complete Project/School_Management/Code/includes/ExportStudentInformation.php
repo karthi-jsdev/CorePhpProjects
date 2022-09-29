@@ -19,7 +19,7 @@
 			<h3>Student Information List
 				<?php
 				if($_POST['Search'])
-					$StudentTotalRows = mysql_fetch_assoc(Student_Count_ByClass());
+					$StudentTotalRows = mysqli_fetch_assoc(Student_Count_ByClass());
 				echo " : No. of Students - ".$StudentTotalRows['total'];
 				?>
 			</h3>
@@ -49,7 +49,7 @@
 					$i = $Start = ($_GET['pageno']-1)*$Limit;
 					$i++; */
 					$student_info = Student_Select_ByClass($Start, $Limit);
-					while($student = mysql_fetch_assoc($student_info))
+					while($student = mysqli_fetch_assoc($student_info))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

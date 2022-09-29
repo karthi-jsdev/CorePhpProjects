@@ -13,7 +13,7 @@
 								<option value="">All</option>
 								<?php
 									$Selectclass = Class_List();
-									while($Fetchclass  = mysql_fetch_array($Selectclass))
+									while($Fetchclass  = mysqli_fetch_array($Selectclass))
 									{
 										if($Fetchclass['sectionid']==$_POST['sectionid'])
 											echo '<option value="'.$Fetchclass['sectionid'].'" selected>'.$Fetchclass['classname'].'  &  '.$Fetchclass['sname'].'</option>';
@@ -44,7 +44,7 @@
 			<div class="columns">
 				<h3>Student Information List
 					<?php
-						$StudentTotalRows = mysql_fetch_assoc(Student_Select_Count_All());
+						$StudentTotalRows = mysqli_fetch_assoc(Student_Select_Count_All());
 						echo " : No. of Students - ".$StudentTotalRows['total'];
 					?>
 				</h3>
@@ -74,7 +74,7 @@
 						$i = $Start = ($_GET['pageno']-1)*$Limit; */
 						$i = 1;
 						$student_info = Student_Select_ByLimit($Start, $Limit);
-						while($student = mysql_fetch_assoc($student_info))
+						while($student = mysqli_fetch_assoc($student_info))
 						{
 							echo "<tr style='valign:middle;'>
 								<td align='center'>".$i++."</td>

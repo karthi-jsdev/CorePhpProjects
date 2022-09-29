@@ -7,7 +7,7 @@
 		<option value="">All</option>
 		<?php
 		$SelectClass = Section_Select($_GET['classid']);
-		while($FetchClass  = mysql_fetch_array($SelectClass))
+		while($FetchClass  = mysqli_fetch_array($SelectClass))
 		{
 			if($FetchClass['id'] == $_GET['SectionId'])
 				echo '<option value="'.$FetchClass['id'].'" selected>'.$FetchClass['name'].'</option>';

@@ -6,15 +6,15 @@ $data = array();
 # The labels for the pie chart 
 //$SelectClassAndSectionNames = Select_Section();
 $labels = array(); 
-$SelectDepartment = mysql_query("select * from department");
+$SelectDepartment = mysqli_query($_SESSION['connection'],"select * from department");
 $i = 0;
-while($FetchDepartment = mysql_fetch_array($SelectDepartment))
+while($FetchDepartment = mysqli_fetch_array($SelectDepartment))
 	$labels[$i++] = $FetchDepartment['name'];
 
-$SelectDepartments = mysql_query("select * from department");
+$SelectDepartments = mysqli_query($_SESSION['connection'],"select * from department");
 $j = 0;
-while($FetchDepartments = mysql_fetch_array($SelectDepartments))
-	$data[$j++] = mysql_num_rows(mysql_query("select * from staff_admission where department_id='".$FetchDepartments['id']."'"));
+while($FetchDepartments = mysqli_fetch_array($SelectDepartments))
+	$data[$j++] = mysqli_num_rows(mysqli_query($_SESSION['connection'],"select * from staff_admission where department_id='".$FetchDepartments['id']."'"));
 # Create a PieChart object of size 450 x 270 pixels 
 $c = new PieChart(750, 350); 
 # Set the center of the pie at (150, 100) and the radius to 80 pixels 

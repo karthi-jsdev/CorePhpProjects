@@ -3,7 +3,7 @@
 		$Columns = array("id", "particular","isdeduction");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Salary_Select_ById());
+			$Class = mysqli_fetch_assoc(Salary_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			$SalaryResource = Salary_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($SalaryResource))
+				if(mysqli_num_rows($SalaryResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Salary Particular already exists</div>";
 				else
 				{
@@ -28,7 +28,7 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				if(mysql_num_rows(Salary_Select_ByNamePWDId()))
+				if(mysqli_num_rows(Salary_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Salary Particular already exists</div>";
 				else
 				{
@@ -73,7 +73,7 @@
 		<div class="columns">
 			<h3>Salary Particulars List
 				<?php
-				$SalaryTotalRows = mysql_fetch_assoc(Salary_Select_Count_All());
+				$SalaryTotalRows = mysqli_fetch_assoc(Salary_Select_Count_All());
 				echo " : No. of total Salary Particulars - ".$SalaryTotalRows['total'];
 				?>
 			</h3>
@@ -103,7 +103,7 @@
 						$i = $SalaryTotalRows['total'];
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$SalaryRows = Salary_Select_ByLimit($Start, $Limit);
-					while($Salary = mysql_fetch_assoc($SalaryRows))
+					while($Salary = mysqli_fetch_assoc($SalaryRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i--."</td>

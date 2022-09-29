@@ -1,7 +1,7 @@
 <?php
 	if($_GET['id'])
 	{
-		mysql_query("delete from student_admission where id='".$_GET['id']."'");
+		mysqli_query($_SESSION['connection'],"delete from student_admission where id='".$_GET['id']."'");
 		echo "<br/><div class='message success'><b>Message</b> : Student information deleted successfully</div>";
 	}
 ?>
@@ -27,9 +27,9 @@
 				<option value="">Select</option>
 				<?php
 					$SelectSection = Select_Section();
-					while($FetchSection  = mysql_fetch_array($SelectSection))
+					while($FetchSection  = mysqli_fetch_array($SelectSection))
 					{
-						$ClassFetch = mysql_fetch_array(mysql_query("Select * From class where id='".$FetchSection['classid']."'"));
+						$ClassFetch = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From class where id='".$FetchSection['classid']."'"));
 						echo '<option value="'.$FetchSection['id'].'">'.$ClassFetch['name'].'-'.$FetchSection['name'].'</option>';
 					}
 				?>
@@ -54,23 +54,23 @@
 					</tr>
 				</thead>';
 		if($_GET['name'] && $_GET['Section'])
-			$FetchStudent = mysql_query("select * from student_admission where ((first_name like '".$_GET['name']."%' or first_name like '% ".$_GET['name']."'  or first_name like '% ".$_GET['name']." %') && section_id='".$_GET['Section']."')");
+			$FetchStudent = mysqli_query($_SESSION['connection'],"select * from student_admission where ((first_name like '".$_GET['name']."%' or first_name like '% ".$_GET['name']."'  or first_name like '% ".$_GET['name']." %') && section_id='".$_GET['Section']."')");
 		else if($_GET['number'])
 		{
-			$FetchStudent = mysql_query("select * from student_admission where (admission_no like '".$_GET['number']."%' or admission_no like '% ".$_GET['number']."'  or admission_no like '% ".$_GET['number']." %')");
+			$FetchStudent = mysqli_query($_SESSION['connection'],"select * from student_admission where (admission_no like '".$_GET['number']."%' or admission_no like '% ".$_GET['number']."'  or admission_no like '% ".$_GET['number']." %')");
 		}
 		else if($_GET['Section'])
 		{
-			$FetchStudent = mysql_query("select * from student_admission where section_id='".$_GET['Section']."'");
+			$FetchStudent = mysqli_query($_SESSION['connection'],"select * from student_admission where section_id='".$_GET['Section']."'");
 		}
 		else if($_GET['name'])
-			$FetchStudent = mysql_query("select * from student_admission where ((first_name like '".$_GET['name']."%' or first_name like '% ".$_GET['name']."'  or first_name like '% ".$_GET['name']." %'))");
-		if(mysql_num_rows($FetchStudent))
+			$FetchStudent = mysqli_query($_SESSION['connection'],"select * from student_admission where ((first_name like '".$_GET['name']."%' or first_name like '% ".$_GET['name']."'  or first_name like '% ".$_GET['name']." %'))");
+		if(mysqli_num_rows($FetchStudent))
 		{
-			while($SelectStudent = mysql_fetch_array($FetchStudent))
+			while($SelectStudent = mysqli_fetch_array($FetchStudent))
 			{
-				$SectionFetch = mysql_fetch_array(mysql_query("Select * From section where id='".$SelectStudent['section_id']."'"));
-				$ClassFetch = mysql_fetch_array(mysql_query("Select * From class where id='".$SectionFetch['classid']."'"));
+				$SectionFetch = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From section where id='".$SelectStudent['section_id']."'"));
+				$ClassFetch = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From class where id='".$SectionFetch['classid']."'"));
 				echo '<tr>
 						<td><img src="data:image/jpeg;base64,'.base64_encode($SelectStudent['user_img']).'"  width="90px" height="90px" alt="photo"/></td>
 						<td  style="vertical-align:middle">'.$SelectStudent['admission_no'].'</td>

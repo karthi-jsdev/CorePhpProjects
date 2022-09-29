@@ -3,7 +3,7 @@
 		$Columns = array("id", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Qualification_Select_ById());
+			$Class = mysqli_fetch_assoc(Qualification_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			$QualificationResource = Qualification_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($QualificationResource))
+				if(mysqli_num_rows($QualificationResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This qualification name already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Class = mysql_fetch_assoc($QualificationResource);
-				if(mysql_num_rows(Qualification_Select_ByNamePWDId()))
+				$Class = mysqli_fetch_assoc($QualificationResource);
+				if(mysqli_num_rows(Qualification_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : qualification name already exists</div>";
 				else
 				{
@@ -67,7 +67,7 @@
 		<div class="columns">
 			<h3>Qualification List
 				<?php
-				$QualificationTotalRows = mysql_fetch_assoc(Qualification_Select_Count_All());
+				$QualificationTotalRows = mysqli_fetch_assoc(Qualification_Select_Count_All());
 				echo " : No. of total Users - ".$QualificationTotalRows['total'];
 				?>
 			</h3>
@@ -96,7 +96,7 @@
 						$i = $QualificationTotalRows['total'];
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$ClassRows = Qualification_Select_ByLimit($Start, $Limit);
-					while($Qualification = mysql_fetch_assoc($ClassRows))
+					while($Qualification = mysqli_fetch_assoc($ClassRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i--."</td>

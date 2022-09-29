@@ -1,6 +1,6 @@
 <?php
 	function Select_Category()
 	{
-		return mysql_query("Select * from miscellaneous");
+		return mysqli_query($_SESSION['connection'],"Select * from miscellaneous");
 	}
 ?>

@@ -15,7 +15,7 @@ if($_GET['getdata'] == "Student_Information")
 		<div class="columns">
 			<h3>Student Information List
 				<?php
-					$StudentTotalRows = mysql_fetch_assoc(Student_Select_Count_All());
+					$StudentTotalRows = mysqli_fetch_assoc(Student_Select_Count_All());
 					echo " : No. of Students - ".$StudentTotalRows['total'];
 				?>
 			</h3>
@@ -46,7 +46,7 @@ if($_GET['getdata'] == "Student_Information")
 					$i++; */
 					$i = 1;
 					$student_info = Student_Select_ByLimit($Start, $Limit);
-					while($student = mysql_fetch_assoc($student_info))
+					while($student = mysqli_fetch_assoc($student_info))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

@@ -26,8 +26,8 @@
 					<select name="class" id="class" onchange="GetSectionNames(this.value)">
 						<option value="">All</option>
 						<?php
-						$SelectClass = mysql_query("select * from class order by name asc");
-						while($FetchClass = mysql_fetch_array($SelectClass))
+						$SelectClass = mysqli_query($_SESSION['connection'],"select * from class order by name asc");
+						while($FetchClass = mysqli_fetch_array($SelectClass))
 						{
 							if($_POST['class']==$FetchClass['id'])
 								echo '<option value="'.$FetchClass['id'].'" selected>'.$FetchClass['name'].'</option>';
@@ -46,8 +46,8 @@
 							<select name="section" id="section">
 								<option value="">All</option>
 								<?php
-								$SelectSection = mysql_query("select * from section where classid = '".$_POST['class']."'order by name asc");
-								while($FetchSection = mysql_fetch_array($SelectSection))
+								$SelectSection = mysqli_query($_SESSION['connection'],"select * from section where classid = '".$_POST['class']."'order by name asc");
+								while($FetchSection = mysqli_fetch_array($SelectSection))
 								{
 									if($_POST['section']==$FetchSection['id'])
 										echo '<option value="'.$FetchSection['id'].'" selected>'.$FetchSection['name'].'</option>';
@@ -66,7 +66,7 @@
 					<br/>
 					<input type="submit" class="button button-green" name="Search" value="Search">&nbsp;
 					<?php
-					//if(mysql_num_rows(Report_Department()) && $_POST['Search'])
+					//if(mysqli_num_rows(Report_Department()) && $_POST['Search'])
 						//echo '<a class="button button-green" onclick=\'Export("subpage='.$_GET['subpage'].'&department='.$_POST['department'].'&status='.$_POST['status'].'&complaintdate='.$_POST['complaintdate'].'&resolveddate='.$_POST['resolveddate'].'&Search=1")\'>Download</a>';
 					?>
 				</td>
@@ -83,7 +83,7 @@ if($_POST['Search'])
 		$Query .= "class.id='".$_POST['class']."' And ";
 	if(isset($_POST['section']))
 		$Query .= "section.id='".$_POST['section']."' ";
-	$SelectClassAndSections = mysql_query("SELECT sum( student_fees.total_amount ) AS TotalAmount, ( sum( student_fees.total_amount ) - sum( student_fees.amount_pending )) as Pending,class.name as ClassName,section.name as SectionName,student_admission.admission_no as AdmissionNo,student_admission.first_name as StudentName FROM student_admission JOIN section ON student_admission.section_id=section.id JOIN class ON class.id=section.classid JOIN student_fees ON student_id=student_admission.id  ".str_replace("=''", "!=''", $Query)." group by admission_no");
+	$SelectClassAndSections = mysqli_query($_SESSION['connection'],"SELECT sum( student_fees.total_amount ) AS TotalAmount, ( sum( student_fees.total_amount ) - sum( student_fees.amount_pending )) as Pending,class.name as ClassName,section.name as SectionName,student_admission.admission_no as AdmissionNo,student_admission.first_name as StudentName FROM student_admission JOIN section ON student_admission.section_id=section.id JOIN class ON class.id=section.classid JOIN student_fees ON student_id=student_admission.id  ".str_replace("=''", "!=''", $Query)." group by admission_no");
 	echo'<table class="paginate sortable full" style="width:600px">
 			<thead>
 				<tr>
@@ -96,7 +96,7 @@ if($_POST['Search'])
 				</tr>
 			</thead>
 			<tbody>';
-				while($FetchClassAndSections = mysql_fetch_array($SelectClassAndSections))
+				while($FetchClassAndSections = mysqli_fetch_array($SelectClassAndSections))
 				{
 					echo '<tr>
 							<td align="center">'.$FetchClassAndSections['AdmissionNo'].'</td>
@@ -111,7 +111,7 @@ if($_POST['Search'])
 }
 /*else if($_POST['Search'] && $_POST['section'])
 {
-	$SelectStudentAdmission = mysql_query("SELECT class.name as ClassName,section.name as SectionName,student_admission.first_name FirstName,student_admission.last_name as LastName,student_admission.admission_no as AdmissionNum FROM `student_admission` JOIN section ON section.id=student_admission.section_id JOIN class ON class.id = section.classid where section_id='".$_POST['section']."'");
+	$SelectStudentAdmission = mysqli_query($_SESSION['connection'],"SELECT class.name as ClassName,section.name as SectionName,student_admission.first_name FirstName,student_admission.last_name as LastName,student_admission.admission_no as AdmissionNum FROM `student_admission` JOIN section ON section.id=student_admission.section_id JOIN class ON class.id = section.classid where section_id='".$_POST['section']."'");
 	echo'<table class="paginate sortable full" style="width:400px">
 			<thead>
 				<tr>
@@ -122,7 +122,7 @@ if($_POST['Search'])
 				</tr>
 			</thead>
 			<tbody>';
-	while($FetchStudentAdmission = mysql_fetch_array($SelectStudentAdmission))
+	while($FetchStudentAdmission = mysqli_fetch_array($SelectStudentAdmission))
 	{
 		echo '<tr>
 				<td align="center">'.$FetchStudentAdmission['AdmissionNum'].'</td>

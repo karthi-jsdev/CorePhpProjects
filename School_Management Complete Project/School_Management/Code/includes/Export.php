@@ -6,8 +6,8 @@
 		date_default_timezone_set('Asia/Kolkata');
 		header("Content-Type: application/msword");
 		header("Content-Disposition: attachment; filename=".str_replace(" ", "_", date("d-m-Y H-i")).".doc");
-		$SelectEmployee = mysql_fetch_array(mysql_query("Select * From employee_salary_assignment Where id='".$_GET['Id']."'"));
-		$SelectEmployeeDetails = mysql_fetch_array(mysql_query("Select * From staff_admission Where id='".$SelectEmployee['employee_id']."'"));
+		$SelectEmployee = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From employee_salary_assignment Where id='".$_GET['Id']."'"));
+		$SelectEmployeeDetails = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From staff_admission Where id='".$SelectEmployee['employee_id']."'"));
 		$months = array("Select","January","Febuary","March","April","May","June","July","August","September","October","November","December");			
 		for($i=0;$i<count($months);$i++)
 		{

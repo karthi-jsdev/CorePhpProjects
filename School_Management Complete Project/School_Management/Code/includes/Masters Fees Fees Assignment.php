@@ -3,7 +3,7 @@
 		$Columns = array("id", "categoryid", "particularid", "classid","total", "mode", "term");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Fees_Assignment_Select_ById());
+			$Class = mysqli_fetch_assoc(Fees_Assignment_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -45,7 +45,7 @@
 						<option value="">Select</option>
 						<?php
 							$SelectCategory = Select_Category();
-							while($FetchCategory  = mysql_fetch_array($SelectCategory))
+							while($FetchCategory  = mysqli_fetch_array($SelectCategory))
 							{
 								if($FetchCategory['id']==$_POST['categoryid'])
 									echo '<option value="'.$FetchCategory['id'].'" selected>'.$FetchCategory['name'].'</option>';
@@ -61,9 +61,9 @@
 							<option value="">Select</option>
 							<?php
 								$SelectClass = Section_Select_All();
-								while($FetchClass  = mysql_fetch_array($SelectClass))
+								while($FetchClass  = mysqli_fetch_array($SelectClass))
 								{
-									$FetchClasses = mysql_fetch_array(Classes_Select_ById($FetchClass['classid']));
+									$FetchClasses = mysqli_fetch_array(Classes_Select_ById($FetchClass['classid']));
 									if($FetchClass['id']==$_POST['classid'])
 										echo '<option value="'.$FetchClass['id'].'" selected>'.$FetchClasses['name'].'/'.$FetchClass['name'].'</option>';
 									else
@@ -97,7 +97,7 @@
 					$SelectTerm = Select_Term();
 					$i=1;$j=0;
 					$ExplodeTerm = explode(',',$_POST['term']);
-					while($FetchTerm = mysql_fetch_array($SelectTerm))
+					while($FetchTerm = mysqli_fetch_array($SelectTerm))
 					{
 						echo '<label>'.$FetchTerm['name'].'<font color="red">*</font><br/>
 								<input type="text" name="terms'.$i.'" id="term'.$i.'" value="'.$ExplodeTerm[$j].'" required="required" onkeypress="return isNumeric(event)">
@@ -120,7 +120,7 @@
 		<div class="columns">
 			<h3>Fees Assignment List
 				<?php
-				$Fees_AssignmentTotalRows = mysql_fetch_assoc(Fees_Assignment_Select_Count_All());
+				$Fees_AssignmentTotalRows = mysqli_fetch_assoc(Fees_Assignment_Select_Count_All());
 				echo " : No. of Total Fees Assignment - ".$Fees_AssignmentTotalRows['total'];
 				?>
 			</h3>
@@ -135,7 +135,7 @@
 						<th align="left">Total Amount</th>
 						<?php
 							$Select = Select_Term();
-							while($FetchTerm  = mysql_fetch_array($Select))
+							while($FetchTerm  = mysqli_fetch_array($Select))
 								echo '<th align="left">'.$FetchTerm['name'].'</th>';
 						?>
 						<th align="left">Action</th>
@@ -157,12 +157,12 @@
 						$i =1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$Fees_AssignmentRows = Fees_Assignment_Select_ByLimit($Start, $Limit);
-					while($Fees_Assignment = mysql_fetch_assoc($Fees_AssignmentRows))
+					while($Fees_Assignment = mysqli_fetch_assoc($Fees_AssignmentRows))
 					{
-						$FetchCategory = mysql_fetch_array(FetchCategoryById($Fees_Assignment['categoryid']));
-						$FetchParticular = mysql_fetch_array(FetchParticularById($Fees_Assignment['particularid']));
-						$FetchSection = mysql_fetch_array(Sections_Select_ById($Fees_Assignment['classid']));
-						$FetchClasses = mysql_fetch_array(Classes_Select_ById($FetchSection['classid']));
+						$FetchCategory = mysqli_fetch_array(FetchCategoryById($Fees_Assignment['categoryid']));
+						$FetchParticular = mysqli_fetch_array(FetchParticularById($Fees_Assignment['particularid']));
+						$FetchSection = mysqli_fetch_array(Sections_Select_ById($Fees_Assignment['classid']));
+						$FetchClasses = mysqli_fetch_array(Classes_Select_ById($FetchSection['classid']));
 						$ExplodeTerms = explode(',',$Fees_Assignment['term']);
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
@@ -170,7 +170,7 @@
 							<td>".$FetchParticular['name']."</td>
 							<td>".$FetchClasses['name'].'/'.$FetchSection['name']."</td>
 							<td>".$Fees_Assignment['total']."</td>";
-							for($j=0;$j<mysql_num_rows(Select_Term());$j++)
+							for($j=0;$j<mysqli_num_rows(Select_Term());$j++)
 								echo "<td>".$ExplodeTerms[$j]."</td>";
 						echo "<td ><a href='index.php?page=".$_GET['page']."&subpage=".$_GET['subpage']."&innersubpage=".$_GET['innersubpage']."&id=".$Fees_Assignment['id']."&pageno=".$_GET['pageno']."&action=Edit' class='action-button' title='user-edit'><span class='user-edit'></span></a>  &nbsp; <a href='#' onclick='deleterow(".$Fees_Assignment['id'].")' class='action-button' title='user-delete'><span class='user-delete'></span></a></td>
 						</tr>";
@@ -241,7 +241,7 @@ if($_POST['categoryid'])
 		}
 		if(mode_val == 1)
 		{
-			for(var i=1;i<=<?php echo mysql_num_rows(mysql_query("select * from term")); ?>;i++)
+			for(var i=1;i<=<?php echo mysqli_num_rows(mysqli_query($_SESSION['connection'],"select * from term")); ?>;i++)
 			{
 				totaloftermamount += Number(document.getElementById("term"+i).value);
 			}
@@ -250,7 +250,7 @@ if($_POST['categoryid'])
 		}
 		if(mode_val == 0)
 		{
-			for(var i=1;i<=<?php echo mysql_num_rows(mysql_query("select * from term")); ?>;i++)
+			for(var i=1;i<=<?php echo mysqli_num_rows(mysqli_query($_SESSION['connection'],"select * from term")); ?>;i++)
 			{
 				percentage += Number(document.getElementById("term"+i).value);
 			}

@@ -1,7 +1,7 @@
 <?php
 	if($_GET['id'])
 	{
-		mysql_query("update employee_salary_assignment set approvestatus='1' where employee_id='".$_GET['id']."'");
+		mysqli_query($_SESSION['connection'],"update employee_salary_assignment set approvestatus='1' where employee_id='".$_GET['id']."'");
 		echo '<br/><div class="message success"><b>Message</b> : Salary approved successfully</div>';
 	}
 ?>
@@ -18,7 +18,7 @@
 							<option value="">Select</option>
 							<?php
 							$SelectName = Select_Employee();
-							while($FetchName = mysql_fetch_assoc($SelectName))
+							while($FetchName = mysqli_fetch_assoc($SelectName))
 							{
 								//if($FetchName['id'] == $_POST['student_id'])
 									//echo "<option value='".$FetchName['id']."' selected>".$FetchName['first_name']."</option>";
@@ -32,7 +32,7 @@
 							<option value="">Select</option>
 							<?php
 							$SelectDepartment = Select_department();
-							while($FetchDepartment  = mysql_fetch_array($SelectDepartment))
+							while($FetchDepartment  = mysqli_fetch_array($SelectDepartment))
 							{
 								//if($FetchClass['id']==$_POST['class_id'])
 									//echo '<option value="'.$FetchClass['id'].'" selected>'.$FetchClass['name'].'</option>';
@@ -78,8 +78,8 @@
 <?php
 	if($_GET['Emp_num'])
 	{
-		$SelectEmployee = mysql_fetch_array(mysql_query("Select * From employee_salary_assignment Where employee_id='".$_GET['Emp_num']."'  && month='".$_GET['Month']."' && year='".$_GET['Year']."'"));
-		$SelectEmployeeDetails = mysql_fetch_array(mysql_query("Select * From staff_admission Where id='".$_GET['Emp_num']."'"));
+		$SelectEmployee = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From employee_salary_assignment Where employee_id='".$_GET['Emp_num']."'  && month='".$_GET['Month']."' && year='".$_GET['Year']."'"));
+		$SelectEmployeeDetails = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * From staff_admission Where id='".$_GET['Emp_num']."'"));
 		$months = array("Select","January","Febuary","March","April","May","June","July","August","September","October","November","December");			
 		for($i=0;$i<count($months);$i++)
 		{

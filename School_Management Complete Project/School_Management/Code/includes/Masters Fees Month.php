@@ -3,7 +3,7 @@
 		$Columns = array("id", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Month_Select_ById());
+			$Class = mysqli_fetch_assoc(Month_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			$MonthResource = Month_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($MonthResource))
+				if(mysqli_num_rows($MonthResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Month name already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Class = mysql_fetch_assoc($MonthResource);
-				if(mysql_num_rows(Month_Select_ByNamePWDId()))
+				$Class = mysqli_fetch_assoc($MonthResource);
+				if(mysqli_num_rows(Month_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Month name already exists</div>";
 				else
 				{
@@ -81,7 +81,7 @@
 <div class="columns">
 	<h3>Month List
 		<?php
-		$MonthTotalRows = mysql_fetch_assoc(Month_Select_Count_All());
+		$MonthTotalRows = mysqli_fetch_assoc(Month_Select_Count_All());
 		echo " : No. of Total Fees Catagory - ".$MonthTotalRows['total'];
 		?>
 	</h3>
@@ -110,7 +110,7 @@
 				$i =1;
 			$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 			$MonthRows = Month_Select_ByLimit($Start, $Limit);
-			while($Month = mysql_fetch_assoc($MonthRows))
+			while($Month = mysqli_fetch_assoc($MonthRows))
 			{
 				echo "<tr style='valign:middle;'>
 					<td align='center'>".$i++."</td>";

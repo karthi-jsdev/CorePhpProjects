@@ -17,7 +17,7 @@
 				
 				//if($_SESSION['SM_roleid'] == 3 || $_SESSION['SM_roleid'] == 2 || $_SESSION['SM_roleid'] == 1)//Super Admin/Admin/Student
 				$headers = array("Dashboard", "Masters", "Students", "Staff", "Salary", "Reports");
-				$FetchModules = mysql_fetch_array(mysql_query("select * from user_role where id='".$_SESSION['SM_roleid']."'"));
+				$FetchModules = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select * from user_role where id='".$_SESSION['SM_roleid']."'"));
 				$ExplodeModules = explode(',',$FetchModules['modules']);
 				for($i = 0; $i < count($ExplodeModules); $i++)
 				{

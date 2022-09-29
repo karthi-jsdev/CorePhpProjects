@@ -3,7 +3,7 @@
 		$Columns = array("id", "name", "discount", "categoryid", "studentcategoryid","mode");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Discount_Select_ById());
+			$Class = mysqli_fetch_assoc(Discount_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows(Discount_Select_ByNamePWD()))
+				if(mysqli_num_rows(Discount_Select_ByNamePWD()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Discount name already exists</div>";
 				else
 				{
@@ -28,7 +28,7 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				if(mysql_num_rows(Discount_Select_ByNamePWDId()))
+				if(mysqli_num_rows(Discount_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Discount name already exists</div>";
 				else
 				{
@@ -57,7 +57,7 @@
 							<option value="">Select</option>
 							<?php
 								$SelectCategory = Select_Category();
-								while($FetchCategory  = mysql_fetch_array($SelectCategory))
+								while($FetchCategory  = mysqli_fetch_array($SelectCategory))
 								{
 									if($FetchCategory['id']==$_POST['categoryid'])
 										echo '<option value="'.$FetchCategory['id'].'" selected>'.$FetchCategory['name'].'</option>';
@@ -73,7 +73,7 @@
 							<option value="">Select</option>
 							<?php
 								$SelectStudentCategory = Select_StudentCategory();
-								while($FetchStudentCategory  = mysql_fetch_array($SelectStudentCategory))
+								while($FetchStudentCategory  = mysqli_fetch_array($SelectStudentCategory))
 								{
 									if($FetchStudentCategory['id']==$_POST['studentcategoryid'])
 										echo '<option value="'.$FetchStudentCategory['id'].'" selected>'.$FetchStudentCategory['name'].'</option>';
@@ -116,7 +116,7 @@
 		<div class="columns">
 			<h3>Discount List
 				<?php
-				$DiscountTotalRows = mysql_fetch_assoc(Discount_Select_Count_All());
+				$DiscountTotalRows = mysqli_fetch_assoc(Discount_Select_Count_All());
 				echo " : No. of Total Discount - ".$DiscountTotalRows['total'];
 				?>
 			</h3>
@@ -147,9 +147,9 @@
 						$i =1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$DiscountRows = Discount_Select_ByLimit($Start, $Limit);
-					while($Discount = mysql_fetch_assoc($DiscountRows))
+					while($Discount = mysqli_fetch_assoc($DiscountRows))
 					{
-						$FetchCategory = mysql_fetch_array(FetchCategoryById($Discount['categoryid']));
+						$FetchCategory = mysqli_fetch_array(FetchCategoryById($Discount['categoryid']));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
 							<td>".$FetchCategory['name']."</td>

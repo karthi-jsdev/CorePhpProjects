@@ -18,7 +18,7 @@
 							<option value="">Select</option>
 							<?php
 							$SelectName = Select_StudentName();
-							while($FetchName = mysql_fetch_assoc($SelectName))
+							while($FetchName = mysqli_fetch_assoc($SelectName))
 							{
 								if($FetchName['id'] == $_POST['student_id'])
 									echo "<option value='".$FetchName['id']."' selected>".$FetchName['first_name']."</option>";
@@ -32,9 +32,9 @@
 							<option value="">Select</option>
 							<?php
 							$SelectClass = Class_Select_All();
-							while($FetchClass  = mysql_fetch_array($SelectClass))
+							while($FetchClass  = mysqli_fetch_array($SelectClass))
 							{
-								$FetchClassName = mysql_fetch_array(mysql_query("Select * from class where id='".$FetchClass['classid']."'"));
+								$FetchClassName = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"Select * from class where id='".$FetchClass['classid']."'"));
 								if($FetchClass['id']==$_POST['section_id'])
 									echo '<option value="'.$FetchClass['id'].'" selected>'.$FetchClassName['name'].'-'.$FetchClass['name'].'</option>';
 								else
@@ -52,7 +52,7 @@
 									<option value="">Select</option>
 									<?php
 									$SelectClass = Section_Select($_POST['section_id']);
-									while($FetchClass  = mysql_fetch_array($SelectClass))
+									while($FetchClass  = mysqli_fetch_array($SelectClass))
 									{
 										if($FetchClass['id']==$_POST['section_id'])
 											echo '<option value="'.$FetchClass['id'].'" selected>'.$FetchClass['name'].'</option>';
@@ -69,7 +69,7 @@
 							<option value="">Select</option>
 							<?php
 							$SelectCategory = Select_Category();
-							while($FetchCategory  = mysql_fetch_array($SelectCategory))
+							while($FetchCategory  = mysqli_fetch_array($SelectCategory))
 							{
 								if($FetchCategory['id'] == $_POST['category_id'])
 									echo '<option value="'.$FetchCategory['id'].'" selected>'.$FetchCategory['name'].'</option>';
@@ -107,13 +107,13 @@
 				$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 				$FeeDetails = Select_Fees_ByStudentId();
 				$i = 1;
-				if(!mysql_num_rows($FeeDetails))
+				if(!mysqli_num_rows($FeeDetails))
 					echo '<tr><td colspan="9"><font color="red"><center>No data found</center></font></td></tr>';
-				while($FeeDetail = mysql_fetch_assoc($FeeDetails))
+				while($FeeDetail = mysqli_fetch_assoc($FeeDetails))
 				{
 					$SelectedTerms = "";
 					$Terms = Select_Terms_ById($FeeDetail['terms']);
-					while($Term = mysql_fetch_assoc($Terms))
+					while($Term = mysqli_fetch_assoc($Terms))
 						$SelectedTerms .= $Term['name'].", ";
 					echo "<tr style='valign:middle;'>
 						<td align='center'>".$i++."</td>

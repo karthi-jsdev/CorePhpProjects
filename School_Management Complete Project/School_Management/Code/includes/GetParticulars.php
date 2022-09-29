@@ -7,7 +7,7 @@
 		<option value="">Select</option>
 		<?php
 			$SelectParticulars = Select_ParticularsByCategoryId($_GET['categoryid']);
-			while($FetchParticulars  = mysql_fetch_array($SelectParticulars))
+			while($FetchParticulars  = mysqli_fetch_array($SelectParticulars))
 			{
 				if($_GET['particularid']==$FetchParticulars['id'])
 					echo '<option value="'.$FetchParticulars['id'].'" selected>'.$FetchParticulars['name'].'</option>';

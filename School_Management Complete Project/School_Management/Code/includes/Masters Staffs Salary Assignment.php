@@ -3,7 +3,7 @@
 		$Columns = array("id", "department_id", "grade_id", "basic_pay", "da", "hra", "cca", "ma", "lop");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Salary_Assignment_Select_ById());
+			$Class = mysqli_fetch_assoc(Salary_Assignment_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -27,7 +27,7 @@
 			$Salary_Assignment = Salary_Assignment_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($Salary_Assignment))
+				if(mysqli_num_rows($Salary_Assignment))
 					$message = "<br /><div class='message error'><b>Message</b> : This Department and Grade already exist</div>";
 				else
 				{
@@ -37,7 +37,7 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				if(mysql_num_rows(Salary_Assignment_Select_ByNamePWDId()))
+				if(mysqli_num_rows(Salary_Assignment_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Department and Grade already exist</div>";
 				else
 				{
@@ -62,7 +62,7 @@
 						<option value="">Select</option>
 						<?php
 							$SelectDepartment = Select_Department();
-							while($FetchDepartment  = mysql_fetch_array($SelectDepartment))
+							while($FetchDepartment  = mysqli_fetch_array($SelectDepartment))
 							{
 								if($FetchDepartment['id']==$_POST['department_id'])
 									echo '<option value="'.$FetchDepartment['id'].'" selected>'.$FetchDepartment['name'].'</option>';
@@ -77,7 +77,7 @@
 						<option value="">Select</option>
 						<?php
 							$SelectGrade = Select_Grade();
-							while($FetchGrade  = mysql_fetch_array($SelectGrade))
+							while($FetchGrade  = mysqli_fetch_array($SelectGrade))
 							{
 								if($FetchGrade['id']==$_POST['grade_id'])
 									echo '<option value="'.$FetchGrade['id'].'" selected>'.$FetchGrade['name'].'</option>';
@@ -92,7 +92,7 @@
 					<?php
 						$SelectParticulars = SelectParticulars();
 						$i = 1;
-						while($FetchParticulars = mysql_fetch_array($SelectParticulars))
+						while($FetchParticulars = mysqli_fetch_array($SelectParticulars))
 						{
 							echo '<label>'.$FetchParticulars['particular'].' <font color="red">*</font><br/>
 									<input type="text" name="partculars[]" id="'.$i.'"  value="'.$_POST[$i].'" required="required" onkeypress="return isNumeric(event)">
@@ -133,7 +133,7 @@
 		<div class="columns">
 			<h3>Salary Assignment List
 				<?php
-				$Salary_AssignmentTotalRows = mysql_fetch_assoc(Salary_Assignment_Select_Count_All());
+				$Salary_AssignmentTotalRows = mysqli_fetch_assoc(Salary_Assignment_Select_Count_All());
 				echo " : No. of Total Salary Assignment - ".$Salary_AssignmentTotalRows['total'];
 				?>
 			</h3>
@@ -169,10 +169,10 @@
 						$i =1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$Salary_AssignmentRows = Salary_Assignment_Select_ByLimit($Start, $Limit);
-					while($Salary_Assignment = mysql_fetch_assoc($Salary_AssignmentRows))
+					while($Salary_Assignment = mysqli_fetch_assoc($Salary_AssignmentRows))
 					{
-						$FetchDepartment = mysql_fetch_array(FetchDepartmentById($Salary_Assignment['department_id']));
-						$FetchGrade = mysql_fetch_array(FetchGradeById($Salary_Assignment['grade_id']));
+						$FetchDepartment = mysqli_fetch_array(FetchDepartmentById($Salary_Assignment['department_id']));
+						$FetchGrade = mysqli_fetch_array(FetchGradeById($Salary_Assignment['grade_id']));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
 							<td>".$FetchDepartment['name']."</td>

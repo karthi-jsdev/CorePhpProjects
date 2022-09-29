@@ -14,7 +14,7 @@
 	$Columns = array("id", "student_id", "terms", "payment_mode", "payment_done", "payment_date", "total_amount", "amount_pending", "fees_category_id", "discount_id", "fine");
 	if($_GET['action'] == 'Edit')
 	{
-		$Section = mysql_fetch_assoc(Select_PayFees_ByAddNo());
+		$Section = mysqli_fetch_assoc(Select_PayFees_ByAddNo());
 		foreach($Columns as $Col)
 			$_POST[$Col] = $Section[$Col];
 	}
@@ -40,7 +40,7 @@
 	} 
 	if($_POST['student_id'])
 	{
-		$FetchStudent = mysql_fetch_array(mysql_query("SELECT student_admission.id,student_admission.admission_no, student_admission.first_name, class.name as classname FROM student_admission JOIN section ON section.id=student_admission.section_id JOIN class ON class.id=section.classid where student_admission.id='".$_POST['student_id']."'"));
+		$FetchStudent = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT student_admission.id,student_admission.admission_no, student_admission.first_name, class.name as classname FROM student_admission JOIN section ON section.id=student_admission.section_id JOIN class ON class.id=section.classid where student_admission.id='".$_POST['student_id']."'"));
 	}
 	?>
 	<div class="columns" style='width:902px;'>
@@ -56,7 +56,7 @@
 						<option value="">Select</option>
 						<?php
 						$StudentAdmissions = Select_All_StudentAdmissions();
-						while($StudentAdmission = mysql_fetch_assoc($StudentAdmissions))
+						while($StudentAdmission = mysqli_fetch_assoc($StudentAdmissions))
 						{
 							if($StudentAdmission['id'] == $_POST['student_id'])
 								echo "<option value='".$StudentAdmission['id'].".".$StudentAdmission['first_name'].".".$StudentAdmission['classname']."' selected>".$StudentAdmission['admission_no']."</option>";
@@ -83,7 +83,7 @@
 						
 						$explodeTerms = explode('.',$_POST['terms']);
 						$ID = array();
-						while($Term = mysql_fetch_assoc($Terms))
+						while($Term = mysqli_fetch_assoc($Terms))
 						{
 							foreach($explodeTerms as $explodeTerm)
 							{
@@ -107,7 +107,7 @@
 						<option value="">Select</option>
 						<?php
 						$PaymentModes = Select_All_PaymentModes();
-						while($PaymentMode = mysql_fetch_assoc($PaymentModes))
+						while($PaymentMode = mysqli_fetch_assoc($PaymentModes))
 						{
 							if($PaymentMode['id'] == $_POST['payment_mode'])
 								echo "<option value='".$PaymentMode['id']."' selected>".$PaymentMode['name']."</option>";
@@ -138,7 +138,7 @@
 						<option value="">Select</option>
 						<?php
 						$FeesCategories = Select_All_FeesCategories();
-						while($FeesCategory = mysql_fetch_assoc($FeesCategories))
+						while($FeesCategory = mysqli_fetch_assoc($FeesCategories))
 						{
 							if($FeesCategory['id'] == $_POST['fees_category_id'])
 								echo "<option value='".$FeesCategory['id']."' selected>".$FeesCategory['name']."</option>";
@@ -157,7 +157,7 @@
 						<option value="">Select</option>
 						<?php
 						$Discounts = Select_All_Discounts();
-						while($Discount = mysql_fetch_assoc($Discounts))
+						while($Discount = mysqli_fetch_assoc($Discounts))
 						{
 							if($Discount['id'] == $_POST['discount_id'])
 								echo "<option value='".$Discount['id']."' selected>".$Discount['name']."</option>";
@@ -171,9 +171,9 @@
 					<select id="fine_id" name="fine_id" onchange="var Options = this.value.split('/');  document.getElementById('fine').innerHTML=Options[1]; ">
 						<option value="">Select</option>
 						<?php
-						$Fines = mysql_query("select * from fine");
-						$FetchFineAmount = mysql_fetch_array(mysql_query("select * from fine where id='".$_POST['fine']."'"));
-						while($Fine = mysql_fetch_assoc($Fines))
+						$Fines = mysqli_query($_SESSION['connection'],"select * from fine");
+						$FetchFineAmount = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select * from fine where id='".$_POST['fine']."'"));
+						while($Fine = mysqli_fetch_assoc($Fines))
 						{
 							if($Fine['id'] == $_POST['fine'])
 								echo "<option value='".$Fine['id'].'/'.$Fine['amount']."' selected>".$Fine['name']."</option>";
@@ -203,7 +203,7 @@
 	<div class="columns">
 		<h3>Fees Payment List
 			<?php
-			$AllPayFees = mysql_fetch_assoc(Count_AllPayFees());
+			$AllPayFees = mysqli_fetch_assoc(Count_AllPayFees());
 			echo " : No. of total records - ".$AllPayFees['total'];
 			?>
 		</h3>
@@ -241,13 +241,13 @@
 					$i =1;
 				$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 				$AllPayFees = Select_PayFees_ByLimit($Start, $Limit);
-				while($PayFees = mysql_fetch_assoc($AllPayFees))
+				while($PayFees = mysqli_fetch_assoc($AllPayFees))
 				{
-					//$FetchStudentFees = mysql_fetch_array(mysql_query("select * from student_fees where id='".$PayFees['id']."'"));
-					$FetchDiscount = mysql_fetch_array(mysql_query("select * from discount where id='".$PayFees['discount_id']."'"));
+					//$FetchStudentFees = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select * from student_fees where id='".$PayFees['id']."'"));
+					$FetchDiscount = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select * from discount where id='".$PayFees['discount_id']."'"));
 					$SelectedTerms = "";
 					$Terms = Select_Terms_ById($PayFees['terms']);
-					while($Term = mysql_fetch_assoc($Terms))
+					while($Term = mysqli_fetch_assoc($Terms))
 						$SelectedTerms .= $Term['name'].", ";
 					echo "<tr style='valign:middle;'>
 						<td align='center'>".$i++."</td>

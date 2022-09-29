@@ -3,7 +3,7 @@
 		$Columns = array("id", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Subject_Select_ById());
+			$Class = mysqli_fetch_assoc(Subject_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			$SubjectResource = Subject_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($SubjectResource))
+				if(mysqli_num_rows($SubjectResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Subject name already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Class = mysql_fetch_assoc($SubjectResource);
-				if(mysql_num_rows(Subject_Select_ByNamePWDId()))
+				$Class = mysqli_fetch_assoc($SubjectResource);
+				if(mysqli_num_rows(Subject_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Subject name already exists</div>";
 				else
 				{
@@ -67,7 +67,7 @@
 		<div class="columns">
 			<h3>Subject List
 				<?php
-				$SubjectTotalRows = mysql_fetch_assoc(Subject_Select_Count_All());
+				$SubjectTotalRows = mysqli_fetch_assoc(Subject_Select_Count_All());
 				echo " : No. of total Users - ".$SubjectTotalRows['total'];
 				?>
 			</h3>
@@ -96,7 +96,7 @@
 						$i = $SubjectTotalRows['total'];
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$SubjectRows = Subject_Select_ByLimit($Start, $Limit);
-					while($Subject = mysql_fetch_assoc($SubjectRows))
+					while($Subject = mysqli_fetch_assoc($SubjectRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i--."</td>

@@ -5,7 +5,7 @@
 		$image = addslashes(file_get_contents($_FILES['photo']['tmp_name']));
 		$imagename = addslashes($_FILES['photo']['name']);
 		$imagesize = getimagesize($_FILES['photo']['tmp_name']);
-		return mysql_query("Insert into student_admission(id,admission_no,admission_date,first_name,last_name,gender,dob,birth_place,section_id,
+		return mysqli_query($_SESSION['connection'],"Insert into student_admission(id,admission_no,admission_date,first_name,last_name,gender,dob,birth_place,section_id,
 		blood_group_id,mother_tongue,nationality_id,subcast_id,cast_id,region_id,father_name,father_occupation_id,mother_name,mother_occupation_id,
 		annual_income,address,contact_no,email_id,contact_person,relation_id,prev_school_name,prev_school_address,prev_school_medium,prev_studied_std,promoted,user_img,fees_particulars,busroute_id) values('','".$_POST['number']."','".date('Y-m-d',strtotime($_POST['date']))."','".$_POST['name']."','".$_POST['lastname']."','".$_POST['gender']."','".date('Y-m-d',strtotime($_POST['dob']))."'
 		,'".$_POST['birthplace']."','".$_POST['section']."','".$_POST['bloodgroup']."','".$_POST['mothertongue']."','".$_POST['nationality']."','".$_POST['subcast']."','".$_POST['cast']."','".$_POST['religion']."','".$_POST['fname']."'
@@ -19,65 +19,65 @@
 		$image = addslashes(file_get_contents($_FILES['photo']['tmp_name']));
 		$imagename = addslashes($_FILES['photo']['name']);
 		$imagesize = getimagesize($_FILES['photo']['tmp_name']);
-		/*return mysql_query("UPDATE student_admission SET user_img='".$image."',admission_date='".date('Y-m-d',strtotime($_POST['date']))."',first_name='".$_POST['name']."',last_name='".$_POST['lastname']."',gender='".$_POST['gender']."',dob='".date('Y-m-d',strtotime($_POST['dob']))."'
+		/*return mysqli_query($_SESSION['connection'],"UPDATE student_admission SET user_img='".$image."',admission_date='".date('Y-m-d',strtotime($_POST['date']))."',first_name='".$_POST['name']."',last_name='".$_POST['lastname']."',gender='".$_POST['gender']."',dob='".date('Y-m-d',strtotime($_POST['dob']))."'
 		,birth_place='".$_POST['birthplace']."',section_id='".$_POST['section']."',blood_group_id='".$_POST['bloodgroup']."',mother_tongue='".$_POST['mothertongue']."',nationality_id='".$_POST['nationality']."',cast_id='".$_POST['cast']."',subcast_id='".$_POST['subcast']."',region_id='".$_POST['religion']."',father_name='".$_POST['fname']."'
 		,father_occupation_id='".$_POST['foccupation']."',mother_name='".$_POST['mname']."',mother_occupation_id='".$_POST['moccupation']."',annual_income='".$_POST['annual']."',address='".$_POST['address']."',contact_no='".$_POST['contactnumber']."',email_id='".$_POST['email']."',contact_person='".$_POST['contactperson']."',relation_id='".$_POST['relation']."',
 		prev_school_name='".$_POST['sname']."',prev_school_address='".$_POST['saddress']."',prev_school_medium='".$_POST['instruction']."',prev_studied_std='".$_POST['pstudied']."',promoted='".$_POST['promoted']."',fees_particulars='".implode($_POST['particulars'],'.')."',busroute_id='".$_POST['route']."' where id='".$_POST['id']."'");*/
-		return mysql_query("UPDATE student_admission SET admission_no='".$_POST['number']."',admission_date='".date('Y-m-d',strtotime($_POST['date']))."',first_name='".$_POST['name']."',last_name='".$_POST['lastname']."',gender='".$_POST['gender']."',dob='".date('Y-m-d',strtotime($_POST['dob']))."'
+		return mysqli_query($_SESSION['connection'],"UPDATE student_admission SET admission_no='".$_POST['number']."',admission_date='".date('Y-m-d',strtotime($_POST['date']))."',first_name='".$_POST['name']."',last_name='".$_POST['lastname']."',gender='".$_POST['gender']."',dob='".date('Y-m-d',strtotime($_POST['dob']))."'
 		,birth_place='".$_POST['birthplace']."',section_id='".$_POST['section']."',blood_group_id='".$_POST['bloodgroup']."',mother_tongue='".$_POST['mothertongue']."',nationality_id='".$_POST['nationality']."',cast_id='".$_POST['cast']."',subcast_id='".$_POST['subcast']."',region_id='".$_POST['religion']."',father_name='".$_POST['fname']."'
 		,father_occupation_id='".$_POST['foccupation']."',mother_name='".$_POST['mname']."',mother_occupation_id='".$_POST['moccupation']."',annual_income='".$_POST['annual']."',address='".$_POST['address']."',contact_no='".$_POST['contactnumber']."',email_id='".$_POST['email']."',contact_person='".$_POST['contactperson']."',relation_id='".$_POST['relation']."',
 		prev_school_name='".$_POST['sname']."',prev_school_address='".$_POST['saddress']."',prev_school_medium='".$_POST['instruction']."',prev_studied_std='".$_POST['pstudied']."',promoted='".$_POST['promoted']."',fees_particulars='".implode($_POST['particulars'],'.')."',busroute_id='".$_POST['route']."' where id='".$_POST['id']."'");
 	}
 	function Select_Section()
 	{
-		return mysql_query("Select * From section");
+		return mysqli_query($_SESSION['connection'],"Select * From section");
 	}
 	function Select_Blood()
 	{
-		return mysql_query("Select * From blood_group");
+		return mysqli_query($_SESSION['connection'],"Select * From blood_group");
 	}
 	function Select_Nationality()
 	{
-		return mysql_query("Select * From nationality");
+		return mysqli_query($_SESSION['connection'],"Select * From nationality");
 	}
 	function Select_Cast()
 	{
-		return mysql_query("Select * From community");
+		return mysqli_query($_SESSION['connection'],"Select * From community");
 	}
 	function Select_Religion()
 	{
-		return mysql_query("Select * From religion");
+		return mysqli_query($_SESSION['connection'],"Select * From religion");
 	}
 	function Select_SubCast()
 	{
-		return mysql_query("Select * From subcast");
+		return mysqli_query($_SESSION['connection'],"Select * From subcast");
 	}
 	function Select_BusRoute()
 	{
-		return mysql_query("Select * From busroute");
+		return mysqli_query($_SESSION['connection'],"Select * From busroute");
 	}
 	function Select_Occupation()
 	{
-		return mysql_query("Select * From occupation");
+		return mysqli_query($_SESSION['connection'],"Select * From occupation");
 	}
 	function Select_Relation()
 	{
-		return mysql_query("Select * From relation");
+		return mysqli_query($_SESSION['connection'],"Select * From relation");
 	}
 	function Select_Name()
 	{
-		return mysql_query("Select * From student_admission");
+		return mysqli_query($_SESSION['connection'],"Select * From student_admission");
 	}
 	function Fetch_LastAdmissionNum()
 	{
-		return mysql_query("Select * From student_admission order by id desc");
+		return mysqli_query($_SESSION['connection'],"Select * From student_admission order by id desc");
 	}
 	function Student_Select_ById()
 	{
-		return mysql_query("Select * From student_admission where id='".$_GET['id']."'");
+		return mysqli_query($_SESSION['connection'],"Select * From student_admission where id='".$_GET['id']."'");
 	}
 	function FetchParticulars()
 	{
-		return mysql_query("Select * From fees_particulars");
+		return mysqli_query($_SESSION['connection'],"Select * From fees_particulars");
 	}
 ?>

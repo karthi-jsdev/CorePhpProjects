@@ -3,7 +3,7 @@
 		$Columns = array("id", "categorydes", "feescategoryid", "classids", "amount", "monthids");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Feescategoryassign_Select_ById());
+			$Class = mysqli_fetch_assoc(Feescategoryassign_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			$FeescategoryassignResource = Feescategoryassign_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($FeescategoryassignResource))
+				if(mysqli_num_rows($FeescategoryassignResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Fees category Assign name already exists</div>";
 				else
 				{
@@ -42,8 +42,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Class = mysql_fetch_assoc($FeescategoryassignResource);
-				if(mysql_num_rows(Feescategoryassign_Select_ByNamePWDId()))
+				$Class = mysqli_fetch_assoc($FeescategoryassignResource);
+				if(mysqli_num_rows(Feescategoryassign_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Fees category Assign name already exists</div>";
 				else
 				{
@@ -86,7 +86,7 @@
 						<option value="">Select</option>
 						<?php
 						$Feescategory = Feescategory_Select_All();
-						while($Feescategory_Name = mysql_fetch_assoc($Feescategory))
+						while($Feescategory_Name = mysqli_fetch_assoc($Feescategory))
 						{
 							if($Feescategory_Name['id'] == $_POST['feescategoryid'])
 								echo "<option value=".$Feescategory_Name['id']." selected>".$Feescategory_Name['name']."</option>";
@@ -105,8 +105,8 @@
 						<?php 
 							$_POST['classids'] = explode(",", $_POST['classids']);
 							$i = 1;
-							$Classnames = mysql_query("SELECT * FROM class order by class.id asc");
-							while($Classes = mysql_fetch_array($Classnames))
+							$Classnames = mysqli_query($_SESSION['connection'],"SELECT * FROM class order by class.id asc");
+							while($Classes = mysqli_fetch_array($Classnames))
 							{
 								$i++;
 								if(in_array($Classes['id'], $_POST['classids']))
@@ -134,9 +134,9 @@
 						<?php
 							$_POST['monthids'] = explode(',',$_POST['monthids']);
 							$i = 1;
-							$Monthnames = mysql_query("SELECT * FROM month order by month.id asc");
+							$Monthnames = mysqli_query($_SESSION['connection'],"SELECT * FROM month order by month.id asc");
 							//echo '<td style="display:none"><input type="checkbox" id="monthnames0" name="monthnames[]" value="'.$Months['id'].'" checked />'.$Months['name'].'</td>';
-							while($Months = mysql_fetch_array($Monthnames))
+							while($Months = mysqli_fetch_array($Monthnames))
 							{
 								$i++;
 								if(in_array($Months['id'],$_POST['monthids']))
@@ -162,7 +162,7 @@
 <div class="columns">
 	<h3>Feescategory Assign List
 		<?php
-		$FeescategoryTotalRows = mysql_fetch_assoc(Feescategory_Select_Count_All());
+		$FeescategoryTotalRows = mysqli_fetch_assoc(Feescategory_Select_Count_All());
 		echo " : No. of Total Fees Catagory Assign- ".$FeescategoryTotalRows['total'];
 		?>
 	</h3>
@@ -195,12 +195,12 @@
 				$i =1;
 			$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 			$FeescategoryRows = Feescategory_Select_ByLimit($Start, $Limit);
-			while($FeescategoryAssign = mysql_fetch_assoc($FeescategoryRows))
+			while($FeescategoryAssign = mysqli_fetch_assoc($FeescategoryRows))
 			{
 				echo "<tr style='valign:middle;'>
 					<td align='center'>".$i++."</td>";
 					echo "<td>".$FeescategoryAssign['categorydes']."</td>";
-					$Feescategoryname = mysql_fetch_array(mysql_query("SELECT * FROM fees_catagory where id='".$FeescategoryAssign['feescategoryid']."'"));
+					$Feescategoryname = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM fees_catagory where id='".$FeescategoryAssign['feescategoryid']."'"));
 					echo "<td>".$Feescategoryname['name']."</td>";
 					if($FeescategoryAssign['classids'])
 					{
@@ -208,7 +208,7 @@
 						$All ="";
 						foreach($Classes as $class)
 						{
-							$Classname = mysql_fetch_array(All_Class_Name($class));
+							$Classname = mysqli_fetch_array(All_Class_Name($class));
 							if($All)
 								$All .=",".$Classname['name'];
 							else
@@ -225,7 +225,7 @@
 						$All ="";
 						foreach($Months as $Month)
 						{
-							$Monthname = mysql_fetch_array(All_Month_Name($Month));
+							$Monthname = mysqli_fetch_array(All_Month_Name($Month));
 							if($All)
 								$All .=",".$Monthname['name'];
 							else
