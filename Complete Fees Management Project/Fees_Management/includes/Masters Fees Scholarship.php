@@ -3,7 +3,7 @@
 		$Columns = array("id", "name", "discount","mode");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Discount_Select_ById());
+			$Class = mysqli_fetch_assoc(Discount_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows(Discount_Select_ByNamePWD()))
+				if(mysqli_num_rows(Discount_Select_ByNamePWD()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Scholarship name already exists</div>";
 				else
 				{
@@ -28,7 +28,7 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				if(mysql_num_rows(Discount_Select_ByNamePWDId()))
+				if(mysqli_num_rows(Discount_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Scholarship name already exists</div>";
 				else
 				{
@@ -82,7 +82,7 @@
 		<div class="columns">
 			<h3>Discount List
 				<?php
-				$DiscountTotalRows = mysql_fetch_assoc(Discount_Select_Count_All());
+				$DiscountTotalRows = mysqli_fetch_assoc(Discount_Select_Count_All());
 				echo " : No. of Total Discount - ".$DiscountTotalRows['total'];
 				?>
 			</h3>
@@ -113,7 +113,7 @@
 						$i =1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$DiscountRows = Discount_Select_ByLimit($Start, $Limit);
-					while($Discount = mysql_fetch_assoc($DiscountRows))
+					while($Discount = mysqli_fetch_assoc($DiscountRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

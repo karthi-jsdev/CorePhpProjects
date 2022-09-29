@@ -3,7 +3,7 @@
 		$Columns = array("id", "name","classid");
 		if($_GET['action'] == 'Edit')
 		{
-			$Section = mysql_fetch_assoc(Section_Select_ById());
+			$Section = mysqli_fetch_assoc(Section_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Section[$Col];
 		}
@@ -18,7 +18,7 @@
 			$SectionResource = Section_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($SectionResource))
+				if(mysqli_num_rows($SectionResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This section name already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				//$User = mysql_fetch_assoc($UserResource);
-				if(mysql_num_rows(Section_Select_ByNamePWDId()))
+				//$User = mysqli_fetch_assoc($UserResource);
+				if(mysqli_num_rows(Section_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This section name already exists</div>";
 				else
 				{
@@ -54,7 +54,7 @@
 						<option value="">Select</option>
 						<?php
 						$Classes = Class_Select_All();
-						while($Class = mysql_fetch_assoc($Classes))
+						while($Class = mysqli_fetch_assoc($Classes))
 						{
 							if($Class['id'] == $_POST['classid'])
 								echo "<option value=".$Class['id']." selected>".$Class['name']."</option>";
@@ -81,7 +81,7 @@
 		<div class="columns">
 			<h3>Section List
 				<?php
-				$SectionTotalRows = mysql_fetch_assoc(Section_Select_Count_All());
+				$SectionTotalRows = mysqli_fetch_assoc(Section_Select_Count_All());
 				echo " : No. of total Sections - ".$SectionTotalRows['total'];
 				?>
 			</h3>
@@ -111,9 +111,9 @@
 						$i =1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$SectionRows = Section_Select_ByLimit($Start, $Limit);
-					while($Section = mysql_fetch_assoc($SectionRows))
+					while($Section = mysqli_fetch_assoc($SectionRows))
 					{
-						$Class = mysql_fetch_assoc(Classes_Select_ById($Section['classid']));
+						$Class = mysqli_fetch_assoc(Classes_Select_ById($Section['classid']));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
 							<td>".$Class['name']."</td>

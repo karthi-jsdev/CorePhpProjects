@@ -3,7 +3,7 @@
 		$Columns = array("id", "name", "days", "amount");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Fine_Select_ById());
+			$Class = mysqli_fetch_assoc(Fine_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows(Fine_Select_ByNamePWD()))
+				if(mysqli_num_rows(Fine_Select_ByNamePWD()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Fine name already exists</div>";
 				else
 				{
@@ -28,7 +28,7 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				if(mysql_num_rows(Fine_Select_ByNamePWDId()))
+				if(mysqli_num_rows(Fine_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Fine name already exists</div>";
 				else
 				{
@@ -74,7 +74,7 @@
 		<div class="columns">
 			<h3>Fine List
 				<?php
-				$FineTotalRows = mysql_fetch_assoc(Fine_Select_Count_All());
+				$FineTotalRows = mysqli_fetch_assoc(Fine_Select_Count_All());
 				echo " : No. of Total Fine - ".$FineTotalRows['total'];
 				?>
 			</h3>
@@ -105,7 +105,7 @@
 						$i =1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$FineRows = Fine_Select_ByLimit($Start, $Limit);
-					while($Fine = mysql_fetch_assoc($FineRows))
+					while($Fine = mysqli_fetch_assoc($FineRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

@@ -3,7 +3,7 @@
 		$Columns = array("id", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Religion_Select_ById());
+			$Class = mysqli_fetch_assoc(Religion_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			$ClassResource = Religion_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($ClassResource))
+				if(mysqli_num_rows($ClassResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Religion already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Class = mysql_fetch_assoc($ClassResource);
-				if(mysql_num_rows(Religion_Select_ByNamePWDId()))
+				$Class = mysqli_fetch_assoc($ClassResource);
+				if(mysqli_num_rows(Religion_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Religion Group already exists</div>";
 				else
 				{
@@ -67,7 +67,7 @@
 		<div class="columns">
 			<h3>Religion List
 				<?php
-				$ReligionTotalRows = mysql_fetch_assoc(Religion_Select_Count_All());
+				$ReligionTotalRows = mysqli_fetch_assoc(Religion_Select_Count_All());
 				echo " : No. of Total Religions - ".$ReligionTotalRows['total'];
 				?>
 			</h3>
@@ -96,7 +96,7 @@
 						$i =1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$ReligionRows = Religion_Select_ByLimit($Start, $Limit);
-					while($Religion = mysql_fetch_assoc($ReligionRows))
+					while($Religion = mysqli_fetch_assoc($ReligionRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

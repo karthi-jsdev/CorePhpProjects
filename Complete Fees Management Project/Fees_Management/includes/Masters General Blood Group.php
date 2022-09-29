@@ -3,7 +3,7 @@
 		$Columns = array("id", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Blood_Select_ById());
+			$Class = mysqli_fetch_assoc(Blood_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			$ClassResource = Blood_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($ClassResource))
+				if(mysqli_num_rows($ClassResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Blood Group already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Class = mysql_fetch_assoc($ClassResource);
-				if(mysql_num_rows(Blood_Select_ByNamePWDId()))
+				$Class = mysqli_fetch_assoc($ClassResource);
+				if(mysqli_num_rows(Blood_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Blood Group already exists</div>";
 				else
 				{
@@ -66,7 +66,7 @@
 		<div class="columns">
 			<h3>Blood Group List
 				<?php
-				$BloodTotalRows = mysql_fetch_assoc(Blood_Select_Count_All());
+				$BloodTotalRows = mysqli_fetch_assoc(Blood_Select_Count_All());
 				echo " : No. of Total Blood Group - ".$BloodTotalRows['total'];
 				?>
 			</h3>
@@ -95,7 +95,7 @@
 						$i =1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$BloodRows = Blood_Select_ByLimit($Start, $Limit);
-					while($Blood = mysql_fetch_assoc($BloodRows))
+					while($Blood = mysqli_fetch_assoc($BloodRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

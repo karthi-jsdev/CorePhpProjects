@@ -4,7 +4,7 @@
 	if($_GET['Student_id'] && $_GET['Student_section_id'])
 	{ 
 		$Student_Details = Student_Name();
-		while($Student_Details_Name = mysql_fetch_array($Student_Details))
+		while($Student_Details_Name = mysqli_fetch_array($Student_Details))
 		{
 			$Section_Name = $Student_Details_Name['sectionname'];
 			$Class_Names = $Student_Details_Name['classname'];
@@ -23,13 +23,13 @@
 			$Student_Office_Address = $Student_Details_Name['officeaddress'];
 			$Student_Contact_Number = $Student_Details_Name['contact_no'];
 			$Student_Image = $Student_Details_Name['user_img'];
-			$Blood_Group = mysql_fetch_array(mysql_query("SELECT name FROM blood_group where id = '".$Student_Details_Name['blood_group_id']."'"));
+			$Blood_Group = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT name FROM blood_group where id = '".$Student_Details_Name['blood_group_id']."'"));
 			$Student_Blood_Group_Name = $Blood_Group['name'];
-			$Student_religion_Name = mysql_fetch_array(mysql_query("SELECT name FROM religion where id = '".$Student_Details_Name['religion_id']."'"));
+			$Student_religion_Name = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT name FROM religion where id = '".$Student_Details_Name['religion_id']."'"));
 			$Student_religion = $Student_religion_Name['name'];
-			$Student_Caste_name =  mysql_fetch_array(mysql_query("SELECT name FROM community where id = '".$Student_Details_Name['cast_id']."'"));
+			$Student_Caste_name =  mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT name FROM community where id = '".$Student_Details_Name['cast_id']."'"));
 			$Student_Caste = $Student_Caste_name['name'];
-			$Student_Sub_cast_name =  mysql_fetch_array(mysql_query("SELECT name FROM subcast where id = '".$Student_Details_Name['subcast_id']."'"));
+			$Student_Sub_cast_name =  mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT name FROM subcast where id = '".$Student_Details_Name['subcast_id']."'"));
 			$Student_Sub_cast = $Student_Sub_cast_name['name'];
 			//$Student_Blood_Group_Name = $Student_Details_Name['bloodgroupname'];
 			//$Student_religion = $Student_Details_Name['religionname'];
@@ -151,9 +151,9 @@
 						<?php
 							$AllCategoryIds = Array();
 							$Condition = "fees_category_assign.id =".str_replace("," ," || fees_category_assign.id=", $_GET['feescategoryid']);
-							$FeesCount = mysql_num_rows(mysql_query("SELECT * FROM fees_catagory join fees_category_assign on fees_catagory.id = fees_category_assign.feescategoryid where ".$Condition." order by fees_category_assign.feescategoryid asc"));
-							$Feescategoryname = mysql_query("SELECT fees_category_assign.id,fees_catagory.name FROM fees_catagory join fees_category_assign on fees_catagory.id = fees_category_assign.feescategoryid where ".$Condition." order by fees_category_assign.feescategoryid asc");
-							while($Feesname = mysql_fetch_array($Feescategoryname))
+							$FeesCount = mysqli_num_rows(mysqli_query($_SESSION['connection'],"SELECT * FROM fees_catagory join fees_category_assign on fees_catagory.id = fees_category_assign.feescategoryid where ".$Condition." order by fees_category_assign.feescategoryid asc"));
+							$Feescategoryname = mysqli_query($_SESSION['connection'],"SELECT fees_category_assign.id,fees_catagory.name FROM fees_catagory join fees_category_assign on fees_catagory.id = fees_category_assign.feescategoryid where ".$Condition." order by fees_category_assign.feescategoryid asc");
+							while($Feesname = mysqli_fetch_array($Feescategoryname))
 							{
 								$AllCategoryIds[] = $Feesname['id'];
 								echo '<td>'.$Feesname['name'].'</td>';
@@ -163,8 +163,8 @@
 							echo '<td></td><td></td><td>Amount</td>';
 							echo "<tr><td>Total Amount</td>";
 							$FeescategoryamountCondition = "fees_category_assign.id =".str_replace("," ," || fees_category_assign.id=", $_GET['feescategoryid']);
-							$Feescategoryamount = mysql_query("SELECT * FROM fees_category_assign join fees_catagory on fees_catagory.id = fees_category_assign.feescategoryid where ".$FeescategoryamountCondition." order by fees_category_assign.feescategoryid asc");
-							while($Feesamount = mysql_fetch_array($Feescategoryamount))
+							$Feescategoryamount = mysqli_query($_SESSION['connection'],"SELECT * FROM fees_category_assign join fees_catagory on fees_catagory.id = fees_category_assign.feescategoryid where ".$FeescategoryamountCondition." order by fees_category_assign.feescategoryid asc");
+							while($Feesamount = mysqli_fetch_array($Feescategoryamount))
 							{
 								echo '<td>'.$Feesamount['amount'].'</td>';
 							}
@@ -175,12 +175,12 @@
 				<tbody>
 					<?php 
 					$FeescategoryCondition = "fees_category_assign.id =".str_replace("," ," || fees_category_assign.id=", $_GET['feescategoryid']);
-					$Feescategorymonth = mysql_query("SELECT * FROM fees_category_assign where ".$FeescategoryCondition." order by feescategoryid asc");
+					$Feescategorymonth = mysqli_query($_SESSION['connection'],"SELECT * FROM fees_category_assign where ".$FeescategoryCondition." order by feescategoryid asc");
 					$Monthname = Array("1" => "May", "2" => "Jun", "3" => "Jul", "4" => "Aug", "5" => "Sep", "6" => "Oct", "7" => "Nov", "8" => "Dec", "9" => "Jan", "10" => "Feb", "11" => "Mar", "12" => "Apr");
 					$k = 0;
 					$Checkboxenable[] = array();
 					
-					while($Feesmonth = mysql_fetch_array($Feescategorymonth))
+					while($Feesmonth = mysqli_fetch_array($Feescategorymonth))
 					{
 						$MonthId = explode(",",$Feesmonth['monthids']);
 						for($j=1; $j<=count($Monthname); $j++)
@@ -198,8 +198,8 @@
 						$k++;
 					}
 					$Fines = Array();
-					$Finename = mysql_query("SELECT * FROM fine order by days DESC");
-					while($Fineamount = mysql_fetch_array($Finename))
+					$Finename = mysqli_query($_SESSION['connection'],"SELECT * FROM fine order by days DESC");
+					while($Fineamount = mysqli_fetch_array($Finename))
 						$Fines[$Fineamount['days']] = $Fineamount['amount']; //$Fineamount['days'] as Key
 					
 					$CurrentDateTime = new DateTime(date("Y-m-d"));
@@ -230,7 +230,7 @@
 						echo "<tr><td>".$Monthname[$j]."</td>";
 						$DisabledCategories = $Feescategory = 0;
 						$AmountToBePaid = "";
-						$Payment_log = mysql_fetch_array(mysql_query("SELECT paidamount,amounttobepaid,feescategory_id FROM payment_log where student_id = '".$_GET['Student_id']."' && month_id=$j $QueryCondition ORDER BY id DESC LIMIT 1"));
+						$Payment_log = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT paidamount,amounttobepaid,feescategory_id FROM payment_log where student_id = '".$_GET['Student_id']."' && month_id=$j $QueryCondition ORDER BY id DESC LIMIT 1"));
 						for($i=0; $i<$FeesCount; $i++)
 						{
 							if($Payment_log)
@@ -255,7 +255,7 @@
 						<input type='hidden' id='scholarid".($j)."' name='scholarid".($j)."' />
 						<input type='hidden' id='scholaramount".($j)."' name='scholaramount".($j)."' />
 						<input type='hidden' id='scholarmode".($j)."' name='scholarmode".($j)."'/>";
-						$Scholarship_log = mysql_fetch_array(mysql_query("SELECT scholarshipamount,finepaid FROM payment_log where student_id = '".$_GET['Student_id']."' && month_id=$j $QueryCondition ORDER BY id DESC LIMIT 1"));
+						$Scholarship_log = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT scholarshipamount,finepaid FROM payment_log where student_id = '".$_GET['Student_id']."' && month_id=$j $QueryCondition ORDER BY id DESC LIMIT 1"));
 						if($Scholarship_log['scholarshipamount'] > 0)
 							echo "<input type='checkbox' id='Scholarshipapplicable".($j)."' onclick='Passing_Scholarship(".$j.")' checked disabled /></td>";
 						else	
@@ -288,7 +288,7 @@
 						<div id='totalamount".$j."'></div>
 						<input type='hidden' id='amounttobepaid".$j."' name='amounttobepaid".$j."' value='".$AmountToBePaid."' /></td>";
 						
-						$PaidAmount = mysql_fetch_array(mysql_query("SELECT sum(paidamount)as totalpaidamount,sum(scholarshipamount) as scholarshipamount,finepaid,sum(fineamount) as fineamount from payment_log where student_id = '".$_GET['Student_id']."' && month_id = '".$j."'"));
+						$PaidAmount = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT sum(paidamount)as totalpaidamount,sum(scholarshipamount) as scholarshipamount,finepaid,sum(fineamount) as fineamount from payment_log where student_id = '".$_GET['Student_id']."' && month_id = '".$j."'"));
 						if($AmountToBePaid != "" && $AmountToBePaid == 0 && $Feescategory !=0)
 						{
 							if($PaidAmount['scholarshipamount'] == 0 && $PaidAmount['finepaid'] == 1)

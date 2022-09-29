@@ -10,7 +10,7 @@
 				<option value="" selected>Select</option>
 				<?php
 				$Cities = City_Select_All();
-				while($City = mysql_fetch_assoc($Cities))
+				while($City = mysqli_fetch_assoc($Cities))
 				{
 					if($City['id'] == $_POST['city_id'])
 						echo "<option value=".$City['id']." selected>".$City['name']."</option>";

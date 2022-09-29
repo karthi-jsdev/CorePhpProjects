@@ -3,7 +3,7 @@
 		$Columns = array("id", "name","castid");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(SubCaste_Select_ById());
+			$Class = mysqli_fetch_assoc(SubCaste_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			$ClassResource = SubCaste_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($ClassResource))
+				if(mysqli_num_rows($ClassResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Subcaste already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Class = mysql_fetch_assoc($ClassResource);
-				if(mysql_num_rows(SubCaste_Select_ByNamePWDId()))
+				$Class = mysqli_fetch_assoc($ClassResource);
+				if(mysqli_num_rows(SubCaste_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Subcaste already exists</div>";
 				else
 				{
@@ -57,8 +57,8 @@
 					<select id="caste" name="caste">
 						<option value="">Select</option>
 						<?php
-							$SelectCaste = mysql_query("select * from community");
-							while($FetchCaste = mysql_fetch_array($SelectCaste))
+							$SelectCaste = mysqli_query($_SESSION['connection'],"select * from community");
+							while($FetchCaste = mysqli_fetch_array($SelectCaste))
 							{
 								if($_POST['castid']==$FetchCaste['id'])
 									echo '<option value="'.$FetchCaste['id'].'" selected>'.$FetchCaste['name'].'</option>';
@@ -83,7 +83,7 @@
 		<div class="columns">
 			<h3>Subcaste List
 				<?php
-				$SubCasteTotalRows = mysql_fetch_assoc(SubCaste_Select_Count_All());
+				$SubCasteTotalRows = mysqli_fetch_assoc(SubCaste_Select_Count_All());
 				echo " : No. of Total Subcaste - ".$SubCasteTotalRows['total'];
 				?>
 			</h3>
@@ -110,9 +110,9 @@
 					$i = 0;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$SubCasteRows = SubCaste_Select_ByLimit($Start, $Limit);
-					while($SubCaste = mysql_fetch_assoc($SubCasteRows))
+					while($SubCaste = mysqli_fetch_assoc($SubCasteRows))
 					{
-						$FetchCste = mysql_fetch_array(mysql_query("select * from community where id='".$SubCaste['castid']."'"));
+						$FetchCste = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"select * from community where id='".$SubCaste['castid']."'"));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".++$i."</td>
 							<td>".$SubCaste['name']."</td>
