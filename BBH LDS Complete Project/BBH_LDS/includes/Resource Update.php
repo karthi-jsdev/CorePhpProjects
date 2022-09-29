@@ -7,18 +7,18 @@
 		include("Resource_UpdateQueries.php");
 		if($_GET['index'])
 		{
-			$Fetch = mysql_fetch_array(mysql_query("select * from resource_update where id='".$_GET['id']."'"));
+			$Fetch = mysql_fetch_array(mysqli_query($_SESSION['connection'],"select * from resource_update where id='".$_GET['id']."'"));
 			$Fetch['qualification'] = explode('$',$Fetch['qualification']);
 			$Qualification = array();
 			for($i=0;$i<count($Fetch['qualification']);$i++)
 				if($i!=$_GET['index'])
 					$Qualification[$i] = $Fetch['qualification'][$i];
-			mysql_query("update resource_update set qualification='".implode($Qualification,'$')."'  where id='".$_GET['id']."'");
+			mysqli_query($_SESSION['connection'],"update resource_update set qualification='".implode($Qualification,'$')."'  where id='".$_GET['id']."'");
 		}
 		$Columns = array("id","titleid", "name", "groupid", "departmentid", "qualification","specialization","status", "days","starttime","endtime","kmc","mobile","mail1","mail2","dob","sex","reason","resign");
 		if($_GET['action'] == 'Edit')
 		{
-			$FetchResource = mysql_fetch_assoc(Resource_Select_ById());
+			$FetchResource = mysqli_fetch_assoc(Resource_Select_ById());
 			$ExplodeQualification = explode("$",$FetchResource['qualification']);
 		}
 		
@@ -94,7 +94,7 @@
 						<select name="titleid" id="titleid">
 							<option value="" >Select</option>
 						<?php
-							$Select_Title = mysql_query("select * from `title` order by name asc");
+							$Select_Title = mysqli_query($_SESSION['connection'],"select * from `title` order by name asc");
 							while($Fetch_Title = mysql_fetch_array($Select_Title))
 							{
 								if($FetchResource['titleid']==$Fetch_Title['id'])
@@ -112,7 +112,7 @@
 						<select name="groupid" id="groupid" onchange="GetDepartment(this.value)">
 							<option value="" >Select</option>
 						<?php
-							$Select_Group = mysql_query("select * from `group` order by name asc");
+							$Select_Group = mysqli_query($_SESSION['connection'],"select * from `group` order by name asc");
 							while($Fetch_Group = mysql_fetch_array($Select_Group))
 							{
 								if($FetchResource['groupId']==$Fetch_Group['id'])
@@ -128,7 +128,7 @@
 							<select name="departmentid" id="departmentid">
 								<option value="" >Select</option>
 								<?php
-									$Select_Department= mysql_query("select * from `department` where groupid='".$FetchResource['groupId']."' order by name asc");
+									$Select_Department= mysqli_query($_SESSION['connection'],"select * from `department` where groupid='".$FetchResource['groupId']."' order by name asc");
 									while($Fetch_Department = mysql_fetch_array($Select_Department))
 									{
 										if($Fetch_Department['id']==$FetchResource['departmentId'])
@@ -146,7 +146,7 @@
 						<select name="designationid" id="designationid">
 							<option value="" >Select</option>
 						<?php
-							$Select_Designation= mysql_query("select * from `designation` order by name asc");
+							$Select_Designation= mysqli_query($_SESSION['connection'],"select * from `designation` order by name asc");
 							while($Fetch_Designation = mysql_fetch_array($Select_Designation))
 							{
 								if($Fetch_Designation['id']==$FetchResource['designationId'])
@@ -161,7 +161,7 @@
 						<select name="specializationid" id="specializationid">
 							<option value="" >Select</option>
 						<?php
-							$Select_Specialization= mysql_query("select * from `specialization` order by name asc");
+							$Select_Specialization= mysqli_query($_SESSION['connection'],"select * from `specialization` order by name asc");
 							while($Fetch_Specialization = mysql_fetch_array($Select_Specialization))
 							{
 								if($Fetch_Specialization['id']==$FetchResource['specialization'])
@@ -183,7 +183,7 @@
 						<select name="qualificationid[]" id="qualificationid" required="required">
 							<option value="" >Select</option>
 						<?php
-							$Select_Qualification= mysql_query("select * from `qualification` order by name asc");
+							$Select_Qualification= mysqli_query($_SESSION['connection'],"select * from `qualification` order by name asc");
 							while($Fetch_Qualification = mysql_fetch_array($Select_Qualification))
 							{
 								if($ExplodeQualification[0]==$Fetch_Qualification['name'])
@@ -201,7 +201,7 @@
 					for($i=1;$i<count($ExplodeQualification);$i++)
 					{
 						echo '<div class="clearfix"><label>Qualification <font color="red">*</font></label><select name="qualificationid[]" required="required" id="qualificationid'.$i.'"><option value="" >Select</option>';
-						$Select_Qualification= mysql_query("select * from `qualification` order by name asc");
+						$Select_Qualification= mysqli_query($_SESSION['connection'],"select * from `qualification` order by name asc");
 						while($Fetch_Qualification = mysql_fetch_array($Select_Qualification))
 						{
 							if($ExplodeQualification[$i]==$Fetch_Qualification['name'])
@@ -429,9 +429,9 @@
 			<h3>Resource Update List
 				<?php
 					if($_GET['Search'])
-						$ResourceTotalRows = mysql_fetch_assoc(ResourceUpdate_Select_Search_Count_All($_GET['Search']));
+						$ResourceTotalRows = mysqli_fetch_assoc(ResourceUpdate_Select_Search_Count_All($_GET['Search']));
 					else
-						$ResourceTotalRows = mysql_fetch_assoc(ResourceUpdate_Select_Count_All());
+						$ResourceTotalRows = mysqli_fetch_assoc(ResourceUpdate_Select_Count_All());
 				echo " : No. of Total Resource Update - ".$ResourceTotalRows['total'];
 				?>
 			</h3>
@@ -482,13 +482,13 @@
 								$ResourceUpdate = ResourceUpdate_Select_ByLimit($Start, $Limit);
 								$days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
 								
-								while($Resource = mysql_fetch_assoc($ResourceUpdate))
+								while($Resource = mysqli_fetch_assoc($ResourceUpdate))
 								{ 
 									$Qualification = explode('$',$Resource['qualification']);
 									$Days = explode('$',$Resource['Days']);
 									$StartTime = explode(',',$Resource['StartTime']);
 									$EndTime = explode(',',$Resource['EndTime']);
-									$Specializationname = mysql_fetch_array(mysql_query("SELECT name from specialization where id ='".$Resource['specializationname']."'"));
+									$Specializationname = mysql_fetch_array(mysqli_query($_SESSION['connection'],"SELECT name from specialization where id ='".$Resource['specializationname']."'"));
 									echo "<tr style='valign:middle;'>
 										<td align='center' style='vertical-align:middle'>".$i++."</td>
 										<td><img src='data:image/jpeg;base64,".base64_encode($Resource['Photo'])."'  width='100px' height='150px' alt='photo'/></td>
@@ -560,13 +560,13 @@
 								$ResourceUpdate = ResourceUpdate_Select_SearchByLimit($Start, $Limit,$_GET['Search']);
 								$days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
 								
-								while($Resource = mysql_fetch_assoc($ResourceUpdate))
+								while($Resource = mysqli_fetch_assoc($ResourceUpdate))
 								{ 
 									$Qualification = explode('$',$Resource['qualification']);
 									$Days = explode('$',$Resource['Days']);
 									$StartTime = explode(',',$Resource['StartTime']);
 									$EndTime = explode(',',$Resource['EndTime']);
-									$Specializationname = mysql_fetch_array(mysql_query("SELECT name from specialization where id ='".$Resource['specializationname']."'"));
+									$Specializationname = mysql_fetch_array(mysqli_query($_SESSION['connection'],"SELECT name from specialization where id ='".$Resource['specializationname']."'"));
 									echo "<tr style='valign:middle;'>
 										<td align='center' style='vertical-align:middle'>".$i++."</td>
 										<td><img src='data:image/jpeg;base64,".base64_encode($Resource['Photo'])."'  width='100px' height='150px' alt='photo'/></td>

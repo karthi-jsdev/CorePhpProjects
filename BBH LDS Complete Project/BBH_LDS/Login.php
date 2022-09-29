@@ -8,10 +8,10 @@
 		header("Location:index.php");
 	else if(isset($_POST["posting"]))
 	{
-		$UserName = mysql_real_escape_string($_POST["username"]); //$var2=md5($_POST["password"]);
-		$Password = mysql_real_escape_string($_POST["userpassword"]);
+		$UserName = mysqli_real_escape_string($_SESSION['connection'],($_POST["username"])); //$var2=md5($_POST["password"]);
+		$Password = mysqli_real_escape_string($_SESSION['connection'],($_POST["userpassword"]));
 		$User_Data = User_Login($UserName, $Password);
-		if($User = mysql_fetch_assoc($User_Data))
+		if($User = mysqli_fetch_assoc($User_Data))
 		{
 			$_SESSION['id'] = $User['id'];
 			$_SESSION['name'] = $User['firstname'];

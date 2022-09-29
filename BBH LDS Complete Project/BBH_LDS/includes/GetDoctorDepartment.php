@@ -14,7 +14,7 @@
 		echo 'Select';
 	echo '</option>';
 	
-	$Select_Department= mysql_query("select * from `department` where groupid='".$_GET['GroupId']."' order by name asc ");
+	$Select_Department= mysqli_query($_SESSION['connection'],"select * from `department` where groupid='".$_GET['GroupId']."' order by name asc ");
 	while($Fetch_Department = mysql_fetch_array($Select_Department))
 	{
 		echo '<option value="'.$Fetch_Department['id'].'">'.$Fetch_Department['name'].'</option>';

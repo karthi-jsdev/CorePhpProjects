@@ -1,12 +1,12 @@
 <?php
 	function Present_Select_Count_All()
 	{
-		return mysql_query("SELECT count(*) as total FROM `leave` WHERE  (`leave`.startdate = CURDATE()) or (`leave`.enddate  = CURDATE())");
-		//return mysql_query("SELECT count(*) as total FROM `leave` WHERE  (startdate BETWEEN startdate AND CURDATE())");
+		return mysqli_query($_SESSION['connection'],"SELECT count(*) as total FROM `leave` WHERE  (`leave`.startdate = CURDATE()) or (`leave`.enddate  = CURDATE())");
+		//return mysqli_query($_SESSION['connection'],"SELECT count(*) as total FROM `leave` WHERE  (startdate BETWEEN startdate AND CURDATE())");
 	}
 	function Present_Select_ByLimit($Start, $Limit)
 	{
-		return mysql_query("SELECT department.name as departmentname,COUNT(resource_update.departmentid) as departmentnum
+		return mysqli_query($_SESSION['connection'],"SELECT department.name as departmentname,COUNT(resource_update.departmentid) as departmentnum
 		FROM `leave`
 		JOIN resource_update ON `leave`.name = resource_update.id
 		JOIN `group` ON resource_update.groupid = group.id
@@ -15,7 +15,7 @@
 		WHERE  (`leave`.startdate = CURDATE()) or (`leave`.enddate  = CURDATE())
 		Group by(resource_update.departmentid)
 		ORDER BY `resource_update`.name ASC  Limit $Start, $Limit");
-		/*return mysql_query("SELECT department.name as departmentname,COUNT(resource_update.departmentid) as departmentnum
+		/*return mysqli_query($_SESSION['connection'],"SELECT department.name as departmentname,COUNT(resource_update.departmentid) as departmentnum
 		FROM `leave`
 		JOIN resource_update ON `leave`.name = resource_update.id
 		JOIN `group` ON resource_update.groupid = group.id
@@ -27,7 +27,7 @@
 	}
 	function Present_Select()
 	{
-		return mysql_query("SELECT department.name as departmentname,COUNT(resource_update.departmentid) as departmentnum
+		return mysqli_query($_SESSION['connection'],"SELECT department.name as departmentname,COUNT(resource_update.departmentid) as departmentnum
 		FROM `leave`
 		JOIN resource_update ON `leave`.name = resource_update.id
 		JOIN `group` ON resource_update.groupid = group.id
@@ -39,11 +39,11 @@
 	}
 	function Future_Select_Count_All()
 	{
-		return mysql_query("SELECT count(*) as total FROM `leave` WHERE  (enddate BETWEEN CURDATE() and enddate) and enddate!=CURDATE()");
+		return mysqli_query($_SESSION['connection'],"SELECT count(*) as total FROM `leave` WHERE  (enddate BETWEEN CURDATE() and enddate) and enddate!=CURDATE()");
 	}
 	function Future_Select_ByLimit($Start, $Limit)
 	{
-		return mysql_query("SELECT department.name as departmentname,COUNT(resource_update.departmentid) as departmentnum
+		return mysqli_query($_SESSION['connection'],"SELECT department.name as departmentname,COUNT(resource_update.departmentid) as departmentnum
 		FROM `leave`
 		JOIN resource_update ON `leave`.name = resource_update.id
 		JOIN `group` ON resource_update.groupid = group.id
@@ -55,7 +55,7 @@
 	}
 	function Future_Select()
 	{
-		return mysql_query("SELECT department.name as departmentname,COUNT(resource_update.departmentid) as departmentnum
+		return mysqli_query($_SESSION['connection'],"SELECT department.name as departmentname,COUNT(resource_update.departmentid) as departmentnum
 		FROM `leave`
 		JOIN resource_update ON `leave`.name = resource_update.id
 		JOIN `group` ON resource_update.groupid = group.id
@@ -67,11 +67,11 @@
 	}
 	function Past_Select_Count_All()
 	{
-		return mysql_query("SELECT COUNT(*) as total FROM `leave` WHERE  (leave.enddate < CURDATE() and `leave`.enddate > YEAR(NOW()))");
+		return mysqli_query($_SESSION['connection'],"SELECT COUNT(*) as total FROM `leave` WHERE  (leave.enddate < CURDATE() and `leave`.enddate > YEAR(NOW()))");
 	}
 	function Past_Select_ByLimit($Start, $Limit)
 	{
-		return mysql_query("SELECT department.name as departmentname,COUNT(resource_update.departmentid) as departmentnum
+		return mysqli_query($_SESSION['connection'],"SELECT department.name as departmentname,COUNT(resource_update.departmentid) as departmentnum
 		FROM `leave`
 		JOIN resource_update ON `leave`.name = resource_update.id
 		JOIN `group` ON resource_update.groupid = group.id
@@ -83,7 +83,7 @@
 	}
 	function Past_Select()
 	{
-		return mysql_query("SELECT department.name as departmentname,COUNT(resource_update.departmentid) as departmentnum
+		return mysqli_query($_SESSION['connection'],"SELECT department.name as departmentname,COUNT(resource_update.departmentid) as departmentnum
 		FROM `leave`
 		JOIN resource_update ON `leave`.name = resource_update.id
 		JOIN `group` ON resource_update.groupid = group.id
@@ -97,11 +97,11 @@
 	
 	function Consultantpresentleave_Select_Count_All()
 	{
-		return mysql_query("SELECT count(*) as total FROM `leave` WHERE  (((`leave`.startdate = CURDATE()) or (`leave`.enddate  = CURDATE())) and `leave`.group_id='1' )");
+		return mysqli_query($_SESSION['connection'],"SELECT count(*) as total FROM `leave` WHERE  (((`leave`.startdate = CURDATE()) or (`leave`.enddate  = CURDATE())) and `leave`.group_id='1' )");
 	} 
 	function Consultantpresentleave_Select_ByLimit($Start, $Limit)
 	{
-		return mysql_query("SELECT title.name as title,`leave`.startdate, `leave`.enddate, `leave`.comments, `group`.name AS groupName, resource_update.name AS Name, department.name AS departmentName,resource_update.photo
+		return mysqli_query($_SESSION['connection'],"SELECT title.name as title,`leave`.startdate, `leave`.enddate, `leave`.comments, `group`.name AS groupName, resource_update.name AS Name, department.name AS departmentName,resource_update.photo
 		FROM `leave`
 		JOIN resource_update ON `leave`.name = resource_update.id
 		JOIN `group` ON resource_update.groupid = group.id
@@ -113,12 +113,12 @@
 	
 	function Consultantfutureleave_Select_Count_All()
 	{
-		return mysql_query("SELECT count(*) as total FROM `leave` WHERE  ((enddate BETWEEN CURDATE() and enddate) and enddate!=CURDATE() and `leave`.group_id='1' )");
+		return mysqli_query($_SESSION['connection'],"SELECT count(*) as total FROM `leave` WHERE  ((enddate BETWEEN CURDATE() and enddate) and enddate!=CURDATE() and `leave`.group_id='1' )");
 	}
 	
 	function Consultantfutureleave_Select_ByLimit($Start, $Limit)
 	{
-		return mysql_query("SELECT title.name as title,`leave`.startdate, `leave`.enddate, `leave`.comments, `group`.name AS groupName, resource_update.name AS Name, department.name AS departmentName,resource_update.photo
+		return mysqli_query($_SESSION['connection'],"SELECT title.name as title,`leave`.startdate, `leave`.enddate, `leave`.comments, `group`.name AS groupName, resource_update.name AS Name, department.name AS departmentName,resource_update.photo
 		FROM `leave`
 		JOIN resource_update ON `leave`.name = resource_update.id
 		JOIN `group` ON resource_update.groupid = group.id
@@ -130,11 +130,11 @@
 	
 	function Consultantpastleave_Select_Count_All()
 	{
-		return mysql_query("SELECT COUNT(*) as total FROM `leave` WHERE ( (leave.enddate < CURDATE() and `leave`.enddate > YEAR(NOW())) and `leave`.group_id='1' )");
+		return mysqli_query($_SESSION['connection'],"SELECT COUNT(*) as total FROM `leave` WHERE ( (leave.enddate < CURDATE() and `leave`.enddate > YEAR(NOW())) and `leave`.group_id='1' )");
 	}
 	function Consultantpastleave_Select_ByLimit($Start, $Limit)
 	{
-		return mysql_query("SELECT title.name as title,`leave`.startdate, `leave`.enddate, `leave`.comments, `group`.name AS groupName, resource_update.name AS Name, department.name AS departmentName,resource_update.photo
+		return mysqli_query($_SESSION['connection'],"SELECT title.name as title,`leave`.startdate, `leave`.enddate, `leave`.comments, `group`.name AS groupName, resource_update.name AS Name, department.name AS departmentName,resource_update.photo
 		FROM `leave`
 		JOIN resource_update ON `leave`.name = resource_update.id
 		JOIN `group` ON resource_update.groupid = group.id

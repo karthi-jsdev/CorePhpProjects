@@ -16,7 +16,7 @@
 	$Query = "";
 		if(isset($_POST['kmcnumber']))
 		{
-			$ResourceUpdatenumbers = mysql_query("Select title.name as titlename,resource_update.titleid,resource_update.photo as Photo,resource_update.joiningdate as Joining,resource_update.leavingdate as Leaving,resource_update.reason,
+			$ResourceUpdatenumbers = mysqli_query($_SESSION['connection'],"Select title.name as titlename,resource_update.titleid,resource_update.photo as Photo,resource_update.joiningdate as Joining,resource_update.leavingdate as Leaving,resource_update.reason,
 												resource_update.id as id,designation.name as designationName,`group`.name as groupName,
 												department.name as departmentName,resource_update.name as Name,resource_update.status as Status,resource_update.qualification AS qualification,
 												resource_update.days as Days,resource_update.starttime as StartTime,resource_update.endtime as EndTime,resource_update.kmc,resource_update.mobile,resource_update.mail1,resource_update.mail2,resource_update.dob,resource_update.sex
@@ -26,7 +26,7 @@
 												where resource_update.kmc like '%".$_POST['kmcnumber']."' or resource_update.kmc like '".$_POST['kmcnumber']."%' or resource_update.kmc like '%".$_POST['kmcnumber']."%'
 												ORDER BY `resource_update`.id DESC");
 		}
-		if(mysql_num_rows($ResourceUpdatenumbers)!=0)
+		if(mysqli_num_rows($ResourceUpdatenumbers)!=0)
 			{
 				echo '<td>
 							<br/>
@@ -58,9 +58,9 @@
 				</thead>
 				<tbody>';
 				$i=1;
-				if(mysql_num_rows($ResourceUpdatenumbers)==0)
+				if(mysqli_num_rows($ResourceUpdatenumbers)==0)
 						echo '<tr><td colspan="17"><font color="red"><center>No data found</center></font></td></tr>';
-		$ResourceUpdate = mysql_query("Select title.name as titlename,resource_update.titleid,resource_update.photo as Photo,resource_update.joiningdate as Joining,resource_update.leavingdate as Leaving,resource_update.reason,
+		$ResourceUpdate = mysqli_query($_SESSION['connection'],"Select title.name as titlename,resource_update.titleid,resource_update.photo as Photo,resource_update.joiningdate as Joining,resource_update.leavingdate as Leaving,resource_update.reason,
 												resource_update.id as id,designation.name as designationName,`group`.name as groupName,
 												department.name as departmentName,resource_update.name as Name,resource_update.status as Status,resource_update.qualification AS qualification,
 												resource_update.days as Days,resource_update.starttime as StartTime,resource_update.endtime as EndTime,resource_update.kmc,resource_update.mobile,resource_update.mail1,resource_update.mail2,resource_update.dob,resource_update.sex
@@ -70,7 +70,7 @@
 												where resource_update.kmc like '%".$_POST['kmcnumber']."' or resource_update.kmc like '".$_POST['kmcnumber']."%' or resource_update.kmc like '%".$_POST['kmcnumber']."%'
 										ORDER BY `resource_update`.id DESC");
 		$days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");								
-		while($Resource = mysql_fetch_assoc($ResourceUpdate))
+		while($Resource = mysqli_fetch_assoc($ResourceUpdate))
 		{ 
 			$Qualification = explode('$',$Resource['qualification']);
 									$Days = explode('$',$Resource['Days']);

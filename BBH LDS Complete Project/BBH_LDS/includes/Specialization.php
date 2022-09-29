@@ -3,7 +3,7 @@
 		$Columns = array("id", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Class = mysql_fetch_assoc(Specialization_Select_ById());
+			$Class = mysqli_fetch_assoc(Specialization_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Class[$Col];
 		}
@@ -18,7 +18,7 @@
 			$ClassResource = Specialization_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($ClassResource))
+				if(mysqli_num_rows($ClassResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Specialization already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Class = mysql_fetch_assoc($ClassResource);
-				if(mysql_num_rows(Specialization_Select_ByNamePWDId()))
+				$Class = mysqli_fetch_assoc($ClassResource);
+				if(mysqli_num_rows(Specialization_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Specialization already exists</div>";
 				else
 				{
@@ -66,7 +66,7 @@
 		<div class="columns">
 			<h3>Specialization List
 				<?php
-				$SpecializationTotalRows = mysql_fetch_assoc(Specialization_Select_Count_All());
+				$SpecializationTotalRows = mysqli_fetch_assoc(Specialization_Select_Count_All());
 				echo " : No. of total Specialization - ".$SpecializationTotalRows['total'];
 				?>
 			</h3>
@@ -95,7 +95,7 @@
 						$i =1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$ClassRows = Specialization_Select_ByLimit($Start, $Limit);
-					while($Specialization = mysql_fetch_assoc($ClassRows))
+					while($Specialization = mysqli_fetch_assoc($ClassRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

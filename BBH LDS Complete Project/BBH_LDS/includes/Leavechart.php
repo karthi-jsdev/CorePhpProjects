@@ -4,15 +4,15 @@
  $data = array(); 
  # The labels for the bar chart 
  $labels = array(date('Y-m-d', strtotime('-3 days', strtotime(date('Y-m-d')))),date('Y-m-d', strtotime('-2 days', strtotime(date('Y-m-d')))),date('Y-m-d', strtotime('-1 days', strtotime(date('Y-m-d')))),date('Y-m-d'),date('Y-m-d', strtotime('+1 days', strtotime(date('Y-m-d')))),date('Y-m-d', strtotime('+2 days', strtotime(date('Y-m-d')))),date('Y-m-d', strtotime('+3 days', strtotime(date('Y-m-d')))),date('Y-m-d', strtotime('+4 days', strtotime(date('Y-m-d')))),date('Y-m-d', strtotime('+5 days', strtotime(date('Y-m-d'))))); 
- $data [0] = mysql_num_rows(mysql_query("select * from `leave` where (startdate=(CURDATE()-INTERVAL 3 day) || enddate=(CURDATE()-INTERVAL 3 day))"));
- $data [1] = mysql_num_rows(mysql_query("select * from `leave` where (startdate=(CURDATE()-INTERVAL 2 day) || enddate=(CURDATE()-INTERVAL 2 day))"));
- $data [2] = mysql_num_rows(mysql_query("select * from `leave` where (startdate=(CURDATE()-INTERVAL 1 day) || enddate=(CURDATE()-INTERVAL 1 day))"));
- $data [3] = mysql_num_rows(mysql_query("SELECT * FROM `leave` WHERE  (`leave`.startdate = CURDATE()) or (`leave`.enddate  = CURDATE())"));
- $data [4] = mysql_num_rows(mysql_query("select * from `leave` where (startdate=(CURDATE()+INTERVAL 1 day) || enddate=(CURDATE()+INTERVAL 1 day))"));
- $data [5] = mysql_num_rows(mysql_query("select * from `leave` where (startdate=(CURDATE()+INTERVAL 2 day) || enddate=(CURDATE()+INTERVAL 2 day))"));
- $data [6] = mysql_num_rows(mysql_query("select * from `leave` where (startdate=(CURDATE()+INTERVAL 3 day) || enddate=(CURDATE()+INTERVAL 3 day))"));
- $data [7] = mysql_num_rows(mysql_query("select * from `leave` where (startdate=(CURDATE()+INTERVAL 4 day) || enddate=(CURDATE()+INTERVAL 4 day))"));
- $data [8] = mysql_num_rows(mysql_query("select * from `leave` where (startdate=(CURDATE()+INTERVAL 5 day) || enddate=(CURDATE()+INTERVAL 5 day))"));
+ $data [0] = mysqli_num_rows(mysqli_query($_SESSION['connection'],"select * from `leave` where (startdate=(CURDATE()-INTERVAL 3 day) || enddate=(CURDATE()-INTERVAL 3 day))"));
+ $data [1] = mysqli_num_rows(mysqli_query($_SESSION['connection'],"select * from `leave` where (startdate=(CURDATE()-INTERVAL 2 day) || enddate=(CURDATE()-INTERVAL 2 day))"));
+ $data [2] = mysqli_num_rows(mysqli_query($_SESSION['connection'],"select * from `leave` where (startdate=(CURDATE()-INTERVAL 1 day) || enddate=(CURDATE()-INTERVAL 1 day))"));
+ $data [3] = mysqli_num_rows(mysqli_query($_SESSION['connection'],"SELECT * FROM `leave` WHERE  (`leave`.startdate = CURDATE()) or (`leave`.enddate  = CURDATE())"));
+ $data [4] = mysqli_num_rows(mysqli_query($_SESSION['connection'],"select * from `leave` where (startdate=(CURDATE()+INTERVAL 1 day) || enddate=(CURDATE()+INTERVAL 1 day))"));
+ $data [5] = mysqli_num_rows(mysqli_query($_SESSION['connection'],"select * from `leave` where (startdate=(CURDATE()+INTERVAL 2 day) || enddate=(CURDATE()+INTERVAL 2 day))"));
+ $data [6] = mysqli_num_rows(mysqli_query($_SESSION['connection'],"select * from `leave` where (startdate=(CURDATE()+INTERVAL 3 day) || enddate=(CURDATE()+INTERVAL 3 day))"));
+ $data [7] = mysqli_num_rows(mysqli_query($_SESSION['connection'],"select * from `leave` where (startdate=(CURDATE()+INTERVAL 4 day) || enddate=(CURDATE()+INTERVAL 4 day))"));
+ $data [8] = mysqli_num_rows(mysqli_query($_SESSION['connection'],"select * from `leave` where (startdate=(CURDATE()+INTERVAL 5 day) || enddate=(CURDATE()+INTERVAL 5 day))"));
  # Create a XYChart object of size 600 x 360 pixels 
  $c = new XYChart(1000, 360);
  # Add a title to the chart using 18pts Times Bold Italic font 

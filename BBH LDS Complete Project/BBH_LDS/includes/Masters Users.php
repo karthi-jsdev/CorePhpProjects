@@ -4,7 +4,7 @@
 		
 		if($_GET['action'] == 'Edit')
 		{
-			$User = mysql_fetch_assoc(User_Select_ById($_GET['id']));
+			$User = mysqli_fetch_assoc(User_Select_ById($_GET['id']));
 			foreach($Columns as $Col)
 				$_POST[$Col] = $User[$Col];
 		}
@@ -23,7 +23,7 @@
 				$UserResource = User_Select_ByNamePWD($_POST['username'], $_POST['password']);
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($UserResource))
+					if(mysqli_num_rows($UserResource))
 						$message = "<br /><div class='message error'><b>Message</b> : This User already exists</div>";
 					else
 					{
@@ -33,8 +33,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$User = mysql_fetch_assoc($UserResource);
-					if(mysql_num_rows(User_Select_ByNamePWDId($_POST['username'], $_POST['password'], $User['id'])))
+					$User = mysqli_fetch_assoc($UserResource);
+					if(mysqli_num_rows(User_Select_ByNamePWDId($_POST['username'], $_POST['password'], $User['id'])))
 						$message = "<br /><div class='message error'><b>Message</b> : This User already exists</div>";
 					else
 					{
@@ -80,7 +80,7 @@
 						<select id="userroleid" name="userroleid" onchange ="selectgroup(this.value)">
 							<?php
 							$Roles = UserRoles_Select_All();
-							while($Role = mysql_fetch_assoc($Roles))
+							while($Role = mysqli_fetch_assoc($Roles))
 							{
 								if($Role['id'] == $_POST['userroleid'])
 									echo "<option value=".$Role['id']." selected>".$Role['role']."</option>";
@@ -103,7 +103,7 @@
 							<option value="" selected>Select</option>
 							<?php
 							$Roles = Department_Select_All();
-							while($Role = mysql_fetch_assoc($Roles))
+							while($Role = mysqli_fetch_assoc($Roles))
 							{
 								if($Role['id'] == $_POST['departmentid'])
 									echo "<option value=".$Role['id']." selected>".$Role['name']."</option>";
@@ -118,7 +118,7 @@
 							<option value="">Select</option>
 							<?php
 							$Group = Group_Select_All();
-							while($Fetch_Group = mysql_fetch_assoc($Group))
+							while($Fetch_Group = mysqli_fetch_assoc($Group))
 							{
 								if($Fetch_Group['id'] == $_POST['groupid'])
 									echo "<option value=".$Fetch_Group['id']." selected>".$Fetch_Group['name']."</option>";
@@ -145,9 +145,9 @@
 			<h3>User List
 				<?php
 				if($_GET['Search'])
-					$UserTotalRows = mysql_num_rows(User_Select_AllsBySearch($_GET['Search']));
+					$UserTotalRows = mysqli_num_rows(User_Select_AllsBySearch($_GET['Search']));
 				else
-					$UserTotalRows = mysql_num_rows(User_Select_Alls());	
+					$UserTotalRows = mysqli_num_rows(User_Select_Alls());	
 				echo " : No. of total Users - ".$UserTotalRows;
 				?>
 			</h3>
@@ -183,10 +183,10 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$UserRows = User_Select_ByLimit($Start, $Limit);
-					while($User = mysql_fetch_assoc($UserRows))
+					while($User = mysqli_fetch_assoc($UserRows))
 					{
-						$Role = mysql_fetch_assoc(UserRole_Select_ById($User['userroleid']));
-						$Department = mysql_fetch_assoc(Department_Select_ById($User['departmentid']));
+						$Role = mysqli_fetch_assoc(UserRole_Select_ById($User['userroleid']));
+						$Department = mysqli_fetch_assoc(Department_Select_ById($User['departmentid']));
 						$Group = mysql_fetch_assoc (Group_Select_ById($User['groupid']));
 						echo "<tr>
 							<td align='center'>".$i++."</td>
@@ -218,10 +218,10 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$UserRows = User_Select_ByLimitSearch($Start, $Limit,$_GET['Search']);
-					while($User = mysql_fetch_assoc($UserRows))
+					while($User = mysqli_fetch_assoc($UserRows))
 					{
-						$Role = mysql_fetch_assoc(UserRole_Select_ById($User['userroleid']));
-						$Department = mysql_fetch_assoc(Department_Select_ById($User['departmentid']));
+						$Role = mysqli_fetch_assoc(UserRole_Select_ById($User['userroleid']));
+						$Department = mysqli_fetch_assoc(Department_Select_ById($User['departmentid']));
 						$Group = mysql_fetch_assoc (Group_Select_ById($User['groupid']));
 						echo "<tr>
 							<td align='center'>".$i++."</td>

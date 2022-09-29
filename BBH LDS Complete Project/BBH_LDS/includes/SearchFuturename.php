@@ -5,7 +5,7 @@
 	?>
 		<h3>Leave Apply List Of Future Day dfsgdfasdfadsf
 			<?php
-			$ResourceTotalRows = mysql_fetch_assoc(Future_Select_Count_All_Name(chr($_GET['Nameid']))); 
+			$ResourceTotalRows = mysqli_fetch_assoc(Future_Select_Count_All_Name(chr($_GET['Nameid']))); 
 			echo " : No. of List - ".$ResourceTotalRows['total'];
 			?>
 		</h3>
@@ -47,7 +47,7 @@
 				$i =1;
 			$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 			$ResourceUpdate = Future_Select_ByLimit_Name((chr($_GET['Nameid'])),$Start, $Limit);
-			while($Resource = mysql_fetch_assoc($ResourceUpdate))
+			while($Resource = mysqli_fetch_assoc($ResourceUpdate))
 			{ 
 				echo "<td style='vertical-align:middle'>".($i)."</td>";
 				echo "<td id='imageid".$i."' onmouseover='Displayimage(".$i.");' onmouseout='Hideimage(".$i.");' style='vertical-align:middle'>".$Resource['title'].".".$Resource['Name']."<div id='img".$i."' style='display:none'><img src='data:image/jpeg;base64,".base64_encode($Resource['photo'])."' width='100px' height='150px' alt='photo'/></div></td>";

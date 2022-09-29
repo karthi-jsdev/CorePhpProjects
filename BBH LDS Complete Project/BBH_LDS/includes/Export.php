@@ -28,13 +28,13 @@
 			//$Query .= " AND (startdate >='".date("Y-m-d",strtotime($_POST['startdate']))."' OR enddate<='".date("Y-m-d",strtotime($_POST['enddate']))."')"; 
 		//if($_POST['enddate'])
 			//$Query .= " AND (enddate<='".date("Y-m-d",strtotime($_POST['enddate']))."' || enddate>='".date("Y-m-d",strtotime($_POST['enddate']))."')";
-		$ResourceUpdatenumbers = mysql_query("SELECT * FROM `leave`
+		$ResourceUpdatenumbers = mysqli_query($_SESSION['connection'],"SELECT * FROM `leave`
 										JOIN resource_update ON `leave`.name = resource_update.id
 										JOIN `group` ON resource_update.groupid = group.id
 										JOIN department ON resource_update.departmentid = department.id 
 										JOIN title ON title.id = resource_update.titleid where ".str_replace("=''","!=''",$Query)."
 										ORDER BY `leave`.id DESC");
-		if(mysql_num_rows($ResourceUpdatenumbers)!=0)
+		if(mysqli_num_rows($ResourceUpdatenumbers)!=0)
 			{
 				echo '<td>
 							<br/>
@@ -55,16 +55,16 @@
 				</thead>
 				<tbody>';
 				$i=1;
-				if(mysql_num_rows($ResourceUpdatenumbers)==0)
+				if(mysqli_num_rows($ResourceUpdatenumbers)==0)
 						echo '<tr><td colspan="7"><font color="red"><center>No data found</center></font></td></tr>';
-		$ResourceUpdate = mysql_query("SELECT title.name as title,`leave`.id,`leave`.startdate, `leave`.enddate, `leave`.comments, `group`.name AS groupName, resource_update.name AS Name, department.name AS departmentName ,resource_update.photo
+		$ResourceUpdate = mysqli_query($_SESSION['connection'],"SELECT title.name as title,`leave`.id,`leave`.startdate, `leave`.enddate, `leave`.comments, `group`.name AS groupName, resource_update.name AS Name, department.name AS departmentName ,resource_update.photo
 										FROM `leave`
 										JOIN resource_update ON `leave`.name = resource_update.id
 										JOIN `group` ON resource_update.groupid = group.id
 										JOIN department ON resource_update.departmentid = department.id 
 										JOIN title ON title.id = resource_update.titleid where ".str_replace("=''","!=''",$Query)."
 										ORDER BY `leave`.id DESC");
-		while($Resource = mysql_fetch_assoc($ResourceUpdate))
+		while($Resource = mysqli_fetch_assoc($ResourceUpdate))
 		{ 
 			echo "<td>".($i++)."</td>";
 			echo "<td>".$Resource['title'].".".$Resource['Name']."</td>";

@@ -23,7 +23,7 @@
 						<select name="groupid" id="groupid" onchange="GetDepartment(this.value)">
 							<option value="" >All</option>
 							<?php
-								$Select_Group = mysql_query("select * from `group` order by name asc");
+								$Select_Group = mysqli_query($_SESSION['connection'],"select * from `group` order by name asc");
 								while($Fetch_Group = mysql_fetch_array($Select_Group))
 								{
 									if($_POST['groupid']==$Fetch_Group['id'])
@@ -43,7 +43,7 @@
 							<?php
 							if($_POST['groupid'])
 							{
-								$Select_Department= mysql_query("select * from `department` where groupid='".$_POST['groupid']."' order by name asc");
+								$Select_Department= mysqli_query($_SESSION['connection'],"select * from `department` where groupid='".$_POST['groupid']."' order by name asc");
 								while($Fetch_Department = mysql_fetch_array($Select_Department))
 								{
 									if($Fetch_Department['id']==$_POST['departmentid'])
@@ -64,7 +64,7 @@
 							<?php 	
 							if($_POST['departmentid'])
 							{
-								$SelectNames = mysql_query("select id,name from resource_update where groupid='".$_POST['groupid']."' and departmentid='".$_POST['departmentid']."'");
+								$SelectNames = mysqli_query($_SESSION['connection'],"select id,name from resource_update where groupid='".$_POST['groupid']."' and departmentid='".$_POST['departmentid']."'");
 								while($FetchNames = mysql_fetch_array($SelectNames))
 								{
 									if($FetchNames['id'] == $_POST['name'])

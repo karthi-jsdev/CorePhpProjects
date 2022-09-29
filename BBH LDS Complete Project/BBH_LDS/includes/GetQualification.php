@@ -11,7 +11,7 @@ include("Config.php");
 	if($j)
 		$Qualification .= " And ";
  }
- $Select = mysql_query("select * from qualification $Qualification"); 
+ $Select = mysqli_query($_SESSION['connection'],"select * from qualification $Qualification"); 
  echo '<select name="qualificationid[]" id="qualificationid'.$_GET['i'].'" required="required">
  <option value="">Select</option>';
  

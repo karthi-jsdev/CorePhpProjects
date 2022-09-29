@@ -3,7 +3,7 @@
 		$Columns = array("id", "groupid","name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Department = mysql_fetch_assoc(Department_Select_ById());
+			$Department = mysqli_fetch_assoc(Department_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Department[$Col];
 		}
@@ -18,7 +18,7 @@
 			$DepartmentResource = Department_Select_ByNamePWD();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($DepartmentResource))
+				if(mysqli_num_rows($DepartmentResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Department name already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				//$User = mysql_fetch_assoc($UserResource);
-				if(mysql_num_rows(Department_Select_ByNamePWDId()))
+				//$User = mysqli_fetch_assoc($UserResource);
+				if(mysqli_num_rows(Department_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Department name already exists</div>";
 				else
 				{
@@ -54,7 +54,7 @@
 						<option value="">Select</option>
 						<?php
 						$Classes = Group_Select_All();
-						while($Class = mysql_fetch_assoc($Classes))
+						while($Class = mysqli_fetch_assoc($Classes))
 						{
 							if($Class['id'] == $_POST['groupid'])
 								echo "<option value=".$Class['id']." selected>".$Class['name']."</option>";
@@ -81,7 +81,7 @@
 		<div class="columns">
 			<h3>Department List
 				<?php
-				$DepartmentTotalRows = mysql_fetch_assoc(Department_Select_Count_All());
+				$DepartmentTotalRows = mysqli_fetch_assoc(Department_Select_Count_All());
 				echo " : No. of total Departments - ".$DepartmentTotalRows['total'];
 				?>
 			</h3>
@@ -111,9 +111,9 @@
 						$i =1;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$DepartmentRows = Department_Select_ByLimit($Start, $Limit);
-					while($Department = mysql_fetch_assoc($DepartmentRows))
+					while($Department = mysqli_fetch_assoc($DepartmentRows))
 					{
-						$Class = mysql_fetch_assoc(Group_Select_ByIds($Department['groupid']));
+						$Class = mysqli_fetch_assoc(Group_Select_ByIds($Department['groupid']));
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
 							<td>".$Class['name']."</td>

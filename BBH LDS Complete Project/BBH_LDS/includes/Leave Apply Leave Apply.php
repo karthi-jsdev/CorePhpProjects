@@ -4,15 +4,15 @@
 		$Columns = array("id","group_id","name","starttime","endtime","comments","half","leavetypeid");
 		if($_GET['action'] == 'Edit')
 		{
-			$FetchResource = mysql_fetch_assoc(Leave_Select_ById());
-			//echo mysql_num_rows(Leave_Select_ById());
+			$FetchResource = mysqli_fetch_assoc(Leave_Select_ById());
+			//echo mysqli_num_rows(Leave_Select_ById());
 		}
 		if(isset($_POST['Submit']) || isset($_POST['Update']))
 		{
 			$User_Apply_Leave = User_Select_Byname_Leave();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows(User_Select_Byname_Leave())>=1)
+				if(mysqli_num_rows(User_Select_Byname_Leave())>=1)
 					$message = "<br /><div class='message error'><b>Message</b> : This User already apply the leave in the same day</div>";
 				else
 				{
@@ -22,8 +22,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Username = mysql_fetch_assoc($User_Apply_Leave);
-				if(mysql_num_rows(User_Select_BynameId($Username['id'],$Username['name'],$Username['startdate'],$Username['enddate']))>=1)
+				$Username = mysqli_fetch_assoc($User_Apply_Leave);
+				if(mysqli_num_rows(User_Select_BynameId($Username['id'],$Username['name'],$Username['startdate'],$Username['enddate']))>=1)
 					$message = "<br /><div class='message error'><b>Message</b> : This User already apply the leave in the same day</div>";
 				else
 				{
@@ -61,7 +61,7 @@
 					<select name="groupid" id="groupid" onchange="GetDepartment(this.value)">
 						<option value="" >Select</option>
 					<?php
-						$Select_Group = mysql_query("select * from `group` order by name asc");
+						$Select_Group = mysqli_query($_SESSION['connection'],"select * from `group` order by name asc");
 						while($Fetch_Group = mysql_fetch_array($Select_Group))
 						{
 							if($FetchResource['groupid']==$Fetch_Group['id'])
@@ -77,7 +77,7 @@
 					<select name="departmentid" id="departmentid"  onchange="GetDepartment(document.getElementById('groupid').value,this.value)">
 						<option value="" >Select</option>
 						<?php
-							$Select_Department= mysql_query("select * from `department` where groupid='".$FetchResource['groupid']."' order by name asc");
+							$Select_Department= mysqli_query($_SESSION['connection'],"select * from `department` where groupid='".$FetchResource['groupid']."' order by name asc");
 							while($Fetch_Department = mysql_fetch_array($Select_Department))
 							{
 								if($Fetch_Department['id']==$FetchResource['departmentid'])
@@ -93,7 +93,7 @@
 					<select name="name" id="name" >
 						<option value="" >Select</option>
 						<?php
-							$Select_Name= mysql_query("select * from `resource_update` where departmentid='".$FetchResource['departmentid']."'  and  groupid='".$FetchResource['groupid']."' order by name asc");
+							$Select_Name= mysqli_query($_SESSION['connection'],"select * from `resource_update` where departmentid='".$FetchResource['departmentid']."'  and  groupid='".$FetchResource['groupid']."' order by name asc");
 							while($Fetch_Name = mysql_fetch_array($Select_Name))
 							{
 								if($Fetch_Name['id']==$FetchResource['name'])
@@ -109,7 +109,7 @@
 					<select name="leavetypeid" id="leavetypeid" >
 						<option value="" >Select</option>
 						<?php
-							$Leavetype_Name= mysql_query("select * from `leavetype`  order by name asc");
+							$Leavetype_Name= mysqli_query($_SESSION['connection'],"select * from `leavetype`  order by name asc");
 							while($Fetch_Leavetype_Name = mysql_fetch_array($Leavetype_Name))
 							{
 								if($Fetch_Leavetype_Name['id']==$FetchResource['leavetypeid'])
@@ -176,7 +176,7 @@
 		<div class="columns">
 			<h3>Leave Apply List
 				<?php
-				$ResourceTotalRows = mysql_fetch_assoc(LeaveApply_Select_Count_All());
+				$ResourceTotalRows = mysqli_fetch_assoc(LeaveApply_Select_Count_All());
 				echo " : No. of List - ".$ResourceTotalRows['total'];
 				?>
 			</h3>
@@ -213,7 +213,7 @@
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$ResourceUpdate = Leave_Select_ByLimit($Start, $Limit);
 					$days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-					while($Resource = mysql_fetch_assoc($ResourceUpdate))
+					while($Resource = mysqli_fetch_assoc($ResourceUpdate))
 					{ 
 						echo "<td>".($i++)."</td>";
 						echo "<td>".$Resource['title'].".".$Resource['Name']."</td>";
