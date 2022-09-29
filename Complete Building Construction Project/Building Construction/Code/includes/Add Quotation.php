@@ -21,7 +21,7 @@
 					<label>
 						<strong>Quotation Number</strong><font color="red">*</font>
 						<?php
-						if(!$Quotation = mysql_fetch_array(Select_Last_Quotation_Id()))
+						if(!$Quotation = mysqli_fetch_array(Select_Last_Quotation_Id()))
 							$Quotation['quotation_no'] = "10000001";
 						?>
 						<input type="text" autocomplete="off" id="quotation_no" value="<?php echo ++$Quotation['quotation_no'];?>" readonly onblur="Validate_Quotation();"/>
@@ -32,7 +32,7 @@
 							<option value="">Select</option>
 							<?php
 							$Client = Client_Select_All();
-							while($Client_name = mysql_fetch_assoc($Client))
+							while($Client_name = mysqli_fetch_assoc($Client))
 								echo '<option value="'.$Client_name['id'].'">'.$Client_name['client_name'].'</option>';
 							?>
 						</select>
@@ -90,7 +90,7 @@
 										<option value="">Select</option>
 										<?php
 										$Units = Select_All_Units();
-										while($Unit = mysql_fetch_assoc($Units))
+										while($Unit = mysqli_fetch_assoc($Units))
 											echo '<option value="'.$Unit['id'].'">'.$Unit['name'].'</option>';
 										?>
 									</select>

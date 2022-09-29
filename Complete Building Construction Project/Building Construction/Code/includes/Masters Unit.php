@@ -3,7 +3,7 @@
 		$Columns = array("id", "name", "value");
 		if($_GET['action'] == 'Edit')
 		{
-			$Unit = mysql_fetch_assoc(Unit_Select_ById());
+			$Unit = mysqli_fetch_assoc(Unit_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Unit[$Col];
 		}
@@ -18,7 +18,7 @@
 				$UnitResource = Unit_Select_ByNamePWD();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($UnitResource))
+					if(mysqli_num_rows($UnitResource))
 						$message = "<br /><div class='message error'><b>Message</b> : This Unit already exists</div>";
 					else
 					{
@@ -28,8 +28,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$Unit = mysql_fetch_assoc($UnitResource);
-					if(mysql_num_rows(Unit_Select_ByNamePWDId()))
+					$Unit = mysqli_fetch_assoc($UnitResource);
+					if(mysqli_num_rows(Unit_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Unit already exists</div>";
 					else
 					{
@@ -71,7 +71,7 @@
 		<div class="columns">
 			<h3>Unit List
 				<?php
-				$UnitTotalRows = mysql_fetch_assoc(Unit_Select_Count_All());
+				$UnitTotalRows = mysqli_fetch_assoc(Unit_Select_Count_All());
 				echo " : No. of total Units - ".$UnitTotalRows['total'];
 				?>
 			</h3>
@@ -98,7 +98,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$UnitRows = Unit_Select_ByLimit($Start, $Limit);
-					while($Unit = mysql_fetch_assoc($UnitRows))
+					while($Unit = mysqli_fetch_assoc($UnitRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

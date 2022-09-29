@@ -3,7 +3,7 @@
 		$Columns = array("id", "type", "percent","description");
 		if($_GET['action'] == 'Edit')
 		{
-			$Tax = mysql_fetch_assoc(Tax_Select_ById());
+			$Tax = mysqli_fetch_assoc(Tax_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Tax[$Col];
 		}
@@ -18,7 +18,7 @@
 				$TaxResource = Tax_Select_ByNamePWD();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($TaxResource))
+					if(mysqli_num_rows($TaxResource))
 						$message = "<br /><div class='message error'><b>Message</b> : This Tax already exists</div>";
 					else
 					{
@@ -28,8 +28,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$Tax = mysql_fetch_assoc($TaxResource);
-					if(mysql_num_rows(Tax_Select_ByNamePWDId()))
+					$Tax = mysqli_fetch_assoc($TaxResource);
+					if(mysqli_num_rows(Tax_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Tax already exists</div>";
 					else
 					{
@@ -75,7 +75,7 @@
 		<div class="columns">
 			<h3>Tax List
 				<?php
-				$TaxTotalRows = mysql_fetch_assoc(Tax_Select_Count_All());
+				$TaxTotalRows = mysqli_fetch_assoc(Tax_Select_Count_All());
 				echo " : No. of total Taxes - ".$TaxTotalRows['total'];
 				?>
 			</h3>
@@ -103,7 +103,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$TaxRows = Tax_Select_ByLimit($Start, $Limit);
-					while($Tax = mysql_fetch_assoc($TaxRows))
+					while($Tax = mysqli_fetch_assoc($TaxRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

@@ -3,7 +3,7 @@
 		$Columns = array("id", "code", "description");
 		if($_GET['action'] == 'Edit')
 		{
-			$Work = mysql_fetch_assoc(Work_Select_ById());
+			$Work = mysqli_fetch_assoc(Work_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Work[$Col];
 		}
@@ -18,7 +18,7 @@
 				$WorkResource = Work_Select_ByNamePWD();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($WorkResource))
+					if(mysqli_num_rows($WorkResource))
 						$message = "<br /><div class='message error'><b>Message</b> : This Work already exists</div>";
 					else
 					{
@@ -28,8 +28,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$Work = mysql_fetch_assoc($WorkResource);
-					if(mysql_num_rows(Work_Select_ByNamePWDId()))
+					$Work = mysqli_fetch_assoc($WorkResource);
+					if(mysqli_num_rows(Work_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Work already exists</div>";
 					else
 					{
@@ -71,7 +71,7 @@
 		<div class="columns">
 			<h3>Work List
 				<?php
-				$WorkTotalRows = mysql_fetch_assoc(Work_Select_Count_All());
+				$WorkTotalRows = mysqli_fetch_assoc(Work_Select_Count_All());
 				echo " : No. of total Works - ".$WorkTotalRows['total'];
 				?>
 			</h3>
@@ -98,7 +98,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$WorkRows = Work_Select_ByLimit($Start, $Limit);
-					while($Work = mysql_fetch_assoc($WorkRows))
+					while($Work = mysqli_fetch_assoc($WorkRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>

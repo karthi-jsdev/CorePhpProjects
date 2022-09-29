@@ -24,7 +24,7 @@ if($_GET['getdata']=='particularstatus')
 		</thead>
 		<?php
 		$i=1;
-		$status_totaldata = mysql_fetch_assoc(Status_Total_Rows());
+		$status_totaldata = mysqli_fetch_assoc(Status_Total_Rows());
 			echo "<br/><h3>Quotation Status: Total Number of Quotations - ".$status_totaldata["total"]."</h3>";
 		$Limit = 20;
 		$total_pages = ceil($status_totaldata['total'] / $Limit);
@@ -38,7 +38,7 @@ if($_GET['getdata']=='particularstatus')
 		else
 		{
 		$allstatus = Status_Data_ByLimit($Start,$Limit);
-			while($statusall = mysql_fetch_assoc($allstatus))
+			while($statusall = mysqli_fetch_assoc($allstatus))
 			{
 			echo '<tbody>
 					<tr>

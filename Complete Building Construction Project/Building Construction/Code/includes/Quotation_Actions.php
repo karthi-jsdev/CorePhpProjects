@@ -11,7 +11,7 @@
 	{
 		echo Insert_Work();
 		$Works = Select_Works_By_QuotationId();
-		while($Work = mysql_fetch_array($Works))
+		while($Work = mysqli_fetch_array($Works))
 		{
 			echo "<tr id='".$Work['id']."'><td>".$Work['code']."</td><td>".$Work['description']."</td>
 			<td>".$Work['quantity']."</td><td>".$Work['rate_per_unit']."</td>
@@ -26,7 +26,7 @@
 		echo "Sub work added@";
 		Insert_SubWork();
 		$SubWorks = Select_SubWorks_By_WorkId();
-		while($SubWork = mysql_fetch_array($SubWorks))
+		while($SubWork = mysqli_fetch_array($SubWorks))
 		{
 			echo "<tr id='S".$SubWork['id']."'><td>".$SubWork['code']."</td><td> ".$SubWork['subworkname']."</td>
 			<td>".$SubWork['quantity']."</td><td>".$SubWork['length']."</td>
@@ -40,7 +40,7 @@
 	{
 		if(is_numeric($_GET['id']))
 		{
-			$Work = mysql_fetch_array(Select_Work_ById());
+			$Work = mysqli_fetch_array(Select_Work_ById());
 			?>
 			<td colspan="13">
 				<hr />
@@ -67,7 +67,7 @@
 							<option value="">Select</option>
 							<?php
 							$Units = Select_All_Units();
-							while($Unit = mysql_fetch_assoc($Units))
+							while($Unit = mysqli_fetch_assoc($Units))
 							{
 								if($Work['unit_id'] == $Unit['id'])
 									echo '<option value="'.$Unit['id'].'" selected>'.$Unit['name'].'</option>';
@@ -90,7 +90,7 @@
 		}
 		else
 		{
-			$SubWork = mysql_fetch_array(Select_SubWork_ById());
+			$SubWork = mysqli_fetch_array(Select_SubWork_ById());
 			?>
 			<td colspan="13">
 				<hr />
@@ -138,7 +138,7 @@
 		{
 			Update_Work_ById();
 			echo "Work updated successfully@";
-			$Work = mysql_fetch_array(Select_Work_ById());
+			$Work = mysqli_fetch_array(Select_Work_ById());
 			echo "<td>".$Work['code']."</td><td>".$Work['description']."</td>
 			<td>".$Work['quantity']."</td><td>".$Work['rate_per_unit']."</td>
 			<td>".$Work['name']."</td><td>".$Work['amount']."</td>
@@ -148,14 +148,14 @@
 		{
 			Update_SubWork_ById();
 			echo "Work updated successfully@";
-			$SubWork = mysql_fetch_array(Select_SubWork_ById());
+			$SubWork = mysqli_fetch_array(Select_SubWork_ById());
 			echo "<tr id='S".$SubWork['id']."'><td>".$SubWork['code']."</td><td>".$SubWork['subworkname']."</td>
 			<td>".$SubWork['quantity']."</td><td>".$SubWork['length']."</td>
 			<td>".$SubWork['breath']."</td><td>".$SubWork['depth']."</td><td>".$SubWork['area']."</td>
 			<td><a href='#' onclick='Actions(\"S".$SubWork['id']."\", \"Edit\")' class='action-button' title='user-edit'><span class='user-edit'></span></a>&nbsp;&nbsp;&nbsp;<a href='#' onclick='Actions(\"S".$SubWork['id']."\", \"Delete\")' class='action-button' title='user-delete'><span class='user-delete'></span></a></td></tr>";
 			$_GET['id'] = $_GET['quotation_work_id'] = $SubWork['quotation_work_id'];
 			Update_Work_Details_BySubWork_Id();
-			$Work = mysql_fetch_array(Select_Work_ById());
+			$Work = mysqli_fetch_array(Select_Work_ById());
 			echo "@".$Work['id']."@<td>".$Work['description']."</td>
 			<td>".$Work['quantity']."</td><td>".$Work['rate_per_unit']."</td>
 			<td>".$Work['name']."</td><td>".$Work['amount']."</td>
@@ -166,7 +166,7 @@
 	{
 		if(is_numeric($_GET['id']))
 		{
-			if($Exits = mysql_fetch_array(Select_SubWork_ByWorkId()))
+			if($Exits = mysqli_fetch_array(Select_SubWork_ByWorkId()))
 				echo "Please delete all the SubWork records before this record";
 			else
 			{
@@ -177,13 +177,13 @@
 		else
 		{
 			$_GET['id'] = substr($_GET['id'], 1, strlen($_GET['id']));
-			$SubWork = mysql_fetch_array(Select_SubWork_BySubWorkId());
+			$SubWork = mysqli_fetch_array(Select_SubWork_BySubWorkId());
 			Delete_SubWork_ById();
 			echo "SubWork deleted successfully";
 			$_GET['quotation_work_id'] = $SubWork['quotation_work_id'];
 			Update_Work_Details_BySubWork_Id();
 			$_GET['id'] = $SubWork['quotation_work_id'];
-			$Work = mysql_fetch_array(Select_Work_ById());
+			$Work = mysqli_fetch_array(Select_Work_ById());
 			echo "@".$Work['id']."@<td>".$Work['description']."</td>
 			<td>".$Work['quantity']."</td><td>".$Work['rate_per_unit']."</td>
 			<td>".$Work['name']."</td><td>".$Work['amount']."</td>

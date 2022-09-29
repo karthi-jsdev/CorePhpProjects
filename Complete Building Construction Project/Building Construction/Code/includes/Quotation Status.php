@@ -38,7 +38,7 @@ if(!$_GET['quotation_id'])
 				<select name="quotaion_id" id="quotaion_id">
 					<option value="">All</option>
 					<?php 
-						while($quotation_number = mysql_fetch_assoc($quotationdropdown))
+						while($quotation_number = mysqli_fetch_assoc($quotationdropdown))
 						{
 							if($_GET['quotaion_id']==$quotation_number['id'])
 								echo '<option value="'.$quotation_number['id'].'" selected="selected">'.$quotation_number['quotation_no'].'</option>';
@@ -52,7 +52,7 @@ if(!$_GET['quotation_id'])
 				<select name="client_id" id="client_id">
 					<option value="">All</option>
 					<?php
-					while($client_name = mysql_fetch_assoc($clientdropdown))
+					while($client_name = mysqli_fetch_assoc($clientdropdown))
 						{
 							if($_GET['client_id']==$client_name['id'])
 								echo '<option value="'.$client_name['id'].'" selected="selected">'.$client_name['client_name'].'</option>';
@@ -67,7 +67,7 @@ if(!$_GET['quotation_id'])
 					<option value="">All</option>
 					<?php
 					
-						while($status = mysql_fetch_assoc($statusdropdown))
+						while($status = mysqli_fetch_assoc($statusdropdown))
 						{
 							if($_GET['status_id'] == $status['id'])
 								echo '<option value="'.$status['id'].'" selected="selected">'.$status['name'].'</option>';
@@ -93,7 +93,7 @@ if(!$_GET['quotation_id'])
 	{ ?>
 		<section role="main" id="main">
 		<?php
-		$TotalRows = mysql_fetch_assoc(Quotation_Summary_Count());
+		$TotalRows = mysqli_fetch_assoc(Quotation_Summary_Count());
 		echo "<br/><h3>Quotation Status: Total Number of Quotations - ".$TotalRows["total"]."</h3>";
 		?>
 		<table class="paginate sortable full" id="Filter_Display">
@@ -116,7 +116,7 @@ if(!$_GET['quotation_id'])
 			$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");		
 			$summary = Quotation_Summary($Start,$Limit);
 			echo $summary['name'];
-			while($quotation_summary = mysql_fetch_assoc($summary))
+			while($quotation_summary = mysqli_fetch_assoc($summary))
 			{
 				echo'<tbody><tr>
 						<td>'.$i++.'</td>
@@ -142,7 +142,7 @@ if(!$_GET['quotation_id'])
 		if($_POST['Update'] && $_POST['comments'])
 		{
 			$_POST['quotation_id']= $_GET['quotation_id'];
-			mysql_query("INSERT INTO status_comments VALUES('','".$_POST['quotation_id']."','".$_POST['comments']."','".$_POST['status_id']."')");
+			mysqli_query($_SESSION['connection'],"INSERT INTO status_comments VALUES('','".$_POST['quotation_id']."','".$_POST['comments']."','".$_POST['status_id']."')");
 		}
 		$_POST['quotation_id']= $_GET['quotation_id'];
 		echo '<table class="paginate sortable full" style="width:950px;">
@@ -156,8 +156,8 @@ if(!$_GET['quotation_id'])
 					</tr>
 			</thead>';
 			echo'<tbody>';
-			$Quotation_Amounts = mysql_fetch_assoc(Quotation_Amount($_GET['quotation_id']));
-			$Total_Amount_Count = mysql_fetch_assoc(Quotation_Amount_Count($_GET['quotation_id']));
+			$Quotation_Amounts = mysqli_fetch_assoc(Quotation_Amount($_GET['quotation_id']));
+			$Total_Amount_Count = mysqli_fetch_assoc(Quotation_Amount_Count($_GET['quotation_id']));
 				if(!$Total_Amount_Count['total'])
 						echo '<tr><td colspan="5"><font color="red"><center>No data found</center></font></td></tr>';
 				echo "<tr>
@@ -178,7 +178,7 @@ if(!$_GET['quotation_id'])
 					</tr>
 				</thead>
 			<tbody>';
-					$Totalcomments = mysql_fetch_assoc(Status_Comments_Count());
+					$Totalcomments = mysqli_fetch_assoc(Status_Comments_Count());
 					if(!$Totalcomments['total'])
 						echo '<tr><td colspan="4"><font color="red"><center>No data found</center></font></td></tr>';
 					$Limit = 10;
@@ -193,9 +193,9 @@ if(!$_GET['quotation_id'])
 						$i = $Totalcomments['total'];
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$Status_Comments = Status_Comments_ByLimit($Start, $Limit);
-					while($Status = mysql_fetch_assoc($Status_Comments))
+					while($Status = mysqli_fetch_assoc($Status_Comments))
 					{
-						$Status_names = mysql_fetch_assoc(Comments_Status_name($Status['status_id']));
+						$Status_names = mysqli_fetch_assoc(Comments_Status_name($Status['status_id']));
 						echo "<tr>
 							<td align='center'>".$i--."</td>
 							<td>".$Status['comments']."</td>
@@ -208,8 +208,8 @@ if(!$_GET['quotation_id'])
 			<td><strong>Status:</strong>
 			<select id="status_id" name="status_id">
 				<option value="" >Select</option>';
-				$Status = mysql_query("SELECT * FROM status");
-				while($Statusus = mysql_fetch_assoc($Status))
+				$Status = mysqli_query($_SESSION['connection'],"SELECT * FROM status");
+				while($Statusus = mysqli_fetch_assoc($Status))
 				{
 					echo "<option value=".$Statusus["id"].">".$Statusus["name"]."</option>";
 				}

@@ -3,7 +3,7 @@
 		$Columns = array("id", "vendor_code", "client_name","phone","address");
 		if($_GET['action'] == 'Edit')
 		{
-			$Client = mysql_fetch_assoc(Client_Select_ById());
+			$Client = mysqli_fetch_assoc(Client_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Client[$Col];
 		}
@@ -17,7 +17,7 @@
 		{
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows(Client_Select_ByName()))
+					if(mysqli_num_rows(Client_Select_ByName()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Client and Vendor code already exists</div>";
 					else
 					{
@@ -27,7 +27,7 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					if(mysql_num_rows(Client_Select_ByNamePWDId()))
+					if(mysqli_num_rows(Client_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Client and Vendor code already exists</div>";
 					else
 					{
@@ -80,7 +80,7 @@
 		<div class="grid_6 first">
 			<h3>Client List
 				<?php
-				$Client_TotalRows = mysql_fetch_assoc(Client_Select_Count_All());
+				$Client_TotalRows = mysqli_fetch_assoc(Client_Select_Count_All());
 				echo " : No. of total Client - ".$Client_TotalRows['total'];
 				?>
 			</h3>
@@ -112,7 +112,7 @@
 						$i = $Client_TotalRows['total'];
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$ClientRows = Client_Select_ByLimit($Start, $Limit);
-					while($Client = mysql_fetch_assoc($ClientRows))
+					while($Client = mysqli_fetch_assoc($ClientRows))
 					{
 						echo "<tr>
 							<td align='center'>".$i--."</td>

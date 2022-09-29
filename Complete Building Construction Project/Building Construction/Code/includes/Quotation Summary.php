@@ -1,6 +1,6 @@
 <section role="main" id="main">
 <?php
-$TotalRows = mysql_fetch_assoc(Quotation_Summary_Count());
+$TotalRows = mysqli_fetch_assoc(Quotation_Summary_Count());
 echo "<br/><h3>Quotation SUMMARY: Total Number of Quotations - ".$TotalRows["total"]."</h3>";
 ?>
 <table class="paginate sortable full">
@@ -23,9 +23,9 @@ echo "<br/><h3>Quotation SUMMARY: Total Number of Quotations - ".$TotalRows["tot
 	$i++;
 	$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");		
 	$summary = Quotation_Summary($Start,$Limit);
-	while($quotation_summary = mysql_fetch_assoc($summary))
+	while($quotation_summary = mysqli_fetch_assoc($summary))
 	{
-		$quotation_work = mysql_fetch_assoc(Quotation_Work_Retrieval_Amount($quotation_summary['id']));
+		$quotation_work = mysqli_fetch_assoc(Quotation_Work_Retrieval_Amount($quotation_summary['id']));
 		echo'<tbody><tr>
 				<td>'.$i++.'</td>
 				<td><a href="?page=Quotation&subpage=Quotation Retrieval&quotation_id='.$quotation_summary['id'].'">'.$quotation_summary['quotation_no'].'</a></td>

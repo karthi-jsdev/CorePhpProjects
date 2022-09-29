@@ -39,7 +39,7 @@ if(!$_GET['quotation_id'])
 				<select name="quotaion_id" id="quotaion_id">
 					<option value="">All</option>
 					<?php 
-						while($quotation_number = mysql_fetch_assoc($quotationdropdown))
+						while($quotation_number = mysqli_fetch_assoc($quotationdropdown))
 						{
 							if($_GET['quotaion_id']==$quotation_number['id'])
 								echo '<option value="'.$quotation_number['id'].'" selected="selected">'.$quotation_number['quotation_no'].'</option>';
@@ -53,7 +53,7 @@ if(!$_GET['quotation_id'])
 				<select name="client_id" id="client_id">
 					<option value="">All</option>
 					<?php
-					while($client_name = mysql_fetch_assoc($clientdropdown))
+					while($client_name = mysqli_fetch_assoc($clientdropdown))
 						{
 							if($_GET['client_id']==$client_name['id'])
 								echo '<option value="'.$client_name['id'].'" selected="selected">'.$client_name['client_name'].'</option>';
@@ -68,7 +68,7 @@ if(!$_GET['quotation_id'])
 					<option value="">All</option>
 					<?php
 					
-						while($status = mysql_fetch_assoc($statusdropdown))
+						while($status = mysqli_fetch_assoc($statusdropdown))
 						{
 							if($_GET['status_id'] == $status['id'])
 								echo '<option value="'.$status['id'].'" selected="selected">'.$status['name'].'</option>';
@@ -94,7 +94,7 @@ if(!$_GET['quotation_id'])
 	{ ?>
 		<section role="main" id="main">
 		<?php
-		$TotalRows = mysql_fetch_assoc(Quotation_Summary_Count());
+		$TotalRows = mysqli_fetch_assoc(Quotation_Summary_Count());
 		echo "<br/><h3>Quotation Status: Total Number of Quotations - ".$TotalRows["total"]."</h3>";
 		echo '<div align="right"><a href="" title="Download" onclick=\'Export_Data("getdata=totalstatus")\'><img src="images/icons/download.png"></a></div>';
 		?>
@@ -118,7 +118,7 @@ if(!$_GET['quotation_id'])
 			$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");		
 			$summary = Quotation_Summary($Start,$Limit);
 			echo $summary['name'];
-			while($quotation_summary = mysql_fetch_assoc($summary))
+			while($quotation_summary = mysqli_fetch_assoc($summary))
 			{
 				echo'<tbody><tr>
 						<td>'.$i++.'</td>

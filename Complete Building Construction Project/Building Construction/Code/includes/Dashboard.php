@@ -14,10 +14,10 @@
 					</thead>
 					<tbody>	
 					<?php
-					$TotalClients = mysql_fetch_assoc(Total_Clients());
-					$NewClients = mysql_fetch_assoc(New_Client_Added_This_Month());
-					$ActiveClients = mysql_fetch_assoc(Active_Clients());
-					$TotalClientsthisyear = mysql_fetch_assoc(This_YearClients());
+					$TotalClients = mysqli_fetch_assoc(Total_Clients());
+					$NewClients = mysqli_fetch_assoc(New_Client_Added_This_Month());
+					$ActiveClients = mysqli_fetch_assoc(Active_Clients());
+					$TotalClientsthisyear = mysqli_fetch_assoc(This_YearClients());
 					?>
 					<tr><td>1</td><td>Total Client List</td><td><?php echo $TotalClients["total"];?></td></tr>
 					<tr><td>2</td><td>New Client Added This Month</td><td><?php echo $NewClients["total"]; ?></td></tr>

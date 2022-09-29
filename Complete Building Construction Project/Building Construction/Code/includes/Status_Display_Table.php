@@ -14,7 +14,7 @@
 	include('Quotation_Queries.php');
 	ini_set("display_errors","0");
 
-	$status_totaldata = mysql_fetch_assoc(Status_Total_Rows());
+	$status_totaldata = mysqli_fetch_assoc(Status_Total_Rows());
 	echo "<br/><h3>Quotation Status: Total Number of Quotations - ".$status_totaldata["total"]."</h3>";
 	if(!$_GET['Quotation_Status'])
 		echo '<div align="right"><a href="#" title="Download" onclick=\'Export_Status("getdata=particularstatus")\'><img src="images/icons/download.png"></a></div>';
@@ -30,7 +30,7 @@
 	else
 	{
 		$allstatus = Status_Data_ByLimit($Start,$Limit);
-		while($statusall = mysql_fetch_assoc($allstatus))
+		while($statusall = mysqli_fetch_assoc($allstatus))
 		{
 			echo '<tbody>
 				<tr>

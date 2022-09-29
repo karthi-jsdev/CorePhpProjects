@@ -6,7 +6,7 @@ if($_GET['quotation_id'])
 	$_POST['quotation_id']= $_GET['quotation_id'];
 	
 	$quotation_number= Quotation_Number();
-	while($quotation = mysql_fetch_assoc($quotation_number))
+	while($quotation = mysqli_fetch_assoc($quotation_number))
 		echo "<br/><h3>QUOTATION NUMBER - ".$quotation['quotation_no']."&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp CLIENT - ".$quotation['client_name']."</h3><button  onclick='print_quotaion();'>Print Quotation</button><button onclick='print_work();'>Print Work</button><button onclick='print_work_Quotaion();'>Work Quotation</button></h3>";
 	
 	echo '<table class="paginate sortable full">
@@ -25,9 +25,9 @@ if($_GET['quotation_id'])
 	$TotalAmount = 0;
 	$quotation_work_details = Quotation_Work_Retrieval();
 	$i = $j = 1;
-	if(!mysql_num_rows($quotation_work_details))
+	if(!mysqli_num_rows($quotation_work_details))
 		echo "<tr><td colspan='7'><center><font color='red'>No work data found!</font></center></td></tr>";
-	else while($quotation_work = mysql_fetch_assoc($quotation_work_details))
+	else while($quotation_work = mysqli_fetch_assoc($quotation_work_details))
 	{
 		$TotalAmount += $quotation_work['amount'];
 		echo'<tr>
@@ -56,9 +56,9 @@ if($_GET['quotation_id'])
 			</tr>
 		</thead>';
 		$quotation_subwork_details = Quotation_Subwork_Retrieval($quotation_work['work_id']);
-		if(!mysql_num_rows($quotation_subwork_details))
+		if(!mysqli_num_rows($quotation_subwork_details))
 			echo '<tr><td colspan="7"><font color="red"><center>No subwork data found!</center></font></td></tr>';
-		else while($quotation_subwork = mysql_fetch_assoc($quotation_subwork_details))
+		else while($quotation_subwork = mysqli_fetch_assoc($quotation_subwork_details))
 		{
 			echo'<tr>
 			<td>'.$j++.'</td>

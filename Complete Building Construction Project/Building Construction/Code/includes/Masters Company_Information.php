@@ -4,7 +4,7 @@
 		$Columns = array("id", "company_name", "company_slogan", "address","contact_name", "designation", "phone", "email","service_taxno","pan_no","tin_no");
 		if($_GET['action'] == 'Edit')
 		{
-			$Company = mysql_fetch_assoc(Company_Select_ById());
+			$Company = mysqli_fetch_assoc(Company_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Company[$Col];
 		}
@@ -23,7 +23,7 @@
 				$CompanyResource = Company_Select_ByNamePWD();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($CompanyResource))
+					if(mysqli_num_rows($CompanyResource))
 						$message = "<br /><div class='message error'><b>Message</b> : This Company already exists</div>";
 					else
 					{
@@ -33,8 +33,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$Company = mysql_fetch_assoc($CompanyResource);
-					if(mysql_num_rows(Company_Select_ByNamePWDId()))
+					$Company = mysqli_fetch_assoc($CompanyResource);
+					if(mysqli_num_rows(Company_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Company already exists</div>";
 					else
 					{
@@ -107,7 +107,7 @@
 		<div class="columns">
 			<h3>Company List
 				<?php
-				$CompanyTotalRows = mysql_fetch_assoc(Company_Select_Count_All());
+				$CompanyTotalRows = mysqli_fetch_assoc(Company_Select_Count_All());
 				echo " : No. of total Companies - ".$CompanyTotalRows['total'];
 				?>
 			</h3>
@@ -146,7 +146,7 @@
 						$i = $CompanyTotalRows['total'];
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$CompanyRows = Company_Select_ByLimit($Start, $Limit);
-					while($Company = mysql_fetch_assoc($CompanyRows))
+					while($Company = mysqli_fetch_assoc($CompanyRows))
 					{
 						echo "<tr>
 							<td align='center'>".$i--."</td>

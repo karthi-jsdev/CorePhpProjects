@@ -50,9 +50,9 @@ ini_set("display_errors",0);
 if($_GET['quotation_id'])
 {
 	$_POST['quotation_id']= $_GET['quotation_id'];
-	$Vendor_No = mysql_fetch_array(mysql_query("SELECT * FROM quotation JOIN client ON  quotation.client_id =client.id WHERE quotation.id='".$_POST['quotation_id']."'"));
-	$Company_Information = mysql_fetch_array(mysql_query("SELECT * FROM company_information"));
-	$quotation= mysql_fetch_assoc(Quotation_Number());
+	$Vendor_No = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM quotation JOIN client ON  quotation.client_id =client.id WHERE quotation.id='".$_POST['quotation_id']."'"));
+	$Company_Information = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM company_information"));
+	$quotation= mysqli_fetch_assoc(Quotation_Number());
 	echo "<table align='center'><tr><td><h2>".$Company_Information['company_name']."</h2></td></tr>
 	<tr><td align='center'><h3>".$Company_Information['company_slogan']."</h3></td></tr></table>";
 	echo "<table><tr><td style='width:800px;'><strong>".$Company_Information['contact_name']."</strong></td><td><strong>".$Company_Information['address']."</strong></td></tr>
@@ -78,7 +78,7 @@ if($_GET['quotation_id'])
 	$TotalAmount = 0;
 	$quotation_work_details = Quotation_Work_Retrieval();
 	$i = $j = 1;
-	while($quotation_work = mysql_fetch_assoc($quotation_work_details))
+	while($quotation_work = mysqli_fetch_assoc($quotation_work_details))
 	{
 		$TotalAmount += $quotation_work['amount'];
 		echo'<tr class="tr3">
@@ -105,10 +105,10 @@ if($_GET['quotation_id'])
 			</tr>
 		</thead>';
 		$quotation_subwork_details = Quotation_Subwork_Retrieval($quotation_work['work_id']);
-		while($quotation_subwork = mysql_fetch_assoc($quotation_subwork_details))
+		while($quotation_subwork = mysqli_fetch_assoc($quotation_subwork_details))
 		{
 			$quotation_subwork_count = Quotation_Subwork_Count($quotation_work['work_id']);
-			$subwork_count = mysql_num_rows($quotation_subwork_count);
+			$subwork_count = mysqli_num_rows($quotation_subwork_count);
 			if(!$subwork_count)
 				echo '<tr><td colspan="7"><font color="red"><center>No data found</center></font></td></tr>';
 			else

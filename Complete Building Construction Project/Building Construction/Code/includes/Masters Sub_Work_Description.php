@@ -3,7 +3,7 @@
 		$Columns = array("id", "code", "description");
 		if($_GET['action'] == 'Edit')
 		{
-			$Sub_Work = mysql_fetch_assoc(Sub_Work_Select_ById());
+			$Sub_Work = mysqli_fetch_assoc(Sub_Work_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Sub_Work[$Col];
 		}
@@ -18,7 +18,7 @@
 				$Sub_WorkResource = Sub_Work_Select_ByNamePWD();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($Sub_WorkResource))
+					if(mysqli_num_rows($Sub_WorkResource))
 						$message = "<br /><div class='message error'><b>Message</b> : This Sub_Work already exists</div>";
 					else
 					{
@@ -28,8 +28,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$Sub_Work = mysql_fetch_assoc($Sub_WorkResource);
-					if(mysql_num_rows(Sub_Work_Select_ByNamePWDId()))
+					$Sub_Work = mysqli_fetch_assoc($Sub_WorkResource);
+					if(mysqli_num_rows(Sub_Work_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Sub_Work already exists</div>";
 					else
 					{
@@ -71,7 +71,7 @@
 		<div class="columns">
 			<h3>Sub_Work List
 				<?php
-				$Sub_WorkTotalRows = mysql_fetch_assoc(Sub_Work_Select_Count_All());
+				$Sub_WorkTotalRows = mysqli_fetch_assoc(Sub_Work_Select_Count_All());
 				echo " : No. of total Sub_Works - ".$Sub_WorkTotalRows['total'];
 				?>
 			</h3>
@@ -98,7 +98,7 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$Sub_WorkRows = Sub_Work_Select_ByLimit($Start, $Limit);
-					while($Sub_Work = mysql_fetch_assoc($Sub_WorkRows))
+					while($Sub_Work = mysqli_fetch_assoc($Sub_WorkRows))
 					{
 						echo "<tr style='valign:middle;'>
 							<td align='center'>".$i++."</td>
