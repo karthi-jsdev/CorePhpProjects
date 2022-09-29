@@ -1,26 +1,26 @@
 <?php
 	function Select_Sections()
 	{
-		return mysql_query("SELECT * FROM section WHERE id IN(SELECT DISTINCT(section_id) FROM location) ORDER BY id ASC");
+		return mysqli_query($_SESSION['connection'],"SELECT * FROM section WHERE id IN(SELECT DISTINCT(section_id) FROM location) ORDER BY id ASC");
 	}
 	function Select_SubSections()
 	{//SELECT * FROM subsection JOIN section ON section.id=subsection.sectionid WHERE section.id IN(SELECT DISTINCT(subsection.id) FROM location) ORDER BY subsection.id ASC
-		return mysql_query("SELECT * FROM subsection");
+		return mysqli_query($_SESSION['connection'],"SELECT * FROM subsection");
 	}
 	function SubSection_Select_Distinct()
 	{
-		return mysql_query("SELECT DISTINCT(subsection_id) FROM location ORDER BY location_reference_id DESC");
+		return mysqli_query($_SESSION['connection'],"SELECT DISTINCT(subsection_id) FROM location ORDER BY location_reference_id DESC");
 	}
 	function SubSection_Select_Required($SectionId)
 	{
-		return mysql_query("SELECT DISTINCT(subsection_id) FROM location WHERE section_id='".$SectionId."' ORDER BY subsection_id ASC");
+		return mysqli_query($_SESSION['connection'],"SELECT DISTINCT(subsection_id) FROM location WHERE section_id='".$SectionId."' ORDER BY subsection_id ASC");
 	}
 	function Location_Reference_Select_Id($SubSectionIds)
 	{
 		if(count($SubSectionIds))
 		{
-			$ReferenceId = mysql_fetch_array(mysql_query("SELECT location_reference_id%30 as location_reference_id FROM location WHERE (subsection_id='".implode("' || subsection_id='", $SubSectionIds)."') ORDER BY location_reference_id DESC LIMIT 0,1"));
-			return mysql_query("SELECT reference FROM location_reference WHERE id='".$ReferenceId['location_reference_id']."'");
+			$ReferenceId = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT location_reference_id%30 as location_reference_id FROM location WHERE (subsection_id='".implode("' || subsection_id='", $SubSectionIds)."') ORDER BY location_reference_id DESC LIMIT 0,1"));
+			return mysqli_query($_SESSION['connection'],"SELECT reference FROM location_reference WHERE id='".$ReferenceId['location_reference_id']."'");
 		}
 		else
 			return 0;
@@ -101,83 +101,83 @@
 			) t2
 			ON t1.machine_id=t2.machine_id";
 		}
-		return mysql_query($Query);
+		return mysqli_query($_SESSION['connection'],$Query);
 	}
 	function Count_Available_Machines()
 	{
 		if($_GET['section_id'])
 		{
-			return mysql_query("SELECT COUNT(DISTINCT(machine_id)) as total FROM `machine_assignment` 
+			return mysqli_query($_SESSION['connection'],"SELECT COUNT(DISTINCT(machine_id)) as total FROM `machine_assignment` 
 			JOIN location ON location.id = machine_assignment.location_id
 			JOIN section ON location.section_id  = section.id WHERE section.id = '".$_GET['section_id']."'");
 		}
 		else
 		{
-			return mysql_query("SELECT COUNT(DISTINCT(machine_id)) as total FROM `machine_assignment` 
+			return mysqli_query($_SESSION['connection'],"SELECT COUNT(DISTINCT(machine_id)) as total FROM `machine_assignment` 
 			JOIN location ON location.id = machine_assignment.location_id
 			JOIN section ON location.section_id=section.id");
 		}
 	}
 	function Count_Nearing_Machines()
 	{
-		return mysql_query("SELECT COUNT(*) as total FROM job WHERE job.tentative_date<=CURDATE() && job.tentative_enddate>=CURDATE() && CURDATE() BETWEEN DATE_SUB(job.tentative_enddate, INTERVAL 10 DAY) AND job.tentative_enddate");
+		return mysqli_query($_SESSION['connection'],"SELECT COUNT(*) as total FROM job WHERE job.tentative_date<=CURDATE() && job.tentative_enddate>=CURDATE() && CURDATE() BETWEEN DATE_SUB(job.tentative_enddate, INTERVAL 10 DAY) AND job.tentative_enddate");
 	}
 	function Count_Running_Machines()
 	{
-		return mysql_query("SELECT COUNT(DISTINCT(machine_id)) as total FROM job WHERE job.tentative_date<=CURDATE() && job.tentative_enddate>=CURDATE()");
+		return mysqli_query($_SESSION['connection'],"SELECT COUNT(DISTINCT(machine_id)) as total FROM job WHERE job.tentative_date<=CURDATE() && job.tentative_enddate>=CURDATE()");
 	}
 	function Count_Assigned_Machines_Status()
 	{
-		$Assigned = mysql_fetch_array(mysql_query("SELECT COUNT(DISTINCT(machine_id)) as total FROM (SELECT machine_assignment.machine_id, machine.machine_number, job.tentative_date, job.tentative_enddate, IF(CURDATE() BETWEEN DATE_SUB(job.tentative_enddate, INTERVAL 10 DAY) AND job.tentative_enddate , 1, 0) AS 10tentative_date FROM location LEFT JOIN location_reference ON location_reference.id = location.location_reference_id LEFT JOIN machine_assignment ON location.id = machine_assignment.location_id LEFT JOIN machine ON machine.id = machine_assignment.machine_id LEFT JOIN machine_type ON machine_type.id = machine.machine_type_id LEFT JOIN job ON job.machine_id = machine.id LEFT JOIN `order` ON `order`.id = job.order_id LEFT JOIN customer ON customer.id = `order`.customer_id LEFT JOIN product ON product.id = job.product_id) as newtable WHERE newtable.tentative_date!='' && newtable.tentative_date<=CURDATE() && newtable.tentative_enddate>=CURDATE() && newtable.10tentative_date=0"));
+		$Assigned = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT COUNT(DISTINCT(machine_id)) as total FROM (SELECT machine_assignment.machine_id, machine.machine_number, job.tentative_date, job.tentative_enddate, IF(CURDATE() BETWEEN DATE_SUB(job.tentative_enddate, INTERVAL 10 DAY) AND job.tentative_enddate , 1, 0) AS 10tentative_date FROM location LEFT JOIN location_reference ON location_reference.id = location.location_reference_id LEFT JOIN machine_assignment ON location.id = machine_assignment.location_id LEFT JOIN machine ON machine.id = machine_assignment.machine_id LEFT JOIN machine_type ON machine_type.id = machine.machine_type_id LEFT JOIN job ON job.machine_id = machine.id LEFT JOIN `order` ON `order`.id = job.order_id LEFT JOIN customer ON customer.id = `order`.customer_id LEFT JOIN product ON product.id = job.product_id) as newtable WHERE newtable.tentative_date!='' && newtable.tentative_date<=CURDATE() && newtable.tentative_enddate>=CURDATE() && newtable.10tentative_date=0"));
 		return $Assigned['total'];
 	}
 	function Count_Nearing_Machines_Status()
 	{
-		$Nearing = mysql_fetch_array(mysql_query("SELECT COUNT(DISTINCT(machine_id)) as total FROM
+		$Nearing = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT COUNT(DISTINCT(machine_id)) as total FROM
 		(SELECT machine_assignment.machine_id, machine.machine_number, job.tentative_date, IF(job.tentative_date<=CURDATE() && job.tentative_enddate>=CURDATE(), job.tentative_enddate, '') AS tentative_enddate, IF(CURDATE() BETWEEN DATE_SUB(job.tentative_enddate, INTERVAL 10 DAY) AND job.tentative_enddate , 1, 0) AS 10tentative_date FROM location LEFT JOIN location_reference ON location_reference.id = location.location_reference_id LEFT JOIN machine_assignment ON location.id = machine_assignment.location_id LEFT JOIN machine ON machine.id = machine_assignment.machine_id LEFT JOIN machine_type ON machine_type.id = machine.machine_type_id LEFT JOIN job ON job.machine_id = machine.id LEFT JOIN `order` ON `order`.id = job.order_id LEFT JOIN customer ON customer.id = `order`.customer_id LEFT JOIN product ON product.id = job.product_id)
 		as newtable WHERE newtable.tentative_date<=CURDATE() && newtable.tentative_enddate>=CURDATE() && newtable.10tentative_date=1"));
 		return $Nearing['total'];
 	}
 	function Count_NotAssigned_Machines_Status()
 	{
-		$Nearing = mysql_fetch_array(mysql_query("SELECT COUNT(DISTINCT(machine_id)) as total FROM (SELECT machine_assignment.machine_id, machine.machine_number, IF(CURDATE() BETWEEN DATE_SUB(job.tentative_enddate, INTERVAL 10 DAY) AND job.tentative_enddate , 1, 0) AS 10tentative_date FROM location LEFT JOIN location_reference ON location_reference.id = location.location_reference_id LEFT JOIN machine_assignment ON location.id = machine_assignment.location_id LEFT JOIN machine ON machine.id = machine_assignment.machine_id LEFT JOIN machine_type ON machine_type.id = machine.machine_type_id LEFT JOIN job ON job.machine_id = machine.id LEFT JOIN `order` ON `order`.id = job.order_id LEFT JOIN customer ON customer.id = `order`.customer_id LEFT JOIN product ON product.id = job.product_id) as newtable WHERE newtable.10tentative_date=1"));
+		$Nearing = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT COUNT(DISTINCT(machine_id)) as total FROM (SELECT machine_assignment.machine_id, machine.machine_number, IF(CURDATE() BETWEEN DATE_SUB(job.tentative_enddate, INTERVAL 10 DAY) AND job.tentative_enddate , 1, 0) AS 10tentative_date FROM location LEFT JOIN location_reference ON location_reference.id = location.location_reference_id LEFT JOIN machine_assignment ON location.id = machine_assignment.location_id LEFT JOIN machine ON machine.id = machine_assignment.machine_id LEFT JOIN machine_type ON machine_type.id = machine.machine_type_id LEFT JOIN job ON job.machine_id = machine.id LEFT JOIN `order` ON `order`.id = job.order_id LEFT JOIN customer ON customer.id = `order`.customer_id LEFT JOIN product ON product.id = job.product_id) as newtable WHERE newtable.10tentative_date=1"));
 		return $Nearing['total'];
 	}
 	function Machines_Select_NotAllocated()
 	{
-		return mysql_query("SELECT machine.id, machine.machine_number FROM machine WHERE machine.id NOT IN (SELECT machine_assignment.machine_id FROM machine_assignment)");
+		return mysqli_query($_SESSION['connection'],"SELECT machine.id, machine.machine_number FROM machine WHERE machine.id NOT IN (SELECT machine_assignment.machine_id FROM machine_assignment)");
 	}
 	function Masters_Assign_Machines()
 	{
-		$LocationId = mysql_fetch_array(mysql_query("SELECT id FROM location WHERE section_id='".$_GET['section_id']."' && subsection_id='".$_GET['subsection_id']."' && location_reference_id='".$_GET['location_reference_id']."'"));
+		$LocationId = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT id FROM location WHERE section_id='".$_GET['section_id']."' && subsection_id='".$_GET['subsection_id']."' && location_reference_id='".$_GET['location_reference_id']."'"));
 		if($_GET['action'] == "assign")
 		{
-			mysql_query("INSERT INTO machine_assignment VALUES('', '".$_GET['machine_id']."', '".$LocationId['id']."')");
+			mysqli_query($_SESSION['connection'],"INSERT INTO machine_assignment VALUES('', '".$_GET['machine_id']."', '".$LocationId['id']."')");
 			echo "Machine successfully assigned";
 		}
 		else
 		{
-			mysql_query("DELETE FROM machine_assignment WHERE location_id='".$LocationId['id']."'");
+			mysqli_query($_SESSION['connection'],"DELETE FROM machine_assignment WHERE location_id='".$LocationId['id']."'");
 			echo "Machine successfully removed";
 		}
 	}
 	function Select_All_Sections()
 	{
-		return mysql_query("SELECT * from section");
+		return mysqli_query($_SESSION['connection'],"SELECT * from section");
 	}
 	function Select_All_SubSections()
 	{
-		return mysql_query("SELECT * FROM subsection");
+		return mysqli_query($_SESSION['connection'],"SELECT * FROM subsection");
 	}
 	function Master_Select_Section_ById()
 	{
-		return mysql_query("SELECT id,name FROM section order by name asc");
+		return mysqli_query($_SESSION['connection'],"SELECT id,name FROM section order by name asc");
 	}
 	function Master_Select_All_Customers()
 	{
 		if($_GET['id'])
 		{
-			return mysql_query("SELECT DISTINCT(customer.id), customer.name
+			return mysqli_query($_SESSION['connection'],"SELECT DISTINCT(customer.id), customer.name
 			FROM `order` JOIN job ON order.id = job.order_id
 			JOIN customer ON order.customer_id = customer.id
 			JOIN product ON product.id = job.product_id
@@ -189,7 +189,7 @@
 		}
 		else
 		{
-			return mysql_query("SELECT DISTINCT(customer.id), customer.name
+			return mysqli_query($_SESSION['connection'],"SELECT DISTINCT(customer.id), customer.name
 			FROM `order` JOIN job ON order.id = job.order_id
 			JOIN customer ON order.customer_id = customer.id
 			JOIN product ON product.id = job.product_id
@@ -198,7 +198,7 @@
 			JOIN location ON location.id=machine_assignment.location_id
 			LEFT JOIN section ON section.id=location.section_id");
 		}
-		/*return mysql_query("SELECT DISTINCT(customer.id), customer.name FROM customer
+		/*return mysqli_query($_SESSION['connection'],"SELECT DISTINCT(customer.id), customer.name FROM customer
 		JOIN `order` ON customer.id = `order`.customer_id
 		JOIN job ON `order`.id = job.order_id
 		JOIN machine ON job.machine_id = machine.id
@@ -208,21 +208,21 @@
 	}
 	function Master_Select_Order_ById()
 	{
-		return mysql_query("SELECT id,number FROM `order` WHERE customer_id=".$_GET['id']);
+		return mysqli_query($_SESSION['connection'],"SELECT id,number FROM `order` WHERE customer_id=".$_GET['id']);
 	}
 	function Master_Select_DrawingNo_ById()
 	{
-		return mysql_query("SELECT id,drawing_number FROM product WHERE id IN(SELECT product_id FROM job WHERE order_id='".$_GET['id']."')");
+		return mysqli_query($_SESSION['connection'],"SELECT id,drawing_number FROM product WHERE id IN(SELECT product_id FROM job WHERE order_id='".$_GET['id']."')");
 	}
 	function Master_Select_Description_ById()
 	{
-		return mysql_query("SELECT id,description FROM product WHERE id IN(SELECT product_id FROM job WHERE order_id='".$_GET['id']."')");
+		return mysqli_query($_SESSION['connection'],"SELECT id,description FROM product WHERE id IN(SELECT product_id FROM job WHERE order_id='".$_GET['id']."')");
 	}
 	
 	//Report
 	function Machine_Status_Report()
 	{
-		return mysql_query("SELECT * FROM
+		return mysqli_query($_SESSION['connection'],"SELECT * FROM
 		(
 			SELECT * FROM
 			(
@@ -263,7 +263,7 @@
 	}
 	function Machine_Status_Dropdown()
 	{
-		return mysql_query("select machine_make.id as make_id,machine_make.name,
+		return mysqli_query($_SESSION['connection'],"select machine_make.id as make_id,machine_make.name,
 		machine_specification.id as specid,machine_specification.specification,
 		machine_turningtools.id as toolid,machine_turningtools.turningtool,
 		machine_type.id as typeid,machine_type.type 
@@ -280,34 +280,34 @@
 	}
 	function Machine_Make()
 	{
-		return mysql_query("SELECT id,name from machine_make");
+		return mysqli_query($_SESSION['connection'],"SELECT id,name from machine_make");
 	}
 	function Machine_Type()
 	{
-		return mysql_query("SELECT id,type from machine_type");
+		return mysqli_query($_SESSION['connection'],"SELECT id,type from machine_type");
 	}
 	function Machine_Turningtools()
 	{
-		return mysql_query("SELECT id,turningtool from machine_turningtools");
+		return mysqli_query($_SESSION['connection'],"SELECT id,turningtool from machine_turningtools");
 	}
 	function Machine_Specification()
 	{
-		return mysql_query("SELECT id,specification from machine_specification");
+		return mysqli_query($_SESSION['connection'],"SELECT id,specification from machine_specification");
 	}
 	function Machine_Dropdownvalues_Make()
 	{
-		return mysql_query("Select distinct machine_make.id,machine_make.name from machine join machine_make on machine_make.id=machine.machine_make_id");
+		return mysqli_query($_SESSION['connection'],"Select distinct machine_make.id,machine_make.name from machine join machine_make on machine_make.id=machine.machine_make_id");
 	}
 	function Machine_Dropdownvalues_Type()
 	{
-		return mysql_query("Select distinct machine_type.id,machine_type.type from machine join machine_type on machine_type.id=machine.machine_type_id");
+		return mysqli_query($_SESSION['connection'],"Select distinct machine_type.id,machine_type.type from machine join machine_type on machine_type.id=machine.machine_type_id");
 	}
 	function Machine_Dropdownvalues_Specification()
 	{
-		return mysql_query("Select distinct machine_specification.id,machine_specification.specification from machine join machine_specification on machine_specification.id=machine.machine_specification_id");
+		return mysqli_query($_SESSION['connection'],"Select distinct machine_specification.id,machine_specification.specification from machine join machine_specification on machine_specification.id=machine.machine_specification_id");
 	}
 	function Machine_Dropdownvalues_Turningtool()
 	{
-		return mysql_query("Select distinct machine_turningtools.id,machine_turningtools.turningtool from machine join machine_turningtools on machine_turningtools.id=machine.machine_turningtools_id");
+		return mysqli_query($_SESSION['connection'],"Select distinct machine_turningtools.id,machine_turningtools.turningtool from machine join machine_turningtools on machine_turningtools.id=machine.machine_turningtools_id");
 	}
 ?>

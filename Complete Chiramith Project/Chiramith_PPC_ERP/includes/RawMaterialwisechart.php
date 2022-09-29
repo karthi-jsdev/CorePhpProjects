@@ -7,7 +7,7 @@
  $labels = array();
  $Raw_Material_Machine = Raw_Material_Machineallocation();
  #$Raw_Material_Machine = Raw_Material_Product();
- while($Raw_Material_Machine_Allocation = mysql_fetch_array($Raw_Material_Machine))
+ while($Raw_Material_Machine_Allocation = mysqli_fetch_array($Raw_Material_Machine))
  {
 	$data[] = $Raw_Material_Machine_Allocation['totalcount'];
 	$labels[] = $Raw_Material_Machine_Allocation['material_type'];

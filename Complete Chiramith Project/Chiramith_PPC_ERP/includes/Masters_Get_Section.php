@@ -8,7 +8,7 @@ include("Masters_Queries.php");
 		<option value=''>Select</option>
 		<?php
 		$SelectSection = Master_Section();
-		while($FetchSection = mysql_fetch_array($SelectSection))
+		while($FetchSection = mysqli_fetch_array($SelectSection))
 		{
 			if($FetchSection['id'] == $_POST['section_id'])
 				echo '<option value="'.$FetchSection['id'].'" selected>Section '.$FetchSection['name'].'</option>';

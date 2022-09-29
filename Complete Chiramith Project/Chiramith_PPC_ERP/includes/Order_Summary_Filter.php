@@ -8,13 +8,13 @@ if(!$_GET['Initial'])
 	<h3>Order Summary
 		<?php
 		if($_GET['number'] && $_GET['name'])
-			$TotalOrder = mysql_fetch_assoc(Count_All_Order_ByNameandNumber());
+			$TotalOrder = mysqli_fetch_assoc(Count_All_Order_ByNameandNumber());
 		else if($_GET['number'])
-			$TotalOrder = mysql_fetch_assoc(Count_All_Order_ByNumber());
+			$TotalOrder = mysqli_fetch_assoc(Count_All_Order_ByNumber());
 		else if($_GET['name'])	
-			$TotalOrder = mysql_fetch_assoc(Count_All_Order_ByName());
+			$TotalOrder = mysqli_fetch_assoc(Count_All_Order_ByName());
 		else
-			$TotalOrder = mysql_fetch_assoc(Count_All_Order_ById());
+			$TotalOrder = mysqli_fetch_assoc(Count_All_Order_ById());
 		echo "Total Orders: ".$TotalOrder['total'];
 		?>
 	</h3>
@@ -37,11 +37,11 @@ if(!$_GET['Initial'])
 			$i = $Start = ($_GET['pageno']-1)*$Limit;
 			$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 			$orders = Select_All_Order_ByLimit($Start, $Limit);
-			while($order = mysql_fetch_assoc($orders))
+			while($order = mysqli_fetch_assoc($orders))
 			{
-				$TotalNoJobs = mysql_fetch_array(TOtalJobInOrder($order['number']));
-				$customers = mysql_fetch_array(Select_Customers($order['customer_id']));
-				$Product = mysql_fetch_array(Select_Products($order['product_id']));
+				$TotalNoJobs = mysqli_fetch_array(TOtalJobInOrder($order['number']));
+				$customers = mysqli_fetch_array(Select_Customers($order['customer_id']));
+				$Product = mysqli_fetch_array(Select_Products($order['product_id']));
 				echo "<tr id='".$order['id']."' style='valign:middle;'>
 					<td align='center'>".++$i."</td>
 					<td><a href='?page=Order&subpage=Job Status&number=".$order['number']."'>".$order['number']."</a></td>
@@ -54,7 +54,7 @@ if(!$_GET['Initial'])
 						<td>".date("d-m-Y", strtotime($TotalNoJobs['maxdate']))."</td>";
 				echo "</tr>";
 			}
-			if(mysql_num_rows($orders) == 0)
+			if(mysqli_num_rows($orders) == 0)
 				echo '<tr><td colspan="7"><font color="red"><center>No data found</center></font></td></tr>';
 			?>
 		</tbody>

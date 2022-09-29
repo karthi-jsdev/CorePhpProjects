@@ -7,7 +7,7 @@ include("Machine_Status_Queries.php");
 	<option value=''>Select</option>
 	<?php
 	$Machines = Machines_Select_NotAllocated();
-	while($Machine = mysql_fetch_array($Machines))
+	while($Machine = mysqli_fetch_array($Machines))
 		echo '<option value="'.$Machine['id'].'">'.$Machine['machine_number'].'</option>';
 	?>
 </select>

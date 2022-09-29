@@ -8,9 +8,9 @@
 				$message = "<br /><div class='message error'><b>Message</b> : Invalid phone number</div>";
 			else
 			{
-				if(mysql_num_rows(User_Select_ByNamePWD()))
+				if(mysqli_num_rows(User_Select_ByNamePWD()))
 				{
-					if(mysql_num_rows(User_Select_ByNamePWDId()))
+					if(mysqli_num_rows(User_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This username and password already exists.</div>";
 					else
 					{
@@ -22,7 +22,7 @@
 					$message = "<br /><div class='message error'><b>Message</b> : This Current-Password is Incorrect</div>";
 			}
 		}
-		$User = mysql_fetch_assoc(User_Select_ById());
+		$User = mysqli_fetch_assoc(User_Select_ById());
 	?>
 	<div class="columns">
 		<?php echo $message; ?>
@@ -64,7 +64,7 @@
 					<div class="clearfix">
 						<label>User Role</label>
 						<?php
-							$rolename = mysql_fetch_array(User_Role($User['userrole_id']));
+							$rolename = mysqli_fetch_array(User_Role($User['userrole_id']));
 							echo  $rolename['role']; 
 						?>
 					</div>

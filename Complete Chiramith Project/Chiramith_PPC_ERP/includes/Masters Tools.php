@@ -3,7 +3,7 @@
 		$Columns = array("id", "turningtool", "turningtoolid");
 		if($_GET['action'] == 'Edit')
 		{
-			$TurningTools = mysql_fetch_assoc(TurningTools_Select_ById());
+			$TurningTools = mysqli_fetch_assoc(TurningTools_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $TurningTools[$Col];
 		}
@@ -18,11 +18,11 @@
 				$TurningToolsResource = TurningTools_Select_ByName();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($TurningToolsResource))
+					if(mysqli_num_rows($TurningToolsResource))
 						$message = "<br /><div class='message error'><b>Message</b> : This Tool already exists</div>";
 					else
 					{
-						$TurningToolsNo = mysql_fetch_assoc(Machine_Get_LastId_Turningtool());
+						$TurningToolsNo = mysqli_fetch_assoc(Machine_Get_LastId_Turningtool());
 						$TurnigtoolsNo = substr($TurningToolsNo[turningtool_id],2);
 						$Zeros = array("", "0", "00");
 						$TurningToolsNos ="TT".$Zeros[3 - strlen($TurnigtoolsNo+1)].($TurnigtoolsNo+1);
@@ -32,8 +32,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$TurningTools = mysql_fetch_assoc($TurningToolsResource);
-					if(mysql_num_rows(User_Select_ByNamePWDId()))
+					$TurningTools = mysqli_fetch_assoc($TurningToolsResource);
+					if(mysqli_num_rows(User_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Tool already exists</div>";
 					else
 					{
@@ -74,7 +74,7 @@
 		<div class="grid_6 first">
 			<h3>Make List
 				<?php
-				$TurningTools_TotalRows = mysql_fetch_assoc(TurningTools_Select_Count_All());
+				$TurningTools_TotalRows = mysqli_fetch_assoc(TurningTools_Select_Count_All());
 				echo " : No. of total Tools - ".$TurningTools_TotalRows['total'];
 				?>
 			</h3>
@@ -104,7 +104,7 @@
 						$i = $TurningTools_TotalRows['total'];
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$TurningToolsRows = TurningTools_Select_ByLimit($Start, $Limit);
-					while($TurningTools = mysql_fetch_assoc($TurningToolsRows))
+					while($TurningTools = mysqli_fetch_assoc($TurningToolsRows))
 					{
 						echo "<tr>
 							<td align='center'>".$i--."</td>

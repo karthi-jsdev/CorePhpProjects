@@ -3,7 +3,7 @@
 		$Columns = array("id", "typeid", "type");
 		if($_GET['action'] == 'Edit')
 		{
-			$Types = mysql_fetch_assoc(MachineType_Select_ById());
+			$Types = mysqli_fetch_assoc(MachineType_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Types[$Col];
 		}
@@ -18,11 +18,11 @@
 			$MachineTypeResource = MachineType_Select_ByName();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($MachineTypeResource))
+				if(mysqli_num_rows($MachineTypeResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Machine type already exists</div>";
 				else
 				{
-					$MachineNo = mysql_fetch_assoc(Machine_Get_LastId_Type());
+					$MachineNo = mysqli_fetch_assoc(Machine_Get_LastId_Type());
 					$TypeNo = substr($MachineNo['typeid'],1);
 					$Zeros = array("", "0", "00");
 					$MachineNos ="T".$Zeros[3 - strlen($TypeNo+1)].($TypeNo+1);
@@ -32,8 +32,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$MachineType = mysql_fetch_assoc($MachineTypeResource);
-				if(mysql_num_rows(User_Select_ByNamePWDId()))
+				$MachineType = mysqli_fetch_assoc($MachineTypeResource);
+				if(mysqli_num_rows(User_Select_ByNamePWDId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Machine type already exists</div>";
 				else
 				{
@@ -74,7 +74,7 @@
 		<div class="grid_6 first">
 			<h3>Type List
 				<?php
-				$MachineType_TotalRows = mysql_fetch_assoc(MachineType_Select_Count_All());
+				$MachineType_TotalRows = mysqli_fetch_assoc(MachineType_Select_Count_All());
 				echo " : No. of total Types - ".$MachineType_TotalRows['total'];
 				?>
 			</h3>
@@ -104,7 +104,7 @@
 						$i = $MachineType_TotalRows['total'];
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$MachineTypeRows = MachineType_Select_ByLimit($Start, $Limit);
-					while($MachineType = mysql_fetch_assoc($MachineTypeRows))
+					while($MachineType = mysqli_fetch_assoc($MachineTypeRows))
 					{
 						echo "<tr>
 							<td align='center'>".$i--."</td>";

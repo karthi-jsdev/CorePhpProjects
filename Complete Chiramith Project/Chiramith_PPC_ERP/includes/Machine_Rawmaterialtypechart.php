@@ -7,7 +7,7 @@
  $labels = array();
  $i =0 ;
  $Machine_Type = MachineType();
- while($Type = mysql_fetch_array($Machine_Type))
+ while($Type = mysqli_fetch_array($Machine_Type))
  {
 	$data0[] = $Type['totalcount'];
 	$labels[] = $Type['grade'];

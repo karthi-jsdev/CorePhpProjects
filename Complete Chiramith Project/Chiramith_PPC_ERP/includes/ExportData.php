@@ -31,12 +31,12 @@
 						</tr>
 					</thead>
 					<tbody>';
-				if(mysql_num_rows($product))
+				if(mysqli_num_rows($product))
 				{
-					while($product_limit = mysql_fetch_assoc($product))
+					while($product_limit = mysqli_fetch_assoc($product))
 					{
-						$MachineNum = mysql_fetch_array(Select_Machine($product_limit['id']));
-						$FetchMachine = mysql_fetch_array(Fetch_Machine($MachineNum['machine_id']));
+						$MachineNum = mysqli_fetch_array(Select_Machine($product_limit['id']));
+						$FetchMachine = mysqli_fetch_array(Fetch_Machine($MachineNum['machine_id']));
 						echo '<tr>
 								<td>'.$j++.'</td>
 								<td>'.$product_limit['description'].'</td>
@@ -75,12 +75,12 @@
 					</tr>
 				</thead>
 				<tbody>';
-			if(mysql_num_rows($product))
+			if(mysqli_num_rows($product))
 			{
-				while($product_limit = mysql_fetch_assoc($product))
+				while($product_limit = mysqli_fetch_assoc($product))
 				{
-					$MachineNum = mysql_fetch_array(Select_Machine($product_limit['id']));
-					$FetchMachine = mysql_fetch_array(Fetch_Machine($MachineNum['machine_id']));
+					$MachineNum = mysqli_fetch_array(Select_Machine($product_limit['id']));
+					$FetchMachine = mysqli_fetch_array(Fetch_Machine($MachineNum['machine_id']));
 					echo '<tr>
 							<td>'.$i++.'</td>
 							<td>'.$product_limit['description'].'</td>
@@ -115,7 +115,7 @@
 			<tbody>';
 		$FetchMachine = Select_MachineId();
 		$TotalMachine = $TotalRunning = $Total = 0;
-		while($FetchSections = mysql_fetch_array($FetchMachine))
+		while($FetchSections = mysqli_fetch_array($FetchMachine))
 		{
 			$MachineId = $FetchSections['MachineId'];
 			$TotalMachine += $MachineId;
@@ -123,7 +123,7 @@
 			$TotalRunning += $JobMachineId;
 			$TotalRunningAndAvailable = $MachineId+$JobMachineId;
 			$Total += $TotalRunningAndAvailable;
-			$FetchSections = mysql_fetch_array(Select_Sections($FetchSections['section_id']));
+			$FetchSections = mysqli_fetch_array(Select_Sections($FetchSections['section_id']));
 			echo '<tr>
 					<td>'.$i++.'</td>
 					<td>Section '.$FetchSections['name'].'</td>
@@ -152,14 +152,14 @@
 				$j = 1;
 			$FetchMachine = Select_Customer();
 			$TotalMachinesRunning = $TotalProductRunning = $Totals = 0;
-			while($FetchSections = mysql_fetch_array($FetchMachine))
+			while($FetchSections = mysqli_fetch_array($FetchMachine))
 			{
 				$MachineId = $FetchSections['MachineId'];
 				$TotalMachinesRunning += $MachineId;
 				$JobMachineId = $FetchSections['ProductId'];
 				$TotalProductRunning += $JobMachineId;
 				$Totals += $JobMachineId+$MachineId;
-				$FetchCustomer = mysql_fetch_array(Select_CustomersName($FetchSections['id']));
+				$FetchCustomer = mysqli_fetch_array(Select_CustomersName($FetchSections['id']));
 				echo '<tr>
 						<td>'.$j++.'</td>
 						<td>'.$FetchCustomer['name'].'</td>

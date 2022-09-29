@@ -13,7 +13,7 @@
 </head>
 <?php
 if($_GET['id'] && $_GET['action']=='Edit')	
-	$Editing_Job = mysql_fetch_array(JobEdit_Selected($_GET['id'],$_GET['jobid']));
+	$Editing_Job = mysqli_fetch_array(JobEdit_Selected($_GET['id'],$_GET['jobid']));
 if($_POST['update'])
 	Job_All_Update_ById($_GET['jobid']);
 if($_GET['action']=='Edit' && !isset($_POST['update']))
@@ -32,7 +32,7 @@ if($_GET['action']=='Edit' && !isset($_POST['update']))
 								<option value="">Select</option>
 								<?php
 								$Customers = Customers_Select_All();
-								while($Customer = mysql_fetch_assoc($Customers))
+								while($Customer = mysqli_fetch_assoc($Customers))
 								{
 									if($Customer['id'] == $Editing_Job['customer_id'])
 										echo "<option value=".$Customer['id']." selected>".$Customer['name']."</option>";
@@ -49,7 +49,7 @@ if($_GET['action']=='Edit' && !isset($_POST['update']))
 									<option value="">Select</option>
 									<?php
 									$Products = Products_Select_All();
-									while($Product = mysql_fetch_assoc($Products))
+									while($Product = mysqli_fetch_assoc($Products))
 									{
 										if($Product['id'] == $Editing_Job['product_id'])
 											echo "<option value=".$Product['id']." selected>".$Product['drawing_number']."</option>";
@@ -75,7 +75,7 @@ if($_GET['action']=='Edit' && !isset($_POST['update']))
 									<?php
 									$SelectedMachineId = "";
 									$Machines = Machines_Select_All();
-									while($Machine = mysql_fetch_assoc($Machines))
+									while($Machine = mysqli_fetch_assoc($Machines))
 									{
 										if($Machine['id'] == $Editing_Job['machine_id'])
 										{
@@ -114,7 +114,7 @@ if($_GET['action']=='Edit' && !isset($_POST['update']))
 											<?php
 											if($_GET['jobid'])
 											{
-												$NextJob = mysql_fetch_array(mysql_query("SELECT product.drawing_number, job.tentative_date, `order`.number FROM job
+												$NextJob = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT product.drawing_number, job.tentative_date, `order`.number FROM job
 												JOIN product ON product.id=job.product_id
 												JOIN `order` ON `order`.id=job.order_id
 												WHERE job.machine_id=".$SelectedMachineId." && job.id!=".$_GET['jobid']." && tentative_date>".$Editing_Job['tentative_enddate']." ORDER BY job.id LIMIT 1"));
@@ -156,7 +156,7 @@ if($_GET['action']=='Delete')
 <div class="columns" style="width:950px;">
 	<h3>
 		<?php
-		$TotalOrder = mysql_fetch_assoc(Count_All_Joborder_ById());
+		$TotalOrder = mysqli_fetch_assoc(Count_All_Joborder_ById());
 		echo "Order Code : ".$_GET['number'].", Total Jobs : ".$TotalOrder['total'];
 		?>
 	</h3><hr />
@@ -196,7 +196,7 @@ if($_GET['action']=='Delete')
 				$i = $Start = ($_GET['pageno']-1)*$Limit;
 				$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 				$Joborder = Select_Joborder_ByLimit($Start, $Limit);
-				while($Joborders = mysql_fetch_assoc($Joborder))
+				while($Joborders = mysqli_fetch_assoc($Joborder))
 				{
 					echo "<tr style='valign:middle;'>
 						<td align='center'>".++$i."</td>
@@ -215,7 +215,7 @@ if($_GET['action']=='Delete')
 						<td><input type='checkbox' id='CH".$i."' name='deleterecords' class='deleterecords' value='".$Joborders['id']."' onclick=\"checkUncheckParent(CH".$i.");\"</input></td>
 					</tr>";
 				}
-				echo "<script>var initial = ".$i.", count=".mysql_num_rows($Joborder).";</script>";
+				echo "<script>var initial = ".$i.", count=".mysqli_num_rows($Joborder).";</script>";
 				?>
 			</form>
 		</tbody>

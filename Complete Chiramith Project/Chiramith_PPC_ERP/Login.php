@@ -9,20 +9,20 @@
 		header("Location:index.php");
 	else if(isset($_POST["posting"]))
 	{
-		$_POST["name"] = mysql_real_escape_string($_POST["name"]); //$var2=md5($_POST["password"]);
-		$_POST["password"] = mysql_real_escape_string($_POST["password"]);
+		$_POST["name"] = mysqli_real_escape_string($_SESSION['connection'],$_POST["name"]); //$var2=md5($_POST["password"]);
+		$_POST["password"] = mysqli_real_escape_string($_SESSION['connection'],$_POST["password"]);
 		$User_Data = User_Login();
-		if($User = mysql_fetch_assoc($User_Data))
+		if($User = mysqli_fetch_assoc($User_Data))
 		{
 			$_SESSION['logindatetime'] = date("Y-m-d H:i:s");
-			mysql_query("INSERT into userhistory VALUES('', '".$User['id']."','".$_SESSION['logindatetime']."','".$_SESSION['logindatetime']."','')");
-			$lastlogin = mysql_fetch_array(mysql_query("SELECT logintime FROM userhistory ORDER BY id DESC LIMIT 1,1"));
+			mysqli_query($_SESSION['connection'],"INSERT into userhistory VALUES('', '".$User['id']."','".$_SESSION['logindatetime']."','".$_SESSION['logindatetime']."','')");
+			$lastlogin = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT logintime FROM userhistory ORDER BY id DESC LIMIT 1,1"));
 			$_SESSION['lastlogin'] = substr($lastlogin['logintime'], 0, 16);
 			$_SESSION['id'] = $User['id'];
 			$_SESSION['name'] = $User['name'];
 			$_SESSION['phone'] = $User['phone'];
 			$_SESSION['roleid'] = $User['userrole_id'];
-			$UserRole = mysql_fetch_assoc(User_Role($User['userrole_id']));
+			$UserRole = mysqli_fetch_assoc(User_Role($User['userrole_id']));
 			$_SESSION['role'] = $UserRole['role'];
 			header("Location:index.php");
 		}

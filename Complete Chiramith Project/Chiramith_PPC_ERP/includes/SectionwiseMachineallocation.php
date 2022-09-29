@@ -9,7 +9,7 @@
 	$data2 = array();
 	/*$FetchMachine = Select_MachineId();
 	$TotalMachine = $TotalRunning = $Total = 0;
-	while($FetchSections = mysql_fetch_array($FetchMachine))
+	while($FetchSections = mysqli_fetch_array($FetchMachine))
 	{
 		$MachineId = $FetchSections['MachineId'];
 		$TotalMachine += $MachineId;
@@ -17,17 +17,17 @@
 		$TotalRunning += $JobMachineId;
 		$TotalRunningAndAvailable = $MachineId+$JobMachineId;
 		$Total += $TotalRunningAndAvailable;
-		$FetchSections = mysql_fetch_array(Select_Sections($FetchSections['section_id']));
+		$FetchSections = mysqli_fetch_array(Select_Sections($FetchSections['section_id']));
 		$labels[] = "Section ".$FetchSections['name'];
 		$data2[] = $JobMachineId;
 		$data1[] = ($MachineId-$JobMachineId);
 		$data0[] = $MachineId;
 	}*/
 	$SectionMachineAllocation = SectionWiseMachineAllocation();
-	while($SectionAllocation = mysql_fetch_array($SectionMachineAllocation))
+	while($SectionAllocation = mysqli_fetch_array($SectionMachineAllocation))
 	{
 		
-		$Sections = mysql_fetch_array(Section_Name($SectionAllocation['section_id']));
+		$Sections = mysqli_fetch_array(Section_Name($SectionAllocation['section_id']));
 		$AvailableMachines = $SectionAllocation['MachineId'] - $SectionAllocation['JobMachineId'];
 		$labels[] = "Section ".$Sections['name'];
 		$data0[] = $SectionAllocation['MachineId'];

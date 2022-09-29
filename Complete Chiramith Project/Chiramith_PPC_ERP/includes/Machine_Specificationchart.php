@@ -7,7 +7,7 @@
  $labels = array();
  $i =0 ;
  $Machine_Specification = MachineSpecification();
- while($Specification = mysql_fetch_array($Machine_Specification))
+ while($Specification = mysqli_fetch_array($Machine_Specification))
  {
 	$data0[] = $Specification['specificationid'];
 	$labels[] = $Specification['specification'];

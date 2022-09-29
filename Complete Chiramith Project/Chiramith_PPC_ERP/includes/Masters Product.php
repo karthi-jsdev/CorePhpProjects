@@ -3,11 +3,11 @@
 	$database_columns=array("id","drawing_number","description","material_type","material_size","grade","numberofpieces","outputperhour","image");
 	if($_GET['action']=='Edit')
 	{
-		$product = mysql_fetch_assoc(Product_Select_ById());
+		$product = mysqli_fetch_assoc(Product_Select_ById());
 		foreach($database_columns as $prod)
 			$_POST[$prod] = $product[$prod];
 		$query = Product_Select_ById();
-		while($row = mysql_fetch_assoc($query))
+		while($row = mysqli_fetch_assoc($query))
 			$file = $row['image'];
 	}
 	
@@ -32,7 +32,7 @@
 			}
 			if(isset($_POST['submit']))
 			{
-				if(mysql_num_rows(Product_Select_ByNo())>0)
+				if(mysqli_num_rows(Product_Select_ByNo())>0)
 					$message = "<br /><div class='message error'><b>Message</b> : This Product already exists</div>";
 				//else if (!in_array($extension, $allowedExts))
 					//$message = "<br /><div class='message error'><b>Message</b> : Invalid Image Type</div>";
@@ -129,7 +129,7 @@
 		<h3>
 			<?php
 			$Total_Products = Product_Select();
-			echo 'Total No. of Products - '.mysql_num_rows($Total_Products);
+			echo 'Total No. of Products - '.mysqli_num_rows($Total_Products);
 			?>
 		</h3><hr/>
 		<table border="1px solid black" class="paginate sortable full"> 
@@ -151,7 +151,7 @@
 				if(!$_GET['Search'])
 				{
 					$i=1;
-					$total = mysql_fetch_assoc(Product_Select_Count()); 
+					$total = mysqli_fetch_assoc(Product_Select_Count()); 
 					$Limit = 10;
 					$total_pages = ceil($total['total']/$Limit);
 					if(!$_GET['pageno'])
@@ -163,11 +163,11 @@
 						$i = $total['total'];
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$Total_Product = Product_Select_ByLimit($Start, $Limit);
-					if(mysql_num_rows($Total_Products)==0)
+					if(mysqli_num_rows($Total_Products)==0)
 						echo '<tr><td colspan="10" style="color:red;"><center>No Data found</center></td></tr>';
 					else
 					{
-						while($products = mysql_fetch_assoc($Total_Product))
+						while($products = mysqli_fetch_assoc($Total_Product))
 						{
 							echo'<tr> 
 									<td>'.$i--.'</td>
@@ -186,7 +186,7 @@
 				else
 				{
 					$i=1;
-					$total = mysql_fetch_assoc(Product_Select_Count_Search($_GET['Search'])); 
+					$total = mysqli_fetch_assoc(Product_Select_Count_Search($_GET['Search'])); 
 					echo "<h4>Total Number Of Searched Products-".$total['total']."</h4>";
 					$Limit = 10;
 					$total_pages = ceil($total['total']/$Limit);
@@ -199,11 +199,11 @@
 						$i = $total['total'];
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$Total_Product = Product_Select_ByLimit_Search($Start, $Limit,$_GET['Search']);
-					if(mysql_num_rows($Total_Products)==0)
+					if(mysqli_num_rows($Total_Products)==0)
 						echo '<tr><td colspan="10" style="color:red;"><center>No Data found</center></td></tr>';
 					else
 					{
-						while($products = mysql_fetch_assoc($Total_Product))
+						while($products = mysqli_fetch_assoc($Total_Product))
 						{
 							echo'<tr> 
 									<td>'.$i--.'</td>

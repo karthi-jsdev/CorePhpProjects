@@ -78,7 +78,7 @@ console.log("(plannedquantity/(product_output_perhour*productionhours))+settingd
 								<option value="">Select</option>
 								<?php
 								$Customers = Customers_Select_All();
-								while($Customer = mysql_fetch_assoc($Customers))
+								while($Customer = mysqli_fetch_assoc($Customers))
 									echo "<option value='".$Customer['id'].".".$Customer['name']."'>".$Customer['name']."</option>";
 								?>
 							</select>
@@ -94,7 +94,7 @@ console.log("(plannedquantity/(product_output_perhour*productionhours))+settingd
 								<option value="$$">Select</option>
 								<?php
 								$Products = Products_Select_All();
-								while($Product = mysql_fetch_assoc($Products))
+								while($Product = mysqli_fetch_assoc($Products))
 									echo "<option value='".$Product['id']."$".$Product['drawing_number']."$".$Product['outputperhour']."'>".$Product['drawing_number']."</option>";
 								?>
 							</select>

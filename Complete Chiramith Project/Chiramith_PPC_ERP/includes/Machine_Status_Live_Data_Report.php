@@ -13,7 +13,7 @@ $machine_makee = Machine_Dropdownvalues_Make();
 $machine_turnings = Machine_Dropdownvalues_Turningtool();
 $machine_specification = Machine_Dropdownvalues_Specification();
 $machine_types = Machine_Dropdownvalues_Type();
-while($machine_report = mysql_fetch_array($machinereport))
+while($machine_report = mysqli_fetch_array($machinereport))
 {
 	if($machine_report['make_id'] && !in_array($machine_report['make_id'], $report_data[1]))
 	{
@@ -61,7 +61,7 @@ while($machine_report = mysql_fetch_array($machinereport))
 						<option value="">All</option>
 						<?php
 						if($_GET['machinemake'] && !$_GET['machinespecification'] && !$_GET['machineturningtools'] && !$_GET['machinetype'])
-							while($allmachinemake = mysql_fetch_assoc($machine_makee))
+							while($allmachinemake = mysqli_fetch_assoc($machine_makee))
 							{
 								if($_GET['machinemake'] == $allmachinemake['id'])
 									echo'<option value="'.$allmachinemake['id'].'" selected>'.$allmachinemake['name'].'</option>';
@@ -79,7 +79,7 @@ while($machine_report = mysql_fetch_array($machinereport))
 						<option value="">All</option>
 						<?php
 						if($_GET['machinespecification'] && !$_GET['machinemake']&& !$_GET['machineturningtools'] && !$_GET['machinetype'])
-						while($machine_specifications = mysql_fetch_assoc($machine_specification))
+						while($machine_specifications = mysqli_fetch_assoc($machine_specification))
 						{
 							if($_GET['machinespecification'] == $machine_specifications['id'])
 								echo'<option value="'.$machine_specifications['id'].'" selected>'.$machine_specifications['specification'].'</option>';
@@ -97,7 +97,7 @@ while($machine_report = mysql_fetch_array($machinereport))
 						<option value="">All</option>
 						<?php
 						if($_GET['machineturningtools'] && !$_GET['machinemake']&& !$_GET['machinespecification'] && !$_GET['machinetype'])
-							while($allmachinturn = mysql_fetch_assoc($machine_turnings))
+							while($allmachinturn = mysqli_fetch_assoc($machine_turnings))
 							{
 								if($_GET['machineturningtools'] == $allmachinturn['id'])
 									echo'<option value="'.$allmachinturn['id'].'" selected>'.$allmachinturn['turningtool'].'</option>';
@@ -115,7 +115,7 @@ while($machine_report = mysql_fetch_array($machinereport))
 						<option value="">All</option>
 						<?php 
 						if($_GET['machinetype'] && !$_GET['machinemake'] && !$_GET['machinespecification'] && !$_GET['machineturningtools'])
-							while($mach_type = mysql_fetch_assoc($machine_types))
+							while($mach_type = mysqli_fetch_assoc($machine_types))
 							{
 								if($_GET['machinetype'] == $mach_type['id'])
 									echo'<option value="'.$mach_type['id'].'" selected>'.$mach_type['type'].'</option>';
@@ -133,7 +133,7 @@ while($machine_report = mysql_fetch_array($machinereport))
 						<option value="">All</option>
 						<?php
 						$Sections = Select_Sections();
-						while($Section = mysql_fetch_array($Sections))
+						while($Section = mysqli_fetch_array($Sections))
 							echo "<option value='".$Section['id']."'>".$Section['name']."</option>";
 						?>
 					</select>
@@ -146,7 +146,7 @@ while($machine_report = mysql_fetch_array($machinereport))
 						<option value="">All</option>
 						<?php
 						$SubSections = Select_SubSections();
-						while($SubSection = mysql_fetch_array($SubSections))
+						while($SubSection = mysqli_fetch_array($SubSections))
 							echo "<option value='".$SubSection['id']."'>".$SubSection['name']."</option>";
 						?>
 					</select>

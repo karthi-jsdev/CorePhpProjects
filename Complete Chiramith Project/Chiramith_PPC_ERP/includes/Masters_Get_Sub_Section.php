@@ -8,9 +8,9 @@
 			<select id="subsection_id" name="subsection_id" onchange="LocationReference(this.value,'')">
 				<option value=''>Select</option>
 				<?php
-				$FetchSection = mysql_fetch_array(Select_SectionName($_GET['SectionId']));
+				$FetchSection = mysqli_fetch_array(Select_SectionName($_GET['SectionId']));
 				$SelectSubSection = Master_SubSectionBySectionId($_GET['SectionId']);
-				while($FetchSubSection = mysql_fetch_array($SelectSubSection))
+				while($FetchSubSection = mysqli_fetch_array($SelectSubSection))
 				{
 					if($FetchSubSection['id'] == $_GET['SubSectionId'])
 						echo '<option value="'.$FetchSubSection['id'].'" selected>Section '.$FetchSection['name'].''.$FetchSubSection['name'].'</option>';

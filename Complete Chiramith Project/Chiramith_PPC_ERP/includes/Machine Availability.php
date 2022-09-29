@@ -34,7 +34,7 @@
 			echo"<h3 align='center'><i style='background-color:gray'>Machine's Near Future</i></h3>";
 			$j=1;
 			$machine_nearfuture = Machine_Near_Future();
-			if(mysql_num_rows($machine_nearfuture)==0)
+			if(mysqli_num_rows($machine_nearfuture)==0)
 			{
 				echo '<table class="paginate soratble full">
 						<thead>
@@ -50,7 +50,7 @@
 						</thead>
 					<tr><td style="color:red;" colspan="7"><center><strong>Sorry!!!!Every machine has been unassigned</strong></center></td></tr>';
 			}
-			if(mysql_num_rows($machine_nearfuture)!=0)
+			if(mysqli_num_rows($machine_nearfuture)!=0)
 			{
 				echo '<table class="paginate soratble full">
 						<thead>
@@ -64,7 +64,7 @@
 								<th align="left" width="120px">Tentative Enddate</th>
 							</tr>
 						</thead>';
-				while($machine_unassigned = mysql_fetch_assoc($machine_nearfuture))
+				while($machine_unassigned = mysqli_fetch_assoc($machine_nearfuture))
 				{
 					echo'<tbody>
 							<tr>
@@ -96,7 +96,7 @@
 					</thead>
 					<?php
 					$i=1;
-					$machine_available = mysql_fetch_assoc(Machine_Availability_By_Count());
+					$machine_available = mysqli_fetch_assoc(Machine_Availability_By_Count());
 					$Limit = 20;
 					$total_pages = ceil($machine_available['total'] / $Limit);
 					if(!$_GET['pageno'])
@@ -105,11 +105,11 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$machine = Machine_Availability($Start,$Limit);
-					if(mysql_num_rows($machine)==0)
+					if(mysqli_num_rows($machine)==0)
 						echo'<tr><td style="color:red;" colspan="4"><center><strong>Sorry!!!!Every machine has been assigned</strong></center></td></tr>';
 					else
 					{
-						while($machineunassigned = mysql_fetch_assoc($machine))
+						while($machineunassigned = mysqli_fetch_assoc($machine))
 						{
 							echo'<tbody>
 									<tr>

@@ -16,7 +16,7 @@
 	$Columns = array("id", "order_id", "product_id","totalorderquantity", "plannedquantity", "machine_id", "productionhours","settingdays", "tentative_date");
 	if($_GET['action'] == 'Edit')
 	{
-		$Job = mysql_fetch_assoc(Job_Select_ById());
+		$Job = mysqli_fetch_assoc(Job_Select_ById());
 		foreach($Columns as $Col)
 			$_POST[$Col] = $Job[$Col];
 	}
@@ -55,7 +55,7 @@
 							<option value="">Select</option>
 							<?php
 							$ordernos = Orderno_Select_All();
-							while($orderno = mysql_fetch_assoc($ordernos))
+							while($orderno = mysqli_fetch_assoc($ordernos))
 							{
 								if($orderno['id'] == $_POST['order_id'])
 									echo "<option value='".$orderno['id']."' selected>".$orderno['number']."</option>";
@@ -70,7 +70,7 @@
 							<option value="">Select</option>
 							<?php
 							$Products = Products_Select_All();
-							while($Product = mysql_fetch_assoc($Products))
+							while($Product = mysqli_fetch_assoc($Products))
 							{
 								if($Product['id'] == $_POST['product_id'])
 									echo "<option value=".$Product['id']." selected>".$Product['drawing_number']."</option>";
@@ -98,7 +98,7 @@
 							<option value="">Select</option>
 							<?php
 							$Machines = Machines_Select_All();
-							while($Machine = mysql_fetch_assoc($Machines))
+							while($Machine = mysqli_fetch_assoc($Machines))
 							{
 								if($Machine['id'] == $_POST['machine_id'])
 									echo "<option value=".$Machine['id']." selected>".$Machine['machine_number']."</option>";
@@ -135,7 +135,7 @@
 		<div class="grid_6 first">
 			<h3>Job List
 				<?php
-				$JobTotalRows = mysql_fetch_assoc(Job_Select_Count_All());
+				$JobTotalRows = mysqli_fetch_assoc(Job_Select_Count_All());
 				echo " : No. of total Jobs - ".$JobTotalRows['total'];
 				?>
 			</h3>
@@ -171,12 +171,12 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$JobRows = Job_Select_ByLimit($Start, $Limit);
-					while($Job = mysql_fetch_assoc($JobRows))
+					while($Job = mysqli_fetch_assoc($JobRows))
 					{
-						$OrderName = mysql_fetch_assoc(Select_Order_ById($Job['order_id']));
-						$DrawingNumber = mysql_fetch_assoc(Select_DrawingNo_ById($Job['product_id']));
-						$CustomerName = mysql_fetch_assoc(Select_CustomerName_ById($OrderName['customer_id']));
-						$MachineName = mysql_fetch_assoc(Select_MachineName_ById($Job['machine_id']));
+						$OrderName = mysqli_fetch_assoc(Select_Order_ById($Job['order_id']));
+						$DrawingNumber = mysqli_fetch_assoc(Select_DrawingNo_ById($Job['product_id']));
+						$CustomerName = mysqli_fetch_assoc(Select_CustomerName_ById($OrderName['customer_id']));
+						$MachineName = mysqli_fetch_assoc(Select_MachineName_ById($Job['machine_id']));
 						echo "<tr>
 							<td align='center'>".$i++."</td>
 							<td>".$Job['createdate']."</td>

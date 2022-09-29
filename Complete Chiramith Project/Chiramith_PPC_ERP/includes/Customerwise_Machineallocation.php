@@ -6,7 +6,7 @@
  $data = array();
  $labels = array();
  $Customer_Machine = Customer_Machineallocation();
- while($Customer_Machine_Allocation = mysql_fetch_array($Customer_Machine))
+ while($Customer_Machine_Allocation = mysqli_fetch_array($Customer_Machine))
  {
 	$data[] = $Customer_Machine_Allocation['totalcount'];
 	$labels[] = $Customer_Machine_Allocation['name'];

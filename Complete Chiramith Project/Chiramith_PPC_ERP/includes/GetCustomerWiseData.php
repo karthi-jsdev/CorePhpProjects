@@ -21,14 +21,14 @@
 				//$j = ($Limit*($_GET['pageno']-1))+1;
 			$FetchMachine = Select_CustomerByLimit(0,$_GET['Limit']);
 			$TotalMachinesRunning = $TotalProductRunning = $Totals = 0;
-			while($FetchSections = mysql_fetch_array($FetchMachine))
+			while($FetchSections = mysqli_fetch_array($FetchMachine))
 			{
 				$MachineId = $FetchSections['MachineId'];
 				$TotalMachinesRunning += $MachineId;
 				$JobMachineId = $FetchSections['ProductId'];
 				$TotalProductRunning += $JobMachineId;
 				$Totals += $JobMachineId+$MachineId;
-				$FetchCustomer = mysql_fetch_array(Select_CustomersName($FetchSections['id']));
+				$FetchCustomer = mysqli_fetch_array(Select_CustomersName($FetchSections['id']));
 				echo '<tr>
 						<td>'.$j++.'</td>
 						<td>'.$FetchCustomer['name'].'</td>

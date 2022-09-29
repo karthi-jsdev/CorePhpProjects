@@ -3,7 +3,7 @@
 		$Columns = array("id", "machine_number", "machine_type_id", "machine_make_id", "machine_specification_id", "machine_turningtools_id");
 		if($_GET['action'] == 'Edit')
 		{
-			$Machine = mysql_fetch_assoc(Machine_Select_ById());
+			$Machine = mysqli_fetch_assoc(Machine_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Machine[$Col];
 		}
@@ -18,7 +18,7 @@
 			$FetchMachineNo = Select_MachineNo();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($FetchMachineNo))
+				if(mysqli_num_rows($FetchMachineNo))
 					$message = "<br /><div class='message error'><b>Message</b> : This Machine already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Machine = mysql_fetch_assoc($FetchMachineNo);
-				if(mysql_num_rows(Select_MachineNoById()))
+				$Machine = mysqli_fetch_assoc($FetchMachineNo);
+				if(mysqli_num_rows(Select_MachineNoById()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Machine already exists</div>";
 				else
 				{
@@ -59,7 +59,7 @@
 							<option value=''>Select</option>
 							<?php
 							$SelectMachineType = Master_Machine_Type();
-							while($FetchMachineType = mysql_fetch_array($SelectMachineType))
+							while($FetchMachineType = mysqli_fetch_array($SelectMachineType))
 							{
 								if($FetchMachineType['id'] == $_POST['machine_type_id'])
 									echo '<option value="'.$FetchMachineType['id'].'" selected>'.$FetchMachineType['type'].'</option>';
@@ -74,7 +74,7 @@
 							<option value=''>Select</option>
 							<?php
 							$SelectMachineMake = Master_Machine_Make();
-							while($FetchMachineMake = mysql_fetch_array($SelectMachineMake))
+							while($FetchMachineMake = mysqli_fetch_array($SelectMachineMake))
 							{
 								if($FetchMachineMake['id'] == $_POST['machine_make_id'])
 									echo '<option value="'.$FetchMachineMake['id'].'" selected>'.$FetchMachineMake['name'].'</option>';
@@ -89,7 +89,7 @@
 							<option value=''>Select</option>
 							<?php
 							$SelectMachineSpecifiactionSize = Master_Machine_Specification_Size();
-							while($FetchMachineSpecifiactionSize = mysql_fetch_array($SelectMachineSpecifiactionSize))
+							while($FetchMachineSpecifiactionSize = mysqli_fetch_array($SelectMachineSpecifiactionSize))
 							{
 								if($FetchMachineSpecifiactionSize['id'] == $_POST['machine_specification_id'])
 									echo '<option value="'.$FetchMachineSpecifiactionSize['id'].'" selected>'.$FetchMachineSpecifiactionSize['specification'].'</option>';
@@ -104,7 +104,7 @@
 							<option value=''>Select</option>
 							<?php
 							$SelectMachineTurningTools = Master_Machine_Turning_Tools();
-							while($FetchMachineTurningTools = mysql_fetch_array($SelectMachineTurningTools))
+							while($FetchMachineTurningTools = mysqli_fetch_array($SelectMachineTurningTools))
 							{
 								if($FetchMachineTurningTools['id'] == $_POST['machine_turningtools_id'])
 									echo '<option value="'.$FetchMachineTurningTools['id'].'" selected>'.$FetchMachineTurningTools['turningtool'].'</option>';
@@ -130,7 +130,7 @@
 		<div class="grid_6 first">
 			<h3>Machine List
 				<?php
-				$MachineTotalRows = mysql_fetch_assoc(Machine_Select_Count_All());
+				$MachineTotalRows = mysqli_fetch_assoc(Machine_Select_Count_All());
 				echo " : No. of total Machine - ".$MachineTotalRows['total'];
 				?>
 			</h3>
@@ -163,12 +163,12 @@
 						$i = $MachineTotalRows['total'];
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$MachineRows = Machine_Select_ByLimit($Start, $Limit);
-					while($Machine = mysql_fetch_assoc($MachineRows))
+					while($Machine = mysqli_fetch_assoc($MachineRows))
 					{
-						$MachineType = mysql_fetch_assoc(Select_MachineType($Machine['machine_type_id']));
-						$MachineMake = mysql_fetch_assoc(Select_MachineMake($Machine['machine_make_id']));
-						$Specification_Size = mysql_fetch_assoc(Select_Specification_Size($Machine['machine_specification_id']));
-						$Turning_Tools = mysql_fetch_assoc(Select_Turning_Tools($Machine['machine_turningtools_id']));
+						$MachineType = mysqli_fetch_assoc(Select_MachineType($Machine['machine_type_id']));
+						$MachineMake = mysqli_fetch_assoc(Select_MachineMake($Machine['machine_make_id']));
+						$Specification_Size = mysqli_fetch_assoc(Select_Specification_Size($Machine['machine_specification_id']));
+						$Turning_Tools = mysqli_fetch_assoc(Select_Turning_Tools($Machine['machine_turningtools_id']));
 						echo "<tr>
 							<td align='center'>".$i--."</td>
 							<td>".$Machine['machine_number']."</td>

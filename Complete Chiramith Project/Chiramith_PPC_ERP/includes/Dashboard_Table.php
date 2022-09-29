@@ -38,7 +38,7 @@
 	{
 		echo "<div id='Products'>
 			<table class='paginate sortable full'>";
-				$NumofProduct = mysql_num_rows(Product_List());
+				$NumofProduct = mysqli_num_rows(Product_List());
 				if(!$NumofProduct)
 					echo '<tr><td colspan="13"><font color="red"><center>No data found</center></font></td></tr>';
 				
@@ -71,12 +71,12 @@
 						</tr>
 					</thead>
 					<tbody>';
-				//if(mysql_num_rows($product))
+				//if(mysqli_num_rows($product))
 				//{
-					while($product_limit = mysql_fetch_assoc($product))
+					while($product_limit = mysqli_fetch_assoc($product))
 					{
-						//$MachineNum = mysql_fetch_array(Select_Machine($product_limit['id']));
-						//$FetchMachine = mysql_fetch_array(Fetch_Machine($MachineNum['machine_id']));
+						//$MachineNum = mysqli_fetch_array(Select_Machine($product_limit['id']));
+						//$FetchMachine = mysqli_fetch_array(Fetch_Machine($MachineNum['machine_id']));
 						echo '<tr>
 								<td>'.$j++.'</td>
 								<td>'.$product_limit['description'].'</td>
@@ -120,7 +120,7 @@
 		<div id='MachineAvalability'>
 			<table class="paginate sortable full">
 			<?php
-			$NumofProductMachineAvailability = mysql_num_rows(Product_Machine_AvailabilityList());
+			$NumofProductMachineAvailability = mysqli_num_rows(Product_Machine_AvailabilityList());
 			if(!$NumofProductMachineAvailability)
 				echo '<tr><td colspan="13"><font color="red"><center>No data found</center></font></td></tr>';
 			//$Limit = 5;
@@ -150,12 +150,12 @@
 				$j = 1;
 			else
 				$j = ($_GET['limit']*($_GET['pageno']-1))+1;
-			//if(mysql_num_rows($product))
+			//if(mysqli_num_rows($product))
 			//{
-				while($product_limit = mysql_fetch_assoc($product))
+				while($product_limit = mysqli_fetch_assoc($product))
 				{
-					//$MachineNum = mysql_fetch_array(Select_Machine($product_limit['id']));
-					//$FetchMachine = mysql_fetch_array(Fetch_Machine($MachineNum['machine_id']));
+					//$MachineNum = mysqli_fetch_array(Select_Machine($product_limit['id']));
+					//$FetchMachine = mysqli_fetch_array(Fetch_Machine($MachineNum['machine_id']));
 					echo '<tr>
 							<td>'.$j++.'</td>
 							<td>'.$product_limit['description'].'</td>
@@ -193,18 +193,18 @@
 			<tbody>';
 		$FetchMachine = SectionWiseMachineAllocation();
 		//$TotalMachine = $TotalRunning = $Total = 0;
-		while($FetchSections = mysql_fetch_array($FetchMachine))
+		while($FetchSections = mysqli_fetch_array($FetchMachine))
 		{
 			/*$MachineId = $FetchSections['MachineId'];
 			$TotalMachine += $MachineId;
 			$JobMachineId = $FetchSections['JobMachineId'];
 			$TotalRunning += $JobMachineId;
 			$TotalRunningAndAvailable = $MachineId+$JobMachineId;
-			$FetchSections = mysql_fetch_array(Select_Sections($FetchSections['section_id']));*/
+			$FetchSections = mysqli_fetch_array(Select_Sections($FetchSections['section_id']));*/
 			$TotalMachineRunning +=$FetchSections['JobMachineId'];
 			$TotalMachineAvailable += ($FetchSections['MachineId'] - $FetchSections['JobMachineId']);
 			$Total += $FetchSections['MachineId'];
-			$SectionName = mysql_fetch_array(mysql_query("SELECT * FROM section WHERE id = '".$FetchSections['section_id']."'"));
+			$SectionName = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT * FROM section WHERE id = '".$FetchSections['section_id']."'"));
 			echo '<tr>
 					<td>'.$i++.'</td>
 					<td>Section '.$SectionName['name'].'</td>
@@ -240,7 +240,7 @@
 	<div id="CustomerWise"> 
 		<table frame="box">
 			<?php
-			$NumofCustomer = mysql_num_rows(Select_Customer());
+			$NumofCustomer = mysqli_num_rows(Select_Customer());
 			if(!$NumofCustomer)
 				echo '<tr><td colspan="13"><font color="red"><center>No data found</center></font></td></tr>';
 			//$Limit = 10;
@@ -251,7 +251,7 @@
 			$i =  1;
 			$TotalMachinesRunning = $TotalProductRunning = $Totals = 0;
 			$FetchMachines = Select_Customer();
-			while($FetchSection = mysql_fetch_array($FetchMachines))
+			while($FetchSection = mysqli_fetch_array($FetchMachines))
 			{
 				$MachineId = $FetchSection['MachineId'];
 				$TotalMachinesRunning += $MachineId;
@@ -275,14 +275,14 @@
 			else
 				$j = ($_GET['limit']*($_GET['pageno']-1))+1;
 			$FetchMachine = Select_CustomerByLimit($Start,$_GET['limit']);
-			while($FetchSections = mysql_fetch_array($FetchMachine))
+			while($FetchSections = mysqli_fetch_array($FetchMachine))
 			{
 				$MachineId = $FetchSections['MachineId'];
 				//$TotalMachinesRunning += $MachineId;
 				$JobMachineId = $FetchSections['ProductId'];
 				//$TotalProductRunning += $JobMachineId;
 				//$Totals += $JobMachineId+$MachineId;
-				$FetchCustomer = mysql_fetch_array(Select_CustomersName($FetchSections['id']));
+				$FetchCustomer = mysqli_fetch_array(Select_CustomersName($FetchSections['id']));
 				echo '<tr>
 						<td>'.$j++.'</td>
 						<td>'.$FetchCustomer['name'].'</td>
@@ -317,9 +317,9 @@ if(!$PaginationFor)
 						</tr>
 					</thead>
 					<tbody>';
-				$machine_working_status = mysql_fetch_assoc($machine_working);
-				$machine_notworking_status = mysql_fetch_assoc($machine_notworking);
-				$machine_nearing = mysql_fetch_assoc($machine_nearing);
+				$machine_working_status = mysqli_fetch_assoc($machine_working);
+				$machine_notworking_status = mysqli_fetch_assoc($machine_notworking);
+				$machine_nearing = mysqli_fetch_assoc($machine_nearing);
 					echo'
 						<tr><td>1</td><td>Total Machine Running</td><td>'.$machine_working_status['Item'].'</td></tr>
 						<tr><td>2</td><td>Total Machine Not Running</td><td>'.$machine_notworking_status['Item'].'</td></tr>
@@ -345,9 +345,9 @@ if(!$PaginationFor)
 							</tr>
 						</thead>
 						<tbody>';
-				if(mysql_num_rows($job)==0)
+				if(mysqli_num_rows($job)==0)
 					echo "<tr><td colspan='5' style='color:red;'><center>No Data Found</center></td></tr>";
-				while($job_report = mysql_fetch_assoc($job))
+				while($job_report = mysqli_fetch_assoc($job))
 				{
 						echo'<tr>
 							<td align="center">'.$i++.'</td>

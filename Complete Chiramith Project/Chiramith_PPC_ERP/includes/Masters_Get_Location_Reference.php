@@ -9,7 +9,7 @@ if($_GET['SubSectionId'] && $_GET['LocationReferenceId'] == '-')
 			<option value=''>Select</option>
 			<?php
 			$SelectLocationReference = Master_AvailableLocationReference();
-			while($FetchLocationReference = mysql_fetch_array($SelectLocationReference))
+			while($FetchLocationReference = mysqli_fetch_array($SelectLocationReference))
 				echo '<option value="'.$FetchLocationReference['location_reference_id'].'">'.$FetchLocationReference['name'].'</option>';
 			?>
 		</select>
@@ -24,9 +24,9 @@ else if($_GET['SubSectionId'])
 			<option value=''>Select</option>
 			<?php
 			$SelectLocationReference = Master_LocationReference($_GET['SubSectionId']);
-			while($FetchLocationReference = mysql_fetch_array($SelectLocationReference))
+			while($FetchLocationReference = mysqli_fetch_array($SelectLocationReference))
 			{
-				$FetchLocationId = mysql_fetch_array(Masters_SelectLocationById($FetchLocationReference['id']));
+				$FetchLocationId = mysqli_fetch_array(Masters_SelectLocationById($FetchLocationReference['id']));
 				if($FetchLocationReference['id']%30)
 				{
 					if($FetchLocationReference['id'] == $_GET['LocationReferenceId'])

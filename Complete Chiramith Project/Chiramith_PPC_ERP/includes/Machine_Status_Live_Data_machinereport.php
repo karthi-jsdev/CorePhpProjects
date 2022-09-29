@@ -24,9 +24,9 @@ if($_GET['Export'])
 	$Sections = $SubSections = array("");
 	$GetSections = Select_All_Sections();
 	$GetSubSections = Select_All_SubSections();
-	while($GetSection = mysql_fetch_array($GetSections))
+	while($GetSection = mysqli_fetch_array($GetSections))
 		$Sections[] = $GetSection['name'];
-	while($GetSubSection = mysql_fetch_array($GetSubSections))
+	while($GetSubSection = mysqli_fetch_array($GetSubSections))
 		$SubSections[] = $GetSubSection['name'];
 	$Layout = array(array(3), array(1, 2));
 	$LayoutStyle = array("<table><tr><td rowspan='2' style='padding-left:15px;'>", "</td><td style='padding-left:20px;'>", "</td></tr><tr><td style='padding-left:20px;padding-top:5px;'>", "</td></tr><table>");
@@ -34,7 +34,7 @@ if($_GET['Export'])
 	$Assigned4Future = $Assigned = $Nearing = $NotAssigned = $Available = $NotAvailable = 0;
 	$Machine_Status = Machine_Status_Report();
 	$Machines[][] = $Machines[] = $Machines = $Size = array();
-	while($Machine = mysql_fetch_assoc($Machine_Status))
+	while($Machine = mysqli_fetch_assoc($Machine_Status))
 	{
 		if((!$_GET['section_id'] && !$_GET['subsection_id'])|| ($_GET['section_id'] == $Machine['section_id'] || $_GET['subsection_id'] == $Machine['subsection_id']))
 		{
@@ -70,7 +70,7 @@ if($_GET['Export'])
 		if(count($SectionIds) > $MaxSectionCount)
 			$MaxSectionCount = count($SectionIds);
 	}
-	$TotalMachines = mysql_fetch_array(Count_Available_Machines());
+	$TotalMachines = mysqli_fetch_array(Count_Available_Machines());
 	echo "
 	<center>
 		<table>
@@ -102,7 +102,7 @@ if($_GET['Export'])
 			$SubSectionIds = array();
 			$SubSectionISQuery = SubSection_Select_Required($SectionId);
 			$TDSubSections = "<tr class='tr'>";
-			while($SubSectionId = mysql_fetch_assoc($SubSectionISQuery))
+			while($SubSectionId = mysqli_fetch_assoc($SubSectionISQuery))
 			{
 				$SubSectionIds[] = $SubSectionId['subsection_id'];
 				$TDSubSections .= "<td class='td' align='center' style='background:gray'>".$Sections[$SectionId].$SubSections[$SubSectionId['subsection_id']]."</b></td>";
@@ -110,7 +110,7 @@ if($_GET['Export'])
 			}
 			echo str_replace("colspan='0'", "colspan='".($SSCount+1)."'", $TDData);
 			$TDSubSections .= "</tr>";
-			$MaxLReferenceId = mysql_fetch_assoc(Location_Reference_Select_Id($SubSectionIds));
+			$MaxLReferenceId = mysqli_fetch_assoc(Location_Reference_Select_Id($SubSectionIds));
 			$MaxLReference = substr($MaxLReferenceId['reference'],2)%30;
 			for($i = $MaxLReference; $i > 0; $i--)
 			{

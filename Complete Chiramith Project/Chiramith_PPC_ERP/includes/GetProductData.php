@@ -22,12 +22,12 @@
 						</tr>
 					</thead>
 					<tbody>';
-				if(mysql_num_rows($product))
+				if(mysqli_num_rows($product))
 				{
-					while($product_limit = mysql_fetch_assoc($product))
+					while($product_limit = mysqli_fetch_assoc($product))
 					{
-						$MachineNum = mysql_fetch_array(Select_Machine($product_limit['id']));
-						$FetchMachine = mysql_fetch_array(Fetch_Machine($MachineNum['machine_id']));
+						$MachineNum = mysqli_fetch_array(Select_Machine($product_limit['id']));
+						$FetchMachine = mysqli_fetch_array(Fetch_Machine($MachineNum['machine_id']));
 						echo '<tr>
 								<td>'.$j++.'</td>
 								<td>'.$product_limit['description'].'</td>

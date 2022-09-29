@@ -6,7 +6,7 @@
 		$Columns = array("id", "number", "customer_id", "quantity", "order_date");
 		if($_GET['action'] == 'Edit')
 		{
-			$CreateOrder = mysql_fetch_assoc(Create_Order_Select_ById());
+			$CreateOrder = mysqli_fetch_assoc(Create_Order_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $CreateOrder[$Col];
 		}
@@ -22,7 +22,7 @@
 			$CreateOrderResource = Create_Order_Select_ByName();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($CreateOrderResource))
+				if(mysqli_num_rows($CreateOrderResource))
 					$message = "<br /><div class='message error'><b>Message</b> : This Order already exists</div>";
 				else
 				{	
@@ -32,8 +32,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$CreateOrder = mysql_fetch_assoc($CreateOrderResource);
-				if(mysql_num_rows(Create_Order_Select_ByNameId()))
+				$CreateOrder = mysqli_fetch_assoc($CreateOrderResource);
+				if(mysqli_num_rows(Create_Order_Select_ByNameId()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Order already exists</div>";
 				else
 				{
@@ -63,7 +63,7 @@
 							<option value="">Select</option>
 							<?php
 							$Customers = Customerss_Select_All();
-							while($Customer = mysql_fetch_assoc($Customers))
+							while($Customer = mysqli_fetch_assoc($Customers))
 							{
 								if($Customer['id'] == $_POST['customer_id'])
 									echo "<option value=".$Customer['id']." selected>".$Customer['name']."</option>";
@@ -93,7 +93,7 @@
 		<div class="grid_6 first">
 			<h3>Order List
 				<?php
-				$CreateOrderTotalRows = mysql_fetch_assoc(Create_Order_Select_Count_All());
+				$CreateOrderTotalRows = mysqli_fetch_assoc(Create_Order_Select_Count_All());
 				echo " : Total Order List - ".$CreateOrderTotalRows['total'];
 				?>
 			</h3>
@@ -122,9 +122,9 @@
 					$i++;
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$CreateOrderRows = Create_Order_Select_ByLimit($Start, $Limit);
-					while($CreateOrder = mysql_fetch_assoc($CreateOrderRows))
+					while($CreateOrder = mysqli_fetch_assoc($CreateOrderRows))
 					{
-						$customer = mysql_fetch_assoc(Customers_Select_ById($CreateOrder['customer_id']));
+						$customer = mysqli_fetch_assoc(Customers_Select_ById($CreateOrder['customer_id']));
 						echo "<tr>
 							<td align='center'>".$i++."</td>
 							<td>".$CreateOrder['order_date']."</td>

@@ -22,7 +22,7 @@
 		echo '<a class="button button-gray" href="#">Job Status</a>';
 	
 	include("includes/Order_".$_GET['subpage'].".php");
-	$Lastorderdate = mysql_fetch_array(mysql_query("SELECT order_date FROM `order` order by order_date DESC LIMIT 1"));
+	$Lastorderdate = mysqli_fetch_array(mysqli_query($_SESSION['connection'],"SELECT order_date FROM `order` order by order_date DESC LIMIT 1"));
 	echo "<b><font color='blue'>Last updated date:&nbsp;&nbsp;".date("d-m-Y", strtotime($Lastorderdate['order_date']))."</font></b>";	
 	?>
 </section>

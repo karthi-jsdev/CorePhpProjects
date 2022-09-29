@@ -3,7 +3,7 @@
 		$Columns = array("id", "specificationid", "specification");
 		if($_GET['action'] == 'Edit')
 		{
-			$Specifications = mysql_fetch_assoc(Specification_Select_ById());
+			$Specifications = mysqli_fetch_assoc(Specification_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Specifications[$Col];
 		}
@@ -18,11 +18,11 @@
 				$SpecificationResource = Specification_Select_ByName();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($SpecificationResource))
+					if(mysqli_num_rows($SpecificationResource))
 						$message = "<br /><div class='message error'><b>Message</b> : This Specification already exists</div>";
 					else
 					{
-						$MachineNo =  mysql_fetch_assoc(Machine_Get_LastId_Specification());
+						$MachineNo =  mysqli_fetch_assoc(Machine_Get_LastId_Specification());
 						$SpecificationNo = substr($MachineNo['specificationid'],3);
 						$Zeros = array("", "0", "00");
 						$SpecificationNos ="MSP".$Zeros[3 - strlen($SpecificationNo+1)].($SpecificationNo+1);
@@ -32,8 +32,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$Specification = mysql_fetch_assoc($SpecificationResource);
-					if(mysql_num_rows(User_Select_ByNamePWDId()))
+					$Specification = mysqli_fetch_assoc($SpecificationResource);
+					if(mysqli_num_rows(User_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Specification already exists</div>";
 					else
 					{
@@ -74,7 +74,7 @@
 		<div class="grid_6 first">
 			<h3>Make List
 				<?php
-				$Specification_TotalRows = mysql_fetch_assoc(Specification_Select_Count_All());
+				$Specification_TotalRows = mysqli_fetch_assoc(Specification_Select_Count_All());
 				echo " : No. of total Specification - ".$Specification_TotalRows['total'];
 				?>
 			</h3>
@@ -104,7 +104,7 @@
 						$i = $Specification_TotalRows['total'];
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$SpecificationRows = Specification_Select_ByLimit($Start, $Limit);
-					while($Specification = mysql_fetch_assoc($SpecificationRows))
+					while($Specification = mysqli_fetch_assoc($SpecificationRows))
 					{
 						echo "<tr>
 							<td align='center'>".$i--."</td>

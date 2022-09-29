@@ -3,7 +3,7 @@
 		$Columns = array("id","customerid", "name", "address", "contactname","phone", "fax","email");
 		if($_GET['action'] == 'Edit')
 		{
-			$Customer = mysql_fetch_assoc(Customer_Select_Id());
+			$Customer = mysqli_fetch_assoc(Customer_Select_Id());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Customer[$Col];
 		}
@@ -15,7 +15,7 @@
 		}
 		if(isset($_POST['Submit']) || isset($_POST['Update']))
 		{	
-			$customer_id = mysql_fetch_assoc(Customer_Select_CustomerId());
+			$customer_id = mysqli_fetch_assoc(Customer_Select_CustomerId());
 			/*$customer = (substr($customer_id['customerid'],3,5))+1;
 			echo strlen($customer);
 			if(strlen($customer)==1)
@@ -99,7 +99,7 @@
 			<h3>Customer List:&nbsp;
 				<?php 
 				$customers = Customer_Select();
-				echo 'Total no. of Customers - '.mysql_num_rows($customers);?> 
+				echo 'Total no. of Customers - '.mysqli_num_rows($customers);?> 
 			</h3>
 			<hr/>
 			<table class="paginate sortable full">
@@ -119,7 +119,7 @@
 				<tbody>
 					<?php
 					$i=1; 
-					$total = mysql_fetch_assoc(Customer_Select_ByCount());
+					$total = mysqli_fetch_assoc(Customer_Select_ByCount());
 					$Limit=10;
 					$total_pages = ceil($total['total']/$Limit);
 					if(!$_GET['pageno'])
@@ -132,11 +132,11 @@
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$Total_Customer = Customer_Select_ByLimit($Start, $Limit);
 				
-					if(mysql_num_rows($customers)==0)
+					if(mysqli_num_rows($customers)==0)
 						echo "<tr><td colspan='10' style='color:red;'><center>No Data found</center></td></tr>";
 					else
 					{
-						while($customer = mysql_fetch_assoc($Total_Customer))
+						while($customer = mysqli_fetch_assoc($Total_Customer))
 						{
 							echo"<tr>
 								<td>".$i--."</td>

@@ -16,7 +16,7 @@ $machinedropdown = Machine_Dropdown();
 $machinespecdropdown = Machinespec_Dropdown();
 $machineturntooldropdown = Machineturn_Dropdown();
 
-while($customer = mysql_fetch_assoc($customername))
+while($customer = mysqli_fetch_assoc($customername))
 {
 	if($customer['customer_id'] && !in_array($customer['customer_id'], $report_data[0]))
 	{
@@ -111,7 +111,7 @@ while($customer = mysql_fetch_assoc($customername))
 						<?php 
 						if($_GET['cust_id'] && !$_GET['order_id'] && !$_GET['description'] && !$_GET['drawing_number'] && !$_GET['grade'] && !$_GET['material_size'] && !$_GET['machine']&& !$_GET['specification'] && !$_GET['tools'])
 						{
-							while($cust_name = mysql_fetch_assoc($customerdropdown))
+							while($cust_name = mysqli_fetch_assoc($customerdropdown))
 							{
 								if($_GET['cust_id']==$cust_name['id'])
 									echo '<option value="'.$cust_name['id'].'" selected="selected">'.$cust_name['name'].'</option>';
@@ -131,7 +131,7 @@ while($customer = mysql_fetch_assoc($customername))
 						<?php
 						if($_GET['order_id'] && !$_GET['cust_id'] && !$_GET['description'] && !$_GET['drawing_number'] && !$_GET['grade'] && !$_GET['material_size'] && !$_GET['machine']&& !$_GET['specification'] && !$_GET['tools'])
 						{
-							while($order_no = mysql_fetch_assoc($orderdropdown))
+							while($order_no = mysqli_fetch_assoc($orderdropdown))
 							{
 								if($_GET['order_id']==$order_no['id'])
 									echo '<option value="'.$order_no['id'].'" selected="selected">'.$order_no['number'].'</option>';
@@ -150,7 +150,7 @@ while($customer = mysql_fetch_assoc($customername))
 						<?php
 						if($_GET['grade'] && !$_GET['cust_id'] && !$_GET['order_id'] && $_GET['description'] && !$_GET['drawing_number'] && !$_GET['material_size'] && !$_GET['machine']&& !$_GET['specification'] && !$_GET['tools'])
 						{
-							while($proddescription = mysql_fetch_assoc($prod_description))
+							while($proddescription = mysqli_fetch_assoc($prod_description))
 							{
 								if($_GET['description'] == $proddescription['description'])
 									echo '<option value="'.$proddescription['description'].'" selected="selected">'.$proddescription['description'].'</option>';
@@ -169,7 +169,7 @@ while($customer = mysql_fetch_assoc($customername))
 						<?php
 						if(!$_GET['grade'] && !$_GET['cust_id'] && !$_GET['order_id'] && !$_GET['description'] && $_GET['drawing_number'] && !$_GET['material_size'] && !$_GET['machine']&& !$_GET['specification'] && !$_GET['tools'])
 						{
-							while($proddrawno = mysql_fetch_assoc($prod_drawno))
+							while($proddrawno = mysqli_fetch_assoc($prod_drawno))
 							{
 								if($_GET['drawing_number']==$proddrawno['drawing_number'])
 									echo '<option value="'.$proddrawno['drawing_number'].'" selected="selected">'.$proddrawno['drawing_number'].'</option>';
@@ -190,7 +190,7 @@ while($customer = mysql_fetch_assoc($customername))
 						<?php
 						if($_GET['grade'] && !$_GET['cust_id'] && !$_GET['order_id'] && !$_GET['description'] && !$_GET['drawing_number'] && !$_GET['material_size'] && !$_GET['machine']&& !$_GET['specification'] && !$_GET['tools'])
 						{
-							while($prodgrade = mysql_fetch_assoc($prod_grade))
+							while($prodgrade = mysqli_fetch_assoc($prod_grade))
 							{
 								if($_GET['grade'] == $prodgrade['grade'])
 									echo '<option value="'.$prodgrade['grade'].'" selected="selected">'.$prodgrade['grade'].'</option>';
@@ -209,7 +209,7 @@ while($customer = mysql_fetch_assoc($customername))
 						<?php 
 						if($_GET['material_size'] && !$_GET['cust_id'] && !$_GET['order_id'] && !$_GET['description'] && !$_GET['drawing_number'] && !$_GET['grade'] && !$_GET['machine'] && !$_GET['specification'] && !$_GET['tools'])
 						{
-							while($prodsize  = mysql_fetch_assoc($prod_size ))
+							while($prodsize  = mysqli_fetch_assoc($prod_size ))
 							{
 								if($_GET['material_size'] == $prodsize['material_size'])
 									echo '<option value="'.$prodsize['material_size'].'" selected="selected">'.$prodsize['material_size'].'</option>';
@@ -228,7 +228,7 @@ while($customer = mysql_fetch_assoc($customername))
 						<?php 
 						if($_GET['machine'] && !$_GET['cust_id'] && !$_GET['order_id'] && !$_GET['description'] && !$_GET['drawing_number'] && !$_GET['grade'] && !$_GET['material_size'] && !$_GET['specification'] && !$_GET['tools'])
 						{
-							while($machine_no= mysql_fetch_assoc($machinedropdown))
+							while($machine_no= mysqli_fetch_assoc($machinedropdown))
 							{
 								if($_GET['machine'] == $machine_no['id'])
 									echo '<option value="'.$machine_no['id'].'" selected="selected">'.$machine_no['machine_number'].'</option>';
@@ -247,7 +247,7 @@ while($customer = mysql_fetch_assoc($customername))
 						<?php 
 						if($_GET['specification'] && !$_GET['cust_id'] && !$_GET['order_id'] && !$_GET['description'] && !$_GET['drawing_number'] && !$_GET['grade'] && !$_GET['material_size'] && !$_GET['machine'] && !$_GET['tools'])
 						{
-							while($machine_specdropdown= mysql_fetch_assoc($machinespecdropdown))
+							while($machine_specdropdown= mysqli_fetch_assoc($machinespecdropdown))
 							{
 								if($_GET['specification']==$machine_specdropdown['id'])
 									echo '<option value="'.$machine_specdropdown['id'].'" selected="selected">'.$machine_specdropdown['specification'].'</option>';
@@ -267,7 +267,7 @@ while($customer = mysql_fetch_assoc($customername))
 						<?php 
 						if($_GET['tools'] && !$_GET['cust_id'] && !$_GET['order_id'] && !$_GET['description'] && !$_GET['drawing_number'] && !$_GET['grade'] && !$_GET['material_size'] && !$_GET['specification'] && !$_GET['machine'])
 						{
-							while($machinetooldropdown= mysql_fetch_assoc($machineturntooldropdown))
+							while($machinetooldropdown= mysqli_fetch_assoc($machineturntooldropdown))
 							{
 								if($_GET['tools']==$machinetooldropdown['id'])
 									echo '<option value="'.$machinetooldropdown['id'].'" selected="selected">'.$machinetooldropdown['turningtool'].'</option>';

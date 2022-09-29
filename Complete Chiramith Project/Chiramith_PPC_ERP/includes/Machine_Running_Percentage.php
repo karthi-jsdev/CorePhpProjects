@@ -4,9 +4,9 @@
  #include("Dashboard_Queries.php");
  # The data for the pie chart 
  $Total_Machine_Number = Total_Machine();
- $Total_Numbers = mysql_num_rows($Total_Machine_Number);
+ $Total_Numbers = mysqli_num_rows($Total_Machine_Number);
  $Machine = Machine_Working();
- $Machine_Number = mysql_num_rows($Machine);
+ $Machine_Number = mysqli_num_rows($Machine);
  $Machine_Not_Working = $Total_Numbers - $Machine_Number;
  $data = array($Machine_Not_Working,$Machine_Number); 
  # The labels for the pie chart 

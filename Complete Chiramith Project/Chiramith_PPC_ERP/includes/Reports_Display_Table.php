@@ -20,7 +20,7 @@
 	include('Reports_Queries.php');
 	ini_set("display_errors","0");
 	$i=1;
-	$report_totaldata = mysql_fetch_assoc(Report_Total_Rows());
+	$report_totaldata = mysqli_fetch_assoc(Report_Total_Rows());
 	$Limit = 20;
 	$_GET['total_pages'] = ceil($report_totaldata['total'] / $Limit);
 	if(!$_GET['CurrentPageNo'])
@@ -29,11 +29,11 @@
 	$i++;
 	//$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 	$allreport = Report_Data_ByLimit($Start,$Limit);
-	if(mysql_num_rows($allreport)==0)
+	if(mysqli_num_rows($allreport)==0)
 		echo'<tr><td style="color:red" colspan="10"><center>No Data Found</center></td></tr>';
 	else
 	{
-		while($reportsall = mysql_fetch_assoc($allreport))
+		while($reportsall = mysqli_fetch_assoc($allreport))
 		{
 			echo '<tbody>
 				<tr>

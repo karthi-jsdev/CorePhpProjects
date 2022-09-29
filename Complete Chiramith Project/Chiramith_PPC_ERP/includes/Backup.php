@@ -10,7 +10,7 @@ if($_POST['DB'])
 	if($tables == '*')
 	{
 		$tables = array();
-		$result = mysql_query('SHOW TABLES');
+		$result = mysqli_query($_SESSION['connection'],'SHOW TABLES');
 		while($row = mysql_fetch_row($result))
 		{
 			$tables[] = $row[0];
@@ -24,11 +24,11 @@ if($_POST['DB'])
 	//cycle through
 	foreach($tables as $table)
 	{
-		$result = mysql_query('SELECT * FROM '.$table);
+		$result = mysqli_query($_SESSION['connection'],'SELECT * FROM '.$table);
 		$num_fields = mysql_num_fields($result);
 		
 		$return.= 'DROP TABLE '.$table.';';
-		$row2 = mysql_fetch_row(mysql_query('SHOW CREATE TABLE '.$table));
+		$row2 = mysql_fetch_row(mysqli_query($_SESSION['connection'],'SHOW CREATE TABLE '.$table));
 		$return.= "\n\n".$row2[1].";\n\n";
 		
 		for ($i = 0; $i < $num_fields; $i++) 

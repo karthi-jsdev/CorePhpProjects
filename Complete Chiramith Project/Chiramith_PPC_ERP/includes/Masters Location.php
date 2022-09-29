@@ -3,7 +3,7 @@
 		$Columns = array("id", "name", "section_id", "subsection_id", "location_reference_id");
 		if($_GET['action'] == 'Edit')
 		{
-			$Locaion = mysql_fetch_assoc(Location_Select_ById());
+			$Locaion = mysqli_fetch_assoc(Location_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Locaion[$Col];
 		}
@@ -18,7 +18,7 @@
 			$FetchLocation = Select_Location();
 			if(isset($_POST['Submit']))
 			{
-				if(mysql_num_rows($FetchLocation))
+				if(mysqli_num_rows($FetchLocation))
 					$message = "<br /><div class='message error'><b>Message</b> : This Location already exists</div>";
 				else
 				{
@@ -28,8 +28,8 @@
 			}
 			else if(isset($_POST['Update']))
 			{
-				$Locaion = mysql_fetch_assoc($FetchLocation);
-				if(mysql_num_rows(Select_LocationNameById()))
+				$Locaion = mysqli_fetch_assoc($FetchLocation);
+				if(mysqli_num_rows(Select_LocationNameById()))
 					$message = "<br /><div class='message error'><b>Message</b> : This Location already exists</div>";
 				else
 				{
@@ -59,7 +59,7 @@
 							<option value=''>Select</option>
 							<?php
 								$SelectSection = Master_Section();
-								while($FetchSection = mysql_fetch_array($SelectSection))
+								while($FetchSection = mysqli_fetch_array($SelectSection))
 								{
 									if($FetchSection['id'] == $_POST['section_id'])
 										echo '<option value="'.$FetchSection['id'].'" selected>Section '.$FetchSection['name'].'</option>';
@@ -91,7 +91,7 @@
 		<div class="grid_6 first">
 			<h3>Location List
 				<?php
-				$LocationTotalRows = mysql_fetch_assoc(Location_Select_Count_All());
+				$LocationTotalRows = mysqli_fetch_assoc(Location_Select_Count_All());
 				echo " : No. of total Location - ".$LocationTotalRows['total'];
 				?>
 			</h3>
@@ -123,11 +123,11 @@
 						$i = $LocationTotalRows['total'];
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$LocationRows = Location_Select_ByLimit($Start, $Limit);
-					while($Location = mysql_fetch_assoc($LocationRows))
+					while($Location = mysqli_fetch_assoc($LocationRows))
 					{
-						$Section = mysql_fetch_assoc(Select_SectionName($Location['section_id']));
-						$SubSection = mysql_fetch_assoc(Select_SubSectionName($Location['subsection_id']));
-						$LocationReference = mysql_fetch_assoc(Select_LoctionReference($Location['location_reference_id']));
+						$Section = mysqli_fetch_assoc(Select_SectionName($Location['section_id']));
+						$SubSection = mysqli_fetch_assoc(Select_SubSectionName($Location['subsection_id']));
+						$LocationReference = mysqli_fetch_assoc(Select_LoctionReference($Location['location_reference_id']));
 						echo "<tr>
 							<td align='center'>".$i--."</td>
 							<td>".$Location['name']."</td>

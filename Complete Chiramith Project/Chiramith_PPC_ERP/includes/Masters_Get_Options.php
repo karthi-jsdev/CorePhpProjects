@@ -13,26 +13,26 @@ if($_GET['module'])
 			if($_GET['module'] == 'section_id')
 			{
 				$SelectOptions = Master_Select_Section_ById();
-				while($SelectOption = mysql_fetch_array($SelectOptions))
+				while($SelectOption = mysqli_fetch_array($SelectOptions))
 					echo str_replace('"'.$_GET[id].'"', '"'.$_GET[id].'" selected',  '<option value="'.$SelectOption['id'].'">'.$SelectOption['name'].'</option>');
 			}
 			else if($_GET['module'] == 'customer_id')
 			{
 				echo $_GET['section_id'];
 				$SelectOptions = Master_Select_All_Customers();
-				while($SelectOption = mysql_fetch_array($SelectOptions))
+				while($SelectOption = mysqli_fetch_array($SelectOptions))
 					echo '<option value="'.$SelectOption['id'].'">'.$SelectOption['name'].'</option>';
 			}
 			else if($_GET['module'] == 'order_id')
 			{
 				$SelectOptions = Master_Select_Order_ById();
-				while($SelectOption = mysql_fetch_array($SelectOptions))
+				while($SelectOption = mysqli_fetch_array($SelectOptions))
 					echo '<option value="'.$SelectOption['id'].'">'.$SelectOption['number'].'</option>';
 			}
 			else if($_GET['module'] == 'drawing_id')
 			{
 				$SelectOptions = Master_Select_DrawingNo_ById();
-				while($SelectOption = mysql_fetch_array($SelectOptions))
+				while($SelectOption = mysqli_fetch_array($SelectOptions))
 					echo '<option value="'.$SelectOption['id'].'">'.$SelectOption['drawing_number'].'</option>';
 			}
 			else if($_GET['module'] == 'status_id')
@@ -55,7 +55,7 @@ if($_GET['module'] == 'drawing_id')
 			<option value=''>All</option>
 			<?php
 			$SelectOptions = Master_Select_Description_ById();
-			while($SelectOption = mysql_fetch_array($SelectOptions))
+			while($SelectOption = mysqli_fetch_array($SelectOptions))
 			{
 				echo '<option value="'.$SelectOption['id'].'">'.$SelectOption['description'].'</option>';
 			} ?>

@@ -3,7 +3,7 @@
 		$Columns = array("id", "makeid", "name");
 		if($_GET['action'] == 'Edit')
 		{
-			$Makes = mysql_fetch_assoc(MachineMake_Select_ById());
+			$Makes = mysqli_fetch_assoc(MachineMake_Select_ById());
 			foreach($Columns as $Col)
 				$_POST[$Col] = $Makes[$Col];
 		}
@@ -18,11 +18,11 @@
 				$MachineMakeResource = MachineMake_Select_ByName();
 				if(isset($_POST['Submit']))
 				{
-					if(mysql_num_rows($MachineMakeResource))
+					if(mysqli_num_rows($MachineMakeResource))
 						$message = "<br /><div class='message error'><b>Message</b> : This Machine make already exists</div>";
 					else
 					{
-						$MachineNo = mysql_fetch_assoc(Machine_Get_LastId_Make());
+						$MachineNo = mysqli_fetch_assoc(Machine_Get_LastId_Make());
 						$MakeNo = substr($MachineNo['makeid'],2);
 						$Zeros = array("", "0", "00");
 						$MakeNos ="MK".$Zeros[3 - strlen($MakeNo+1)].($MakeNo+1);
@@ -32,8 +32,8 @@
 				}
 				else if(isset($_POST['Update']))
 				{
-					$MachineMake = mysql_fetch_assoc($MachineMakeResource);
-					if(mysql_num_rows(User_Select_ByNamePWDId()))
+					$MachineMake = mysqli_fetch_assoc($MachineMakeResource);
+					if(mysqli_num_rows(User_Select_ByNamePWDId()))
 						$message = "<br /><div class='message error'><b>Message</b> : This Machine make already exists</div>";
 					else
 					{
@@ -74,7 +74,7 @@
 		<div class="grid_6 first">
 			<h3>Make List
 				<?php
-				$MachineMake_TotalRows = mysql_fetch_assoc(MachineMake_Select_Count_All());
+				$MachineMake_TotalRows = mysqli_fetch_assoc(MachineMake_Select_Count_All());
 				echo " : No. of total Make - ".$MachineMake_TotalRows['total'];
 				?>
 			</h3>
@@ -104,7 +104,7 @@
 						$i = $MachineMake_TotalRows['total'];
 					$Status = array("<a href='#' class='action-button' title='delete'><span class='delete'></span></a>", "<a href='#' class='action-button' title='accept'><span class='accept'></span></a>");
 					$MachineMakeRows = MachineMake_Select_ByLimit($Start, $Limit);
-					while($MachineMake = mysql_fetch_assoc($MachineMakeRows))
+					while($MachineMake = mysqli_fetch_assoc($MachineMakeRows))
 					{
 						echo "<tr>
 							<td align='center'>".$i--."</td>
